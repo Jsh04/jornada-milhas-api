@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "X7S5T0OPMox6o3KKVIz82keZuKW8VEvWiIZ3EJTVLDNM9eup+Cd3Df7ArVDju3sk3TJXhuCWAIILSXY6Tikmtg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Configuracao\\API-Configuracao.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Silvinho\\.nuget\\packages\\elasticsearch.net\\6.8.11\\elasticsearch.net.6.8.11.nupkg.sha512",
+    "C:\\Users\\Silvinho\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Silvinho\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Silvinho\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\Silvinho\\.nuget\\packages\\nest\\6.8.11\\nest.6.8.11.nupkg.sha512",
+    "C:\\Users\\Silvinho\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

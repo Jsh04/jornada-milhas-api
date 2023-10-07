@@ -1,0 +1,12 @@
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\bin\Debug\net6.0\API-Infraestrutura.deps.json
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\bin\Debug\net6.0\API-Infraestrutura.dll
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\bin\Debug\net6.0\API-Infraestrutura.pdb
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\obj\Debug\net6.0\API-Infraestrutura.csproj.AssemblyReference.cache
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\obj\Debug\net6.0\API-Infraestrutura.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\obj\Debug\net6.0\API-Infraestrutura.AssemblyInfoInputs.cache
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\obj\Debug\net6.0\API-Infraestrutura.AssemblyInfo.cs
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\obj\Debug\net6.0\API-Infraestrutura.csproj.CoreCompileInputs.cache
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\obj\Debug\net6.0\API-Infraestrutura.dll
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\obj\Debug\net6.0\refint\API-Infraestrutura.dll
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\obj\Debug\net6.0\API-Infraestrutura.pdb
+C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Infraestrutura\obj\Debug\net6.0\ref\API-Infraestrutura.dll

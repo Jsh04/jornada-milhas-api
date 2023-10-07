@@ -1,0 +1,298 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\jornada-milhas\\jornada-milhas.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Configuracao\\API-Configuracao.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Configuracao\\API-Configuracao.csproj",
+        "projectName": "API-Configuracao",
+        "projectPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Configuracao\\API-Configuracao.csproj",
+        "packagesPath": "C:\\Users\\Silvinho\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Configuracao\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Silvinho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Domains\\API-Domains.csproj": {
+                "projectPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Domains\\API-Domains.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "NEST": {
+              "target": "Package",
+              "version": "[6.8.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Domains\\API-Domains.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Domains\\API-Domains.csproj",
+        "projectName": "API-Domains",
+        "projectPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Domains\\API-Domains.csproj",
+        "packagesPath": "C:\\Users\\Silvinho\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Domains\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Silvinho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Infraestrutura\\API-Infraestrutura.csproj": {
+                "projectPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Infraestrutura\\API-Infraestrutura.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Infraestrutura\\API-Infraestrutura.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Infraestrutura\\API-Infraestrutura.csproj",
+        "projectName": "API-Infraestrutura",
+        "projectPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Infraestrutura\\API-Infraestrutura.csproj",
+        "packagesPath": "C:\\Users\\Silvinho\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Infraestrutura\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Silvinho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "NEST": {
+              "target": "Package",
+              "version": "[6.8.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\jornada-milhas\\jornada-milhas.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\jornada-milhas\\jornada-milhas.csproj",
+        "projectName": "jornada-milhas",
+        "projectPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\jornada-milhas\\jornada-milhas.csproj",
+        "packagesPath": "C:\\Users\\Silvinho\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\jornada-milhas\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Silvinho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Configuracao\\API-Configuracao.csproj": {
+                "projectPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Configuracao\\API-Configuracao.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.18.1, )"
+            },
+            "NEST": {
+              "target": "Package",
+              "version": "[6.8.11, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
