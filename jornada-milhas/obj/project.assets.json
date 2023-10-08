@@ -2,6 +2,35 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Elastic.Clients.Elasticsearch/8.10.0": {
+        "type": "package",
+        "dependencies": {
+          "Elastic.Transport": "0.4.16"
+        },
+        "compile": {
+          "lib/net6.0/Elastic.Clients.Elasticsearch.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Elastic.Clients.Elasticsearch.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Elastic.Transport/0.4.16": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Elastic.Transport.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Elastic.Transport.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Elasticsearch.Net/6.8.11": {
         "type": "package",
         "compile": {
@@ -197,9 +226,9 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "API-Domains": "1.0.0",
+          "Elastic.Clients.Elasticsearch": "8.10.0",
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
-          "NEST": "6.8.11"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
         },
         "compile": {
           "bin/placeholder/API-Configuracao.dll": {}
@@ -225,7 +254,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "NEST": "6.8.11"
+          "Elastic.Clients.Elasticsearch": "8.10.0"
         },
         "compile": {
           "bin/placeholder/API-Infraestrutura.dll": {}
@@ -237,6 +266,57 @@
     }
   },
   "libraries": {
+    "Elastic.Clients.Elasticsearch/8.10.0": {
+      "sha512": "/Z6AaZxJChgq3SZHe1ma1/Lw+wl/ELvjwEtylDGXd9rQgpAl3gL3gTzTlreLo5uRI8+RPhCipNlhvE2gyJfKqg==",
+      "type": "package",
+      "path": "elastic.clients.elasticsearch/8.10.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "elastic.clients.elasticsearch.8.10.0.nupkg.sha512",
+        "elastic.clients.elasticsearch.nuspec",
+        "lib/net461/Elastic.Clients.Elasticsearch.dll",
+        "lib/net461/Elastic.Clients.Elasticsearch.xml",
+        "lib/net5.0/Elastic.Clients.Elasticsearch.dll",
+        "lib/net5.0/Elastic.Clients.Elasticsearch.xml",
+        "lib/net6.0/Elastic.Clients.Elasticsearch.dll",
+        "lib/net6.0/Elastic.Clients.Elasticsearch.xml",
+        "lib/netcoreapp3.1/Elastic.Clients.Elasticsearch.dll",
+        "lib/netcoreapp3.1/Elastic.Clients.Elasticsearch.xml",
+        "lib/netstandard2.0/Elastic.Clients.Elasticsearch.dll",
+        "lib/netstandard2.0/Elastic.Clients.Elasticsearch.xml",
+        "lib/netstandard2.1/Elastic.Clients.Elasticsearch.dll",
+        "lib/netstandard2.1/Elastic.Clients.Elasticsearch.xml",
+        "nuget-icon.png"
+      ]
+    },
+    "Elastic.Transport/0.4.16": {
+      "sha512": "O2LHqnQTWAF0+cic9zYkZJ8m95cG9AnkRbwkRZogroWXZHh8oY5ewVsQsF+wwNHs/YWnNIBTq/7yqaFklBB/Wg==",
+      "type": "package",
+      "path": "elastic.transport/0.4.16",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "elastic.transport.0.4.16.nupkg.sha512",
+        "elastic.transport.nuspec",
+        "lib/net462/Elastic.Transport.dll",
+        "lib/net462/Elastic.Transport.pdb",
+        "lib/net462/Elastic.Transport.xml",
+        "lib/net6.0/Elastic.Transport.dll",
+        "lib/net6.0/Elastic.Transport.pdb",
+        "lib/net6.0/Elastic.Transport.xml",
+        "lib/netstandard2.0/Elastic.Transport.dll",
+        "lib/netstandard2.0/Elastic.Transport.pdb",
+        "lib/netstandard2.0/Elastic.Transport.xml",
+        "lib/netstandard2.1/Elastic.Transport.dll",
+        "lib/netstandard2.1/Elastic.Transport.pdb",
+        "lib/netstandard2.1/Elastic.Transport.xml",
+        "license.txt",
+        "nuget-icon.png"
+      ]
+    },
     "Elasticsearch.Net/6.8.11": {
       "sha512": "rrZXzhb7W9USxok0AeJvRkojrwRkLF7VxGUUmHSOSQik1FfblpNobqA4+MfBMs5oiItNROXlul/gpZiNpbjObg==",
       "type": "package",
@@ -813,24 +893,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Silvinho\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\silvi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\jornada-milhas\\jornada-milhas.csproj",
+      "projectUniqueName": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\jornada-milhas\\jornada-milhas.csproj",
       "projectName": "jornada-milhas",
-      "projectPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\jornada-milhas\\jornada-milhas.csproj",
-      "packagesPath": "C:\\Users\\Silvinho\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\jornada-milhas\\obj\\",
+      "projectPath": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\jornada-milhas\\jornada-milhas.csproj",
+      "packagesPath": "C:\\Users\\silvi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\jornada-milhas\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Silvinho\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\silvi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -838,16 +913,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Configuracao\\API-Configuracao.csproj": {
-              "projectPath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Configuracao\\API-Configuracao.csproj"
+            "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\API-Configuracao\\API-Configuracao.csproj": {
+              "projectPath": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\API-Configuracao\\API-Configuracao.csproj"
             }
           }
         }
@@ -894,7 +967,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400-preview.23274.1\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -13,3 +13,18 @@ C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jorn
 C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Domains\obj\Debug\net6.0\refint\API-Domains.dll
 C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Domains\obj\Debug\net6.0\API-Domains.pdb
 C:\Users\Silvinho\OneDrive\Documentos\Alura\Challenge Back-End\7ª Edição\jornada-milhas\API-Domains\obj\Debug\net6.0\ref\API-Domains.dll
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\bin\Debug\net6.0\API-Domains.deps.json
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\bin\Debug\net6.0\API-Domains.dll
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\bin\Debug\net6.0\API-Domains.pdb
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\bin\Debug\net6.0\API-Infraestrutura.dll
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\bin\Debug\net6.0\API-Infraestrutura.pdb
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\API-Domains.csproj.AssemblyReference.cache
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\API-Domains.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\API-Domains.AssemblyInfoInputs.cache
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\API-Domains.AssemblyInfo.cs
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\API-Domains.csproj.CoreCompileInputs.cache
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\API-Domains.csproj.CopyComplete
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\API-Domains.dll
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\refint\API-Domains.dll
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\API-Domains.pdb
+C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\API-Domains\obj\Debug\net6.0\ref\API-Domains.dll

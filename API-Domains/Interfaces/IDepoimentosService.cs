@@ -9,6 +9,6 @@ namespace API_Domains.Interfaces
 {
     public interface IDepoimentosService
     {
-        Task<IEnumerable<DepoimentosIndex>> GetAllAsync();
+        Task<DepoimentosIndex> GetAllDepoimentosAsync();
     }
 }

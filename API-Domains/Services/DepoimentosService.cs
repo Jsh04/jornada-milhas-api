@@ -14,16 +14,12 @@ namespace API_Domains.Services
 
         public DepoimentosService(IDepoimentosRepository depoimentosRepository)
         {
-
             _depoimentosRepository = depoimentosRepository;
-
         }
 
-        public Task<IEnumerable<DepoimentosIndex>> GetAllAsync()
+        public Task<DepoimentosIndex> GetAllDepoimentosAsync()
         {
-
-            var dados = _depoimentosRepository.GetAllAsync();
-            return dados;
+           var dados = _depoimentosRepository.GetAllAsync();
         }
     }
 }

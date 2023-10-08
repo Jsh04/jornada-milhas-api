@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "BBM1yBuKRbKiEXKuoWtD+lZjbSZJAlVkX3HmEFjGq/O5WpG5h/U64SGkWHy6cTFyxEog2Z13Ry+a8QJVviA+Vg==",
+  "dgSpecHash": "JFjEz5G1twlEW3IbXtsf3Tid8RcZWoHhkOkLRo5iid2flzRpX37oJcfzrN3ScO66obAlRzXKjBLWZHbcI0uVMQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Silvinho\\OneDrive\\Documentos\\Alura\\Challenge Back-End\\7ª Edição\\jornada-milhas\\API-Domains\\API-Domains.csproj",
+  "projectFilePath": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\API-Domains\\API-Domains.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Silvinho\\.nuget\\packages\\elasticsearch.net\\6.8.11\\elasticsearch.net.6.8.11.nupkg.sha512",
-    "C:\\Users\\Silvinho\\.nuget\\packages\\nest\\6.8.11\\nest.6.8.11.nupkg.sha512"
+    "C:\\Users\\silvi\\.nuget\\packages\\elastic.clients.elasticsearch\\8.10.0\\elastic.clients.elasticsearch.8.10.0.nupkg.sha512",
+    "C:\\Users\\silvi\\.nuget\\packages\\elastic.transport\\0.4.16\\elastic.transport.0.4.16.nupkg.sha512"
   ],
   "logs": []
 }

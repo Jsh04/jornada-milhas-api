@@ -1,4 +1,5 @@
-﻿using API_Domains.Interfaces;
+﻿using API_Configuracao.Configuracao;
+using API_Domains.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace jornada_milhas.Controllers;
@@ -7,17 +8,13 @@ namespace jornada_milhas.Controllers;
 [Route("[controller]")]
 public class DepoimentoController : ControllerBase
 {
-    private readonly IDepoimentosService _depoimentosService;
 
-    public DepoimentoController(IDepoimentosService depoimentosService)
-    {
-        _depoimentosService = depoimentosService;
-    }
 
     [HttpGet]
-    public async Task<IActionResult> PegarDepoimentos()
+    public IActionResult PegarDepoimentos()
     {
-        var dados = await _depoimentosService.GetAllAsync();
-        return Ok(dados);
+        
+
+        return Ok("conectou");
     }
 }
