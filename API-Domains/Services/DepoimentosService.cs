@@ -1,6 +1,7 @@
 ﻿using API_Domains.Interfaces;
 using API_Infraestrutura.Indices;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,18 @@ namespace API_Domains.Services
             _depoimentosRepository = depoimentosRepository;
         }
 
-        public Task<DepoimentosIndex> GetAllDepoimentosAsync()
+
+        public async Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync()
         {
-           var dados = _depoimentosRepository.GetAllAsync();
+           var dados = await _depoimentosRepository.GetAllAsync();
+
+            return dados;
+        }
+
+        public async  Task<DepoimentosIndex> CreateDepoimento(DepoimentosIndex depoimento)
+        {
+            var depoimentoCriado = await _depoimentosRepository.CreateDepoimento(depoimento);
+            return depoimentoCriado;
         }
     }
 }

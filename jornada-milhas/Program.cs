@@ -1,4 +1,4 @@
-using API_Configuracao.Configuracao;
+using jornada_milhas.Configuracao;
 
 var builder = WebApplication.CreateBuilder(args);
 

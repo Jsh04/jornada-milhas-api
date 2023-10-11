@@ -52,12 +52,8 @@ C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\ne
 C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\net6.0\API-Configuracao.dll
 C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\net6.0\API-Domains.dll
-C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\net6.0\API-Infraestrutura.dll
-C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\net6.0\API-Configuracao.pdb
 C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\net6.0\API-Domains.pdb
-C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\bin\Debug\net6.0\API-Infraestrutura.pdb
 C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\obj\Debug\net6.0\jornada-milhas.csproj.AssemblyReference.cache
 C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\obj\Debug\net6.0\jornada-milhas.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\silvi\Source\Repos\Jsh04\jornada-milhas-api\jornada-milhas\obj\Debug\net6.0\jornada-milhas.AssemblyInfoInputs.cache

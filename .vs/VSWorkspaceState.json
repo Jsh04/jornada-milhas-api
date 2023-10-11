@@ -3,9 +3,10 @@
     "",
     "\\API-Configuracao",
     "\\API-Configuracao\\Configuracao",
+    "\\API-Infraestrutura",
     "\\API-Infraestrutura\\Elastic",
     "\\jornada-milhas"
   ],
-  "SelectedNode": "\\API-Configuracao\\Configuracao\\ConfiguracaoElastic.cs",
+  "SelectedNode": "\\jornada-milhas.sln",
   "PreviewInSolutionExplorer": false
 }

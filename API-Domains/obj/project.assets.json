@@ -30,19 +30,6 @@
             "related": ".pdb;.xml"
           }
         }
-      },
-      "API-Infraestrutura/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Elastic.Clients.Elasticsearch": "8.10.0"
-        },
-        "compile": {
-          "bin/placeholder/API-Infraestrutura.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/API-Infraestrutura.dll": {}
-        }
       }
     }
   },
@@ -97,16 +84,11 @@
         "license.txt",
         "nuget-icon.png"
       ]
-    },
-    "API-Infraestrutura/1.0.0": {
-      "type": "project",
-      "path": "../API-Infraestrutura/API-Infraestrutura.csproj",
-      "msbuildProject": "../API-Infraestrutura/API-Infraestrutura.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "API-Infraestrutura >= 1.0.0"
+      "Elastic.Clients.Elasticsearch >= 8.10.0"
     ]
   },
   "packageFolders": {
@@ -135,11 +117,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\API-Infraestrutura\\API-Infraestrutura.csproj": {
-              "projectPath": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\API-Infraestrutura\\API-Infraestrutura.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -151,6 +129,12 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "Elastic.Clients.Elasticsearch": {
+            "target": "Package",
+            "version": "[8.10.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

@@ -97,32 +97,6 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
-      },
-      "API-Domains/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "API-Infraestrutura": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/API-Domains.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/API-Domains.dll": {}
-        }
-      },
-      "API-Infraestrutura/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Elastic.Clients.Elasticsearch": "8.10.0"
-        },
-        "compile": {
-          "bin/placeholder/API-Infraestrutura.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/API-Infraestrutura.dll": {}
-        }
       }
     }
   },
@@ -271,21 +245,10 @@
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt"
       ]
-    },
-    "API-Domains/1.0.0": {
-      "type": "project",
-      "path": "../API-Domains/API-Domains.csproj",
-      "msbuildProject": "../API-Domains/API-Domains.csproj"
-    },
-    "API-Infraestrutura/1.0.0": {
-      "type": "project",
-      "path": "../API-Infraestrutura/API-Infraestrutura.csproj",
-      "msbuildProject": "../API-Infraestrutura/API-Infraestrutura.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "API-Domains >= 1.0.0",
       "Elastic.Clients.Elasticsearch >= 8.10.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 6.0.0",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 6.0.0"
@@ -317,11 +280,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\API-Domains\\API-Domains.csproj": {
-              "projectPath": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\API-Domains\\API-Domains.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

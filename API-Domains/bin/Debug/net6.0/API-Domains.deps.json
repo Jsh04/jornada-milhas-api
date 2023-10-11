@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "API-Domains/1.0.0": {
         "dependencies": {
-          "API-Infraestrutura": "1.0.0"
+          "Elastic.Clients.Elasticsearch": "8.10.0"
         },
         "runtime": {
           "API-Domains.dll": {}
@@ -32,14 +32,6 @@
             "fileVersion": "0.4.16.0"
           }
         }
-      },
-      "API-Infraestrutura/1.0.0": {
-        "dependencies": {
-          "Elastic.Clients.Elasticsearch": "8.10.0"
-        },
-        "runtime": {
-          "API-Infraestrutura.dll": {}
-        }
       }
     }
   },
@@ -62,11 +54,6 @@
       "sha512": "sha512-O2LHqnQTWAF0+cic9zYkZJ8m95cG9AnkRbwkRZogroWXZHh8oY5ewVsQsF+wwNHs/YWnNIBTq/7yqaFklBB/Wg==",
       "path": "elastic.transport/0.4.16",
       "hashPath": "elastic.transport.0.4.16.nupkg.sha512"
-    },
-    "API-Infraestrutura/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

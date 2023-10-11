@@ -1,4 +1,4 @@
-﻿using API_Configuracao.Configuracao;
+﻿
 using API_Infraestrutura.Configuracao;
 using API_Infraestrutura.Indices;
 using Elastic.Clients.Elasticsearch;
@@ -12,8 +12,8 @@ namespace API_Infraestrutura.Elastic
 
         public  ElasticBaseRepository()
         {
-            _clientElastic = API_Configuracao.Configuracao.ConfiguracaoElastic.CreateElasticCLient();
-            _clientElastic.Indices.Create<T>();
+            _clientElastic = ConfiguracaoElastic.CreateElasticCLient();
+            
         }
 
         public async Task<List<T>> GetAllAsync()
@@ -22,5 +22,17 @@ namespace API_Infraestrutura.Elastic
 
             return response.Hits.Select(hit => hit.Source).ToList();
         }
+
+        public bool CreateIndexAsync()
+        {
+            var response =  _clientElastic.Indices.Create<T>();
+            if(response.Acknowledged)
+                return true;
+            else 
+                return false;
+            
+        }
+
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿using API_Infraestrutura.Elastic;
+﻿
 using API_Infraestrutura.Indices;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace API_Domains.Interfaces
 {
-    public interface IDepoimentosRepository : IElasticBaseRepository<DepoimentosIndex>
+    public interface IDepoimentosRepository 
     {
+        Task<IEnumerable<DepoimentosIndex>> GetAllAsync();
+        Task<DepoimentosIndex> CreateDepoimento(DepoimentosIndex depoimento);
     }
 }
