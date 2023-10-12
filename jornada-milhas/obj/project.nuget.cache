@@ -1,20 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "oVgA5EQ1hUPLvDOTfcRpWWUooD/Ce6opY7BHfCNGfOEcTaEKX0nvug47KwaXUdoAjlcO+EjTHi+qHSqqECd2gQ==",
+  "dgSpecHash": "NUg2XEN8pq/z3I3dfd+wkaH8XZ+mhTfGvbJ8wbFvuCecNi3pGZb+OmTYx9AiGmOo/UTLN+hPBBWTcbNEAVo5Vg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\jornada-milhas\\jornada-milhas.csproj",
+  "projectFilePath": "C:\\Users\\silvi\\source\\repos\\Jsh04\\jornada-milhas-api\\jornada-milhas\\jornada-milhas.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\silvi\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\elastic.clients.elasticsearch\\8.10.0\\elastic.clients.elasticsearch.8.10.0.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\elastic.transport\\0.4.16\\elastic.transport.0.4.16.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\elasticsearch.net\\6.8.11\\elasticsearch.net.6.8.11.nupkg.sha512",
+    "C:\\Users\\silvi\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\silvi\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.1\\microsoft.extensions.dependencyinjection.6.0.1.nupkg.sha512",
+    "C:\\Users\\silvi\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.18.1\\microsoft.visualstudio.azure.containers.tools.targets.1.18.1.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\nest\\6.8.11\\nest.6.8.11.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
-    "C:\\Users\\silvi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+    "C:\\Users\\silvi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
+    "C:\\Users\\silvi\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/EA8fR2aqnS+Z9Zi63CxV50vbN1oybcSvsVBMU4AfYfOE5slKCDXppta4O32xpmGBmVgiORGn44EGu3bOYuAAg==",
+  "dgSpecHash": "cGiYE5jQoIDnAtJZl5zTMnutfMWTfzp/oW+vSCQZ+0Y7AfI8zRaWQ/MpAHddXOe+C6WUJTo5fpzIp/0mNn4X/A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\API-Domains\\API-Domains.csproj",
+  "projectFilePath": "C:\\Users\\silvi\\source\\repos\\Jsh04\\jornada-milhas-api\\API-Domains\\API-Domains.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\silvi\\.nuget\\packages\\elastic.clients.elasticsearch\\8.10.0\\elastic.clients.elasticsearch.8.10.0.nupkg.sha512",
     "C:\\Users\\silvi\\.nuget\\packages\\elastic.transport\\0.4.16\\elastic.transport.0.4.16.nupkg.sha512"

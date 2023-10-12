@@ -14,17 +14,26 @@ namespace API_Domains.Repository
     {
         private readonly ElasticsearchClient _client;
 
-        private const string IndexName = "depoimentosindex";
+        private string IndexName;
+            
 
-        public DepoimentoRepository()
+        public DepoimentoRepository(string indexName)
         {
             _client = FactoryElastic.CreateElasticCLient();
+            IndexName = indexName;
             _client.Indices.Create(IndexName);
         }
 
-        public async Task<IEnumerable<DepoimentosIndex>> GetAllAsync()
+        public async Task<IEnumerable<DepoimentosIndex>> GetAllAsync(int page, int size)
         {
-            var response = await _client.SearchAsync<DepoimentosIndex>(dep => dep.Index(IndexName));
+            if (page != 0)
+                page = page * 10;
+                
+            
+            var response = await _client.SearchAsync<DepoimentosIndex>(dep => 
+            dep.Index(IndexName)
+            .From(page)
+            .Size(size));
 
             return response.Documents;
         }
@@ -35,7 +44,7 @@ namespace API_Domains.Repository
             return depoimento;
         }
 
-        public async Task<DepoimentosIndex> GetDepoimentoById(int id)
+        public async Task<DepoimentosIndex> GetDepoimentoById(string id)
         {
             var response = await _client.GetAsync<DepoimentosIndex>(id, idx => idx.Index(IndexName));
 
@@ -43,6 +52,24 @@ namespace API_Domains.Repository
                 return response.Source!;
             throw new Exception("Nenhum dado encontrado");
             
+        }
+
+        public async Task<bool> DeleteDepoimento(string id)
+        {
+            var response = await _client.DeleteAsync(IndexName, id);
+            if (response.IsValidResponse)
+                return true;
+            return false;
+        }
+
+        public async Task<DepoimentosIndex> UpdateDepoimento(DepoimentosIndex depoimento,string id)
+        {
+            var response = await _client.UpdateAsync<DepoimentosIndex, DepoimentosIndex>(IndexName, id, doc => doc.Doc(depoimento));
+
+            if (response.IsValidResponse)
+                return response.Get!.Source;
+            
+            throw new Exception("Erro na atualização");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using API_Domains.Interfaces;
+﻿
+
+using API_Domains.Interfaces;
 using API_Domains.Repository;
 using API_Domains.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace jornada_milhas.Configuracao
+namespace API_Configuration.Configuracao
 {
     public static class ConfiguracaoApi
     {

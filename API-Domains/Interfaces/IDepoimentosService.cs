@@ -11,5 +11,9 @@ namespace API_Domains.Interfaces
     {
         Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync();
         Task<DepoimentosIndex> CreateDepoimento(DepoimentosIndex depoimento);
+        Task<bool> DeleteDepoimento(string id);
+        Task<DepoimentosIndex> UpdateDepoimento(DepoimentosIndex depoimento, string id);
+        Task<DepoimentosIndex> GetDepoimentoById(string id);
+
     }
 }

@@ -19,9 +19,9 @@ namespace API_Domains.Services
         }
 
 
-        public async Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync()
+        public async Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync(int page, int size)
         {
-           var dados = await _depoimentosRepository.GetAllAsync();
+           var dados = await _depoimentosRepository.GetAllAsync(page, size);
 
             return dados;
         }
@@ -30,6 +30,26 @@ namespace API_Domains.Services
         {
             var depoimentoCriado = await _depoimentosRepository.CreateDepoimento(depoimento);
             return depoimentoCriado;
+        }
+
+        public Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> DeleteDepoimento(string id)
+        {
+            return await  _depoimentosRepository.DeleteDepoimento(id);
+        }
+
+        public async Task<DepoimentosIndex> UpdateDepoimento(DepoimentosIndex depoimento, string id)
+        {
+           return await _depoimentosRepository.UpdateDepoimento(depoimento, id);
+        }
+
+        public async Task<DepoimentosIndex> GetDepoimentoById(string id)
+        {
+            return await _depoimentosRepository.GetDepoimentoById(id);
         }
     }
 }
