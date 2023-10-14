@@ -40,4 +40,26 @@ public class DepoimentoController : ControllerBase
         return Ok(depoimentoCriado);
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> AtualizarDepoimento([FromBody] DepoimentoAtualizarDTO atualizarDTO, string id)
+    {
+        var depoimento = await _depoimentosService.GetDepoimentoById(id);
+        var depoimentorRequisicao = _mapper.Map(atualizarDTO, depoimento);
+        var depoimentoAtualizado = await _depoimentosService.UpdateDepoimento(depoimentorRequisicao, id);
+        if (depoimentoAtualizado == null)
+            return NotFound();
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletarDepoimento(string id)
+    {
+        var isDeleted = await _depoimentosService.DeleteDepoimento(id);
+        if (isDeleted)
+            return NoContent();
+        else
+            return BadRequest();
+    }
+
+
 }
