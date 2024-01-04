@@ -12,6 +12,7 @@ namespace API_Domains.Services
     public class DepoimentosService : IDepoimentosService
     {
         private readonly IDepoimentosRepository _depoimentosRepository;
+        
 
         public DepoimentosService(IDepoimentosRepository depoimentosRepository)
         {
@@ -28,28 +29,28 @@ namespace API_Domains.Services
 
         public async  Task<DepoimentosIndex> CreateDepoimento(DepoimentosIndex depoimento)
         {
-            var depoimentoCriado = await _depoimentosRepository.CreateDepoimento(depoimento);
+            var depoimentoCriado = await _depoimentosRepository.Create(depoimento);
             return depoimentoCriado;
         }
 
-        public Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync()
+        public async Task<IEnumerable<DepoimentosIndex>> GetAllAsync(int page, int size)
         {
-            throw new NotImplementedException();
+            return await _depoimentosRepository.GetAllAsync(page, size);
         }
 
         public async Task<bool> DeleteDepoimento(string id)
         {
-            return await  _depoimentosRepository.DeleteDepoimento(id);
+            return await  _depoimentosRepository.Delete(id);
         }
 
         public async Task<DepoimentosIndex> UpdateDepoimento(DepoimentosIndex depoimento, string id)
         {
-           return await _depoimentosRepository.UpdateDepoimento(depoimento, id);
+           return await _depoimentosRepository.Update(depoimento, id);
         }
 
         public async Task<DepoimentosIndex> GetDepoimentoById(string id)
         {
-            return await _depoimentosRepository.GetDepoimentoById(id);
+            return await _depoimentosRepository.GetById(id);
         }
     }
 }

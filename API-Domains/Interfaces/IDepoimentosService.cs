@@ -9,7 +9,7 @@ namespace API_Domains.Interfaces
 {
     public interface IDepoimentosService
     {
-        Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync();
+        Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync(int page, int size);
         Task<DepoimentosIndex> CreateDepoimento(DepoimentosIndex depoimento);
         Task<bool> DeleteDepoimento(string id);
         Task<DepoimentosIndex> UpdateDepoimento(DepoimentosIndex depoimento, string id);

@@ -1,6 +1,6 @@
-﻿namespace API_Configuration
+﻿namespace API_Configuration;
+
+public class Class1
 {
-    public class Class1
-    {
-    }
+
 }

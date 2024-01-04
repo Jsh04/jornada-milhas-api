@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("jornada-milhas")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a5db45678a8030f5ea1968db32b8859e6e6a22e")]
 [assembly: System.Reflection.AssemblyProductAttribute("jornada-milhas")]
 [assembly: System.Reflection.AssemblyTitleAttribute("jornada-milhas")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

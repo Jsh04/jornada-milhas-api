@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\silvi\\source\\repos\\Jsh04\\jornada-milhas-api\\API-Domains\\API-Domains.csproj": {}
+    "C:\\Users\\José Silvio\\source\\repos\\Jsh04\\jornada-milhas\\API-Domains\\API-Domains.csproj": {}
   },
   "projects": {
-    "C:\\Users\\silvi\\source\\repos\\Jsh04\\jornada-milhas-api\\API-Domains\\API-Domains.csproj": {
+    "C:\\Users\\José Silvio\\source\\repos\\Jsh04\\jornada-milhas\\API-Domains\\API-Domains.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\silvi\\source\\repos\\Jsh04\\jornada-milhas-api\\API-Domains\\API-Domains.csproj",
+        "projectUniqueName": "C:\\Users\\José Silvio\\source\\repos\\Jsh04\\jornada-milhas\\API-Domains\\API-Domains.csproj",
         "projectName": "API-Domains",
-        "projectPath": "C:\\Users\\silvi\\source\\repos\\Jsh04\\jornada-milhas-api\\API-Domains\\API-Domains.csproj",
-        "packagesPath": "C:\\Users\\silvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\silvi\\Source\\Repos\\Jsh04\\jornada-milhas-api\\API-Domains\\obj\\",
+        "projectPath": "C:\\Users\\José Silvio\\source\\repos\\Jsh04\\jornada-milhas\\API-Domains\\API-Domains.csproj",
+        "packagesPath": "C:\\Users\\José Silvio\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\José Silvio\\source\\repos\\Jsh04\\jornada-milhas\\API-Domains\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\silvi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\José Silvio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,6 +47,10 @@
             "Elastic.Clients.Elasticsearch": {
               "target": "Package",
               "version": "[8.10.0, )"
+            },
+            "OpenAI": {
+              "target": "Package",
+              "version": "[1.10.0, )"
             }
           },
           "imports": [
@@ -61,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400-preview.23274.1\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

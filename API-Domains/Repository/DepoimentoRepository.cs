@@ -14,13 +14,12 @@ namespace API_Domains.Repository
     {
         private readonly ElasticsearchClient _client;
 
-        private string IndexName;
+        private readonly string IndexName = "depoimento";
             
 
-        public DepoimentoRepository(string indexName)
+        public DepoimentoRepository()
         {
             _client = FactoryElastic.CreateElasticCLient();
-            IndexName = indexName;
             _client.Indices.Create(IndexName);
         }
 
@@ -38,13 +37,13 @@ namespace API_Domains.Repository
             return response.Documents;
         }
 
-        public async Task<DepoimentosIndex> CreateDepoimento(DepoimentosIndex depoimento)
+        public async Task<DepoimentosIndex> Create(DepoimentosIndex depoimento)
         {
             var response = await _client.IndexAsync(depoimento, IndexName);
             return depoimento;
         }
 
-        public async Task<DepoimentosIndex> GetDepoimentoById(string id)
+        public async Task<DepoimentosIndex> GetById(string id)
         {
             var response = await _client.GetAsync<DepoimentosIndex>(id, idx => idx.Index(IndexName));
 
@@ -54,7 +53,7 @@ namespace API_Domains.Repository
             
         }
 
-        public async Task<bool> DeleteDepoimento(string id)
+        public async Task<bool> Delete(string id)
         {
             var response = await _client.DeleteAsync(IndexName, id);
             if (response.IsValidResponse)
@@ -62,7 +61,7 @@ namespace API_Domains.Repository
             return false;
         }
 
-        public async Task<DepoimentosIndex> UpdateDepoimento(DepoimentosIndex depoimento,string id)
+        public async Task<DepoimentosIndex> Update(DepoimentosIndex depoimento,string id)
         {
             var response = await _client.UpdateAsync<DepoimentosIndex, DepoimentosIndex>(IndexName, id, doc => doc.Doc(depoimento));
 

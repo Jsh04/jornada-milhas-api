@@ -1,0 +1,16 @@
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\bin\Debug\net6.0\API-Configuration.deps.json
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\bin\Debug\net6.0\API-Configuration.dll
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\bin\Debug\net6.0\API-Configuration.pdb
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\bin\Debug\net6.0\API-Domains.dll
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\bin\Debug\net6.0\API-Domains.pdb
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\API-Configuration.csproj.AssemblyReference.cache
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\API-Configuration.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\API-Configuration.AssemblyInfoInputs.cache
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\API-Configuration.AssemblyInfo.cs
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\API-Configuration.csproj.CoreCompileInputs.cache
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\API-Configuration.sourcelink.json
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\API-Configuration.csproj.CopyComplete
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\API-Configuration.dll
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\refint\API-Configuration.dll
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\API-Configuration.pdb
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Configuration\obj\Debug\net6.0\ref\API-Configuration.dll

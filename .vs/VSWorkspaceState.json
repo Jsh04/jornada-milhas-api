@@ -1,12 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\API-Configuracao",
-    "\\API-Configuracao\\Configuracao",
-    "\\API-Infraestrutura",
-    "\\API-Infraestrutura\\Configuracao",
-    "\\API-Infraestrutura\\Elastic",
-    "\\jornada-milhas"
+    ""
   ],
+  "SelectedNode": "\\jornada-milhas.sln",
   "PreviewInSolutionExplorer": false
 }

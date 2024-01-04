@@ -24,9 +24,9 @@ public class DepoimentoController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> PegarDepoimentos()
+    public async Task<IActionResult> PegarDepoimentos([FromQuery] int page = 1, [FromQuery] int size = 10)
     {
-        var dados = await _depoimentosService.GetAllDepoimentosAsync();
+        var dados = await _depoimentosService.GetAllDepoimentosAsync(page, size);
 
        return Ok(dados);
     }
