@@ -14,7 +14,7 @@ public class ChatGPTService : IChatGPTService
     public async Task<string> ChatGPTConsult(string query)
     {
         string outputResult = "";
-        var openIA = new OpenAIAPI("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");
+        var openIA = new OpenAIAPI("");
         CompletionRequest completionRequest = new()
         {
             Prompt = query,
