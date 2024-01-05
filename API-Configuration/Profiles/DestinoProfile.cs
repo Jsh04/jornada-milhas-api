@@ -13,7 +13,7 @@ public class DestinoProfile : Profile
 {
     public DestinoProfile()
     {
-        CreateMap<DestinoDTO, DestinosIndex>();
+        CreateMap<CreateDestinoDTO, DestinosIndex>();
     }
     
 }

@@ -121,3 +121,4 @@ C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\obj\Debug
 C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\obj\Debug\net6.0\jornada-milhas.csproj.CopyComplete
 C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\obj\Debug\net6.0\jornada-milhas.genruntimeconfig.cache
 C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\obj\Debug\net6.0\ref\jornada-milhas.dll
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

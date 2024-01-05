@@ -11,10 +11,10 @@ namespace API_Domains.Services
 {
     public class DepoimentosService : IDepoimentosService
     {
-        private readonly IDepoimentosRepository _depoimentosRepository;
+        private readonly IRepository<DepoimentosIndex> _depoimentosRepository;
         
 
-        public DepoimentosService(IDepoimentosRepository depoimentosRepository)
+        public DepoimentosService(IRepository<DepoimentosIndex> depoimentosRepository)
         {
             _depoimentosRepository = depoimentosRepository;
         }

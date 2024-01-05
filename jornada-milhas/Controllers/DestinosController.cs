@@ -20,7 +20,7 @@ public class DestinosController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateDestino([FromBody] DestinoDTO destinoDTO)
+    public async Task<IActionResult> CreateDestino([FromBody] CreateDestinoDTO destinoDTO)
     {
         var destino = _mapper.Map<DestinosIndex>(destinoDTO);
         var destinoCriado = await _destinoService.CreateDestino(destino);

@@ -14,12 +14,12 @@ public class ChatGPTService : IChatGPTService
     public async Task<string> ChatGPTConsult(string query)
     {
         string outputResult = "";
-        var openIA = new OpenAIAPI("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");
+        var openIA = new OpenAIAPI("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");
         CompletionRequest completionRequest = new()
         {
             Prompt = query,
             Model = OpenAI_API.Models.Model.Davinci,
-            MaxTokens = 1024
+            MaxTokens = 200
         };
         var completions = await openIA.Completions.CreateCompletionAsync(completionRequest);
         foreach (var completion in completions.Completions)

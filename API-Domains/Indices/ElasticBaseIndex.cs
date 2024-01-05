@@ -9,6 +9,6 @@ namespace API_Infraestrutura.Indices
     public abstract class ElasticBaseIndex
     {
         public string Id { get; set; }
-        public DateTime? DataAtualizacao { get; set; }
+        public DateTime? DataAtualizacao { get; set; } = DateTime.Now;
     }
 }

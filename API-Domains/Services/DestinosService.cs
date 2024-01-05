@@ -10,28 +10,23 @@ namespace API_Domains.Services
 {
     public class DestinosService : IDestinosService
     {
-        private readonly IDestinosRepository _destinoRepository;
-        private readonly IChatGPTService _chatGPTService;
+        private readonly IRepository<DestinosIndex> _destinoRepository;
 
-        public DestinosService(IDestinosRepository desRepository, IChatGPTService chatGPTService)
+
+        public DestinosService(IRepository<DestinosIndex> desRepository)
         {
             _destinoRepository = desRepository;
-            _chatGPTService = chatGPTService;
         }
 
         public async Task<DestinosIndex> CreateDestino(DestinosIndex destino)
         {
-            var query = $"Traga uma descrição em dois parágrafos, uma em português e outra em inglês do lugar{destino.Name}";
-            var text = await _chatGPTService.ChatGPTConsult(query);
-            if (string.IsNullOrEmpty(text))
-                throw new Exception("Erro ao cadastrar destino");
-            var destinoCreated = await _destinoRepository.CreateDestino(destino);
+            var destinoCreated = await _destinoRepository.Create(destino);
             return destinoCreated;
         }
 
         public async Task<bool> DeleteDestino(string id)
         {
-            var isDeleted = await _destinoRepository.DeleteDestino(id);
+            var isDeleted = await _destinoRepository.Delete(id);
             if (!isDeleted)
                 throw new Exception("Erro na deleção do documento");
             
@@ -45,12 +40,12 @@ namespace API_Domains.Services
 
         public async Task<DestinosIndex> GetDestinoById(string id)
         {
-            return await _destinoRepository.GetDestinoById(id);
+            return await _destinoRepository.GetById(id);
         }
 
         public async Task<DestinosIndex> UpdateDestino(DestinosIndex destino, string id)
         {
-            var destinoAtualizado = await _destinoRepository.UpdateDestino(destino, id);
+            var destinoAtualizado = await _destinoRepository.Update(destino, id);
             return destinoAtualizado;
         }
     }
