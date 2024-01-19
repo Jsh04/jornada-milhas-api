@@ -1,6 +1,6 @@
 ﻿
 using API_Domains.DTO;
-using API_Domains.Interfaces;
+using API_Domains.Interfaces.Depoimentos;
 using API_Infraestrutura.Indices;
 using AutoMapper;
 using Microsoft.AspNetCore.Cors;
@@ -15,40 +15,49 @@ public class DepoimentoController : ControllerBase
 {
 
     private readonly IDepoimentosService _depoimentosService;
-    private readonly IMapper _mapper;
 
-    public DepoimentoController(IDepoimentosService depoimentosService, IMapper mapper)
+    public DepoimentoController(IDepoimentosService depoimentosService)
     {
         _depoimentosService = depoimentosService;
-        _mapper = mapper;
+        
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> PegarDepoimentoPorId(string id)
+    {
+        var depoimento = _depoimentosService.GetDepoimentoById(id);
+        return Ok(depoimento);
     }
 
     [HttpGet]
     public async Task<IActionResult> PegarDepoimentos([FromQuery] int page = 1, [FromQuery] int size = 10)
     {
-        var dados = await _depoimentosService.GetAllDepoimentosAsync(page, size);
+        var depoimentos = await _depoimentosService.GetAllDepoimentosAsync(page, size);
 
-       return Ok(dados);
+       return Ok(depoimentos);
     }
 
     [HttpPost]
     public async Task<IActionResult> CriarDepoimentos([FromBody] DepoimentoDTO depoimentoDTO)
     {
-        var depoimento = _mapper.Map<DepoimentosIndex>(depoimentoDTO);
-        var depoimentoCriado = await _depoimentosService.CreateDepoimento(depoimento);
+       
+        var depoimentoCriado = await _depoimentosService.CreateDepoimento(depoimentoDTO);
 
-        return Ok(depoimentoCriado);
+        return CreatedAtAction(nameof(PegarDepoimentoPorId), new { id = depoimentoCriado.Id }, depoimentoCriado);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> AtualizarDepoimento([FromBody] DepoimentoAtualizarDTO atualizarDTO, string id)
     {
-        var depoimento = await _depoimentosService.GetDepoimentoById(id);
-        var depoimentorRequisicao = _mapper.Map(atualizarDTO, depoimento);
-        var depoimentoAtualizado = await _depoimentosService.UpdateDepoimento(depoimentorRequisicao, id);
-        if (depoimentoAtualizado == null)
-            return NotFound();
-        return NoContent();
+        try
+        {
+            var depoimentoAtualizado = await _depoimentosService.UpdateDepoimento(atualizarDTO, id);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpDelete("{id}")]

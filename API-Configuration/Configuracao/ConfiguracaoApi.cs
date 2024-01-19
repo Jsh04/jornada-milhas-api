@@ -2,6 +2,8 @@
 
 using API_Domains.Indices;
 using API_Domains.Interfaces;
+using API_Domains.Interfaces.Depoimentos;
+using API_Domains.Interfaces.Destinos;
 using API_Domains.Repository;
 using API_Domains.Services;
 using API_Infraestrutura.Indices;
@@ -21,11 +23,9 @@ public static class ConfiguracaoApi
     public static void AddDependenciesInjectionsServices(IServiceCollection services)
     {
         services.AddScoped<IDepoimentosService, DepoimentosService>();
+        services.AddScoped<IDepoimentosRepository, DepoimentosRepository>();
 
-        services.AddScoped<IRepository<DepoimentosIndex>, Repository<DepoimentosIndex>>(servicePrpvider => new Repository<DepoimentosIndex>("depoimentos"));
-
-        services.AddScoped<IRepository<DestinosIndex>, Repository<DestinosIndex>>(serviceProvider => new Repository<DestinosIndex>("destinos"));
-
+        services.AddScoped<IDestinosRepository, DestinosRepository>();
         services.AddScoped<IDestinosService, DestinosService>();
     }
 

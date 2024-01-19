@@ -1,5 +1,9 @@
-﻿using API_Domains.Interfaces;
+﻿using API_Domains.DTO;
+using API_Domains.Interfaces;
+using API_Domains.Interfaces.Depoimentos;
 using API_Infraestrutura.Indices;
+using AutoMapper;
+using jornada_milhas.Controllers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,12 +15,14 @@ namespace API_Domains.Services
 {
     public class DepoimentosService : IDepoimentosService
     {
-        private readonly IRepository<DepoimentosIndex> _depoimentosRepository;
+        private readonly IDepoimentosRepository _depoimentosRepository;
+        private readonly IMapper _mapper;
         
 
-        public DepoimentosService(IRepository<DepoimentosIndex> depoimentosRepository)
+        public DepoimentosService(IDepoimentosRepository depoimentosRepository,IMapper mapper)
         {
             _depoimentosRepository = depoimentosRepository;
+            _mapper = mapper;
         }
 
 
@@ -27,8 +33,9 @@ namespace API_Domains.Services
             return dados;
         }
 
-        public async  Task<DepoimentosIndex> CreateDepoimento(DepoimentosIndex depoimento)
+        public async  Task<DepoimentosIndex> CreateDepoimento(DepoimentoDTO depoimentoDTO)
         {
+            var depoimento = _mapper.Map<DepoimentosIndex>(depoimentoDTO);
             var depoimentoCriado = await _depoimentosRepository.Create(depoimento);
             return depoimentoCriado;
         }
@@ -43,9 +50,11 @@ namespace API_Domains.Services
             return await  _depoimentosRepository.Delete(id);
         }
 
-        public async Task<DepoimentosIndex> UpdateDepoimento(DepoimentosIndex depoimento, string id)
+        public async Task<DepoimentosIndex> UpdateDepoimento(DepoimentoAtualizarDTO depoimentoDTO, string id)
         {
-           return await _depoimentosRepository.Update(depoimento, id);
+            var depoimento = await GetDepoimentoById(id) ?? throw new Exception("Não existe depoimento");
+            var depoimentorRequisicao = _mapper.Map(depoimentoDTO, depoimento);
+            return await _depoimentosRepository.Update(depoimentorRequisicao, id);
         }
 
         public async Task<DepoimentosIndex> GetDepoimentoById(string id)

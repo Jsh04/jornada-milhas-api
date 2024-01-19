@@ -1,6 +1,6 @@
 ﻿using API_Domains.DTO.Destinos;
 using API_Domains.Indices;
-using API_Domains.Interfaces;
+using API_Domains.Interfaces.Destinos;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,12 +27,20 @@ public class DestinosController : ControllerBase
         return Ok(destinoCriado);
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteDestino(string id)
+    {
+        var deleted = await _destinoService.DeleteDestino(id);
+        if (deleted)
+            return NoContent();
+        return BadRequest();
+        
+    }
+
     [HttpGet]
     public IActionResult GetAllDestinos([FromQuery] int size, [FromQuery] int page) 
     {
         var destinos = _destinoService.GetAllAsync(size, page);
         return Ok(destinos);
     }
-
-
 }

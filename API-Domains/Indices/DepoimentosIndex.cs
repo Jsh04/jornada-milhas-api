@@ -10,6 +10,6 @@ namespace API_Infraestrutura.Indices
     {
         public string Nome { get; set; }
         public string DescricaoDepoimento { get; set; }
-        public string Foto { get; set; }
+        public FileStream Foto { get; set; }
     }
 }

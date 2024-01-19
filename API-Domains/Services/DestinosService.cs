@@ -1,5 +1,5 @@
 ﻿using API_Domains.Indices;
-using API_Domains.Interfaces;
+using API_Domains.Interfaces.Destinos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace API_Domains.Services
 {
     public class DestinosService : IDestinosService
     {
-        private readonly IRepository<DestinosIndex> _destinoRepository;
+        private readonly IDestinosRepository _destinoRepository;
 
 
-        public DestinosService(IRepository<DestinosIndex> desRepository)
+        public DestinosService(IDestinosRepository desRepository)
         {
             _destinoRepository = desRepository;
         }
