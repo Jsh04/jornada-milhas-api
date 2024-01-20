@@ -1,6 +1,5 @@
-﻿using API_Domains.DTO;
+﻿using API_Domains.DTO.Depoimeto;
 using API_Infraestrutura.Indices;
-using jornada_milhas.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

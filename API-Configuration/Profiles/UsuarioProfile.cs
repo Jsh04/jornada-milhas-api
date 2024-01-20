@@ -15,5 +15,7 @@ public class UsuarioProfile : Profile
     {
         CreateMap<UsuarioCadastroDTO, UsuarioIndex>();
         CreateMap<UsuarioAtualizacaoDTO, UsuarioIndex>();
+        CreateMap<UsuarioIndex, DetalhamentoUsuarioDTO>();
+        CreateMap<List<UsuarioIndex>, IEnumerable<DetalhamentoUsuarioDTO>>();
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using API_Domains.DTO;
+﻿using API_Domains.DTO.Depoimeto;
 using API_Domains.Interfaces.Depoimentos;
 using API_Infraestrutura.Indices;
 using AutoMapper;
@@ -25,7 +24,7 @@ public class DepoimentoController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> PegarDepoimentoPorId(string id)
     {
-        var depoimento = _depoimentosService.GetDepoimentoById(id);
+        var depoimento = await _depoimentosService.GetDepoimentoById(id);
         return Ok(depoimento);
     }
 

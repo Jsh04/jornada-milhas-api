@@ -1,4 +1,5 @@
-﻿using API_Domains.DTO.Usuario;
+﻿using API_Domains.DTO.Login;
+using API_Domains.DTO.Usuario;
 using API_Domains.Indices;
 using API_Domains.Interfaces.Usuarios;
 using API_Domains.Util;
@@ -23,39 +24,49 @@ public class UsuarioService : IUsuarioService
         _usuarioRepository = usuarioRepository;
     }
 
-    public async Task<UsuarioIndex> CreateUsuario(UsuarioCadastroDTO usuarioCadastroDTO)
+    public async Task<DetalhamentoUsuarioDTO> CreateUsuario(UsuarioCadastroDTO usuarioCadastroDTO)
     {
         var usuario = _mapper.Map<UsuarioIndex>(usuarioCadastroDTO);
         usuario = FormartarCampos(usuario);
         var usuarioCadastrado = await _usuarioRepository.Create(usuario);
-        return usuarioCadastrado;
+        var usuarioDto = _mapper.Map<DetalhamentoUsuarioDTO>(usuarioCadastrado);
+        return usuarioDto;
     }
 
-    private static UsuarioIndex FormartarCampos(UsuarioIndex usuario)
+    public async Task<bool> DeleteUsuario(string id)
+    {
+        var deleted = await _usuarioRepository.Delete(id);
+        return deleted;
+    }
+
+    public async Task<IEnumerable<DetalhamentoUsuarioDTO>> GetAllAsync(int page, int size)
+    {
+        return _mapper.Map<List<DetalhamentoUsuarioDTO>>(await _usuarioRepository.GetAllAsync(page, size));
+    }
+
+    public async Task<DetalhamentoUsuarioDTO> GetUsuarioById(string id)
+    {
+        var usuario = await _usuarioRepository.GetById(id);
+        var usuarioDto = _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
+        return usuarioDto;
+    }
+
+    public async Task<DetalhamentoUsuarioDTO> LoginUsuario(LoginDTO login)
+    {
+        var usuario = await _usuarioRepository.GetUserByEmail(login.Email);
+        return _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
+    }
+
+    public Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, string id)
+    {
+        throw new NotImplementedException();
+    }
+
+    private UsuarioIndex FormartarCampos(UsuarioIndex usuario)
     {
         usuario.Password = EncriptarSenha.CriptografarSenha(usuario.Password);
         usuario.Phone = Formatar.RetirarMascara(usuario.Phone);
         usuario.Cpf = Formatar.RetirarMascara(usuario.Cpf);
         return usuario;
-    }
-
-    public Task<bool> DeleteDestino(string id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<UsuarioIndex>> GetAllAsync(int page, int size)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<UsuarioIndex> GetDestinoById(string id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<UsuarioIndex> UpdateDestino(UsuarioAtualizacaoDTO destino, string id)
-    {
-        throw new NotImplementedException();
     }
 }

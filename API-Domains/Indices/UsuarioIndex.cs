@@ -24,7 +24,7 @@ public class UsuarioIndex : ElasticBaseIndex
     public string Phone { get; set; }
 
 
-    public FileStream Picture { get; set; }
+    public byte[] Picture { get; set; }
 
     public string City { get; set; }
 
@@ -35,7 +35,4 @@ public class UsuarioIndex : ElasticBaseIndex
     public string ConfirmEmail{ get; set; }
 
     public string Password { get; set; }
-
-
-    public string ConfirmPassword { get; set; }
 }

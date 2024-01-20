@@ -1,4 +1,4 @@
-﻿using API_Domains.DTO;
+﻿using API_Domains.DTO.Depoimeto;
 using API_Infraestrutura.Indices;
 using AutoMapper;
 

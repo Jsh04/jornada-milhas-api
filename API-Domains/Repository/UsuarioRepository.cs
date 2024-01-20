@@ -2,6 +2,7 @@
 using API_Domains.Interfaces.Usuarios;
 using API_Infraestrutura.Configuracao;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,20 @@ public class UsuarioRepository : IUsuarioRepository
         if (response.IsValidResponse)
             return response.Source!;
         throw new Exception("Nenhum dado encontrado");
+    }
+
+    public async Task<UsuarioIndex> GetUserByEmail(string email)
+    {
+        var response = await _client.SearchAsync<UsuarioIndex>(
+            s =>
+            s.Index(IndexName)
+            .Query(
+                query =>
+                query.Match(m => m.Field(f => f.Email).Query(email))
+                )
+            );
+        var usuario = response.Documents.FirstOrDefault();
+        return usuario ?? throw new Exception("Usuário não encontrado com o email especificado");
     }
 
     public async Task<UsuarioIndex> Update(UsuarioIndex obj, string id)

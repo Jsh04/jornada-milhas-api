@@ -9,5 +9,6 @@ namespace API_Domains.Interfaces.Usuarios
 {
     public interface IUsuarioRepository : IRepository<UsuarioIndex>
     {
+        Task<UsuarioIndex> GetUserByEmail(string email);
     }
 }

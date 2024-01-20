@@ -1,9 +1,8 @@
-﻿using API_Domains.DTO;
+﻿using API_Domains.DTO.Depoimeto;
 using API_Domains.Interfaces;
 using API_Domains.Interfaces.Depoimentos;
 using API_Infraestrutura.Indices;
 using AutoMapper;
-using jornada_milhas.Controllers;
 using System;
 using System.Collections;
 using System.Collections.Generic;

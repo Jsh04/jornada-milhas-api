@@ -15,5 +15,4 @@ public class DestinoProfile : Profile
     {
         CreateMap<CreateDestinoDTO, DestinosIndex>();
     }
-    
 }

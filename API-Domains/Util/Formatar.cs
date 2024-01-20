@@ -14,7 +14,7 @@ public static class Formatar
         if (string.IsNullOrEmpty(campo))
             return string.Empty;
 
-        Regex regex = new Regex("/\\D/g");
-        return regex.Replace(campo, "");
+        Regex regex = new (@"\D");
+        return regex.Replace(campo, string.Empty);
     }
 }
