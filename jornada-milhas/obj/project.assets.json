@@ -689,6 +689,7 @@
           "API-Domains": "1.0.0",
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.26",
           "Microsoft.Extensions.DependencyInjection": "6.0.1"
         },
         "compile": {

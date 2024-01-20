@@ -1,12 +1,10 @@
-﻿
-using System.Security.Cryptography;
-
+﻿using System.Security.Cryptography;
 
 namespace API_Domains.Util;
 
 public static class EncriptarSenha
 {
-    private static string CriptografarSenha(string senha)
+    public static string CriptografarSenha(string senha)
     {
         Hash hash = new(HashProvider.SHA1);
         string senhaComHash = hash.GetHash(senha);
