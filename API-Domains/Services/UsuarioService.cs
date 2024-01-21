@@ -1,6 +1,7 @@
 ﻿using API_Domains.DTO.Login;
 using API_Domains.DTO.Usuario;
 using API_Domains.Indices;
+using API_Domains.Interfaces;
 using API_Domains.Interfaces.Usuarios;
 using API_Domains.Util;
 using AutoMapper;
@@ -16,12 +17,13 @@ public class UsuarioService : IUsuarioService
 {
     private readonly IMapper _mapper;
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly ITokenService _tokenService;
 
-
-    public UsuarioService(IMapper mapper, IUsuarioRepository usuarioRepository)
+    public UsuarioService(IMapper mapper, IUsuarioRepository usuarioRepository, ITokenService tokenService)
     {
         _mapper = mapper;
         _usuarioRepository = usuarioRepository;
+        _tokenService = tokenService;
     }
 
     public async Task<DetalhamentoUsuarioDTO> CreateUsuario(UsuarioCadastroDTO usuarioCadastroDTO)
@@ -51,10 +53,20 @@ public class UsuarioService : IUsuarioService
         return usuarioDto;
     }
 
-    public async Task<DetalhamentoUsuarioDTO> LoginUsuario(LoginDTO login)
+    public async Task<CredenciasUsuarioDTO> LoginUsuario(LoginDTO login)
     {
         var usuario = await _usuarioRepository.GetUserByEmail(login.Email);
-        return _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
+
+        var senhaCriptografada = EncriptarSenha.CriptografarSenha(login.Password);
+        
+        if (!usuario.Password.Equals(senhaCriptografada))
+            throw new Exception("Senha está incorreta");
+
+        var token = _tokenService.GerarToken(usuario);
+
+        var usuarioRetorno = _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
+
+        return new CredenciasUsuarioDTO { Usuario = usuarioRetorno, Token = token };
     }
 
     public Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, string id)
@@ -62,7 +74,7 @@ public class UsuarioService : IUsuarioService
         throw new NotImplementedException();
     }
 
-    private UsuarioIndex FormartarCampos(UsuarioIndex usuario)
+    private static UsuarioIndex FormartarCampos(UsuarioIndex usuario)
     {
         usuario.Password = EncriptarSenha.CriptografarSenha(usuario.Password);
         usuario.Phone = Formatar.RetirarMascara(usuario.Phone);

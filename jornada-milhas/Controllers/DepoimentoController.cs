@@ -2,6 +2,7 @@
 using API_Domains.Interfaces.Depoimentos;
 using API_Infraestrutura.Indices;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace jornada_milhas.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[DisableCors]
+[Authorize(AuthenticationSchemes = "Bearer")]
 public class DepoimentoController : ControllerBase
 {
 

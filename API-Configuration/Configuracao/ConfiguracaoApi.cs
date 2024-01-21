@@ -36,6 +36,8 @@ public static class ConfiguracaoApi
 
         services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         services.AddScoped<IUsuarioService, UsuarioService>();
+
+        services.AddScoped<ITokenService, TokenService>();
     }
 
     public static void AddDependenciesInjectionsExternal(IServiceCollection services)

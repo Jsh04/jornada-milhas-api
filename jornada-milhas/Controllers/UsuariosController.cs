@@ -1,7 +1,6 @@
 ﻿using API_Domains.DTO.Login;
 using API_Domains.DTO.Usuario;
 using API_Domains.Interfaces.Usuarios;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace jornada_milhas.Controllers;
@@ -31,11 +30,5 @@ public class UsuariosController : ControllerBase
         return Ok(usuario);
     }
 
-    [HttpPost("login")]
-    public async Task<IActionResult> LoginTeste(LoginDTO login)
-    {
-        await _service.LoginUsuario(login);
-        return Ok();
-    }
 
 }

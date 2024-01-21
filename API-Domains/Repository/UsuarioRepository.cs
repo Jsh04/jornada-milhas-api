@@ -66,7 +66,7 @@ public class UsuarioRepository : IUsuarioRepository
             s.Index(IndexName)
             .Query(
                 query =>
-                query.Match(m => m.Field(f => f.Email).Query(email))
+                query.Term(t => t.Email.Suffix("keyword"), email)
                 )
             );
         var usuario = response.Documents.FirstOrDefault();

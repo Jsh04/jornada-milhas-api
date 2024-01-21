@@ -16,6 +16,6 @@ namespace API_Domains.Interfaces.Usuarios
         Task<bool> DeleteUsuario(string id);
         Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, string id);
         Task<DetalhamentoUsuarioDTO> GetUsuarioById(string id);
-        Task<DetalhamentoUsuarioDTO> LoginUsuario(LoginDTO login);
+        Task<CredenciasUsuarioDTO> LoginUsuario(LoginDTO login);
     }
 }
