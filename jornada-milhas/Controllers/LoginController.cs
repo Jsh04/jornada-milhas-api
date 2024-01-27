@@ -21,8 +21,19 @@ public class LoginController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> LogarUsuario([FromBody] LoginDTO login)
     {
-        var usuarioCredencias = await _usuarioService.LoginUsuario(login);
-        return Ok(usuarioCredencias);
+        try
+        {
+            var usuarioCredencias = await _usuarioService.LoginUsuario(login);
+            return Ok(usuarioCredencias);
+        }
+        catch (Exception ex)
+        {
+            if (ex is NullReferenceException)
+                return NotFound(ex.Message);
+            return BadRequest(ex.Message);
+        }
+        
+        
     }
 
 }
