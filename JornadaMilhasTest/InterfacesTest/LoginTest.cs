@@ -1,21 +1,21 @@
 ﻿
 using OpenQA.Selenium;
-
 using NUnit.Framework.Internal;
 using JornadaMilhasTest.InterfacesTest.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using JornadaMilhasTest.InterfacesTest.Helpers;
+using OpenQA.Selenium.Chrome;
+using JornadaMilhasTest.InterfacesTest.Fixtures;
 
 namespace JornadaMilhasTest.InterfacesTest;
 
 [TestFixture]
-public class LoginTest 
+public class LoginTest
 {
     private readonly IWebDriver driver;
 
     public LoginTest()
     {
-        driver = SharingResources.Fixture.driver;    
+        driver = SharingResources.Fixture.driver;
     }
 
     [Test]

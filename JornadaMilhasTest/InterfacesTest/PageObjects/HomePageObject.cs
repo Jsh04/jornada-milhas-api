@@ -9,6 +9,5 @@ namespace JornadaMilhasTest.InterfacesTest.PageObjects;
 
 public class HomePageObject
 {
-    private IWebDriver driver;
-    private By 
+
 }

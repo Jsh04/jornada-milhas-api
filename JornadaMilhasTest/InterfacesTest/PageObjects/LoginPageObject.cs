@@ -31,10 +31,9 @@ public class LoginPageObject
         return this;
     }
 
-    public LoginPageObject SubmitForm()
+    public void SubmitForm()
     {
         driver.FindElement(btnLogin).Click();
-        return this;
     }
 
     public LoginPageObject FillFormsLogin(string email, string senha)

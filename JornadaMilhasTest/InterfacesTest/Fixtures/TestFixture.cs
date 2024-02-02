@@ -14,9 +14,6 @@ public class TestFixture : IDisposable
         driver = new ChromeDriver(TestHelper.PastaDoExecutavel);
     }
 
-    public void Dispose()
-    {
-        driver.Quit();
-    }
+    public void Dispose() => driver.Quit();
 
 }
