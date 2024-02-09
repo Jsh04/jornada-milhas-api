@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace API_Domains.DTO.Usuario;
@@ -19,6 +20,12 @@ public class UsuarioCadastroDTO
 
     [Required]
     public string Cpf { get; set; }
+
+    public string Adress { get; set; }
+
+    public string Cep { get; set; }
+
+    public string District { get; set; }
 
     [Required]
     public string Phone { get; set; }
@@ -37,6 +44,12 @@ public class UsuarioCadastroDTO
     [EmailAddress]
     [Compare("Email", ErrorMessage = "Email tem que ser o mesmo que o anterior")]
     public string ConfirmEmail { get; set; }
+
+    [Required]
+    [JsonPropertyName("UserRole")]
+    public EnumRole Role { get; set; }
+
+    public string CodeEmployee { get; set; }
 
     [Required]
     public string Password { get; set; }

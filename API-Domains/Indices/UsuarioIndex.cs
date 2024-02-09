@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,16 +20,26 @@ public class UsuarioIndex : ElasticBaseIndex
     public EnumGenre Genre { get; set; }
 
     [Required]
+    public EnumRole Role { get; set; }
+
+    [Required]
     public string Cpf { get; set; }
 
     public string Phone { get; set; }
 
+    public string? CodeEmployee { get; set; }
 
     public byte[] Picture { get; set; }
 
     public string City { get; set; }
 
     public string State { get; set; }
+
+    public string? Cep { get; set; }
+
+    public string? Adress { get; set; }
+
+    public string? District { get; set; }
 
     public string Email { get; set; }
 

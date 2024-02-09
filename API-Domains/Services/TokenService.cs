@@ -29,7 +29,7 @@ namespace API_Domains.Services
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new(ClaimTypes.Name, usuario.Name.ToString()),
-                
+                    new(ClaimTypes.Role, usuario.Role.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(10),
 

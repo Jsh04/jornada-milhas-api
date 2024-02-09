@@ -14,5 +14,6 @@ public class DestinoProfile : Profile
     public DestinoProfile()
     {
         CreateMap<CreateDestinoDTO, DestinosIndex>();
+        CreateMap<IEnumerable<DetailsDestinoDTO>, IEnumerable<DestinosIndex>>();
     }
 }

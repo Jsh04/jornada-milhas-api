@@ -11,19 +11,17 @@ namespace jornada_milhas.Controllers;
 public class DestinosController : ControllerBase
 {
     private readonly IDestinosService _destinoService;
-    private readonly IMapper _mapper;
 
-    public DestinosController(IDestinosService destinoService, IMapper mapper)
+
+    public DestinosController(IDestinosService destinoService)
     {
         _destinoService = destinoService;
-        _mapper = mapper;
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateDestino([FromBody] CreateDestinoDTO destinoDTO)
+    public async Task<IActionResult> CreateDestino([FromBody] CreateDestinoDTO destinoDto)
     {
-        var destino = _mapper.Map<DestinosIndex>(destinoDTO);
-        var destinoCriado = await _destinoService.CreateDestino(destino);
+        var destinoCriado = await _destinoService.CreateDestino(destinoDto);
         return Ok(destinoCriado);
     }
 
@@ -38,9 +36,9 @@ public class DestinosController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetAllDestinos([FromQuery] int size, [FromQuery] int page) 
+    public async Task<IActionResult> GetAllDestinos([FromQuery] int size, [FromQuery] int page) 
     {
-        var destinos = _destinoService.GetAllAsync(size, page);
+        var destinos =  await _destinoService.GetAllAsync(size, page);
         return Ok(destinos);
     }
 }

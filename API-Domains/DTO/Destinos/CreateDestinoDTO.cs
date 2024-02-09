@@ -11,8 +11,20 @@ namespace API_Domains.DTO.Destinos
     {
         [Required]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Valor é obrigatório")]
         public double Price { get; set; }
-        public string Description { get; set; }
+
+        [Required]
+        public string Subtitle { get; set; }
+
+        [Required]
+        public string DescriptionPortuguese { get; set; }
+
+        [Required]
+        public string DescriptionEnglish { get; set; }
+
+        [Required]
+        public List<string> Pictures { get; set; }
     }
 }

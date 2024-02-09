@@ -14,10 +14,10 @@ namespace API_Domains.Repository
     {
         private readonly string IndexName;
         private readonly ElasticsearchClient _client;
-        public Repository(string indexName)
+        public Repository(string indexName, FactoryElastic els)
         {   
             IndexName = indexName;
-            _client = FactoryElastic.CreateElasticCLient();
+            _client = els.CreateElasticCLient();
             _client.Indices.Create(IndexName);
         }
         public async Task<T> Create(T obj)

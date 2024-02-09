@@ -15,10 +15,10 @@ public class UsuarioRepository : IUsuarioRepository
 {
     private readonly string IndexName;
     private readonly ElasticsearchClient _client;
-    public UsuarioRepository()
+    public UsuarioRepository(FactoryElastic factoryElastic)
     {
         IndexName = "usuarios";
-        _client = FactoryElastic.CreateElasticCLient();
+        _client = factoryElastic.CreateElasticCLient();
         _client.Indices.Create(IndexName);
     }
 

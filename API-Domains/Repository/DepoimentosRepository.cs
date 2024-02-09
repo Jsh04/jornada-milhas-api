@@ -12,26 +12,28 @@ namespace API_Domains.Repository
 {
     public class DepoimentosRepository : IDepoimentosRepository
     {
-        private readonly string IndexName;
+        private readonly string _indexName;
         private readonly ElasticsearchClient _client;
-        public DepoimentosRepository()
+        public DepoimentosRepository(FactoryElastic factoryElastic)
         {
-            IndexName = "depoimentos";
-            _client = FactoryElastic.CreateElasticCLient();
-            _client.Indices.Create(IndexName);
+            _indexName = "depoimentos";
+            _client = factoryElastic.CreateElasticCLient();
+            _client.Indices.Create(_indexName);
         }
         public async Task<DepoimentosIndex> Create(DepoimentosIndex obj)
         {
-            var response = await _client.IndexAsync(obj, IndexName);
-            return obj;
+            var response = await _client.IndexAsync(obj, _indexName);
+            if (response.IsSuccess())
+                return obj;
+            throw new ApplicationException("Erro ao cadastrar o depoimento");
+
+
         }
 
         public async Task<bool> Delete(string id)
         {
-            var response = await _client.DeleteAsync(IndexName, id);
-            if (response.IsValidResponse)
-                return true;
-            return false;
+            var response = await _client.DeleteAsync(_indexName, id);
+            return response.IsValidResponse;
         }
 
         public async Task<IEnumerable<DepoimentosIndex>> GetAllAsync(int page, int size)
@@ -41,7 +43,7 @@ namespace API_Domains.Repository
 
 
             var response = await _client.SearchAsync<DepoimentosIndex>(dep =>
-            dep.Index(IndexName)
+            dep.Index(_indexName)
             .From(page)
             .Size(size));
 
@@ -50,16 +52,16 @@ namespace API_Domains.Repository
 
         public async Task<DepoimentosIndex> GetById(string id)
         {
-            var response = await _client.GetAsync<DepoimentosIndex>(id, idx => idx.Index(IndexName));
+            var response = await _client.GetAsync<DepoimentosIndex>(id, idx => idx.Index(_indexName));
 
             if (response.IsValidResponse)
                 return response.Source!;
-            throw new Exception("Nenhum dado encontrado");
+            throw new Exception("Nenhum depoiemento encontrado");
         }
 
         public async Task<DepoimentosIndex> Update(DepoimentosIndex obj, string id)
         {
-            var response = await _client.UpdateAsync<DepoimentosIndex, DepoimentosIndex>(IndexName, id, doc => doc.Doc(obj));
+            var response = await _client.UpdateAsync<DepoimentosIndex, DepoimentosIndex>(_indexName, id, doc => doc.Doc(obj));
 
             if (response.IsValidResponse)
                 return response.Get!.Source;

@@ -136,3 +136,5 @@ C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\bin\Debug
 C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\bin\Debug\net6.0\RabbitMQ.Client.dll
+C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\jornada-milhas\bin\Debug\net6.0\System.Threading.Channels.dll

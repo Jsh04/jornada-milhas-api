@@ -7,6 +7,7 @@ using API_Domains.Interfaces.Destinos;
 using API_Domains.Interfaces.Usuarios;
 using API_Domains.Repository;
 using API_Domains.Services;
+using API_Infraestrutura.Configuracao;
 using API_Infraestrutura.Indices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -38,11 +39,15 @@ public static class ConfiguracaoApi
         services.AddScoped<IUsuarioService, UsuarioService>();
 
         services.AddScoped<ITokenService, TokenService>();
+
+
     }
 
     public static void AddDependenciesInjectionsExternal(IServiceCollection services)
     {
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+        services.AddSingleton<FactoryElastic>();
     }
 
     public static void AddAuthenticationWithJWT(this IServiceCollection services, WebApplicationBuilder builder)
