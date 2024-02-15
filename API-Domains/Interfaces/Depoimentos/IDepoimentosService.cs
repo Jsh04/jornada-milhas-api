@@ -13,7 +13,7 @@ namespace API_Domains.Interfaces.Depoimentos
         Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync(int page, int size);
         Task<DepoimentosIndex> CreateDepoimento(DepoimentoDTO depoimento);
         Task<bool> DeleteDepoimento(string id);
-        Task<DepoimentosIndex> UpdateDepoimento(DepoimentoAtualizarDTO depoimento, string id);
+        Task<bool> UpdateDepoimento(DepoimentoAtualizarDTO depoimento, string id);
         Task<DepoimentosIndex> GetDepoimentoById(string id);
 
     }

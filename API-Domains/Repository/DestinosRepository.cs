@@ -45,6 +45,7 @@ namespace API_Domains.Repository
             dep.Index(_indexName)
             .From(page)
             .Size(size));
+            var hits = response.Hits;
 
             return response.Documents;
         }
@@ -58,14 +59,14 @@ namespace API_Domains.Repository
             throw new Exception("Nenhum dado encontrado");
         }
 
-        public async Task<DestinosIndex> Update(DestinosIndex obj, string id)
+        public async Task<bool> Update(DestinosIndex obj, string id)
         {
             var response = await _client.UpdateAsync<DestinosIndex, DestinosIndex>(_indexName, id, doc => doc.Doc(obj));
 
             if (response.IsValidResponse)
-                return response.Get!.Source;
+                return response.Result == Result.Updated;
 
-            throw new Exception("Erro na atualização");
+            return false;
         }
     }
 }

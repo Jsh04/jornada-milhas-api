@@ -12,7 +12,7 @@ namespace API_Domains.Interfaces
         Task<IEnumerable<T>> GetAllAsync(int page, int size);
         Task<T> Create(T obj);
         Task<bool> Delete(string id);
-        Task<T> Update(T obj, string id);
+        Task<bool> Update(T obj, string id);
         Task<T> GetById(string id);
     }
 }

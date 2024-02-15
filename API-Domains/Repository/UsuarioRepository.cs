@@ -31,9 +31,7 @@ public class UsuarioRepository : IUsuarioRepository
     public async Task<bool> Delete(string id)
     {
         var response = await _client.DeleteAsync(IndexName, id);
-        if (response.IsValidResponse)
-            return true;
-        return false;
+        return response.IsValidResponse;
     }
 
     public async Task<IEnumerable<UsuarioIndex>> GetAllAsync(int page, int size)
@@ -47,7 +45,7 @@ public class UsuarioRepository : IUsuarioRepository
         .From(page)
         .Size(size));
 
-        return response.Documents;
+        return response.Documents.ToList();
     }
 
     public async Task<UsuarioIndex> GetById(string id)
@@ -73,13 +71,13 @@ public class UsuarioRepository : IUsuarioRepository
         return usuario ?? throw new Exception("Usuário não encontrado com o email especificado");
     }
 
-    public async Task<UsuarioIndex> Update(UsuarioIndex obj, string id)
+    public async Task<bool> Update(UsuarioIndex obj, string id)
     {
         var response = await _client.UpdateAsync<UsuarioIndex, UsuarioIndex>(IndexName, id, doc => doc.Doc(obj));
 
         if (response.IsValidResponse)
-            return response.Get!.Source;
+            return response.Result == Result.Updated;
 
-        throw new Exception("Erro na atualização");
+        return false;
     }
 }

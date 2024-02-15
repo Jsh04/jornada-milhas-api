@@ -57,14 +57,14 @@ namespace API_Domains.Repository
             throw new Exception("Nenhum dado encontrado");
         }
 
-        public async Task<T> Update(T obj, string id)
+        public async Task<bool> Update(T obj, string id)
         {
             var response = await _client.UpdateAsync<T, T>(IndexName, id, doc => doc.Doc(obj));
 
             if (response.IsValidResponse)
-                return response.Get!.Source;
+                return response.Result == Result.Updated;
 
-            throw new Exception("Erro na atualização");
+            return false;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using API_Domains.DTO.Destinos;
+using API_Domains.DTO.Usuario;
 using API_Domains.Indices;
 using AutoMapper;
 using System;
@@ -14,6 +15,7 @@ public class DestinoProfile : Profile
     public DestinoProfile()
     {
         CreateMap<CreateDestinoDTO, DestinosIndex>();
-        CreateMap<IEnumerable<DetailsDestinoDTO>, IEnumerable<DestinosIndex>>();
+        CreateMap<DestinosIndex, DetailsDestinoDTO>();
+        CreateMap<UpdateDestinoDTO, DestinosIndex>();
     }
 }

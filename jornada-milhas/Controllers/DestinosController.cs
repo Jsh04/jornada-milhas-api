@@ -35,10 +35,27 @@ public class DestinosController : ControllerBase
         
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateDestino(string id, [FromBody] UpdateDestinoDTO updateDestinoDto)
+    {
+        var updated = await _destinoService.UpdateDestino(updateDestinoDto, id);
+        if (updated)
+            return NoContent();
+        return BadRequest();
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetDestinyById(string id)
+    {
+        var destiny = await _destinoService.GetDestinoById(id);
+        return Ok(destiny);
+    }
+
+
     [HttpGet]
     public async Task<IActionResult> GetAllDestinos([FromQuery] int size, [FromQuery] int page) 
     {
-        var destinos =  await _destinoService.GetAllAsync(size, page);
+        var destinos =  await _destinoService.GetAllAsync(page, size);
         return Ok(destinos);
     }
 }

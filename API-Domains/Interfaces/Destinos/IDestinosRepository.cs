@@ -7,6 +7,5 @@ using System.Threading.Tasks;
 
 namespace API_Domains.Interfaces.Destinos
 {
-    public interface IDestinosRepository : IRepository<DestinosIndex>
-    { }
+    public interface IDestinosRepository : IRepository<DestinosIndex> { }
 }

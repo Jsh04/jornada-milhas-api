@@ -27,25 +27,26 @@ namespace API_Domains.Services
         public async Task<bool> DeleteDestino(string id)
         {
             var isDeleted = await _destinoRepository.Delete(id);
-            if (!isDeleted)
-                throw new Exception("Erro na deleção do documento");
-            
             return isDeleted;
         }
 
-        public async Task<IEnumerable<DetailsDestinoDTO>> GetAllAsync(int page, int size)
+        public async Task<IEnumerable<DestinosIndex>> GetAllAsync(int page, int size)
         {
-            return _mapper.Map<IEnumerable<DetailsDestinoDTO>>(await _destinoRepository.GetAllAsync(page, size));
+            var destinos = await _destinoRepository.GetAllAsync(page, size);
+            return destinos;
         }
 
-        public async Task<DestinosIndex> GetDestinoById(string id)
+        public async Task<DetailsDestinoDTO> GetDestinoById(string id)
         {
-            return await _destinoRepository.GetById(id);
+            var destinoElastic = await _destinoRepository.GetById(id);
+            var destinoDto = _mapper.Map<DetailsDestinoDTO>(destinoElastic);
+            return destinoDto;
         }
 
-        public async Task<DestinosIndex> UpdateDestino(DestinosIndex destino, string id)
+        public async Task<bool> UpdateDestino(UpdateDestinoDTO destino, string id)
         {
-            var destinoAtualizado = await _destinoRepository.Update(destino, id);
+            var destinoIndex = _mapper.Map<DestinosIndex>(destino);
+            var destinoAtualizado = await _destinoRepository.Update(destinoIndex, id);
             return destinoAtualizado;
         }
     }

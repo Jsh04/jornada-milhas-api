@@ -11,9 +11,9 @@ namespace API_Domains.Interfaces.Destinos;
 
 public interface IDestinosService
 {
-    Task<IEnumerable<DetailsDestinoDTO>> GetAllAsync(int page, int size);
+    Task<IEnumerable<DestinosIndex>> GetAllAsync(int page, int size);
     Task<DestinosIndex> CreateDestino(CreateDestinoDTO destino);
     Task<bool> DeleteDestino(string id);
-    Task<DestinosIndex> UpdateDestino(DestinosIndex destino, string id);
-    Task<DestinosIndex> GetDestinoById(string id);
+    Task<bool> UpdateDestino(UpdateDestinoDTO updateDestinoDto, string id);
+    Task<DetailsDestinoDTO> GetDestinoById(string id);
 }

@@ -49,7 +49,7 @@ namespace API_Domains.Services
             return await  _depoimentosRepository.Delete(id);
         }
 
-        public async Task<DepoimentosIndex> UpdateDepoimento(DepoimentoAtualizarDTO depoimentoDTO, string id)
+        public async Task<bool> UpdateDepoimento(DepoimentoAtualizarDTO depoimentoDTO, string id)
         {
             var depoimento = await GetDepoimentoById(id) ?? throw new Exception("Não existe depoimento");
             var depoimentorRequisicao = _mapper.Map(depoimentoDTO, depoimento);

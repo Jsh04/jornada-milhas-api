@@ -9,6 +9,8 @@ namespace API_Domains.DTO.Destinos
 {
     public class CreateDestinoDTO
     {
+        public string Id { get; } = Guid.NewGuid().ToString(); 
+
         [Required]
         public string Name { get; set; }
 
