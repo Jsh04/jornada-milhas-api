@@ -4,6 +4,7 @@ namespace API_Infraestrutura.Configuracao;
 
 public class FactoryElastic
 {
+
     public ElasticsearchClient CreateElasticCLient()
     {
 
