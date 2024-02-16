@@ -10,12 +10,7 @@ namespace JornadaMilhasTest.InterfacesTest.PageObjects;
 public class RegisterDestinyPO
 {
     private IWebDriver driver;
-    private By InputFiles;
-    private By NameDestiny;
-    private By SubtitleDestiny;
-    private By PriceDestiny;
-    private By DescriptionPortuguese;
-    private By DestinationEnglish;
+    private By 
 
 
     public RegisterDestinyPO(IWebDriver driver)
