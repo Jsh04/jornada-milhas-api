@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = API_Domains
-build_property.ProjectDir = C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Domains\
+build_property.ProjectDir = C:\Users\dev\Documents\Estudo\API .NET\API-Domains\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

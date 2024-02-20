@@ -38,3 +38,16 @@ C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Domains\obj\Debug\ne
 C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Domains\obj\Debug\net6.0\refint\API-Domains.dll
 C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Domains\obj\Debug\net6.0\API-Domains.pdb
 C:\Users\José Silvio\source\repos\Jsh04\jornada-milhas\API-Domains\obj\Debug\net6.0\ref\API-Domains.dll
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\bin\Debug\net6.0\API-Domains.deps.json
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\bin\Debug\net6.0\API-Domains.dll
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\bin\Debug\net6.0\API-Domains.pdb
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\API-Domains.csproj.AssemblyReference.cache
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\API-Domains.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\API-Domains.AssemblyInfoInputs.cache
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\API-Domains.AssemblyInfo.cs
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\API-Domains.csproj.CoreCompileInputs.cache
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\API-Domains.sourcelink.json
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\API-Domains.dll
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\refint\API-Domains.dll
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\API-Domains.pdb
+C:\Users\dev\Documents\Estudo\API .NET\API-Domains\obj\Debug\net6.0\ref\API-Domains.dll

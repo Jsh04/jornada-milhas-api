@@ -7,7 +7,6 @@ using JornadaMilhasTest.InterfacesTest.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace JornadaMilhasTest.InterfacesTest.Tests.RegisterDestinyTest;
 

@@ -9,11 +9,11 @@ namespace JornadaMilhasTest.InterfacesTest.PageObjects;
 
 public class LoginPageObject
 {
-    private IWebDriver driver;
-    private By inputLogin;
-    private By inputPassword;
-    private By btnLogin;
-    private By btnLoginHeader;
+    private readonly IWebDriver driver;
+    private readonly By inputLogin;
+    private readonly By inputPassword;
+    private readonly By btnLogin;
+    private readonly By btnLoginHeader;
 
     public LoginPageObject(IWebDriver driver)
     {
