@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\jornada-milhas.props" />
-</Project>
