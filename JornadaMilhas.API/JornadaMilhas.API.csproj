@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>JornadaMilhas</RootNamespace>
+    <RootNamespace>JornadaMilhas.API</RootNamespace>
     <UserSecretsId>7ee90b83-38b9-41c9-abc3-fed1835313fc</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\API-Configuration\JornadaMilhas.Infrastruture.csproj" />
-    <ProjectReference Include="..\API-Domains\JornadaMIlhas.Core.csproj" />
+    <ProjectReference Include="..\JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj" />
+    <ProjectReference Include="..\JornadaMilhas.Core\JornadaMIlhas.Core.csproj" />
   </ItemGroup>
 
 </Project>

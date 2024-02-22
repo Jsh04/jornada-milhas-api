@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>JornadaMilhas.Core</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -23,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\API-Configuration\JornadaMilhas.Infrastruture.csproj" />
+    <ProjectReference Include="..\JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj" />
   </ItemGroup>
 
 </Project>

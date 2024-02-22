@@ -1,4 +1,4 @@
-﻿]using AutoMapper;
+﻿
 using JornadaMilhas.Core.DTO.Depoimeto;
 using JornadaMilhas.Core.Interfaces.Depoimentos;
 using Microsoft.AspNetCore.Authorization;
