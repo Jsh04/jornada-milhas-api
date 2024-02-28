@@ -1,11 +1,12 @@
 ﻿
-using API_Domains.Interfaces.Destinos;
+
 using AutoMapper;
 using JornadaMilhas.Core.DTO.Destinos;
 using JornadaMilhas.Core.Indices;
 using JornadaMilhas.Core.Interfaces;
+using JornadaMilhas.Core.Interfaces.Destinos;
 
-namespace API_Domains.Services
+namespace JornadaMilhas.Application.Services
 {
     public class DestinosService : IDestinosService
     {

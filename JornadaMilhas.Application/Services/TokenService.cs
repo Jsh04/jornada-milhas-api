@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 
 
-namespace API_Domains.Services
+namespace JornadaMilhas.Application.Services
 {
     public class TokenService : ITokenService
     {
@@ -29,8 +29,8 @@ namespace API_Domains.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new(ClaimTypes.Name, usuario.Name.ToString()),
-                    new(ClaimTypes.Role, usuario.Role.ToString())
+                    new(ClaimTypes.Name, usuario.Name),
+                    new(ClaimTypes.Role, usuario.UserRole.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(10),
 

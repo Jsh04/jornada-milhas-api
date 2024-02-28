@@ -1,6 +1,7 @@
-﻿using API_Domains.Interfaces.Destinos;
+﻿
 using AutoMapper;
 using JornadaMilhas.Core.DTO.Destinos;
+using JornadaMilhas.Core.Interfaces.Destinos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API;

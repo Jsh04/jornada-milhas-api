@@ -13,7 +13,7 @@ public class UsuarioIndex : ElasticBaseIndex
     public EnumGenre Genre { get; set; }
 
     [Required]
-    public EnumRole Role { get; set; }
+    public EnumRole UserRole { get; set; }
 
     [Required]
     public string Cpf { get; set; }

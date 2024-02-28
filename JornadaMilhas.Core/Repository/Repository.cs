@@ -50,7 +50,7 @@ namespace JornadaMilhas.Core.Repository
 
             var response = await _client.SearchAsync(request);
 
-            if (response.IsValidResponse )
+            if (!response.IsValidResponse)
                 throw new Exception();
 
             T obj = response.Documents.FirstOrDefault();

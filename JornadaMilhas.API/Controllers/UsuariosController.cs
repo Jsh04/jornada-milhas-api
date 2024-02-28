@@ -1,6 +1,7 @@
 ﻿
-using API_Domains.Interfaces.Usuarios;
+
 using JornadaMilhas.Core.DTO.Usuario;
+using JornadaMilhas.Core.Interfaces.Usuarios;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API;

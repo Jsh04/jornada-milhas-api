@@ -10,21 +10,22 @@ namespace JornadaMilhas.Core.DTO.Usuario;
 
 public class UsuarioCadastroDTO
 {
+    public string Id { get; } = Guid.NewGuid().ToString();
+
     [Required]
     public string Name { get; set; }
     [Required]
     public DateTime DtBirth { get; set; }
 
-    public string Genre { get; set; }
+    public EnumGenre Genre { get; set; }
 
     [Required]
     public string Cpf { get; set; }
 
-    public string Adress { get; set; }
+    public string? Adress { get; set; } = string.Empty;
+    public string? Cep { get; set; } = string.Empty;
 
-    public string Cep { get; set; }
-
-    public string District { get; set; }
+    public string? District { get; set; } = string.Empty;
 
     [Required]
     public string Phone { get; set; }
@@ -45,10 +46,10 @@ public class UsuarioCadastroDTO
     public string ConfirmEmail { get; set; }
 
     [Required]
-    [JsonPropertyName("UserRole")]
-    public EnumRole Role { get; set; }
+    [JsonPropertyName("userRole")]
+    public EnumRole UserRole { get; set; }
 
-    public string CodeEmployee { get; set; }
+    public string? CodeEmployee { get; set; } = string.Empty;
 
     [Required]
     public string Password { get; set; }

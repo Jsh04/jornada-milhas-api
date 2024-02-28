@@ -4,12 +4,7 @@ using JornadaMilhas.Core.DTO.Depoimeto;
 using JornadaMilhas.Core.Indices;
 using JornadaMilhas.Core.Interfaces;
 using JornadaMilhas.Core.Interfaces.Depoimentos;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace JornadaMilhas.Application.Services
 {

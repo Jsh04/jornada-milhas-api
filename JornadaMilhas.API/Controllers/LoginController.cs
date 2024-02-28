@@ -1,7 +1,7 @@
 ﻿
 
-using API_Domains.Interfaces.Usuarios;
 using JornadaMilhas.Core.DTO.Login;
+using JornadaMilhas.Core.Interfaces.Usuarios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

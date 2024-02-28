@@ -13,11 +13,12 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
-    <PackageReference Include="NEST" Version="6.8.11" />
+    <PackageReference Include="NEST" Version="7.17.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JornadaMilhas.Application\JornadaMilhas.Application.csproj" />
     <ProjectReference Include="..\JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj" />
     <ProjectReference Include="..\JornadaMilhas.Core\JornadaMIlhas.Core.csproj" />
   </ItemGroup>

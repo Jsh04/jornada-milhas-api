@@ -2,7 +2,7 @@
 using JornadaMilhas.Core.DTO.Destinos;
 using JornadaMilhas.Core.Indices;
 
-namespace API_Domains.Interfaces.Destinos;
+namespace JornadaMilhas.Core.Interfaces.Destinos;
 
 public interface IDestinosService
 {

@@ -2,7 +2,7 @@
 using JornadaMilhas.Core.DTO.Login;
 using JornadaMilhas.Core.DTO.Usuario;
 
-namespace API_Domains.Interfaces.Usuarios
+namespace JornadaMilhas.Core.Interfaces.Usuarios
 {
     public interface IUsuarioService
     {

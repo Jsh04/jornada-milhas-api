@@ -14,6 +14,8 @@ public class DetalhamentoUsuarioDTO
 
     public EnumGenre Genre { get; set; }
 
+    public EnumRole UserRole { get; set; }
+
     public string Cpf { get; set; }
 
     public string Phone { get; set; }

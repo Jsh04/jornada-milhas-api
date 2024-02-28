@@ -1,15 +1,17 @@
 ﻿
 
-using API_Domains.Interfaces.Usuarios;
+
 using AutoMapper;
 using Elastic.Clients.Elasticsearch;
 using JornadaMilhas.Core.DTO.Login;
 using JornadaMilhas.Core.DTO.Usuario;
 using JornadaMilhas.Core.Indices;
+using JornadaMilhas.Core.Indices.Enums;
 using JornadaMilhas.Core.Interfaces;
+using JornadaMilhas.Core.Interfaces.Usuarios;
 using JornadaMilhas.Core.Util;
 
-namespace API_Domains.Services;
+namespace JornadaMilhas.Application.Services;
 
 public class UsuarioService : IUsuarioService
 {
@@ -26,7 +28,9 @@ public class UsuarioService : IUsuarioService
 
     public async Task<DetalhamentoUsuarioDTO> CreateUsuario(UsuarioCadastroDTO usuarioCadastroDTO)
     {
+        
         var usuario = _mapper.Map<UsuarioIndex>(usuarioCadastroDTO);
+        
         usuario = FormartarCampos(usuario);
         var usuarioCadastrado = await _usuarioRepository.Create(usuario);
         var usuarioDto = _mapper.Map<DetalhamentoUsuarioDTO>(usuarioCadastrado);
@@ -69,7 +73,7 @@ public class UsuarioService : IUsuarioService
 
         var usuarioRetorno = _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
 
-        return new CredenciasUsuarioDTO { Usuario = usuarioRetorno, Token = token };
+        return new CredenciasUsuarioDTO { User = usuarioRetorno, Token = token };
     }
 
     public Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, string id)

@@ -1,17 +1,15 @@
 ﻿
 
-using API_Domains.Interfaces.Destinos;
-using API_Domains.Interfaces.Usuarios;
-using API_Domains.Repository;
-using API_Domains.Services;
 using JornadaMilhas.Core.Interfaces;
 using JornadaMilhas.Core.Interfaces.Depoimentos;
 using JornadaMilhas.Infrastruture;
+using JornadaMilhas.Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using API_Domains.Repository;
+using JornadaMilhas.Core.Interfaces.Destinos;
+using JornadaMilhas.Core.Interfaces.Usuarios;
 
 namespace JornadaMilhas.API;
 
