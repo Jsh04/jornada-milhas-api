@@ -39,4 +39,6 @@ public class UsuarioIndex : ElasticBaseIndex
     public string ConfirmEmail{ get; set; }
 
     public string Password { get; set; }
+
+    public bool EmailExists { get; set; }
 }

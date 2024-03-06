@@ -3,6 +3,7 @@
 
 using AutoMapper;
 using Elastic.Clients.Elasticsearch;
+using JornadaMilhas.Application.Messagings.Senders;
 using JornadaMilhas.Core.DTO.Login;
 using JornadaMilhas.Core.DTO.Usuario;
 using JornadaMilhas.Core.Indices;
@@ -18,12 +19,14 @@ public class UsuarioService : IUsuarioService
     private readonly IMapper _mapper;
     private readonly IRepository<UsuarioIndex> _usuarioRepository;
     private readonly ITokenService _tokenService;
+    private readonly SendEmailMessage _message;
 
-    public UsuarioService(IMapper mapper, IUnitOfWork unitOfWork, ITokenService tokenService)
+    public UsuarioService(IMapper mapper, IUnitOfWork unitOfWork, ITokenService tokenService, SendEmailMessage message)
     {
         _mapper = mapper;
         _usuarioRepository = unitOfWork.UsuarioRepository;
         _tokenService = tokenService;
+        _message = message;
     }
 
     public async Task<DetalhamentoUsuarioDTO> CreateUsuario(UsuarioCadastroDTO usuarioCadastroDTO)
@@ -32,8 +35,11 @@ public class UsuarioService : IUsuarioService
         var usuario = _mapper.Map<UsuarioIndex>(usuarioCadastroDTO);
         
         usuario = FormartarCampos(usuario);
+
         var usuarioCadastrado = await _usuarioRepository.Create(usuario);
-        var usuarioDto = _mapper.Map<DetalhamentoUsuarioDTO>(usuarioCadastrado);
+
+        _message.SendConfirmMmail(usuarioCadastrado.Email);
+        var usuarioDto = _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
         return usuarioDto;
     }
 

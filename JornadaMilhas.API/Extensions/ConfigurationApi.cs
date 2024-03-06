@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using API_Domains.Repository;
+using JornadaMilhas.Application.Messagings.Senders;
 using JornadaMilhas.Core.Interfaces.Destinos;
 using JornadaMilhas.Core.Interfaces.Usuarios;
 
@@ -33,6 +34,8 @@ public static class ConfigurationApi
         services.AddScoped<ITokenService, TokenService>();
 
         services.AddSingleton<IUnitOfWork, UnitOfWork>();
+
+
     }
 
     public static void AddDependenciesInjectionsExternal(IServiceCollection services)
@@ -40,6 +43,8 @@ public static class ConfigurationApi
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         services.AddSingleton<FactoryElastic>();
+
+        services.AddSingleton<SendEmailMessage>();
     }
 
     public static void AddAuthenticationWithJWT(this IServiceCollection services, WebApplicationBuilder builder)
