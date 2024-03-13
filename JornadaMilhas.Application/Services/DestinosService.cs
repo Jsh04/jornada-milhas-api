@@ -28,7 +28,7 @@ namespace JornadaMilhas.Application.Services
             return destinoCreated;
         }
 
-        public async Task<bool> DeleteDestino(string id)
+        public async Task<bool> DeleteDestino(long id)
         {
             var isDeleted = await _destinoRepository.Delete(id);
             return isDeleted;
@@ -40,14 +40,14 @@ namespace JornadaMilhas.Application.Services
             return destinos;
         }
 
-        public async Task<DetailsDestinoDTO> GetDestinoById(string id)
+        public async Task<DetailsDestinoDTO> GetDestinoById(long id)
         {
             var destinoElastic = await _destinoRepository.GetById(id);
             var destinoDto = _mapper.Map<DetailsDestinoDTO>(destinoElastic);
             return destinoDto;
         }
 
-        public async Task<bool> UpdateDestino(UpdateDestinoDTO destino, string id)
+        public async Task<bool> UpdateDestino(UpdateDestinoDTO destino, long id)
         {
             var destinoIndex = _mapper.Map<Destino>(destino);
             var destinoAtualizado = await _destinoRepository.Update(destinoIndex, id);

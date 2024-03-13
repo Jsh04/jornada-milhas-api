@@ -42,19 +42,19 @@ namespace JornadaMilhas.Application.Services
             return await _unitOfWork.DepoimentoRepository.GetAllAsync(page, size);
         }
 
-        public async Task<bool> DeleteDepoimento(string id)
+        public async Task<bool> DeleteDepoimento(long id)
         {
             return await _unitOfWork.DepoimentoRepository.Delete(id);
         }
 
-        public async Task<bool> UpdateDepoimento(DepoimentoAtualizarDTO depoimentoDTO, string id)
+        public async Task<bool> UpdateDepoimento(DepoimentoAtualizarDTO depoimentoDTO, long id)
         {
             var depoimento = await GetDepoimentoById(id) ?? throw new Exception("Não existe depoimento");
             var depoimentorRequisicao = _mapper.Map(depoimentoDTO, depoimento);
             return await _unitOfWork.DepoimentoRepository.Update(depoimentorRequisicao, id);
         }
 
-        public async Task<Depoimento> GetDepoimentoById(string id)
+        public async Task<Depoimento> GetDepoimentoById(long id)
         {
             return await _unitOfWork.DepoimentoRepository.GetById(id);
         }

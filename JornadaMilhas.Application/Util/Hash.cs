@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Core.Util;
+namespace JornadaMilhas.Application.Util;
 
 public enum HashProvider
 

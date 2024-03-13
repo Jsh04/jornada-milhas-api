@@ -4,12 +4,13 @@
 using AutoMapper;
 
 using JornadaMilhas.Application.Messagings.Senders;
+using JornadaMilhas.Application.Util;
 using JornadaMilhas.Core.DTO.Login;
 using JornadaMilhas.Core.DTO.Usuario;
 using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Core.Interfaces;
 using JornadaMilhas.Core.Interfaces.Usuarios;
-using JornadaMilhas.Core.Util;
+
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 
@@ -44,7 +45,7 @@ public class UsuarioService : IUsuarioService
         return usuarioDto;
     }
 
-    public async Task<bool> DeleteUsuario(string id)
+    public async Task<bool> DeleteUsuario(long id)
     {
         var deleted = await _usuarioRepository.Delete(id);
         return deleted;
@@ -55,12 +56,13 @@ public class UsuarioService : IUsuarioService
         return _mapper.Map<List<DetalhamentoUsuarioDTO>>(await _usuarioRepository.GetAllAsync(page, size));
     }
 
-    public async Task<DetalhamentoUsuarioDTO> GetUsuarioById(string id)
+    public async Task<DetalhamentoUsuarioDTO> GetUsuarioById(long id)
     {
         var usuario = await _usuarioRepository.GetById(id);
         var usuarioDto = _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
         return usuarioDto;
     }
+
 
     public async Task<CredenciasUsuarioDTO> LoginUsuario(LoginDTO login)
     {
@@ -78,7 +80,7 @@ public class UsuarioService : IUsuarioService
         return new CredenciasUsuarioDTO { User = usuarioRetorno, Token = token };
     }
 
-    public Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, string id)
+    public Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, long id)
     {
         throw new NotImplementedException();
     }

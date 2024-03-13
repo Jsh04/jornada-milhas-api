@@ -62,13 +62,12 @@ public class RepositoryUsuario : IRepositoryUsuario
     {
         var usuario = await GetById(id);
         obj.Id = usuario.Id;
+
         var usuarioUpdated = _context.Usuarios.Update(obj);
+
         if (usuarioUpdated.Entity != null)
             return true;
         return false;
-
-
-
 
     }
 }

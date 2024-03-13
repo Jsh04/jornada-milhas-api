@@ -26,7 +26,7 @@ public class DestinosController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteDestino(string id)
+    public async Task<IActionResult> DeleteDestino(long id)
     {
         var deleted = await _destinoService.DeleteDestino(id);
         if (deleted)
@@ -36,7 +36,7 @@ public class DestinosController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateDestino(string id, [FromBody] UpdateDestinoDTO updateDestinoDto)
+    public async Task<IActionResult> UpdateDestino(long id, [FromBody] UpdateDestinoDTO updateDestinoDto)
     {
         var updated = await _destinoService.UpdateDestino(updateDestinoDto, id);
         if (updated)
@@ -45,7 +45,7 @@ public class DestinosController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetDestinyById(string id)
+    public async Task<IActionResult> GetDestinyById(long id)
     {
         var destiny = await _destinoService.GetDestinoById(id);
         return Ok(destiny);

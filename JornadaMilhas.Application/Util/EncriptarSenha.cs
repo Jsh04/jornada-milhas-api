@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace JornadaMilhas.Core.Util;
+namespace JornadaMilhas.Application.Util;
 
 public static class EncriptarSenha
 {
