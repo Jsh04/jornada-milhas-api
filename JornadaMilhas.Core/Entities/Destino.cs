@@ -1,12 +1,9 @@
-﻿
+﻿namespace JornadaMilhas.Core.Entities;
 
-namespace JornadaMilhas.Core.Indices;
-
-public class DestinosIndex : ElasticBaseIndex
+public class Destino : BaseEntity
 {
-    public string Name { get; set; }
 
-    public List<string> Pictures { get; set; }
+    public string Name { get; set; }
 
     public string Subtitle { get; set; }
 
@@ -15,4 +12,6 @@ public class DestinosIndex : ElasticBaseIndex
     public string DescriptionPortuguese { get; set; }
 
     public string DescriptionEnglish { get; set; }
+
+    public List<ImagemDestino> Imagens { get; set; }
 }

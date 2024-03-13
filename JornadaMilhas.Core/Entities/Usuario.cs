@@ -1,9 +1,9 @@
 ﻿using JornadaMilhas.Core.Indices.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace JornadaMilhas.Core.Indices;
+namespace JornadaMilhas.Core.Entities;
 
-public class UsuarioIndex : ElasticBaseIndex
+public class Usuario : BaseEntity
 {
     [Required]
     public string Name { get; set; }
@@ -41,4 +41,6 @@ public class UsuarioIndex : ElasticBaseIndex
     public string Password { get; set; }
 
     public bool EmailExists { get; set; }
+
+    public ICollection<Depoimento> Depoimentos { get; set; }
 }

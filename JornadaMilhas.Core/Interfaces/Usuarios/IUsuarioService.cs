@@ -8,9 +8,9 @@ namespace JornadaMilhas.Core.Interfaces.Usuarios
     {
         Task<IEnumerable<DetalhamentoUsuarioDTO>> GetAllAsync(int page, int size);
         Task<DetalhamentoUsuarioDTO> CreateUsuario(UsuarioCadastroDTO usuarioCadastroDTO);
-        Task<bool> DeleteUsuario(string id);
-        Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, string id);
-        Task<DetalhamentoUsuarioDTO> GetUsuarioById(string id);
+        Task<bool> DeleteUsuario(long id);
+        Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, long id);
+        Task<DetalhamentoUsuarioDTO> GetUsuarioById(long id);
         Task<CredenciasUsuarioDTO> LoginUsuario(LoginDTO login);
     }
 }

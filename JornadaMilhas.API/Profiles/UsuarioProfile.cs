@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Core.Entities;
 
 namespace JornadaMilhas.API;
 
@@ -14,9 +15,9 @@ public class UsuarioProfile : Profile
 {
     public UsuarioProfile()
     {
-        CreateMap<UsuarioCadastroDTO, UsuarioIndex>();
-        CreateMap<UsuarioAtualizacaoDTO, UsuarioIndex>();
-        CreateMap<UsuarioIndex, DetalhamentoUsuarioDTO>();
-        CreateMap<List<UsuarioIndex>, IEnumerable<DetalhamentoUsuarioDTO>>();
+        CreateMap<UsuarioCadastroDTO, Usuario>();
+        CreateMap<UsuarioAtualizacaoDTO, Usuario>();
+        CreateMap<Usuario, DetalhamentoUsuarioDTO>();
+        CreateMap<List<Usuario>, IEnumerable<DetalhamentoUsuarioDTO>>();
     }
 }

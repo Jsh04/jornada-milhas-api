@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 
 
-namespace JornadaMilhas.Core.Util;
+namespace JornadaMilhas.Application.Util;
 
 public static class Formatar
 {

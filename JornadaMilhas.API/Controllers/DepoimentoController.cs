@@ -22,7 +22,7 @@ public class DepoimentoController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> PegarDepoimentoPorId(string id)
+    public async Task<IActionResult> PegarDepoimentoPorId(long id)
     {
         var depoimento = await _depoimentosService.GetDepoimentoById(id);
         return Ok(depoimento);
@@ -46,7 +46,7 @@ public class DepoimentoController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> AtualizarDepoimento([FromBody] DepoimentoAtualizarDTO atualizarDTO, string id)
+    public async Task<IActionResult> AtualizarDepoimento([FromBody] DepoimentoAtualizarDTO atualizarDTO, long id)
     {
         try
         {
@@ -60,7 +60,7 @@ public class DepoimentoController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeletarDepoimento(string id)
+    public async Task<IActionResult> DeletarDepoimento(long id)
     {
         var isDeleted = await _depoimentosService.DeleteDepoimento(id);
         if (isDeleted)

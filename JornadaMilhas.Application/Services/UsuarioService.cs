@@ -2,22 +2,24 @@
 
 
 using AutoMapper;
-using Elastic.Clients.Elasticsearch;
+
 using JornadaMilhas.Application.Messagings.Senders;
+using JornadaMilhas.Application.Util;
 using JornadaMilhas.Core.DTO.Login;
 using JornadaMilhas.Core.DTO.Usuario;
-using JornadaMilhas.Core.Indices;
-using JornadaMilhas.Core.Indices.Enums;
+using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Core.Interfaces;
 using JornadaMilhas.Core.Interfaces.Usuarios;
-using JornadaMilhas.Core.Util;
+
+using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Infrastruture.Persistence.UOW;
 
 namespace JornadaMilhas.Application.Services;
 
 public class UsuarioService : IUsuarioService
 {
     private readonly IMapper _mapper;
-    private readonly IRepository<UsuarioIndex> _usuarioRepository;
+    private readonly IRepositoryUsuario _usuarioRepository;
     private readonly ITokenService _tokenService;
     private readonly SendEmailMessage _message;
 
@@ -32,7 +34,7 @@ public class UsuarioService : IUsuarioService
     public async Task<DetalhamentoUsuarioDTO> CreateUsuario(UsuarioCadastroDTO usuarioCadastroDTO)
     {
         
-        var usuario = _mapper.Map<UsuarioIndex>(usuarioCadastroDTO);
+        var usuario = _mapper.Map<Usuario>(usuarioCadastroDTO);
         
         usuario = FormartarCampos(usuario);
 
@@ -43,7 +45,7 @@ public class UsuarioService : IUsuarioService
         return usuarioDto;
     }
 
-    public async Task<bool> DeleteUsuario(string id)
+    public async Task<bool> DeleteUsuario(long id)
     {
         var deleted = await _usuarioRepository.Delete(id);
         return deleted;
@@ -54,21 +56,17 @@ public class UsuarioService : IUsuarioService
         return _mapper.Map<List<DetalhamentoUsuarioDTO>>(await _usuarioRepository.GetAllAsync(page, size));
     }
 
-    public async Task<DetalhamentoUsuarioDTO> GetUsuarioById(string id)
+    public async Task<DetalhamentoUsuarioDTO> GetUsuarioById(long id)
     {
         var usuario = await _usuarioRepository.GetById(id);
         var usuarioDto = _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
         return usuarioDto;
     }
 
+
     public async Task<CredenciasUsuarioDTO> LoginUsuario(LoginDTO login)
     {
-        Action<SearchRequestDescriptor<UsuarioIndex>> actions = 
-            s => 
-            s.Index("usuarios").Query(query => query.Term(t => t.Email.Suffix("keyword"), login.Email));
-
-
-        var usuario = await _usuarioRepository.SearchObjectByQuery(actions);
+        var usuario = await _usuarioRepository.GetUserByEmail(login.Email);
 
         var senhaCriptografada = EncriptarSenha.CriptografarSenha(login.Password);
         
@@ -82,12 +80,12 @@ public class UsuarioService : IUsuarioService
         return new CredenciasUsuarioDTO { User = usuarioRetorno, Token = token };
     }
 
-    public Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, string id)
+    public Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, long id)
     {
         throw new NotImplementedException();
     }
 
-    private static UsuarioIndex FormartarCampos(UsuarioIndex usuario)
+    private static Usuario FormartarCampos(Usuario usuario)
     {
         usuario.Password = EncriptarSenha.CriptografarSenha(usuario.Password);
         usuario.Phone = Formatar.RetirarMascara(usuario.Phone);

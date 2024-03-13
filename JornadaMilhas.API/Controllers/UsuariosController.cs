@@ -25,7 +25,7 @@ public class UsuariosController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> PegarUsuarioPorId(string id)
+    public async Task<IActionResult> PegarUsuarioPorId(long id)
     {
         var usuario = await _service.GetUsuarioById(id);
         return Ok(usuario);
