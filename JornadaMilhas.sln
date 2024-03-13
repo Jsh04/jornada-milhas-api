@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMilhas.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMilhas.API", "JornadaMilhas.API\JornadaMilhas.API.csproj", "{F29D394C-33D5-4EFF-8A0F-ADD748545008}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMIlhas.Core", "JornadaMilhas.Core\JornadaMIlhas.Core.csproj", "{FE973FF0-2AD4-4A24-8541-071941337E36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMilhas.Core", "JornadaMilhas.Core\JornadaMilhas.Core.csproj", "{FE973FF0-2AD4-4A24-8541-071941337E36}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMilhas.Infrastruture", "JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj", "{DC3CAEF2-5834-45EE-841D-867D8A2EE4AC}"
 EndProject

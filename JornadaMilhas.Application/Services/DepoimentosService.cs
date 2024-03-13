@@ -1,9 +1,11 @@
 ﻿
 using AutoMapper;
 using JornadaMilhas.Core.DTO.Depoimeto;
+using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Core.Indices;
 using JornadaMilhas.Core.Interfaces;
 using JornadaMilhas.Core.Interfaces.Depoimentos;
+using JornadaMilhas.Infrastruture.Persistence.UOW;
 
 
 namespace JornadaMilhas.Application.Services
@@ -21,21 +23,21 @@ namespace JornadaMilhas.Application.Services
         }
 
 
-        public async Task<IEnumerable<DepoimentosIndex>> GetAllDepoimentosAsync(int page, int size)
+        public async Task<IEnumerable<Depoimento>> GetAllDepoimentosAsync(int page, int size)
         {
            var dados = await _unitOfWork.DepoimentoRepository.GetAllAsync(page, size);
 
             return dados;
         }
 
-        public async  Task<DepoimentosIndex> CreateDepoimento(DepoimentoDTO depoimentoDTO)
+        public async  Task<Depoimento> CreateDepoimento(DepoimentoDTO depoimentoDTO)
         {
-            var depoimento = _mapper.Map<DepoimentosIndex>(depoimentoDTO);
+            var depoimento = _mapper.Map<Depoimento>(depoimentoDTO);
             var depoimentoCriado = await _unitOfWork.DepoimentoRepository.Create(depoimento);
             return depoimentoCriado;
         }
 
-        public async Task<IEnumerable<DepoimentosIndex>> GetAllAsync(int page, int size)
+        public async Task<IEnumerable<Depoimento>> GetAllAsync(int page, int size)
         {
             return await _unitOfWork.DepoimentoRepository.GetAllAsync(page, size);
         }
@@ -52,7 +54,7 @@ namespace JornadaMilhas.Application.Services
             return await _unitOfWork.DepoimentoRepository.Update(depoimentorRequisicao, id);
         }
 
-        public async Task<DepoimentosIndex> GetDepoimentoById(string id)
+        public async Task<Depoimento> GetDepoimentoById(string id)
         {
             return await _unitOfWork.DepoimentoRepository.GetById(id);
         }

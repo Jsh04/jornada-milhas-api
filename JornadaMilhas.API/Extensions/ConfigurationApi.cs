@@ -1,56 +1,50 @@
-﻿
-
-using JornadaMilhas.Core.Interfaces;
-using JornadaMilhas.Core.Interfaces.Depoimentos;
-using JornadaMilhas.Infrastruture;
-using JornadaMilhas.Application.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using API_Domains.Repository;
 using JornadaMilhas.Application.Messagings.Senders;
-using JornadaMilhas.Core.Interfaces.Destinos;
-using JornadaMilhas.Core.Interfaces.Usuarios;
+using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Infrastruture.Persistence.Context;
+using JornadaMilhas.Infrastruture.Persistence.Repository;
+using JornadaMilhas.Infrastruture.Persistence.UOW;
+using Microsoft.EntityFrameworkCore;
 
 namespace JornadaMilhas.API;
 
 public static class ConfigurationApi
 {
-    public static void AddApiConfiguracao(this IServiceCollection services)
+    public static void AddApiConfiguracao(this WebApplicationBuilder builder)
     {
 
-        AddDependenciesInjectionsServices(services);
-        AddDependenciesInjectionsExternal(services);
+        AddDependenciesInjectionsServices(builder);
+        AddDependenciesInjectionsExternal(builder);
+        AddAuthenticationWithJWT(builder);
     }
 
-    public static void AddDependenciesInjectionsServices(IServiceCollection services)
+    public static void AddDependenciesInjectionsServices(WebApplicationBuilder builder)
     {
-        services.AddScoped<IDepoimentosService, DepoimentosService>();
 
-        services.AddScoped<IDestinosService, DestinosService>();
+        var services = builder.Services;
 
-        services.AddScoped<IUsuarioService, UsuarioService>();
-
-        services.AddScoped<ITokenService, TokenService>();
-
-        services.AddSingleton<IUnitOfWork, UnitOfWork>();
-
+        services.AddScoped<IRepositoryUsuario, RepositoryUsuario>();
+        services.AddScoped<IRepositoryDestino, RepositoryDestino>();
+        services.AddScoped<IRepositoryDepoimento, RepositoryDepoimento>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
     }
 
-    public static void AddDependenciesInjectionsExternal(IServiceCollection services)
+    public static void AddDependenciesInjectionsExternal(WebApplicationBuilder builder)
     {
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        services.AddSingleton<FactoryElastic>();
-
-        services.AddSingleton<SendEmailMessage>();
+        builder.Services.AddDbContext<JornadaMilhasDbContext>(opts => opts.UseSqlServer(builder
+            .Configuration["ConnectionStringSqlServer"]));
+        builder.Services.AddSingleton<SendEmailMessage>();
     }
 
-    public static void AddAuthenticationWithJWT(this IServiceCollection services, WebApplicationBuilder builder)
+    public static void AddAuthenticationWithJWT(WebApplicationBuilder builder)
     {
-        var secretKey = builder.Configuration["SymmetricSecurityKey"]; 
-        services.AddAuthentication(x =>
+        var secretKey = builder.Configuration["SymmetricSecurityKey"];
+        builder.Services.AddAuthentication(x =>
         {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -67,6 +61,8 @@ public static class ConfigurationApi
                     ValidateAudience = false
                 };
             });
+
+        
     }
 
 }

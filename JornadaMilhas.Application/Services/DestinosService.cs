@@ -2,16 +2,18 @@
 
 using AutoMapper;
 using JornadaMilhas.Core.DTO.Destinos;
-using JornadaMilhas.Core.Indices;
-using JornadaMilhas.Core.Interfaces;
+using JornadaMilhas.Core.Entities;
+
 using JornadaMilhas.Core.Interfaces.Destinos;
+using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Infrastruture.Persistence.UOW;
 
 namespace JornadaMilhas.Application.Services
 {
     public class DestinosService : IDestinosService
     {
         private readonly IMapper _mapper;
-        private IRepository<DestinosIndex> _destinoRepository;
+        private IRepositoryDestino _destinoRepository;
 
         public DestinosService(IUnitOfWork unitOfWork, IMapper mapper)
         {
@@ -19,9 +21,9 @@ namespace JornadaMilhas.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<DestinosIndex> CreateDestino(CreateDestinoDTO destinoDTO)
+        public async Task<Destino> CreateDestino(CreateDestinoDTO destinoDTO)
         {
-            var destino = _mapper.Map<DestinosIndex>(destinoDTO);
+            var destino = _mapper.Map<Destino>(destinoDTO);
             var destinoCreated = await _destinoRepository.Create(destino);
             return destinoCreated;
         }
@@ -32,7 +34,7 @@ namespace JornadaMilhas.Application.Services
             return isDeleted;
         }
 
-        public async Task<IEnumerable<DestinosIndex>> GetAllAsync(int page, int size)
+        public async Task<IEnumerable<Destino>> GetAllAsync(int page, int size)
         {
             var destinos = await _destinoRepository.GetAllAsync(page, size);
             return destinos;
@@ -47,7 +49,7 @@ namespace JornadaMilhas.Application.Services
 
         public async Task<bool> UpdateDestino(UpdateDestinoDTO destino, string id)
         {
-            var destinoIndex = _mapper.Map<DestinosIndex>(destino);
+            var destinoIndex = _mapper.Map<Destino>(destino);
             var destinoAtualizado = await _destinoRepository.Update(destinoIndex, id);
             return destinoAtualizado;
         }

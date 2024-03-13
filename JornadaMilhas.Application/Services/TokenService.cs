@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using JornadaMilhas.Core.Entities;
 
 
 namespace JornadaMilhas.Application.Services
@@ -18,7 +19,7 @@ namespace JornadaMilhas.Application.Services
         {
             _configuration = configuration;
         }
-        public string GerarToken(UsuarioIndex usuario)
+        public string GerarToken(Usuario usuario)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 

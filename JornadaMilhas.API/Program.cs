@@ -5,12 +5,12 @@ using JornadaMilhas.API;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.AddApiConfiguracao();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddApiConfiguracao();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthenticationWithJWT(builder);
+builder.Services.AddControllers();
 
 var app = builder.Build();
 

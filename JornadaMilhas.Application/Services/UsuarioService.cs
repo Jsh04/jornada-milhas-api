@@ -2,22 +2,23 @@
 
 
 using AutoMapper;
-using Elastic.Clients.Elasticsearch;
+
 using JornadaMilhas.Application.Messagings.Senders;
 using JornadaMilhas.Core.DTO.Login;
 using JornadaMilhas.Core.DTO.Usuario;
-using JornadaMilhas.Core.Indices;
-using JornadaMilhas.Core.Indices.Enums;
+using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Core.Interfaces;
 using JornadaMilhas.Core.Interfaces.Usuarios;
 using JornadaMilhas.Core.Util;
+using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Infrastruture.Persistence.UOW;
 
 namespace JornadaMilhas.Application.Services;
 
 public class UsuarioService : IUsuarioService
 {
     private readonly IMapper _mapper;
-    private readonly IRepository<UsuarioIndex> _usuarioRepository;
+    private readonly IRepositoryUsuario _usuarioRepository;
     private readonly ITokenService _tokenService;
     private readonly SendEmailMessage _message;
 
@@ -32,7 +33,7 @@ public class UsuarioService : IUsuarioService
     public async Task<DetalhamentoUsuarioDTO> CreateUsuario(UsuarioCadastroDTO usuarioCadastroDTO)
     {
         
-        var usuario = _mapper.Map<UsuarioIndex>(usuarioCadastroDTO);
+        var usuario = _mapper.Map<Usuario>(usuarioCadastroDTO);
         
         usuario = FormartarCampos(usuario);
 
@@ -63,12 +64,7 @@ public class UsuarioService : IUsuarioService
 
     public async Task<CredenciasUsuarioDTO> LoginUsuario(LoginDTO login)
     {
-        Action<SearchRequestDescriptor<UsuarioIndex>> actions = 
-            s => 
-            s.Index("usuarios").Query(query => query.Term(t => t.Email.Suffix("keyword"), login.Email));
-
-
-        var usuario = await _usuarioRepository.SearchObjectByQuery(actions);
+        var usuario = await _usuarioRepository.GetUserByEmail(login.Email);
 
         var senhaCriptografada = EncriptarSenha.CriptografarSenha(login.Password);
         
@@ -87,7 +83,7 @@ public class UsuarioService : IUsuarioService
         throw new NotImplementedException();
     }
 
-    private static UsuarioIndex FormartarCampos(UsuarioIndex usuario)
+    private static Usuario FormartarCampos(Usuario usuario)
     {
         usuario.Password = EncriptarSenha.CriptografarSenha(usuario.Password);
         usuario.Phone = Formatar.RetirarMascara(usuario.Phone);
