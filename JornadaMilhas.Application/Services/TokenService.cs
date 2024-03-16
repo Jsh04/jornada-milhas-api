@@ -23,7 +23,6 @@ namespace JornadaMilhas.Application.Services
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            //chave secreta, geralmente se coloca em arquivo de configuração
             var key = Encoding.ASCII.GetBytes(_configuration["SymmetricSecurityKey"]);
 
             var tokenDescriptor = new SecurityTokenDescriptor

@@ -11,6 +11,6 @@ namespace JornadaMilhas.Core.Interfaces.Usuarios
         Task<bool> DeleteUsuario(long id);
         Task<DetalhamentoUsuarioDTO> UpdateUsuario(UsuarioAtualizacaoDTO destino, long id);
         Task<DetalhamentoUsuarioDTO> GetUsuarioById(long id);
-        Task<CredenciasUsuarioDTO> LoginUsuario(LoginDTO login);
+        Task<CredenciasUsuarioDTO> AuthenticateUser(LoginDTO login);
     }
 }

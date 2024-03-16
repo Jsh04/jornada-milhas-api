@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="JornadaMilhasTest"/>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\JornadaMilhas.Application\JornadaMilhas.Application.csproj" />
   </ItemGroup>
 

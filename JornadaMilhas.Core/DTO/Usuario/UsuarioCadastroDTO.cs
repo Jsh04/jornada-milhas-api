@@ -10,7 +10,6 @@ namespace JornadaMilhas.Core.DTO.Usuario;
 
 public class UsuarioCadastroDTO
 {
-    public string Id { get; } = Guid.NewGuid().ToString();
 
     [Required]
     public string Name { get; set; }

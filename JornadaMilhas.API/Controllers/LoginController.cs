@@ -24,7 +24,7 @@ public class LoginController : ControllerBase
     {
         try
         {
-            var usuarioCredencias = await _usuarioService.LoginUsuario(login);
+            var usuarioCredencias = await _usuarioService.AuthenticateUser(login);
             return Ok(usuarioCredencias);
         }
         catch (Exception ex)

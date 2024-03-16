@@ -7,6 +7,11 @@ using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using Microsoft.EntityFrameworkCore;
+using JornadaMilhas.Core.Interfaces;
+using JornadaMilhas.Application.Services;
+using JornadaMilhas.Core.Interfaces.Usuarios;
+using JornadaMilhas.Core.Interfaces.Destinos;
+using System.Text.Json.Serialization;
 
 namespace JornadaMilhas.API;
 
@@ -18,6 +23,9 @@ public static class ConfigurationApi
         AddDependenciesInjectionsServices(builder);
         AddDependenciesInjectionsExternal(builder);
         AddAuthenticationWithJWT(builder);
+        
+        builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
     }
 
     public static void AddDependenciesInjectionsServices(WebApplicationBuilder builder)
@@ -25,6 +33,9 @@ public static class ConfigurationApi
 
         var services = builder.Services;
 
+        services.AddScoped<IUsuarioService, UsuarioService>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IDestinosService, DestinosService>();
         services.AddScoped<IRepositoryUsuario, RepositoryUsuario>();
         services.AddScoped<IRepositoryDestino, RepositoryDestino>();
         services.AddScoped<IRepositoryDepoimento, RepositoryDepoimento>();

@@ -64,7 +64,7 @@ public class UsuarioService : IUsuarioService
     }
 
 
-    public async Task<CredenciasUsuarioDTO> LoginUsuario(LoginDTO login)
+    public async Task<CredenciasUsuarioDTO> AuthenticateUser(LoginDTO login)
     {
         var usuario = await _usuarioRepository.GetUserByEmail(login.Email);
 

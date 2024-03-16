@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JornadaMilhas.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,8 +10,6 @@ namespace JornadaMilhas.Core.DTO.Destinos
 {
     public class CreateDestinoDTO
     {
-        public string Id { get; } = Guid.NewGuid().ToString();
-
         [Required]
         public string Name { get; set; }
 
