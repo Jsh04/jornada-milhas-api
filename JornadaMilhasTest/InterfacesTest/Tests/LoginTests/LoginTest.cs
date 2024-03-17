@@ -5,7 +5,7 @@ using OpenQA.Selenium.Support.UI;
 namespace JornadaMilhasTest.InterfacesTest.Tests.LoginTests;
 
 
-
+[TestFixture]
 public class LoginTest
 {
     private readonly IWebDriver driver;
