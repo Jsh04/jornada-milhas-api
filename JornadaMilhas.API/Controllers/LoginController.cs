@@ -3,6 +3,7 @@
 using JornadaMilhas.Core.DTO.Login;
 using JornadaMilhas.Core.Interfaces.Usuarios;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API;
@@ -33,8 +34,14 @@ public class LoginController : ControllerBase
                 return NotFound(ex.Message);
             return BadRequest(ex.Message);
         }
-        
-        
+    }
+
+    [HttpGet("confirmMail/{idUser}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> VerifyConfirmMail(long idUser)
+    {
+        var existEmail = await _usuarioService.VerifyConfirmMail(idUser);
+        return Ok(existEmail);
     }
 
 }

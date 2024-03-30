@@ -1,4 +1,5 @@
-﻿using JornadaMilhasTest.InterfacesTest.Fixtures;
+﻿using AutoFixture;
+using JornadaMilhasTest.InterfacesTest.Fixtures;
 
 namespace JornadaMilhasTest.InterfacesTest;
 
@@ -7,9 +8,14 @@ public class SharingResources
 {
 
     public static TestFixtureJornada Fixture { get; set; }
+    public static Fixture AutoFixture { get; set; }
 
     [OneTimeSetUp]
-    public void InstaceWebDriver() => Fixture = new TestFixtureJornada();
+    public void InstaceWebDriver()
+    {
+        Fixture = new TestFixtureJornada();
+        AutoFixture = new Fixture();
+    } 
     
 
     [OneTimeTearDown]

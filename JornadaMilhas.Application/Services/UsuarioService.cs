@@ -19,46 +19,54 @@ namespace JornadaMilhas.Application.Services;
 public class UsuarioService : IUsuarioService
 {
     private readonly IMapper _mapper;
-    private readonly IRepositoryUsuario _usuarioRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly ITokenService _tokenService;
     private readonly SendEmailMessage _message;
 
     public UsuarioService(IMapper mapper, IUnitOfWork unitOfWork, ITokenService tokenService, SendEmailMessage message)
     {
         _mapper = mapper;
-        _usuarioRepository = unitOfWork.UsuarioRepository;
+        _unitOfWork = unitOfWork;
         _tokenService = tokenService;
         _message = message;
     }
 
     public async Task<DetalhamentoUsuarioDTO> CreateUsuario(UsuarioCadastroDTO usuarioCadastroDTO)
     {
-        
+
         var usuario = _mapper.Map<Usuario>(usuarioCadastroDTO);
         
         usuario = FormartarCampos(usuario);
 
-        var usuarioCadastrado = await _usuarioRepository.Create(usuario);
+        await _unitOfWork.BeginTransactionAsync();
 
-        _message.SendConfirmMmail(usuarioCadastrado.Email);
+        var usuarioCadastrado = await _unitOfWork.UsuarioRepository.Create(usuario);
+
+        await _unitOfWork.CompleteAsync();
+
+        await _unitOfWork.CommitAsync();
+
+        _message.SendConfirmMmail(usuarioCadastrado);
+
         var usuarioDto = _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
+
         return usuarioDto;
     }
 
     public async Task<bool> DeleteUsuario(long id)
     {
-        var deleted = await _usuarioRepository.Delete(id);
+        var deleted = await _unitOfWork.UsuarioRepository.Delete(id);
         return deleted;
     }
 
     public async Task<IEnumerable<DetalhamentoUsuarioDTO>> GetAllAsync(int page, int size)
     {
-        return _mapper.Map<List<DetalhamentoUsuarioDTO>>(await _usuarioRepository.GetAllAsync(page, size));
+        return _mapper.Map<List<DetalhamentoUsuarioDTO>>(await _unitOfWork.UsuarioRepository.GetAllAsync(page, size));
     }
 
     public async Task<DetalhamentoUsuarioDTO> GetUsuarioById(long id)
     {
-        var usuario = await _usuarioRepository.GetById(id);
+        var usuario = await _unitOfWork.UsuarioRepository.GetById(id);
         var usuarioDto = _mapper.Map<DetalhamentoUsuarioDTO>(usuario);
         return usuarioDto;
     }
@@ -66,7 +74,7 @@ public class UsuarioService : IUsuarioService
 
     public async Task<CredenciasUsuarioDTO> AuthenticateUser(LoginDTO login)
     {
-        var usuario = await _usuarioRepository.GetUserByEmail(login.Email);
+        var usuario = await _unitOfWork.UsuarioRepository.GetUserByEmail(login.Email);
 
         var senhaCriptografada = EncriptarSenha.CriptografarSenha(login.Password);
         
@@ -85,6 +93,27 @@ public class UsuarioService : IUsuarioService
         throw new NotImplementedException();
     }
 
+    public async Task<bool> VerifyConfirmMail(long id)
+    {
+        var usuario = await _unitOfWork.UsuarioRepository.GetById(id);
+        return usuario.EmailExists;
+    }
+
+    public async Task<bool> ConfirmMailUser(long idUser)
+    {
+        await _unitOfWork.BeginTransactionAsync();
+
+        var usuario = await _unitOfWork.UsuarioRepository.GetById(idUser);
+
+        usuario.EmailExists = true;
+
+        await _unitOfWork.CompleteAsync();
+
+        await _unitOfWork.CommitAsync();
+
+        return usuario.EmailExists;
+    }
+
     private static Usuario FormartarCampos(Usuario usuario)
     {
         usuario.Password = EncriptarSenha.CriptografarSenha(usuario.Password);
@@ -92,4 +121,6 @@ public class UsuarioService : IUsuarioService
         usuario.Cpf = Formatar.RetirarMascara(usuario.Cpf);
         return usuario;
     }
+
+    
 }

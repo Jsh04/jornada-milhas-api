@@ -22,7 +22,7 @@ public class Usuario : BaseEntity
 
     public string? CodeEmployee { get; set; }
 
-    public byte[] Picture { get; set; }
+    public byte[]? Picture { get; set; }
 
     public string City { get; set; }
 

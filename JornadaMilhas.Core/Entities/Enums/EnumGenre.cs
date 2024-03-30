@@ -10,5 +10,6 @@ namespace JornadaMilhas.Core.Indices.Enums
     {
         Male = 1,
         Female = 2,
+        NotInfo = 3
     }
 }

@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using System.Threading.Channels;
+using JornadaMilhas.Core.Entities;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 
@@ -20,19 +21,20 @@ public class SendEmailMessage
 
     }
 
-    public void SendConfirmMmail(string email)
+    public void SendConfirmMmail(Usuario usuario)
     {
         using var channel = _connection.CreateModel();
         ConfigurationOfQueueEmail(channel);
 
-        var message = JsonSerializer.Serialize(email);
+        var message = JsonSerializer.Serialize(usuario);
+
         var body = Encoding.UTF8.GetBytes(message);
 
         channel.BasicPublish(exchange: "dataUser", routingKey: "email", basicProperties: null, body: body);
 
     }
 
-    private void ConfigurationOfQueueEmail(IModel channel)
+    private static void ConfigurationOfQueueEmail(IModel channel)
     {
         channel.ExchangeDeclare(exchange: "dataUser", type: ExchangeType.Direct);
 

@@ -31,5 +31,12 @@ public class UsuariosController : ControllerBase
         return Ok(usuario);
     }
 
+    [HttpPatch("sendConfirmMail")]
+    public async Task<IActionResult> ConfirmMailUser([FromBody] long idUser)
+    {
+        await _service.ConfirmMailUser(idUser);
+        return NoContent();
+    }
+
 
 }

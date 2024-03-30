@@ -24,7 +24,7 @@ public class LoginTest
 
         //act
         loginPO.NavigateToPage()
-           .FillFormsLogin("josesilvio.bs@gmail.com", "Silvio142536")
+           .FillFormsLogin("josesilvio.bs@gmail.com", "Senha123")
            .SubmitForm();
         //assert
         var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));

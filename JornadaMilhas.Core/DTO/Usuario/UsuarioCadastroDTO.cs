@@ -18,10 +18,13 @@ public class UsuarioCadastroDTO
 
     public EnumGenre Genre { get; set; }
 
+    public DateTime DtCreated { get; } = DateTime.Now;
+
     [Required]
     public string Cpf { get; set; }
 
     public string? Adress { get; set; } = string.Empty;
+
     public string? Cep { get; set; } = string.Empty;
 
     public string? District { get; set; } = string.Empty;
