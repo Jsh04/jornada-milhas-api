@@ -23,4 +23,13 @@
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Builders\" />
+    <Folder Include="Interfaces\Depoimentos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JornadaMilhas.Common\JornadaMilhas.Common.csproj" />
+  </ItemGroup>
+
 </Project>

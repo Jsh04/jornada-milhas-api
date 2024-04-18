@@ -1,4 +1,5 @@
-﻿using JornadaMilhas.Core.Indices.Enums;
+﻿using JornadaMilhas.Common.ValueObjects;
+using JornadaMilhas.Core.Indices.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace JornadaMilhas.Core.Entities;

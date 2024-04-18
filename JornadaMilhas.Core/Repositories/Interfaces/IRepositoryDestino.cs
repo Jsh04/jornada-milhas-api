@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JornadaMilhas.Core.Entities;
+﻿
+using JornadaMilhas.Core.Entities.Destinys;
 
 namespace JornadaMilhas.Core.Repositories.Interfaces;
 
-public interface IRepositoryDestino : IRepository<Destino>
+public interface IRepositoryDestino : IRepository<Destiny>
 {
 }
 

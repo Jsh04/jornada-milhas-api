@@ -1,7 +1,8 @@
 ﻿
-using AutoMapper;
-using JornadaMilhas.Core.DTO.Destinos;
-using JornadaMilhas.Core.Interfaces.Destinos;
+using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
+using JornadaMilhas.Common.Result;
+using JornadaMilhas.Core.Entities.Destinys;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API;
@@ -10,52 +11,23 @@ namespace JornadaMilhas.API;
 [Route("[controller]")]
 public class DestinosController : ControllerBase
 {
-    private readonly IDestinosService _destinoService;
+    private IMediator _mediator;
 
 
-    public DestinosController(IDestinosService destinoService)
+    public DestinosController(IMediator mediator)
     {
-        _destinoService = destinoService;
+        _mediator = mediator;
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateDestino([FromBody] CreateDestinoDTO destinoDto)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Result<Destiny>))]
+    public async Task<IActionResult> CreateDestino([FromBody] RegisterDestinyCommand command)
     {
-        var destinoCriado = await _destinoService.CreateDestino(destinoDto);
+        var destinoCriado = await _mediator.Send(command);
         return Ok(destinoCriado);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteDestino(long id)
-    {
-        var deleted = await _destinoService.DeleteDestino(id);
-        if (deleted)
-            return NoContent();
-        return BadRequest();
-        
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateDestino(long id, [FromBody] UpdateDestinoDTO updateDestinoDto)
-    {
-        var updated = await _destinoService.UpdateDestino(updateDestinoDto, id);
-        if (updated)
-            return NoContent();
-        return BadRequest();
-    }
-
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetDestinyById(long id)
-    {
-        var destiny = await _destinoService.GetDestinoById(id);
-        return Ok(destiny);
-    }
-
-
-    [HttpGet]
-    public async Task<IActionResult> GetAllDestinos([FromQuery] int size, [FromQuery] int page) 
-    {
-        var destinos =  await _destinoService.GetAllAsync(page, size);
-        return Ok(destinos);
-    }
 }

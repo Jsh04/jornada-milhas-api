@@ -1,8 +1,4 @@
-﻿using JornadaMilhas.Application.Services;
-using JornadaMilhas.Core.Interfaces;
-using JornadaMilhas.Core.Interfaces.Destinos;
-using JornadaMilhas.Core.Interfaces.Usuarios;
-using JornadaMilhas.Core.Repositories.Interfaces;
+﻿
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhas.Infrastruture.Persistence.UOW;

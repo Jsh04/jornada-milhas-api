@@ -35,25 +35,25 @@ public class UnitOfWork : IUnitOfWork
     }
 
 
-    public async Task BeginTransactionAsync() => _transaction = await _context.Database.BeginTransactionAsync();
+    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default) => _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
 
 
-    public async Task CommitAsync()
+    public async Task CommitAsync(CancellationToken cancellationToken = default)
     {
         try
         {
-            await _transaction.CommitAsync();
+            await _transaction.CommitAsync(cancellationToken);
         }
         catch (Exception)
         {
-            await _transaction.RollbackAsync();
+            await _transaction.RollbackAsync(cancellationToken);
             throw;
         }
     }
 
-    public async Task<int> CompleteAsync()
+    public async Task<int> CompleteAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.SaveChangesAsync();
+        return await _context.SaveChangesAsync(cancellationToken);
     }
 
     public void Dispose()

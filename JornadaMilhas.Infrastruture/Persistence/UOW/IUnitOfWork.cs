@@ -11,8 +11,8 @@ public interface IUnitOfWork : IDisposable
     IRepositoryDepoimento DepoimentoRepository { get; }
     IRepositoryUsuario UsuarioRepository { get; }
 
-    Task BeginTransactionAsync();
-    Task CommitAsync();
-    Task<int> CompleteAsync();
+    Task BeginTransactionAsync(CancellationToken cancellationToken);
+    Task CommitAsync(CancellationToken cancellationToken);
+    Task<int> CompleteAsync(CancellationToken cancellationToken);
 
 }

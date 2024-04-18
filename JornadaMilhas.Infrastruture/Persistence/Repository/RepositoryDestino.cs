@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JornadaMilhas.Core.Entities;
+﻿
+using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +13,15 @@ public class RepositoryDestino : IRepositoryDestino
     public RepositoryDestino(JornadaMilhasDbContext context) => _context = context;
 
 
-    public async Task<Destino> Create(Destino destino)
+    public async Task<Destiny> CreateAsync(Destiny destino, CancellationToken cancellationToken)
     {
-        var destinoCreated = await _context.Destinos.AddAsync(destino);
+        var destinoCreated = await _context.Destinos.AddAsync(destino, cancellationToken);
         return destinoCreated.Entity;
     }
 
-    public async Task<bool> Delete(long id)
+    public async Task<bool> DeleteAsync(long id, CancellationToken cancellationToken)
     {
-        var destino = await _context.Destinos.FirstOrDefaultAsync(usuario => usuario.Id == id);
+        var destino = await _context.Destinos.FirstOrDefaultAsync(usuario => usuario.Id == id, cancellationToken);
         if (destino == null)
             return false;
 
@@ -37,21 +33,21 @@ public class RepositoryDestino : IRepositoryDestino
 
     }
 
-    public async Task<IEnumerable<Destino>> GetAllAsync(int page, int size)
+    public async Task<IEnumerable<Destiny>> GetAllAsync(int page, int size, CancellationToken cancellationToken = default)
     {
-        return await _context.Destinos.Skip(page).Take(size).Where(usuario => !usuario.IsDeleted).ToListAsync();
+        return await _context.Destinos.Skip(page).Take(size).Where(destiny => !destiny.IsDeleted).ToListAsync(cancellationToken);
     }
 
-    public async Task<Destino> GetById(long id)
+    public async Task<Destiny> GetByIdAsync(long id, CancellationToken cancellationToken = default)
     {
-        var destino = await _context.Destinos.FirstOrDefaultAsync(d => d.Id == id);
+        var destino = await _context.Destinos.FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
         return destino ?? throw new NullReferenceException("Destino não encontrado");
 
     }
 
-    public async Task<bool> Update(Destino obj, long id)
+    public async Task<bool> Update(Destiny obj, long id, CancellationToken cancellationToken = default)
     {
-        var destino = await GetById(id);
+        var destino = await GetByIdAsync(id, cancellationToken);
         obj.Id = destino.Id;
 
         var destinoUpdated = _context.Destinos.Update(obj);

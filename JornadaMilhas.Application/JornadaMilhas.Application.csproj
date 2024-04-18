@@ -10,4 +10,14 @@
     <ProjectReference Include="..\JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Querys\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
 </Project>

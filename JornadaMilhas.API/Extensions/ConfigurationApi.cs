@@ -7,11 +7,11 @@ using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using Microsoft.EntityFrameworkCore;
-using JornadaMilhas.Core.Interfaces;
-using JornadaMilhas.Application.Services;
-using JornadaMilhas.Core.Interfaces.Usuarios;
-using JornadaMilhas.Core.Interfaces.Destinos;
 using System.Text.Json.Serialization;
+using FluentValidation.AspNetCore;
+using JornadaMilhas.Application.Validations;
+using FluentValidation;
+using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 
 namespace JornadaMilhas.API;
 
@@ -26,6 +26,8 @@ public static class ConfigurationApi
         
         builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+        
     }
 
     public static void AddDependenciesInjectionsServices(WebApplicationBuilder builder)
@@ -45,11 +47,19 @@ public static class ConfigurationApi
 
     public static void AddDependenciesInjectionsExternal(WebApplicationBuilder builder)
     {
-        builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         builder.Services.AddDbContext<JornadaMilhasDbContext>(opts => opts.UseSqlServer(builder
             .Configuration["ConnectionStringSqlServer"]));
+
         builder.Services.AddSingleton<SendEmailMessage>();
+
+        builder.Services.AddMediatR(opts =>
+        {
+            opts.RegisterServicesFromAssembly(typeof(RegisterDestinyCommand).Assembly);
+        });
+
+        builder.Services.AddValidatorsFromAssemblyContaining(typeof(RegisterDestinyValidator), ServiceLifetime.Scoped);
+        builder.Services.AddFluentValidationAutoValidation();
     }
 
     public static void AddAuthenticationWithJWT(WebApplicationBuilder builder)
