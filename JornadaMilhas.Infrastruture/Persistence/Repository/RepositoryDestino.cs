@@ -40,8 +40,9 @@ public class RepositoryDestino : IRepositoryDestino
 
     public async Task<Destiny> GetByIdAsync(long id, CancellationToken cancellationToken = default)
     {
-        var destino = await _context.Destinos.FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
-        return destino ?? throw new NullReferenceException("Destino não encontrado");
+        return await _context.Destinos
+            .Include(destiny => destiny.Imagens)
+            .SingleOrDefaultAsync(destiny => destiny.Id == id, cancellationToken);
 
     }
 

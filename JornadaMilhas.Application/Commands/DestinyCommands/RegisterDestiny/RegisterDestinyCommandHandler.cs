@@ -38,10 +38,7 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
 
             await _unitOfWork.CommitAsync(cancellationToken);
 
-            if (!created)
-                return Result.Fail<Destiny>(DestinyErrors.CannotBeCreated);
-            
-            return Result.Ok(destiny);
+            return !created ? Result.Fail<Destiny>(DestinyErrors.CannotBeCreated) : Result.Ok(destiny);
         }
     }
 }

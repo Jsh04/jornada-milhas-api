@@ -1,5 +1,6 @@
 ﻿
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
+using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
 using JornadaMilhas.Common.Result;
 using JornadaMilhas.Core.Entities.Destinys;
 using MediatR;
@@ -28,6 +29,17 @@ public class DestinosController : ControllerBase
     {
         var destinoCriado = await _mediator.Send(command);
         return Ok(destinoCriado);
+    }
+
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetDestinoById(long id)
+    { 
+        var destiny = await _mediator.Send(new GetByIdDestinyQuery(id));
+        return destiny.Success ? Ok(destiny.Value) : NotFound();
     }
 
 }
