@@ -1,12 +1,9 @@
-﻿
-
-using JornadaMilhas.Core.Entities;
-using JornadaMilhas.Core.Indices;
+﻿using JornadaMilhas.Core.Entities.Users;
 
 namespace JornadaMilhas.Core.Interfaces;
 
-    public interface ITokenService
+public interface ITokenService
     {
-        string GerarToken(Usuario usuario);
+        string GerarToken(User usuario);
     }
 

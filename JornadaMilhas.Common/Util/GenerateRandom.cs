@@ -11,7 +11,7 @@ public static class GenerateRandom
 
     public static long GenerateIdLongRandom()
     {
-        Random random = new Random();
+        Random random = new();
 
         byte[] buffer = new byte[8];
         random.NextBytes(buffer);
@@ -27,7 +27,7 @@ public static class GenerateRandom
 
         byte[] buffer = new byte[length];
 
-        Random random = new Random();
+        Random random = new();
 
         random.NextBytes(buffer);
 

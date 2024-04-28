@@ -8,5 +8,4 @@ namespace JornadaMilhas.API;
 [ApiController]
 public class UsuariosController : ControllerBase
 {
-
 }

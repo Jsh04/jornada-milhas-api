@@ -34,13 +34,8 @@ public static class ConfigurationApi
     {
 
         var services = builder.Services;
-
-        services.AddScoped<IUsuarioService, UsuarioService>();
-        services.AddScoped<ITokenService, TokenService>();
-        services.AddScoped<IDestinosService, DestinosService>();
-        services.AddScoped<IRepositoryUsuario, RepositoryUsuario>();
+        
         services.AddScoped<IRepositoryDestino, RepositoryDestino>();
-        services.AddScoped<IRepositoryDepoimento, RepositoryDepoimento>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
     }
@@ -59,6 +54,7 @@ public static class ConfigurationApi
         });
 
         builder.Services.AddValidatorsFromAssemblyContaining(typeof(RegisterDestinyValidator), ServiceLifetime.Scoped);
+
         builder.Services.AddFluentValidationAutoValidation();
     }
 

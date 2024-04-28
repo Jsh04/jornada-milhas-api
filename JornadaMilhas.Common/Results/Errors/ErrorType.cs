@@ -1,4 +1,4 @@
-﻿namespace JornadaMilhas.Common.Result.Errors;
+﻿namespace JornadaMilhas.Common.Results.Errors;
 
 public enum ErrorType
 {

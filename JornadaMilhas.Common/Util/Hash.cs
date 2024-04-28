@@ -82,9 +82,7 @@ public class Hash
     public Hash()
 
     {
-
         _algorithm = new SHA1Managed();
-
     }
 
     /// <summary>

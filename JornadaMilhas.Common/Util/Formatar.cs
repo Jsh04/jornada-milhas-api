@@ -12,6 +12,7 @@ public static class Formatar
             return string.Empty;
 
         Regex regex = new (@"\D");
+        
         return regex.Replace(campo, string.Empty);
     }
 }

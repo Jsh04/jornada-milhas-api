@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll
 {
-    public record GetAllDestinysQuery : IRequest<List<Destiny>>{}
+    public record GetAllDestinysQuery(int Page = 1, int Size = 10) : IRequest<List<Destiny>>{}
 }

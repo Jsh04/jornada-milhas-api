@@ -10,15 +10,4 @@ public static class EncriptarSenha
         string senhaComHash = hash.GetHash(senha);
         return senhaComHash;
     }
-
-    private static byte[] GerarSalt()
-    {
-        // Gera um salt aleatório usando RNGCryptoServiceProvider
-        byte[] salt = new byte[16];
-        using (var rng = new RNGCryptoServiceProvider())
-        {
-            rng.GetBytes(salt);
-        }
-        return salt;
-    }
 }

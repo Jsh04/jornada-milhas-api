@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JornadaMilhas.Core.DTO.Usuario;
+using JornadaMilhas.Application.Commands.UserCommands.RegisterUser;
 using JornadaMilhas.Core.Entities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -68,19 +68,19 @@ public class RegisterPO
         return this;
     }
 
-    public RegisterPO SendKeysToUserLimited(UsuarioCadastroDTO usuario)
+    public RegisterPO SendKeysToUserLimited(RegisterUserCommand usuario)
     {
         driver.FindElement(inputName).SendKeys(usuario.Name);
         driver.FindElement(inputDtBirth).SendKeys(usuario.DtBirth.ToString());
         driver.FindElement(inputGenreMale).Click();
         driver.FindElement(inputCpf).SendKeys(usuario.Cpf);
         driver.FindElement(inputPhone).SendKeys(usuario.Phone);
-        driver.FindElement(inputCity).SendKeys(usuario.City);
+        driver.FindElement(inputCity).SendKeys(usuario.Address.City);
         
         SelectElement select = new SelectElement(driver.FindElement(selectState));
         select.SelectByValue("PE");
-        driver.FindElement(inputEmail).SendKeys(usuario.Email);
-        driver.FindElement(inputConfirmEmail).SendKeys(usuario.ConfirmEmail);
+        driver.FindElement(inputEmail).SendKeys(usuario.Mail);
+        driver.FindElement(inputConfirmEmail).SendKeys(usuario.ConfirmMail);
         driver.FindElement(inputPassword).SendKeys(usuario.Password);
         driver.FindElement(inputConfirmPassword).SendKeys(usuario.ConfirmPassword);
 

@@ -1,11 +1,11 @@
-﻿using JornadaMilhas.Common.Result.Errors;
+﻿using JornadaMilhas.Common.Results.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Common.Result;
+namespace JornadaMilhas.Common.Results;
 
 public class Result : ResultBase
 {
@@ -32,6 +32,11 @@ public class Result : ResultBase
      
     public static Result<TValue> Fail<TValue>(IError error) => Result<TValue>.Fail<TValue>(error);
     public static Result<TValue> Fail<TValue>(IEnumerable<IError> errors) => Result<TValue>.Fail<TValue>(errors);
+
+    public static Result Fail(object cannotBeDeleted)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public class Result<TValue> : ResultBase<TValue>

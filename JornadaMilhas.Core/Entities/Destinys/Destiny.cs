@@ -1,4 +1,5 @@
-﻿using JornadaMilhas.Common.Result;
+﻿using JornadaMilhas.Common.Entity;
+using JornadaMilhas.Common.Results;
 using System.Text.Json.Serialization;
 
 namespace JornadaMilhas.Core.Entities.Destinys;

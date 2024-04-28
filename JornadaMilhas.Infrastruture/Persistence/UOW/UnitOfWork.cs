@@ -17,7 +17,7 @@ public class UnitOfWork : IUnitOfWork
 
     public IRepositoryDepoimento DepoimentoRepository { get; set; }
 
-    public IRepositoryUsuario UsuarioRepository { get; set; }
+    public IRepositoryUsuario UserRepository { get; set; }
 
     private readonly JornadaMilhasDbContext _context;
 
@@ -28,7 +28,7 @@ public class UnitOfWork : IUnitOfWork
         JornadaMilhasDbContext context
         )
     {
-        UsuarioRepository = usuarioRepository;
+        UserRepository = usuarioRepository;
         DestinoRepository = destinoRepository;
         DepoimentoRepository = depoimentoRepository;
         _context = context;

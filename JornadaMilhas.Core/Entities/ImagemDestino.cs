@@ -1,4 +1,5 @@
-﻿using JornadaMilhas.Core.Entities.Destinys;
+﻿using JornadaMilhas.Common.Entity;
+using JornadaMilhas.Core.Entities.Destinys;
 
 namespace JornadaMilhas.Core.Entities;
 

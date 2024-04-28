@@ -1,4 +1,5 @@
-﻿using JornadaMilhas.Common.Result;
+﻿using JornadaMilhas.Common.Results;
+using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
@@ -18,7 +19,8 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
         {
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            var destinyResult = Destiny.CreateBuilder()
+            var destinyResult = 
+                Destiny.CreateBuilder()
                 .AddName(request.Name)
                 .AddPrice(request.Price)
                 .AddSubtitle(request.Subtitle)
@@ -32,7 +34,7 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
 
             var destiny = destinyResult.Value;
 
-            await _unitOfWork.DestinoRepository.CreateAsync(destiny, cancellationToken);
+            _unitOfWork.DestinoRepository.Create(destiny);
 
             var created = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Querys\DestinysQuerys\DestinysGetAllByQuery\" />
     <Folder Include="Validations\" />
   </ItemGroup>
 

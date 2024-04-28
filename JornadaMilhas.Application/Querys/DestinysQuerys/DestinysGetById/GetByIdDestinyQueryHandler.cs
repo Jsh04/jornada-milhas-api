@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JornadaMilhas.Common.Result;
+using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
@@ -12,7 +12,7 @@ namespace JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById
 {
     public class GetByIdDestinyQueryHandler : IRequestHandler<GetByIdDestinyQuery, Result<Destiny>>
     {
-        private IUnitOfWork _unitOfWork;    
+        private readonly IUnitOfWork _unitOfWork;    
 
         public GetByIdDestinyQueryHandler(IUnitOfWork unitOfWork)
         {

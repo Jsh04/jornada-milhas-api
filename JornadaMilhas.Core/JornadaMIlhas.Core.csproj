@@ -13,6 +13,10 @@
     <EmbeddedResource Remove="Services\**" />
     <None Remove="Domains\**" />
     <None Remove="Services\**" />
+    <Compile Remove="Builders\**" />
+    <EmbeddedResource Remove="Builders\**" />
+    <None Remove="Builders\**" />
+    <Compile Remove="Entities\Users\UserAdmin.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Builders\" />
     <Folder Include="Interfaces\Depoimentos\" />
   </ItemGroup>
 

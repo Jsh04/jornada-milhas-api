@@ -1,7 +1,7 @@
 ﻿
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
-using JornadaMilhas.Common.Result;
+using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Destinys;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +13,6 @@ namespace JornadaMilhas.API;
 public class DestinosController : ControllerBase
 {
     private IMediator _mediator;
-
-
     public DestinosController(IMediator mediator)
     {
         _mediator = mediator;

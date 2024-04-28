@@ -1,4 +1,5 @@
 ﻿
+using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Context;
@@ -12,49 +13,22 @@ public class RepositoryDestino : IRepositoryDestino
 
     public RepositoryDestino(JornadaMilhasDbContext context) => _context = context;
 
+    public void Create(Destiny destino) => _context.Destinos.Add(destino);
+    
 
-    public async Task<Destiny> CreateAsync(Destiny destino, CancellationToken cancellationToken)
+    public PaginationResult<Destiny> GetAll(int page, int size)
     {
-        var destinoCreated = await _context.Destinos.AddAsync(destino, cancellationToken);
-        return destinoCreated.Entity;
+        var destinys = _context.Destinos.AsQueryable();
+        return destinys.ToPaginationResult(page, size);
     }
 
-    public async Task<bool> DeleteAsync(long id, CancellationToken cancellationToken)
-    {
-        var destino = await _context.Destinos.FirstOrDefaultAsync(usuario => usuario.Id == id, cancellationToken);
-        if (destino == null)
-            return false;
-
-        destino.IsDeleted = true;
-
-        _context.Destinos.Update(destino);
-
-        return true;
-
-    }
-
-    public async Task<IEnumerable<Destiny>> GetAllAsync(int page, int size, CancellationToken cancellationToken = default)
-    {
-        return await _context.Destinos.Skip(page).Take(size).Where(destiny => !destiny.IsDeleted).ToListAsync(cancellationToken);
-    }
-
-    public async Task<Destiny> GetByIdAsync(long id, CancellationToken cancellationToken = default)
-    {
-        return await _context.Destinos
+    public async Task<Destiny> GetByIdAsync(long id, CancellationToken cancellationToken = default) => 
+        await _context.Destinos
             .Include(destiny => destiny.Imagens)
             .SingleOrDefaultAsync(destiny => destiny.Id == id, cancellationToken);
+    
 
-    }
+    public void Update(Destiny obj) => _context.Destinos.Update(obj);
 
-    public async Task<bool> Update(Destiny obj, long id, CancellationToken cancellationToken = default)
-    {
-        var destino = await GetByIdAsync(id, cancellationToken);
-        obj.Id = destino.Id;
-
-        var destinoUpdated = _context.Destinos.Update(obj);
-
-        return true;
-
-    }
 }
 

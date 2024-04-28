@@ -9,7 +9,7 @@ public interface IUnitOfWork : IDisposable
 {
     IRepositoryDestino DestinoRepository { get; }
     IRepositoryDepoimento DepoimentoRepository { get; }
-    IRepositoryUsuario UsuarioRepository { get; }
+    IRepositoryUsuario UserRepository { get; }
 
     Task BeginTransactionAsync(CancellationToken cancellationToken);
     Task CommitAsync(CancellationToken cancellationToken);

@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using System.Threading.Channels;
-using JornadaMilhas.Core.Entities;
+using JornadaMilhas.Core.Entities.Users;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 
@@ -21,7 +21,7 @@ public class SendEmailMessage
 
     }
 
-    public void SendConfirmMmail(Usuario usuario)
+    public void SendConfirmMmail(User usuario)
     {
         using var channel = _connection.CreateModel();
         ConfigurationOfQueueEmail(channel);

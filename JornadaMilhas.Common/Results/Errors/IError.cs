@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Common.Result.Errors;
+namespace JornadaMilhas.Common.Results.Errors;
 
 public interface IError
 {
-    int Code { get; init; }
+    string Code { get; init; }
     string Message { get; init; }
     public ErrorType Type { get; init; }
 }

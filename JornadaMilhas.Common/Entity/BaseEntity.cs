@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 
 
-namespace JornadaMilhas.Core.Entities;
+namespace JornadaMilhas.Common.Entity;
 
 public class BaseEntity
 {
@@ -13,6 +13,10 @@ public class BaseEntity
     [JsonPropertyName("dtCreated")]
     public DateTime DtCreated { get; set; }
 
+    public DateTime DtUpdated { get; set; }
+
     [JsonPropertyName("isDeleted")]
     public bool IsDeleted { get; set; }
+
+    public virtual void Desactive() => IsDeleted = true;
 }

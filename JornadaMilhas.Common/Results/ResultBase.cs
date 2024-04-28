@@ -1,11 +1,11 @@
-﻿using JornadaMilhas.Common.Result.Errors;
+﻿using JornadaMilhas.Common.Results.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Common.Result;
+namespace JornadaMilhas.Common.Results;
 
 public interface IResultBase
 {
@@ -15,7 +15,7 @@ public interface IResultBase
 
 public abstract class ResultBase : IResultBase
 {
-    public IReadOnlyList<IError> Errors => _errors.ToList().AsReadOnly();
+    public IReadOnlyList<IError> Errors => _errors.AsReadOnly();
 
     public bool Success => _errors.Count == 0;
 

@@ -1,4 +1,4 @@
-﻿using JornadaMilhas.Common.Result;
+﻿using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Destinys;
 using MediatR;
 using System;

@@ -1,13 +1,14 @@
-﻿
-
+﻿using JornadaMilhas.Common.Entity;
+using JornadaMilhas.Common.PaginationResult;
+using JornadaMilhas.Core.Entities;
+using JornadaMilhas.Core.Entities.Destinys;
 
 namespace JornadaMilhas.Core.Repositories;
 
-public interface IRepository<T>
+public interface IRepository<TEntity> where TEntity : BaseEntity
 {
-    Task<IEnumerable<T>> GetAllAsync(int page, int size, CancellationToken cancellationToken);
-    Task<T> CreateAsync(T obj, CancellationToken cancellationToken);
-    Task<bool> DeleteAsync (long id, CancellationToken cancellationToken);
-    Task<bool> Update(T obj, long id, CancellationToken cancellationToken);
-    Task<T> GetByIdAsync(long id, CancellationToken cancellationToken);
+    PaginationResult<TEntity> GetAll(int page, int size);
+    void Create(TEntity obj);
+    void Update(TEntity obj);
+    Task<TEntity> GetByIdAsync(long id, CancellationToken cancellationToken);
 }

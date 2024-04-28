@@ -1,5 +1,7 @@
-﻿using JornadaMilhas.Common.Result;
-using JornadaMilhas.Common.Result.Errors;
+﻿
+
+using JornadaMilhas.Common.Results;
+using JornadaMilhas.Common.Results.Errors;
 
 namespace JornadaMilhas.Common.ValueObjects;
 
@@ -17,10 +19,10 @@ public sealed record Cpf
         number = FormatCpf(number);
 
         if (string.IsNullOrWhiteSpace(number))
-            return Result.Result.Fail<Cpf>(CpfErrors.CpfIsRequired);
+            return Result.Fail<Cpf>(CpfErrors.CpfIsRequired);
 
         if (!IsCpf(number))
-            return Result.Result.Fail<Cpf>(CpfErrors.CpfIsInvalid);
+            return Result.Fail<Cpf>(CpfErrors.CpfIsInvalid);
 
         var cpf = new Cpf(number);
 
@@ -77,12 +79,13 @@ public sealed record Cpf
         return number.EndsWith(digit);
     }
 
-    public sealed record CpfErrors(int Code, string Message, ErrorType Type) : IError
+    public sealed record CpfErrors(string Code, string Message, ErrorType Type) : IError
     {
         public static readonly Error CpfIsRequired =
-            new(500, "CPF é obrigatório", ErrorType.Validation);
+            new("Cpf.CpfIsRequired", "CPF é obrigatório", ErrorType.Validation);
 
         public static readonly Error CpfIsInvalid =
-            new(500, "CPF não pe válido", ErrorType.Validation);
+            new("Cpf.CpfIsInvalid", "CPF não é válido", ErrorType.Validation);
+
     }
 }
