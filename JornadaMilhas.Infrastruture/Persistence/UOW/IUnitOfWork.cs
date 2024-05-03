@@ -1,5 +1,4 @@
 ﻿using JornadaMilhas.Core.Entities;
-using JornadaMilhas.Core.Indices;
 using JornadaMilhas.Core.Repositories;
 using JornadaMilhas.Core.Repositories.Interfaces;
 

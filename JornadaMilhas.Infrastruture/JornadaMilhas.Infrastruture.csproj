@@ -22,4 +22,8 @@
     <ProjectReference Include="..\JornadaMilhas.Core\JornadaMilhas.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\Configurations\UserLimited\" />
+  </ItemGroup>
+
 </Project>

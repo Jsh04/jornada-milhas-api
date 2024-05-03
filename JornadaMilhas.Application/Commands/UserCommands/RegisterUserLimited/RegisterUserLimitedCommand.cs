@@ -4,9 +4,9 @@ using JornadaMilhas.Common.InputDTO;
 using JornadaMilhas.Core.Entities.Enums;
 using JornadaMilhas.Core.Entities.Users;
 
-namespace JornadaMilhas.Application.Commands.UserCommands.RegisterUser;
+namespace JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
 
-public sealed record RegisterUserCommand(
+public sealed record RegisterUserLimitedCommand(
     string Name, 
     DateTime DtBirth,
     EnumGenre Genre,

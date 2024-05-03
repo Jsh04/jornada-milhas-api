@@ -2,9 +2,9 @@
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Common.Validations;
 
-namespace JornadaMilhas.Application.Commands.UserCommands.RegisterUser;
+namespace JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
 
-public class RegisterUserValidation : AbstractValidator<RegisterUserCommand>
+public class RegisterUserValidation : AbstractValidator<RegisterUserLimitedCommand>
 {
     public RegisterUserValidation()
     {

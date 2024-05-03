@@ -74,7 +74,7 @@ public class UserBuilder : Builder<User>
         return this;
     }
     
-    public UserBuilder WithAddress(string street, string city, string state, string district, string zipCode)
+    public UserBuilder WithAddress(string? street, string city, string state, string? district, string? zipCode)
     {
         var address = Address.Create(city, state, zipCode, street, district);
 

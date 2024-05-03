@@ -7,6 +7,11 @@ public class DateOfBirth
 {
     public DateTime Date { get; }
 
+    public DateOfBirth()
+    { 
+        
+    }
+
     private DateOfBirth(DateTime dateOfBirth)
     {
         Date = dateOfBirth;

@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Util;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhasTest.IntegrationsTest.Helper;
@@ -28,25 +29,25 @@ public class DestinoControllerTest
     [Order(1)]
     public async Task DeverarCadastrarDestinoCriado()
     {
-        ////arrange
-        //List<string> randomsBase64 = new();
-        //var destinoDto = fixture.Create<CreateDestinoDTO>();
+        //arrange
+        List<string> randomsBase64 = new();
+        var destinoDto = fixture.Create<RegisterDestinyCommand>();
 
-        //randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
-        //randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
-        //randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
+        randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
+        randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
+        randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
 
-        //destinoDto.Pictures = randomsBase64;
+        destinoDto.Images.AddRange(randomsBase64);
 
-        //var url = "/destinos";
+        var url = "/destinos";
 
-        //var stringContent = new StringContent(TestHelper.SerializerObjToJson(destinoDto), encoding: Encoding.UTF8, "application/json");
+        var stringContent = new StringContent(TestHelper.SerializerObjToJson(destinoDto), encoding: Encoding.UTF8, "application/json");
 
-        ////act
-        //var response = await client.PostAsync(url, stringContent);
-       
-        ////assert
-        //Assert.That(response.IsSuccessStatusCode, Is.True);
+        //act
+        var response = await client.PostAsync(url, stringContent);
+
+        //assert
+        Assert.That(response.IsSuccessStatusCode, Is.True);
     }
 
     [Test]

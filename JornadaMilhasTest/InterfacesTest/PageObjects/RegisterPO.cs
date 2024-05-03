@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JornadaMilhas.Application.Commands.UserCommands.RegisterUser;
+using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
 using JornadaMilhas.Core.Entities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -68,7 +68,7 @@ public class RegisterPO
         return this;
     }
 
-    public RegisterPO SendKeysToUserLimited(RegisterUserCommand usuario)
+    public RegisterPO SendKeysToUserLimited(RegisterUserLimitedCommand usuario)
     {
         driver.FindElement(inputName).SendKeys(usuario.Name);
         driver.FindElement(inputDtBirth).SendKeys(usuario.DtBirth.ToString());

@@ -16,7 +16,6 @@
     <Compile Remove="Builders\**" />
     <EmbeddedResource Remove="Builders\**" />
     <None Remove="Builders\**" />
-    <Compile Remove="Entities\Users\UserAdmin.cs" />
   </ItemGroup>
 
   <ItemGroup>

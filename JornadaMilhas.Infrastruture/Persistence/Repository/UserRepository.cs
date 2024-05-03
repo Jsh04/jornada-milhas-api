@@ -19,19 +19,14 @@ public class UserRepository
 
     public UserRepository(JornadaMilhasDbContext context) => _context = context;
     
-
-   
-    
     public async Task<IEnumerable<User>> GetAllAsync(int page, int size, CancellationToken cancellationToken)
     {
         return await _context.Users.Skip(page).Take(size).Where(usuario => !usuario.IsDeleted).ToListAsync(cancellationToken);
     }
-
-   
-
+    
     public async Task<bool> IsUniqueAsync(string cpf, string mail, CancellationToken cancellationToken = default)
     {
-        var hasUser = await _context.Users.AnyAsync(user => user.Cpf.Number == cpf || user.Email == mail);
+        var hasUser = await _context.Users.AnyAsync(user => user.Cpf.Number == cpf || user.Email.Address == mail);
         return hasUser;
     }
 
