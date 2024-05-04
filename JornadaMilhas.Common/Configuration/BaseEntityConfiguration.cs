@@ -4,10 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JornadaMilhas.Common.Configuration;
 
-public class BaseEntityConfiguration<TBase> : IEntityTypeConfiguration<BaseEntity> where TBase : BaseEntity
+public abstract class BaseEntityConfiguration<TBase> : IEntityTypeConfiguration<TBase> where TBase : BaseEntity
 {
-    public void Configure(EntityTypeBuilder<BaseEntity> builder)
+    public virtual void Configure(EntityTypeBuilder<TBase> builder)
     {
         builder.HasKey(b => b.Id);
+
+        builder.Property(b => b.DtCreated)
+            .IsRequired();
+
+        builder.Property(b => b.DtUpdated)
+            .IsRequired();
     }
 }

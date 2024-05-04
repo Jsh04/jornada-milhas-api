@@ -12,6 +12,7 @@ using FluentValidation.AspNetCore;
 using JornadaMilhas.Application.Validations;
 using FluentValidation;
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
+using JornadaMilhas.Infrastruture.Persistence.Repository.UserRepository;
 
 namespace JornadaMilhas.API;
 
@@ -19,9 +20,10 @@ public static class ConfigurationApi
 {
     public static void AddApiConfiguracao(this WebApplicationBuilder builder)
     {
-
         AddDependenciesInjectionsServices(builder);
         AddDependenciesInjectionsExternal(builder);
+        
+   
         AddAuthenticationWithJWT(builder);
         
         builder.Services.AddControllers().AddJsonOptions(x =>
@@ -36,7 +38,9 @@ public static class ConfigurationApi
         var services = builder.Services;
         
         services.AddScoped<IRepositoryDestino, RepositoryDestino>();
+        services.AddScoped<IUserLimitedRepository, UserLimitedRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
     }
 

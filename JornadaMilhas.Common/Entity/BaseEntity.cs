@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace JornadaMilhas.Common.Entity;
 
-public class BaseEntity
+public abstract class BaseEntity
 {
     [Key]
     [JsonPropertyName("id")]

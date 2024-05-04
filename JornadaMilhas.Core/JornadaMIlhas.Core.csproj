@@ -8,10 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Domains\**" />
+    <Compile Remove="Interfaces\Depoimentos\**" />
     <Compile Remove="Services\**" />
     <EmbeddedResource Remove="Domains\**" />
+    <EmbeddedResource Remove="Interfaces\Depoimentos\**" />
     <EmbeddedResource Remove="Services\**" />
     <None Remove="Domains\**" />
+    <None Remove="Interfaces\Depoimentos\**" />
     <None Remove="Services\**" />
     <Compile Remove="Builders\**" />
     <EmbeddedResource Remove="Builders\**" />
@@ -24,10 +27,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.1" />
     <PackageReference Include="OpenAI" Version="1.10.0" />
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Interfaces\Depoimentos\" />
   </ItemGroup>
 
   <ItemGroup>

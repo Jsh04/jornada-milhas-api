@@ -2,6 +2,7 @@
 
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Results.Errors;
+using Microsoft.EntityFrameworkCore;
 
 namespace JornadaMilhas.Common.ValueObjects;
 
@@ -13,6 +14,8 @@ public sealed record Cpf
     {
         Number = number;
     }
+
+    private Cpf() { }
 
     public static Result<Cpf> Create(string number)
     {

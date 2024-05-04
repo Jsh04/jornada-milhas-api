@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Core.Entities.Enums
+namespace JornadaMilhas.Common.Enums
 {
     public enum EnumGenre
     {

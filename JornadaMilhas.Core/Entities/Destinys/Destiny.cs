@@ -13,7 +13,7 @@ public class Destiny : BaseEntity
     public string Subtitle { get; set; }
 
     [JsonPropertyName("price")]
-    public double Price { get; set; }
+    public decimal Price { get; set; }
 
     [JsonPropertyName("descriptionPortuguese")]
     public string DescriptionPortuguese { get; set; }
@@ -26,7 +26,7 @@ public class Destiny : BaseEntity
 
     public static DestinyBuilder CreateBuilder() => DestinyBuilder.Create();
 
-    public static Result<Destiny> Create(string name, string subtitle, double price, string descriptionPortuguese, string descriptionEnglish, List<ImagemDestino> imags)
+    public static Result<Destiny> Create(string name, string subtitle, decimal price, string descriptionPortuguese, string descriptionEnglish, List<ImagemDestino> imags)
     {
         var destiny = new Destiny
         {

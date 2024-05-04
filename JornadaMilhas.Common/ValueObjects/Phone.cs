@@ -1,10 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Results.Errors;
+using Microsoft.EntityFrameworkCore;
 
 namespace JornadaMilhas.Common.ValueObjects;
 
-public class Phone
+
+public sealed record Phone
 {
     public string Number { get; }
     

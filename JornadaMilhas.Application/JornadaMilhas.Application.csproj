@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj" />
+    <Compile Remove="Querys\DestinysQuerys\DestinysGetAllByQuery\**" />
+    <Compile Remove="Validations\**" />
+    <EmbeddedResource Remove="Querys\DestinysQuerys\DestinysGetAllByQuery\**" />
+    <EmbeddedResource Remove="Validations\**" />
+    <None Remove="Querys\DestinysQuerys\DestinysGetAllByQuery\**" />
+    <None Remove="Validations\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Querys\DestinysQuerys\DestinysGetAllByQuery\" />
-    <Folder Include="Validations\" />
+    <ProjectReference Include="..\JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj" />
   </ItemGroup>
 
   <ItemGroup>

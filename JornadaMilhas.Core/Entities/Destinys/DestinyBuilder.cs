@@ -16,7 +16,7 @@ public class DestinyBuilder : Builder<Destiny>
 
     protected string Subtitle;
 
-    protected double Price;
+    protected decimal Price;
 
     protected string DescriptionPortuguese;
 
@@ -42,7 +42,7 @@ public class DestinyBuilder : Builder<Destiny>
         return this;
     }
 
-    public DestinyBuilder AddPrice(double price)
+    public DestinyBuilder AddPrice(decimal price)
     {
         Price = price;
         return this;

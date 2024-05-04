@@ -1,15 +1,10 @@
 ﻿using JornadaMilhas.Common.Results.Errors;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Common.Results.Errors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace JornadaMilhas.Common.ValueObjects;
 
-public class Address
+public sealed record Address
 {
     public string City { get; }
 

@@ -1,9 +1,10 @@
 ﻿using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Results.Errors;
+using Microsoft.EntityFrameworkCore;
 
 namespace JornadaMilhas.Common.ValueObjects;
 
-public class DateOfBirth
+public sealed record DateOfBirth
 {
     public DateTime Date { get; }
 

@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using System.Threading.Channels;
+using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Core.Entities.Users;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
