@@ -2,13 +2,13 @@
 using JornadaMilhas.Common.Enums;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.ValueObjects;
-using System.ComponentModel.DataAnnotations.Schema;
+using JornadaMilhas.Core.Entities.Depoiments;
 
 namespace JornadaMilhas.Core.Entities.Users.UserLimited;
 
 public class UserLimited : User
 {
-    public List<Depoimento> Depoimentos { get; } = new();
+    public List<Depoiment> Depoimentos { get; } = new();
 
     public bool EmailExists { get; private set; } 
 

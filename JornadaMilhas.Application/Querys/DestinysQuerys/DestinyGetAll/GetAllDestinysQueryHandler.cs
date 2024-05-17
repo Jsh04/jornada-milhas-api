@@ -20,7 +20,7 @@ public class GetAllDestinysQueryHandler : IRequestHandler<GetAllDestinysQuery, L
 
     public Task<List<Destiny>> Handle(GetAllDestinysQuery request, CancellationToken cancellationToken)
     {
-        _unitOfWork.DestinoRepository.GetAll(request.Page, request.Size);
+        _unitOfWork.DestinoRepository.GetAllAsync(request.Page, request.Size);
         throw new NotImplementedException();
     }
 }
