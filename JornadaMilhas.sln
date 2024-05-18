@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMilhas.Core", "Jorna
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMilhas.Infrastruture", "JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj", "{DC3CAEF2-5834-45EE-841D-867D8A2EE4AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JornadaMilhas.Common", "JornadaMilhas.Common\JornadaMilhas.Common.csproj", "{A27CC606-711D-42AD-A28E-AB8331880FB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JornadaMilhas.Common", "JornadaMilhas.Common\JornadaMilhas.Common.csproj", "{A27CC606-711D-42AD-A28E-AB8331880FB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

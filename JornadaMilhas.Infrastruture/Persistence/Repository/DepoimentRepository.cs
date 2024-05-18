@@ -1,4 +1,8 @@
 ﻿
+
+
+
+
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Repositories.Interfaces;
@@ -17,7 +21,8 @@ public class DepoimentRepository : IDepoimentRepository
 
     public Task<PaginationResult<Depoiment>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
     {
-        var depoiments = _context.Depoimentos.AsQueryable();
+        var depoiments = _context.Depoimentos.AsQueryable().Where(depoiment => !depoiment.IsDeleted);
+
         return  depoiments.ToPaginationResultAsync(page, pageSize, cancellationToken);
     }
 

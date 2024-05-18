@@ -12,7 +12,8 @@ namespace JornadaMilhas.API;
 [Route("[controller]")]
 public class DestinosController : ControllerBase
 {
-    private IMediator _mediator;
+    private readonly IMediator _mediator;
+
     public DestinosController(IMediator mediator)
     {
         _mediator = mediator;
@@ -32,6 +33,7 @@ public class DestinosController : ControllerBase
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetDestinoById(long id)

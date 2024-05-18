@@ -1,6 +1,7 @@
 ﻿
 using JornadaMilhas.Common.Data.Repository;
 using JornadaMilhas.Common.PaginationResult;
+using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Context;
@@ -19,7 +20,7 @@ public class RepositoryDestino : IRepositoryDestino
     
     public Task<PaginationResult<Destiny>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
     {
-        var destinys = _context.Destinos.AsQueryable();
+        var destinys = _context.Destinos.AsQueryable().Where(destiny => !destiny.IsDeleted).Include(destiny => destiny.Imagens);
         return destinys.ToPaginationResultAsync(page, pageSize, cancellationToken);
     }
 
