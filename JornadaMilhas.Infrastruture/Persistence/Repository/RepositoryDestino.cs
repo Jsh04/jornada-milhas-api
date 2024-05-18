@@ -20,7 +20,8 @@ public class RepositoryDestino : IRepositoryDestino
     
     public Task<PaginationResult<Destiny>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
     {
-        var destinys = _context.Destinos.AsQueryable().Where(destiny => !destiny.IsDeleted).Include(destiny => destiny.Imagens);
+        var destinys = _context.Destinos.AsQueryable()
+            .Where(destiny => !destiny.IsDeleted).Include(destiny => destiny.Imagens);
         return destinys.ToPaginationResultAsync(page, pageSize, cancellationToken);
     }
 

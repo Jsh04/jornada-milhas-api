@@ -1,4 +1,5 @@
 ﻿
+using JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,8 +14,15 @@ public class DepoimentController : ControllerBase
 
     public DepoimentController(IMediator mediator) => _mediator = mediator;
 
-    [HttpPost]
-    
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public IActionResult GetAllDepoiment([FromQuery] GetAllDestinysQuery query)
+    {
+        _mediator.Send(query);
+        return Ok();
+    }
     
         
     

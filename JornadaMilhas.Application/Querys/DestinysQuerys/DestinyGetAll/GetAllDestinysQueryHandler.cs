@@ -23,6 +23,6 @@ public class GetAllDestinysQueryHandler : IRequestHandler<GetAllDestinysQuery, L
         var destinys = await _unitOfWork.DestinoRepository.GetAllAsync(request.Page, request.Size);
 
         
-        
+        return destinys.Data.ToList();
     }
 }

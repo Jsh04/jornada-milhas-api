@@ -6,9 +6,9 @@ namespace JornadaMilhas.Core.Entities.Depoiments;
 
 public class Depoiment : BaseEntity
 {
-    public string Name { get; set; }
-    public string DepoimentDescription { get; set; }
-    public byte[] Picture { get; init ; }
+    public string Name { get; private set; }
+    public string DepoimentDescription { get; private set; }
+    public byte[] Picture { get; private set ; }
     public virtual UserLimited User { get; private set; }
     public long IdUser { get; private set; }
 
@@ -24,6 +24,13 @@ public class Depoiment : BaseEntity
             IdUser = userId
         };
         return Result<Depoiment>.Ok(depoiment);
+    }
+
+    public void Update(Depoiment depoiment)
+    {
+        Name = depoiment.Name;
+        DepoimentDescription = depoiment.DepoimentDescription;
+        Picture = depoiment.Picture;
     }
 }
 

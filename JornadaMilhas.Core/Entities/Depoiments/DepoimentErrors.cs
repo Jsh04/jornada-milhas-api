@@ -15,4 +15,6 @@ public  record DepoimentErrors
 
     public static readonly Error CannotConvertStringInByteArray = new("Depoiment.CannotConvertStringInByteArray", "Não pode converter o base 64 em bytes", ErrorType.Failure);
 
+    public static readonly Error CannotBeUpdate = new("Depoiment.CannotUpdate", "Erro ao atualizar Depoimento", ErrorType.Failure);
+
 }

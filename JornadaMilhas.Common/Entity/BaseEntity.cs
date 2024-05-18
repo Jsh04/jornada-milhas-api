@@ -11,12 +11,12 @@ public abstract class BaseEntity
     public long Id { get; set; }
 
     [JsonPropertyName("dtCreated")]
-    public DateTime DtCreated { get; set; }
+    public DateTime DtCreated { get; protected set; }
 
-    public DateTime DtUpdated { get; set; }
+    public DateTime DtUpdated { get; protected set; }
 
     [JsonPropertyName("isDeleted")]
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; protected set; }
 
     public virtual void Desactive() => IsDeleted = true;
 }
