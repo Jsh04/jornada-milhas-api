@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace JornadaMilhas.Common.InputDTO;
 
-public sealed record AddressInputDTO(string Address, string District, string City, string State, string ZipCode)
+public sealed record AddressInputDTO(string City, string State, string? ZipCode = default, string? Address = default, string? District = default)
 {
 }

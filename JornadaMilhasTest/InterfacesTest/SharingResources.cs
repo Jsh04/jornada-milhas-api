@@ -15,7 +15,7 @@ public class SharingResources
     {
         Fixture = new TestFixtureJornada();
         AutoFixture = new Fixture();
-    } 
+    }
     
 
     [OneTimeTearDown]

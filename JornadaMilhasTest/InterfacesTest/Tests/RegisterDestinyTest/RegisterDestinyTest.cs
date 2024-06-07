@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhasTest.InterfacesTest.Helper;
 using JornadaMilhasTest.InterfacesTest.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -45,8 +46,7 @@ public class RegisterDestinyTest
             .ClickBtnToSendData();
 
         //assert
-        var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-        var isModalSucess  = wait.Until(drv => drv.PageSource.Contains("Destino Cadastrado com sucesso"));
+        var isModalSucess = TestHelper.ReturnValidationOfTimeWait(drv => drv.PageSource.Contains("Destino Cadastrado com sucesso"), _driver);
         Assert.That(isModalSucess);
 
     }

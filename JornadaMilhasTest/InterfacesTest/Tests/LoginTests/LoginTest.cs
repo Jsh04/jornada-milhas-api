@@ -1,4 +1,5 @@
-﻿using JornadaMilhasTest.InterfacesTest.PageObjects;
+﻿using JornadaMilhasTest.InterfacesTest.Helper;
+using JornadaMilhasTest.InterfacesTest.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -27,8 +28,8 @@ public class LoginTest
            .FillFormsLogin("josesilvio.bs@gmail.com", "Senha123")
            .SubmitForm();
         //assert
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        bool dashboardUrl = wait.Until(drv => drv.Url.Contains("/"));
+        
+        bool dashboardUrl = TestHelper.ReturnValidationOfTimeWait(drv => drv.Url.Contains('/'), driver);
         Assert.That(dashboardUrl);
     }
 }
