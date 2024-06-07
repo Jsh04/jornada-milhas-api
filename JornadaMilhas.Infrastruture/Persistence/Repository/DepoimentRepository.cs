@@ -1,13 +1,9 @@
-﻿
-
-
-
-
-using JornadaMilhas.Common.PaginationResult;
+﻿using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Repository;
 
@@ -30,6 +26,8 @@ public class DepoimentRepository : IDepoimentRepository
         await _context.Depoimentos
             .SingleOrDefaultAsync(depoiment => depoiment.Id == id, cancellation);
 
+    public IQueryable<Depoiment> GetBy(Expression<Func<Depoiment, bool>> expression) => 
+        _context.Depoimentos.AsQueryable().Where(expression);
 
     public bool Update(Depoiment entity)
     {
@@ -37,7 +35,5 @@ public class DepoimentRepository : IDepoimentRepository
 
         return updated.State == EntityState.Modified;
     }
-
-
 }
 
