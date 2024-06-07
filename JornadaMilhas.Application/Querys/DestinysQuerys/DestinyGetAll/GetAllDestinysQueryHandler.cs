@@ -18,9 +18,11 @@ public class GetAllDestinysQueryHandler : IRequestHandler<GetAllDestinysQuery, L
         _unitOfWork = unitOfWork;
     }
 
-    public Task<List<Destiny>> Handle(GetAllDestinysQuery request, CancellationToken cancellationToken)
+    public async Task<List<Destiny>> Handle(GetAllDestinysQuery request, CancellationToken cancellationToken)
     {
-        _unitOfWork.DestinoRepository.GetAll(request.Page, request.Size);
-        throw new NotImplementedException();
+        var destinys = await _unitOfWork.DestinoRepository.GetAllAsync(request.Page, request.Size);
+
+        
+        return destinys.Data.ToList();
     }
 }

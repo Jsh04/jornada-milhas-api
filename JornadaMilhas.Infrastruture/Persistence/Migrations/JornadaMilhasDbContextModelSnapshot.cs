@@ -22,7 +22,7 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoimento", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoiments.Depoiment", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,7 +30,7 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("DescricaoDepoimento")
+                    b.Property<string>("DepoimentDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -40,19 +40,19 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                     b.Property<DateTime>("DtUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte[]>("Foto")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<long>("IdUsuario")
+                    b.Property<long>("IdUser")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Picture")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
@@ -226,7 +226,7 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                     b.ToTable("UsersLimited");
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoimento", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoiments.Depoiment", b =>
                 {
                     b.HasOne("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", "User")
                         .WithMany("Depoimentos")

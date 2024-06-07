@@ -33,8 +33,9 @@ namespace JornadaMilhas.Infrastruture.Persistence.Configurations
                 .HasMaxLength(500);
 
             builder.Property(d => d.Price)
+                .HasPrecision(18, 2)
                 .IsRequired();
-                
+
 
             builder.HasMany(u => u.Imagens)
                 .WithOne(d => d.Destino)

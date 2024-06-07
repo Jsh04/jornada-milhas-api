@@ -8,7 +8,7 @@ using System.Numerics;
 
 namespace JornadaMilhas.Core.Entities.Destinys;
 
-public class DestinyBuilder : Builder<Destiny>
+public class DestinyBuilder : Builder<Destiny, DestinyBuilder>
 {
     private readonly Destiny _destino;
 
@@ -68,6 +68,11 @@ public class DestinyBuilder : Builder<Destiny>
 
     public override Result<Destiny> Build() 
     {
+
+        if (_errors.Count > 0)
+            return Result.Fail<Destiny>(_errors);
+
+
         var destinyCreated = Destiny
             .Create(Name, 
             Subtitle, 
@@ -75,9 +80,6 @@ public class DestinyBuilder : Builder<Destiny>
             DescriptionPortuguese, 
             DescriptionEnglish,
             Images);
-
-        if (!destinyCreated.Success)
-            return Result.Fail<Destiny>(destinyCreated.Errors);
 
         return destinyCreated;
 

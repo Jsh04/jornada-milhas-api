@@ -15,6 +15,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IRepositoryDestino DestinoRepository { get; init; }
 
+    public IDepoimentRepository DepoimentRepository { get; init; }
+
 
     public IUserLimitedRepository UserLimitedRepository { get; init; }
 
@@ -22,12 +24,14 @@ public class UnitOfWork : IUnitOfWork
 
     public UnitOfWork(
         IUserLimitedRepository userLimitedRepository, 
-        IRepositoryDestino destinoRepository, 
+        IRepositoryDestino destinoRepository,
+        IDepoimentRepository depoimentRepository,
         JornadaMilhasDbContext context
         )
     {
         UserLimitedRepository = userLimitedRepository;
         DestinoRepository = destinoRepository;
+        DepoimentRepository = depoimentRepository;
         _context = context;
     }
 

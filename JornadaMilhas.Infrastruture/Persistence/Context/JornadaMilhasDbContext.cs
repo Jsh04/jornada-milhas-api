@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
-using JornadaMilhas.Common.Entities;
-using JornadaMilhas.Core.Entities;
+using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Entities.Destinys;
-using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Entities.Users.UserAdmin;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +13,7 @@ public class JornadaMilhasDbContext : DbContext
     public DbSet<Destiny> Destinos { get; set; }
     public DbSet<UserLimited> UsersLimited { get; set; }
     public DbSet<UserAdmin> UsersAdmin { get; set; }
-    public DbSet<Depoimento> Depoimentos { get; set; }
+    public DbSet<Depoiment> Depoimentos { get; set; }
 
     public JornadaMilhasDbContext(DbContextOptions<JornadaMilhasDbContext> options) : base(options) { }
 

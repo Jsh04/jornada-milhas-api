@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Common.Enums
+namespace JornadaMilhas.Common.Enums;
+public enum EnumGenre
 {
-    public enum EnumGenre
-    {
-        Male = 1,
-        Female = 2,
-        NotInfo = 3
-    }
+    Male = 1,
+    Female = 2,
+    NotInfo = 3
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,14 @@ namespace JornadaMilhas.Common.PaginationResult;
 
 public static class PaginationResultExtension
 {
-    public static PaginationResult<T> ToPaginationResult<T>(
-        this IQueryable<T> query, int page, int pageSize)
+    public static async Task<PaginationResult<T>> ToPaginationResultAsync<T>(
+        this IQueryable<T> query, int page, int pageSize, CancellationToken cancellationToken = default)
     {
-        var totalCount = query.Count();
+        var totalCount = await query.CountAsync(cancellationToken);
 
         var paginatioResult = new PaginationResult<T>(page, pageSize, totalCount);
 
-        var pageCount = (double)totalCount / pageSize;
+        var pageCount = (double) totalCount / pageSize;
 
         var totalPages = (int)Math.Ceiling(pageCount);
 
@@ -23,13 +24,10 @@ public static class PaginationResultExtension
 
         var skip = (page - 1) * pageSize;
 
-        var data = query.Skip(skip).Take(pageSize).ToList();
+        var data = await query.Skip(skip).Take(pageSize).ToListAsync(cancellationToken);
 
         paginatioResult.SetData(data);
 
         return paginatioResult;
-        
-
-        
     }
 }
