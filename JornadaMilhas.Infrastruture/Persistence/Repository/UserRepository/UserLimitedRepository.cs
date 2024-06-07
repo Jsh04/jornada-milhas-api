@@ -1,4 +1,5 @@
 ﻿
+using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Context;
@@ -13,6 +14,14 @@ public class UserLimitedRepository : IUserLimitedRepository
     public UserLimitedRepository(JornadaMilhasDbContext context) => _context = context;
 
     public void Create(UserLimited obj) => _context.UsersLimited.Add(obj);
+
+    public Task<PaginationResult<UserLimited>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<UserLimited?> GetByIdAsync(long id, CancellationToken cancellation = default) => await _context.UsersLimited.SingleOrDefaultAsync(user => user.Id == id, cancellation);
+    
 
     public async Task<UserLimited?> GetUserByEmail(string email, CancellationToken cancellationToken = default)
     {

@@ -14,10 +14,8 @@ public sealed class UpdateDepoimentCommandHandler : IRequestHandler<UpdateDepoim
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateDepoimentCommandHandler(IUnitOfWork unitOfWork)
-    {
-        _unitOfWork = unitOfWork;
-    }
+    public UpdateDepoimentCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+    
 
     public async Task<Result> Handle(UpdateDepoimentCommand request, CancellationToken cancellationToken)
     {

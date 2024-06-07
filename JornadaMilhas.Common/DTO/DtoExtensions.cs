@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace JornadaMilhas.Common.DTO;
 
-public static class DtoExtensions<TEntity> where TEntity : BaseEntity
+public static class DtoExtensions<TEntity, TDto> where TEntity : BaseEntity
 {
-    public static TDto ToDto<TDto>(TEntity entity)
+    public static TDto ToDto(TEntity entity)
     {
         var dto = Activator.CreateInstance<TDto>();
 
@@ -25,7 +25,7 @@ public static class DtoExtensions<TEntity> where TEntity : BaseEntity
         return dto;
     }
 
-    public static IEnumerable<TDto> ToDto<TDto>(IEnumerable<TEntity> objs) => objs is not null ? objs.Select(obj => ToDto<TDto>(obj)) : Enumerable.Empty<TDto>();
+    public static IEnumerable<TDto> ToDto(IEnumerable<TEntity> objs) => objs is not null ? objs.Select(obj => ToDto(obj)) : Enumerable.Empty<TDto>();
 
 
 

@@ -14,7 +14,8 @@ namespace JornadaMilhas.Application.Commands.DepoimentsCommands.UpdateDepoiment
 
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .WithMessage("Nome é obrigário ");
+                .NotNull()
+                .WithMessage("Nome é obrigário");
 
             RuleFor(x => x.DepoimentDescription)
                 .NotEmpty()
@@ -25,6 +26,7 @@ namespace JornadaMilhas.Application.Commands.DepoimentsCommands.UpdateDepoiment
                 
             RuleFor(x => x.UserId)
                 .NotEmpty()
+                .NotNull()
                 .WithMessage("UserId is required");
 
             RuleFor(x => x.Picture)

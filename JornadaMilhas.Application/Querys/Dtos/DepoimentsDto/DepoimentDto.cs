@@ -1,14 +1,20 @@
 ﻿
 namespace JornadaMilhas.Application.Querys.Dtos.DepoimentsDto;
 
-public sealed record DepoimentDto(
-    long Id,
-    string Name, 
-    string DepoimentDescription, 
-    byte[] Picture,
-    long IdUser
-    )
-{}
+public sealed record DepoimentDto
+{
+
+    public long Id { get; set; }
+    public string Name { get; set; }
+    public string DepoimentDescription { get; set; }
+    public byte[] Picture { get; set; }
+    public long IdUser { get; set; }
+
+    public DepoimentDto()
+    {
+        
+    }
+}
 
 
 

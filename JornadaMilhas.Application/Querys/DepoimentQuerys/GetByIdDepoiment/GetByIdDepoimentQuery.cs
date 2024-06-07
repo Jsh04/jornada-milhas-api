@@ -1,5 +1,4 @@
 ﻿using JornadaMilhas.Application.Querys.Dtos.DepoimentsDto;
-using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
 using MediatR;
 using System;
@@ -8,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetAllDepoimentsQuery
+namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetByIdDepoiment
 {
-    public sealed record GetAllDepoimentQuery(int Page, int Size) : IRequest<Result<PaginationResult<DepoimentDto>>>
+    public sealed record GetByIdDepoimentQuery(long Id) : IRequest<Result<DepoimentDto>>
     {
     }
 }

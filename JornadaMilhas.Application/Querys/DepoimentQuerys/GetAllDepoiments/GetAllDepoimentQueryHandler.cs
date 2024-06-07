@@ -6,7 +6,7 @@ using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
-namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetAllDepoimentsQuery;
+namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetAllDepoiments;
 
 
 
@@ -21,7 +21,7 @@ public class GetAllDepoimentQueryHandler : IRequestHandler<GetAllDepoimentQuery,
     {
         var paginationResultDepoiments = await _unitOfWork.DepoimentRepository.GetAllAsync(request.Page, request.Size, cancellationToken);
 
-        var depoimentsDto = DtoExtensions<Depoiment>.ToDto<DepoimentDto>(paginationResultDepoiments.Data);
+        var depoimentsDto = DtoExtensions<Depoiment, DepoimentDto>.ToDto(paginationResultDepoiments.Data);
 
         var paginationResultDepoimentsDto = new PaginationResult<DepoimentDto>
         (

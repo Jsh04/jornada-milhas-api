@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 
 namespace JornadaMilhas.Application.Commands.DepoimentsCommands.RegisterDepoiment
 {
-    public sealed record RegisterDepoiment(string Name, string DepoimentDescription, string Picture, long UserId) : IRequest<Result<Depoiment>>
+    public sealed record RegisterDepoimentCommand(string Name, string DepoimentDescription, string Picture, long UserId) : IRequest<Result<Depoiment>>
     {}
 }

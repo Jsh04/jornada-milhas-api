@@ -34,15 +34,12 @@ public static class ConfigurationApi
 
     public static void AddDependenciesInjectionsServices(WebApplicationBuilder builder)
     {
-
         var services = builder.Services;
         
         services.AddScoped<IRepositoryDestino, RepositoryDestino>();
         services.AddScoped<IUserLimitedRepository, UserLimitedRepository>();
         services.AddScoped<IDepoimentRepository, DepoimentRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-
     }
 
     public static void AddDependenciesInjectionsExternal(WebApplicationBuilder builder)
@@ -58,7 +55,7 @@ public static class ConfigurationApi
             opts.RegisterServicesFromAssembly(typeof(RegisterDestinyCommand).Assembly);
         });
 
-        builder.Services.AddValidatorsFromAssemblyContaining(typeof(RegisterDestinyValidator), ServiceLifetime.Scoped);
+        builder.Services.AddValidatorsFromAssemblyContaining(typeof(RegisterDestinyValidator), ServiceLifetime.Transient);
 
         builder.Services.AddFluentValidationAutoValidation();
     }
