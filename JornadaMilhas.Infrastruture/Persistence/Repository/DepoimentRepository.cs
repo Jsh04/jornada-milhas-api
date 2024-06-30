@@ -26,14 +26,19 @@ public class DepoimentRepository : IDepoimentRepository
         await _context.Depoimentos
             .SingleOrDefaultAsync(depoiment => depoiment.Id == id, cancellation);
 
-    public IQueryable<Depoiment> GetBy(Expression<Func<Depoiment, bool>> expression) => 
-        _context.Depoimentos.AsQueryable().Where(expression);
-
     public bool Update(Depoiment entity)
     {
         var updated = _context.Depoimentos.Update(entity);
 
         return updated.State == EntityState.Modified;
     }
+
+    public Task<Depoiment> GetSingleByAsync(Expression<Func<Depoiment, bool>> expression, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IQueryable<Depoiment> GetAllBy(Expression<Func<Depoiment, bool>> predicate) =>
+        _context.Depoimentos.AsQueryable().Where(predicate);
 }
 

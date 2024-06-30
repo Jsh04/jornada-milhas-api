@@ -7,6 +7,7 @@ using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing;
+using System.Linq.Expressions;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Repository;
 
@@ -25,11 +26,20 @@ public class RepositoryDestino : IRepositoryDestino
         return destinys.ToPaginationResultAsync(page, pageSize, cancellationToken);
     }
 
+    public IQueryable<Destiny> GetAllBy(Expression<Func<Destiny, bool>> predicate)
+    {
+        return _context.Destinos.AsQueryable().Where(predicate);
+    }
+
     public async Task<Destiny> GetByIdAsync(long id, CancellationToken cancellationToken = default) => 
         await _context.Destinos
             .Include(destiny => destiny.Imagens)
             .SingleOrDefaultAsync(destiny => destiny.Id == id, cancellationToken);
 
+    public Task<Destiny> GetSingleByAsync(Expression<Func<Destiny, bool>> expression, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
 
     public bool Update(Destiny obj)
     {

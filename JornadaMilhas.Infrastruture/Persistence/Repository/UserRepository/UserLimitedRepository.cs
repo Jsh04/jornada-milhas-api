@@ -4,6 +4,7 @@ using JornadaMilhas.Core.Entities.Users.UserLimited;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Repository.UserRepository;
 
@@ -17,11 +18,23 @@ public class UserLimitedRepository : IUserLimitedRepository
 
     public Task<PaginationResult<UserLimited>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var query = _context.UsersLimited.AsQueryable();
+
+        return query.ToPaginationResultAsync(page, pageSize, cancellationToken);
+    }
+
+    public IQueryable<UserLimited> GetAllBy(Expression<Func<UserLimited, bool>> predicate)
+    {
+        var resultQueryUsers = _context.UsersLimited.AsQueryable().Where(predicate);
+        return resultQueryUsers;
     }
 
     public async Task<UserLimited?> GetByIdAsync(long id, CancellationToken cancellation = default) => await _context.UsersLimited.SingleOrDefaultAsync(user => user.Id == id, cancellation);
-    
+
+    public Task<UserLimited> GetSingleByAsync(Expression<Func<UserLimited, bool>> expression, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
 
     public async Task<UserLimited?> GetUserByEmail(string email, CancellationToken cancellationToken = default)
     {

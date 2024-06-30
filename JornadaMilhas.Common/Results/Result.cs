@@ -33,10 +33,6 @@ public class Result : ResultBase
     public static Result<TValue> Fail<TValue>(IError error) => Result<TValue>.Fail<TValue>(error);
     public static Result<TValue> Fail<TValue>(IEnumerable<IError> errors) => Result<TValue>.Fail<TValue>(errors);
 
-    public static Result Fail(object cannotBeDeleted)
-    {
-        throw new NotImplementedException();
-    }
 }
 
 public class Result<TValue> : ResultBase<TValue>

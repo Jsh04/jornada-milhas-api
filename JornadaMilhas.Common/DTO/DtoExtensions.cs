@@ -26,7 +26,4 @@ public static class DtoExtensions<TEntity, TDto> where TEntity : BaseEntity
     }
 
     public static IEnumerable<TDto> ToDto(IEnumerable<TEntity> objs) => objs is not null ? objs.Select(obj => ToDto(obj)) : Enumerable.Empty<TDto>();
-
-
-
 }

@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace JornadaMilhas.Infrastruture.Persistence.Migrations
+namespace JornadaMilhas.Infrastruture.Migrations
 {
     [DbContext(typeof(JornadaMilhasDbContext))]
-    [Migration("20240504165040_AlterationOnTables")]
-    partial class AlterationOnTables
+    [Migration("20240625232858_ResetAllMigrations")]
+    partial class ResetAllMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,46 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("Discriminator")
+                    b.Property<DateTime>("DtCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DtUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Genre")
+                        .HasMaxLength(1)
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Picture")
+                        .HasMaxLength(1000)
+                        .HasColumnType("varbinary(1000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoiments.Depoiment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("DepoimentDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -42,8 +81,8 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                     b.Property<DateTime>("DtUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Genre")
-                        .HasColumnType("int");
+                    b.Property<long>("IdUser")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -52,51 +91,9 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<byte[]>("Picture")
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoimento", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<string>("DescricaoDepoimento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DtCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DtUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("Foto")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<long>("IdUsuario")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
@@ -189,11 +186,11 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
 
                     b.Property<string>("CodeEmployee")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("CodeEmployee");
 
-                    b.ToTable("Users");
-
-                    b.HasDiscriminator().HasValue("UserAdmin");
+                    b.ToTable("UserAdmin", (string)null);
                 });
 
             modelBuilder.Entity("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", b =>
@@ -203,19 +200,25 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                     b.Property<bool>("EmailExists")
                         .HasColumnType("bit");
 
-                    b.ToTable("Users");
-
-                    b.HasDiscriminator().HasValue("UserLimited");
+                    b.ToTable("UserLimited", (string)null);
                 });
 
             modelBuilder.Entity("JornadaMilhas.Common.Entities.User", b =>
                 {
-                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Address", "Address", b1 =>
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "ConfirmEmail", b1 =>
                         {
                             b1.Property<long>("UserId")
                                 .HasColumnType("bigint");
 
+                            b1.Property<string>("Address")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
                             b1.HasKey("UserId");
+
+                            b1.HasIndex("Address")
+                                .IsUnique();
 
                             b1.ToTable("Users");
 
@@ -223,10 +226,53 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                                 .HasForeignKey("UserId");
                         });
 
-                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "ConfirmEmail", b1 =>
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "Email", b1 =>
                         {
                             b1.Property<long>("UserId")
                                 .HasColumnType("bigint");
+
+                            b1.Property<string>("Address")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
+                            b1.HasKey("UserId");
+
+                            b1.HasIndex("Address")
+                                .IsUnique();
+
+                            b1.ToTable("Users");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Address", "Address", b1 =>
+                        {
+                            b1.Property<long>("UserId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Adress")
+                                .HasMaxLength(150)
+                                .HasColumnType("nvarchar(150)");
+
+                            b1.Property<string>("Cep")
+                                .HasMaxLength(8)
+                                .HasColumnType("nvarchar(8)");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
+
+                            b1.Property<string>("District")
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
+
+                            b1.Property<string>("State")
+                                .IsRequired()
+                                .HasMaxLength(2)
+                                .HasColumnType("nvarchar(2)");
 
                             b1.HasKey("UserId");
 
@@ -241,7 +287,15 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                             b1.Property<long>("UserId")
                                 .HasColumnType("bigint");
 
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasMaxLength(11)
+                                .HasColumnType("nvarchar(11)");
+
                             b1.HasKey("UserId");
+
+                            b1.HasIndex("Number")
+                                .IsUnique();
 
                             b1.ToTable("Users");
 
@@ -254,18 +308,8 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                             b1.Property<long>("UserId")
                                 .HasColumnType("bigint");
 
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "Email", b1 =>
-                        {
-                            b1.Property<long>("UserId")
-                                .HasColumnType("bigint");
+                            b1.Property<DateTime>("Date")
+                                .HasColumnType("datetime2");
 
                             b1.HasKey("UserId");
 
@@ -279,6 +323,11 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                         {
                             b1.Property<long>("UserId")
                                 .HasColumnType("bigint");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasMaxLength(11)
+                                .HasColumnType("nvarchar(11)");
 
                             b1.HasKey("UserId");
 
@@ -307,7 +356,7 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoimento", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoiments.Depoiment", b =>
                 {
                     b.HasOne("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", "User")
                         .WithMany("Depoimentos")
@@ -327,6 +376,24 @@ namespace JornadaMilhas.Infrastruture.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Destino");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Users.UserAdmin.UserAdmin", b =>
+                {
+                    b.HasOne("JornadaMilhas.Common.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("JornadaMilhas.Core.Entities.Users.UserAdmin.UserAdmin", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", b =>
+                {
+                    b.HasOne("JornadaMilhas.Common.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("JornadaMilhas.Core.Entities.Destinys.Destiny", b =>

@@ -10,6 +10,8 @@ public abstract class BaseEntityConfiguration<TBase> : IEntityTypeConfiguration<
     {
         builder.HasKey(b => b.Id);
 
+        builder.Property(baseEntity => baseEntity.Id).ValueGeneratedOnAdd();
+
         builder.Property(b => b.DtCreated)
             .IsRequired();
 
