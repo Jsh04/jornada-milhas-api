@@ -39,6 +39,7 @@ public static class ConfigurationApi
         services.AddScoped<IRepositoryDestino, RepositoryDestino>();
         services.AddScoped<IUserLimitedRepository, UserLimitedRepository>();
         services.AddScoped<IDepoimentRepository, DepoimentRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 

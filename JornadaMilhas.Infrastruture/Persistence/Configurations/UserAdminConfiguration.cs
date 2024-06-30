@@ -1,25 +1,25 @@
-﻿using JornadaMilhas.Core.Entities.Users.UserAdmin;
+﻿using JornadaMilhas.Common.Entities;
+using JornadaMilhas.Core.Entities.Users.UserAdmin;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations
 {
-    internal class UserAdminConfiguration : UserConfiguration<UserAdmin>
+    internal class UserAdminConfiguration : IEntityTypeConfiguration<UserAdmin>
     {
-        public override void Configure(EntityTypeBuilder<UserAdmin> builder)
+        public void Configure(EntityTypeBuilder<UserAdmin> builder)
         {
-            base.Configure(builder);
-
+            builder.ToTable("UserAdmin");
             builder.Property(user => user.CodeEmployee)
                 .HasColumnName("CodeEmployee")
                 .HasMaxLength(100)
-                .IsRequired();
-            
+            .IsRequired();
+
+            builder
+                .HasOne<User>()
+                .WithOne()
+                .HasForeignKey<UserAdmin>(a => a.Id);
         }
     }
 }

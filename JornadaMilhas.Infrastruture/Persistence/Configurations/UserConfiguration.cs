@@ -2,14 +2,21 @@
 using JornadaMilhas.Common.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations;
 
-public abstract class UserConfiguration<TBase> : BaseEntityConfiguration<TBase> where TBase : User
+public class UserConfiguration : BaseEntityConfiguration<User>
 {
-    public override void Configure(EntityTypeBuilder<TBase> builder)
+    public override void Configure(EntityTypeBuilder<User> builder)
     {
         base.Configure(builder);
+
+        builder.ToTable("Users");
 
         builder.Property(user => user.Name)
             .HasMaxLength(200)
@@ -54,7 +61,6 @@ public abstract class UserConfiguration<TBase> : BaseEntityConfiguration<TBase> 
 
         builder.OwnsOne(user => user.Address, valueAddress =>
         {
-
             valueAddress.Property(address => address.Adress)
                 .HasMaxLength(150);
 
@@ -71,7 +77,6 @@ public abstract class UserConfiguration<TBase> : BaseEntityConfiguration<TBase> 
 
             valueAddress.Property(address => address.District)
                 .HasMaxLength(50);
-                
         });
 
         builder.OwnsOne(user => user.ConfirmEmail, confirmEmail =>
@@ -81,7 +86,7 @@ public abstract class UserConfiguration<TBase> : BaseEntityConfiguration<TBase> 
                 .IsRequired();
 
             confirmEmail.HasIndex(ce => ce.Address)
-            
+
                 .IsUnique();
         });
 
@@ -91,5 +96,6 @@ public abstract class UserConfiguration<TBase> : BaseEntityConfiguration<TBase> 
                 .IsRequired();
 
         });
+
     }
 }

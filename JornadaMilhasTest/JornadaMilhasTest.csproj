@@ -33,4 +33,9 @@
     <ProjectReference Include="..\JornadaMilhas.API\JornadaMilhas.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UnitsTests\Helper\" />
+    <Folder Include="UnitsTests\Builder\" />
+  </ItemGroup>
+
 </Project>

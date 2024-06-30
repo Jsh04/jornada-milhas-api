@@ -6,7 +6,6 @@ namespace JornadaMilhas.Common.Entity;
 
 public abstract class BaseEntity
 {
-    [Key]
     [JsonPropertyName("id")]
     public long Id { get; set; }
 
