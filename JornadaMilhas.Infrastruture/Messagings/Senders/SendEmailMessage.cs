@@ -3,22 +3,25 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Channels;
 using JornadaMilhas.Common.Entities;
+using JornadaMilhas.Common.Options;
 using JornadaMilhas.Core.Entities.Users;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
-namespace JornadaMilhas.Application.Messagings.Senders;
+namespace JornadaMilhas.Infrastruture.Messagings.Senders;
 
 public class SendEmailMessage
 {
-    private readonly IConfiguration _configuration;
     private readonly IConnection _connection;
+    private readonly RabbitMqOptions _rabbitMqOptions;
 
-    public SendEmailMessage(IConfiguration configuration)
+    public SendEmailMessage(IOptions<RabbitMqOptions> optionsRabbitMq)
     {
-         _configuration = configuration;
+        _rabbitMqOptions = optionsRabbitMq.Value;
+
          _connection = new ConnectionFactory
-             { HostName = _configuration["RabbitMq:Host"], Port = int.Parse(_configuration["RabbitMq:Port"]) }.CreateConnection();
+             { HostName = _rabbitMqOptions.HostName, Port = _rabbitMqOptions.Port }.CreateConnection();
 
     }
 

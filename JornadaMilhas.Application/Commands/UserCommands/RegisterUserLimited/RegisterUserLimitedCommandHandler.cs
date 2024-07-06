@@ -9,7 +9,7 @@ namespace JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
 
 public class RegisterUserLimitedCommandHandler : IRequestHandler<RegisterUserLimitedCommand, Result<UserLimited>>
 {
-    private IUnitOfWork _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
     public RegisterUserLimitedCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
     

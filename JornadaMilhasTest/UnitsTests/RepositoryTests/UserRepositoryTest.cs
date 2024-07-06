@@ -5,6 +5,7 @@ using JornadaMilhas.Core.Entities.Users.UserLimited;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhas.Infrastruture.Persistence.Repository.UserRepository;
+using JornadaMilhasTest.UnitsTests.Helper;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
@@ -30,22 +31,8 @@ public class UserRepositoryTest
     public async Task DeverarRetornarUsuarioPeloEmailFornecido()
     {
         var email = "test@gmail.com";
-        var userLimited = UserLimited.Create(
-            _fixture.Create<string>(), DateOfBirth.Create(DateTime.Now).Value,
-            JornadaMilhas.Common.Enums.EnumGenre.Male,
-            Cpf.Create(_fixture.Create<string>()).Value,
-            Phone.Create(_fixture.Create<string>()).Value,
-            Address.Create(_fixture.Create<string>(),
-            _fixture.Create<string>(),
-            _fixture.Create<string>(),
-            _fixture.Create<string>(), _fixture.Create<string>()).Value,
-            _fixture.Create<byte[]>(),
-            Email.Create(email).Value,
-            Email.Create(email).Value,
-            _fixture.Create<string>()
-            );
-
-        _mockRepositoryUser.Setup(repository => repository.GetByEmailAsync(email, It.IsAny<CancellationToken>())).ReturnsAsync(userLimited.Value);
+        var userLimited = UnitTestHelper.GetUserLimitedTest(_fixture, email); 
+        _mockRepositoryUser.Setup(repository => repository.GetByEmailAsync(email, It.IsAny<CancellationToken>())).ReturnsAsync(userLimited);
 
         var result = await _mockRepositoryUser.Object.GetByEmailAsync(email);
 
