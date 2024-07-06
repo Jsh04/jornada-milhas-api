@@ -11,7 +11,7 @@ public class RegisterUserValidation : AbstractValidator<RegisterUserLimitedComma
         RuleFor(x => x.Name)
             .NotEmpty()
             .NotNull()
-            .WithMessage("Name é obrigatório")
+            .WithMessage("Nome é obrigatório")
             .MinimumLength(3)
             .WithMessage("Name deve ter no mínimo 3 caracteres");
 

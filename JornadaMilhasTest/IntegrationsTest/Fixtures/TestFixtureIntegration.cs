@@ -13,8 +13,8 @@ namespace JornadaMilhasTest.IntegrationsTest.Fixtures;
 public class TestFixtureIntegration
 {
 
-    #region Props Privates
-    
+    #region Privates Props
+
 
     private static readonly object _lock = new();
 
@@ -32,9 +32,8 @@ public class TestFixtureIntegration
         client = new WebApplicationFactoryJornada<Program>().CreateClient();
     }
 
-    public JornadaMilhasDbContext CreateContext() => new(new DbContextOptionsBuilder<JornadaMilhasDbContext>()
-                .UseSqlServer(TestHelper.ConnectionString)
-                .Options);
+    public static JornadaMilhasDbContext CreateContext() => 
+        new(new DbContextOptionsBuilder<JornadaMilhasDbContext>().UseSqlServer(TestHelper.ConnectionString).Options);
 
     private void PrepareTestDatabase()
     {

@@ -26,7 +26,6 @@ public class DestinoControllerTest
     }
 
     [Test(Description = "Faz requisição para controller com um objeto destino fictício e é esperado que persista os dados")]
-    [Order(1)]
     public async Task DeverarCadastrarDestinoCriado()
     {
         //arrange
@@ -41,7 +40,7 @@ public class DestinoControllerTest
 
         var url = "/destinos";
 
-        var stringContent = new StringContent(TestHelper.SerializerObjToJson(destinoDto), encoding: Encoding.UTF8, "application/json");
+        var stringContent = new StringContent(TestHelper.SerializerObjToJson(destinoDto), encoding: Encoding.UTF8, TestHelper.ContentTypeJson);
 
         //act
         var response = await client.PostAsync(url, stringContent);
@@ -51,12 +50,13 @@ public class DestinoControllerTest
     }
 
     [Test]
-    [Order(2)]
     public async Task DeverarRetornarOsDestinosCadastrados()
     {
         //arrrange
-        var uri = new UriBuilder(client.BaseAddress + "destinos");
-        uri.Query = $"size={10}&page={0}";
+        var uri = new UriBuilder(client.BaseAddress + "destinos")
+        {
+            Query = $"size={10}&page={0}"
+        };
 
         //act
         var response = await client.GetAsync(uri.ToString());

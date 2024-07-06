@@ -15,5 +15,9 @@ public  record UserErrors
 
     public static Error UserIsNotUnique => new("User.UserIsNotUnique", "Usuário já foi cadastrado", ErrorType.Conflict);
 
+    public static Error UserWithThisEmailNotFound => new("User.UserWithThisEmailNotFound", "Email fornecido não retornou um usuário válido", ErrorType.NotFound);
+
+    public static Error PasswordNotEqual => new("User.PasswordNotEqual", "Senha não coincide", ErrorType.Failure);
+
 
 }
