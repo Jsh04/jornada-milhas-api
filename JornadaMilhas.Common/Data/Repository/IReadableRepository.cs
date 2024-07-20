@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace JornadaMilhas.Common.Data.Repository;
 
+//Exemplos de I do SOLID
 public interface IReadableRepository<TEntity> where TEntity : BaseEntity
 {
     Task<PaginationResult<TEntity>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default);

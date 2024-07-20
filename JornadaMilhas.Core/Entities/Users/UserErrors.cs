@@ -19,5 +19,7 @@ public  record UserErrors
 
     public static Error PasswordNotEqual => new("User.PasswordNotEqual", "Senha não coincide", ErrorType.Failure);
 
+    public static Error UserCannotBeDeleted => new("UserErrors.UserCannotBeDeleted", "Usuário não pode ser deletado", ErrorType.Failure);
+
 
 }

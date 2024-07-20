@@ -17,5 +17,5 @@ public abstract class BaseEntity
     [JsonPropertyName("isDeleted")]
     public bool IsDeleted { get; protected set; }
 
-    public virtual void Desactive() => IsDeleted = true;
+    public virtual void Delete() => IsDeleted = true;
 }

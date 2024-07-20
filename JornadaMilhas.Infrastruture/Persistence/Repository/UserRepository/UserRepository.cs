@@ -21,7 +21,8 @@ public class UserRepository : IUserRepository
 
     public bool Delete(User entity)
     {
-        throw new NotImplementedException();
+        var objUpdated = _context.Update(entity);
+        return objUpdated.State == EntityState.Modified;
     }
 
     public Task<PaginationResult<User>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
@@ -34,18 +35,11 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken) => 
+    public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default) => 
         await _context.Users.SingleOrDefaultAsync(user => user.Email.Address.Equals(email), cancellationToken);
 
-    public Task<User?> GetByIdAsync(long id, CancellationToken cancellation = default)
-    {
-        throw new NotImplementedException();
-    }
-
+    public Task<User?> GetByIdAsync(long id, CancellationToken cancellation = default) => _context.Users.SingleOrDefaultAsync(user => user.Id == id,cancellation);
+        
     public async Task<User?> GetSingleByAsync(Expression<Func<User, bool>> predicate, CancellationToken cancellationToken = default) =>
         await _context.Users.SingleOrDefaultAsync(predicate, cancellationToken);
-    
-        
-
-    
 }

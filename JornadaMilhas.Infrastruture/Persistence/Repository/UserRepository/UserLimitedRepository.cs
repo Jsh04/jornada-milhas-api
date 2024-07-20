@@ -36,12 +36,6 @@ public class UserLimitedRepository : IUserLimitedRepository
         throw new NotImplementedException();
     }
 
-    public async Task<UserLimited?> GetUserByEmail(string email, CancellationToken cancellationToken = default)
-    {
-        var user = await _context.UsersLimited.SingleOrDefaultAsync(user => user.Email.Address == email, cancellationToken);
-        return user;
-    }
-
     public async Task<bool> IsUniqueAsync(string cpf, string mail, CancellationToken cancellationToken = default)
     {
         var hasUser = await _context.UsersLimited.AnyAsync(user => user.Email.Address == mail || user.Cpf.Number == cpf, cancellationToken);

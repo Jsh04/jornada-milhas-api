@@ -25,7 +25,7 @@ public class DeleteDepoimentCommandHandler : IRequestHandler<DeleteDepoimentComm
         if (depoimet is null)
             return Result.Fail(DepoimentErrors.NotFound);
 
-        depoimet.Desactive();
+        depoimet.Delete();
 
         _unitOfWork.DepoimentRepository.Update(depoimet);
 

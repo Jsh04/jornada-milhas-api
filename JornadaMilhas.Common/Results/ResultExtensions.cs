@@ -15,6 +15,6 @@ public static class ResultExtensions
 
     public static T Match<TValue, T>(this Result<TValue> result, Func<TValue?, T> onSuccess, Func<Result<TValue>, T> onFailure)
     {
-        return result.Success ? onSuccess(result.ValueOrDefault) : onFailure(result);
+        return result.Success ? onSuccess(result.ValueOrDefault) : onFailure.Invoke(result);
     }
 }
