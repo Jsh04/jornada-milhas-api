@@ -13,13 +13,13 @@ public static class DtoExtensions<TEntity, TDto> where TEntity : BaseEntity
     {
         var dto = Activator.CreateInstance<TDto>();
 
-        var type = entity.GetType();
+        var typeEntity = entity.GetType();
 
-        foreach (var item in type.GetProperties())
+        foreach (var propEntity in typeEntity.GetProperties())
         {
-            var propDto = dto.GetType().GetProperty(item.Name);
+            var propDto = dto?.GetType().GetProperty(propEntity.Name);
 
-            propDto?.SetValue(dto, item.GetValue(entity));
+            propDto?.SetValue(dto, propEntity.GetValue(entity));
         }
 
         return dto;

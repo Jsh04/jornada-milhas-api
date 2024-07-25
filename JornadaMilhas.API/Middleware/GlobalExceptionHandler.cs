@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API.Middleware;
 
-public class GlobalExceptionHandler : IMiddleware
+public sealed class GlobalExceptionHandler : IMiddleware
 {
     private readonly ILogger _logger;
 

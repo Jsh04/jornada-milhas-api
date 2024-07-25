@@ -27,7 +27,7 @@ public class DeleteDestinyCommandHandler : IRequestHandler<DeleteDestinyCommand,
         if (destiny is null)
             return Result.Fail(DestinyErrors.NotFound);
 
-        destiny.Desactive();
+        destiny.Delete();
 
         _unitWork.DestinoRepository.Update(destiny);
 

@@ -1,8 +1,11 @@
 ﻿
+using JornadaMilhas.API.Extensions;
 using JornadaMilhas.Application.Commands.DepoimentsCommands.RegisterDepoiment;
+using JornadaMilhas.Application.Querys.DepoimentQuerys.GetAllDepoiments;
 using JornadaMilhas.Application.Querys.DepoimentQuerys.GetByIdDepoiment;
 using JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll;
 using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
+using JornadaMilhas.Common.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,10 +34,13 @@ public class DepoimentController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public IActionResult GetAllDepoiment([FromQuery] GetAllDestinysQuery query)
+    public async Task<IActionResult> GetAllDepoiment([FromQuery] GetAllDepoimentQuery query)
     {
-        _mediator.Send(query);
-        return Ok();
+        var paginationResult = await _mediator.Send(query);
+
+        return paginationResult.Match(
+            Ok, 
+            (value) => value.ToProblemDetails());
     }
 
     [HttpGet("{id}")]

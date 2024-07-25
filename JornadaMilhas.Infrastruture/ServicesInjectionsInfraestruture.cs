@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using JornadaMilhas.Common.Options;
-using JornadaMilhas.Core.Interfaces;
 using JornadaMilhas.Infrastruture.Security;
 using System.IdentityModel.Tokens.Jwt;
 

@@ -1,6 +1,7 @@
 
 
 using JornadaMilhas.API;
+using JornadaMilhas.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
 
 // Desactive Cors
 app.UseCors(x => x
@@ -32,6 +34,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 app.UseAuthentication();
+app.UseMiddleware<GlobalExceptionHandler>();
 
 app.MapControllers();
 

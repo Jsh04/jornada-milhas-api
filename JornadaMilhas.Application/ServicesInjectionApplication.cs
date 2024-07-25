@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JornadaMilhas.Core.Interfaces.Services;
+using JornadaMilhas.Application.Interfaces.Services;
 
 namespace JornadaMilhas.Application
 {
@@ -26,6 +27,7 @@ namespace JornadaMilhas.Application
         public static IServiceCollection AddDependencyInjectionOfApplication(this IServiceCollection services)
         {
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserLimitedService, UserLimitedService>();
 
             return services;
         }

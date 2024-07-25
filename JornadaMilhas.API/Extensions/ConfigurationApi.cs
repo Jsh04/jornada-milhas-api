@@ -1,6 +1,7 @@
 ﻿
 
 using System.Text.Json.Serialization;
+using JornadaMilhas.API.Middleware;
 using JornadaMilhas.Application;
 using JornadaMilhas.Infrastruture;
 
@@ -13,9 +14,10 @@ public static class ConfigurationApi
         builder.Services.GetServicesInjectiosOfInfraestruture(builder.Configuration);
         builder.Services.GetServicesInjectiosOfApplication();
 
+        builder.Services.AddTransient<GlobalExceptionHandler>();
+
         builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-
     }
 
 }
