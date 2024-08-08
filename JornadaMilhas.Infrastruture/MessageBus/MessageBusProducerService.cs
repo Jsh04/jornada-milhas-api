@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using System.Threading.Channels;
-using JornadaMilhas.Common.DomainEvent;
+using JornadaMilhas.Common.DomainEventConsumer;
 using JornadaMilhas.Common.EventHandler;
 using JornadaMilhas.Common.Options;
 using Microsoft.Extensions.Options;
@@ -66,14 +66,14 @@ public class MessageBusProducerService : IMessageBusProducerService
         return body;
     }
 
-    private static TDomainEvent GetDataOfBodyQueue<TDomainEvent>(BasicDeliverEventArgs ea)
+    private static TDomainEvent? GetDataOfBodyQueue<TDomainEvent>(BasicDeliverEventArgs ea)
     {
         var byteArrayData = ea.Body.ToArray();
         var message = Encoding.UTF8.GetString(byteArrayData);
         return JsonSerializer.Deserialize<TDomainEvent>(message);
     }
 
-    public void Subscribe<TDomainEvent>(IEventHandler<TDomainEvent> eventHandler, string queue) where TDomainEvent : DomainEventBase
+    public void Subscribe<TDomainEvent>(IDomainEventHandler<TDomainEvent> eventHandler, string queue) where TDomainEvent : DomainEventConsumeBase
     {
         using var connection = _connectionFactory.CreateConnection();
         using var channel = connection.CreateModel();

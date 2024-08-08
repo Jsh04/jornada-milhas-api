@@ -1,6 +1,7 @@
 ﻿using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
@@ -9,10 +10,11 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
     public class RegisterDestinyCommandHandler : IRequestHandler<RegisterDestinyCommand, Result<Destiny>>
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public RegisterDestinyCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IRepositoryDestino _repositoryDestiny;
+        public RegisterDestinyCommandHandler(IUnitOfWork unitOfWork, IRepositoryDestino repositoryDestino)
         {
             _unitOfWork = unitOfWork;
+            _repositoryDestiny = repositoryDestino;
         }
 
         public async Task<Result<Destiny>> Handle(RegisterDestinyCommand request, CancellationToken cancellationToken)
@@ -34,7 +36,7 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
 
             var destiny = destinyResult.Value;
 
-            _unitOfWork.DestinoRepository.Create(destiny);
+            _repositoryDestiny.Create(destiny);
 
             var created = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 

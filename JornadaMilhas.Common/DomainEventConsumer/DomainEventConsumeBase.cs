@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Common.DomainEvent
+namespace JornadaMilhas.Common.DomainEventConsumer
 {
-    public abstract class DomainEventBase
+    public abstract class DomainEventConsumeBase
     {
         public Guid Id { get; protected set; }
 

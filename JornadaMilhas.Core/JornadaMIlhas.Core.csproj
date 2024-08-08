@@ -30,4 +30,8 @@
     <ProjectReference Include="..\JornadaMilhas.Common\JornadaMilhas.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Events\" />
+  </ItemGroup>
+
 </Project>

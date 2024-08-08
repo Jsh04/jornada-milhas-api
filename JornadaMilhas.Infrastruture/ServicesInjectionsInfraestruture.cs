@@ -14,6 +14,7 @@ using System.Text;
 using JornadaMilhas.Common.Options;
 using JornadaMilhas.Infrastruture.Security;
 using System.IdentityModel.Tokens.Jwt;
+using JornadaMilhas.Infrastruture.Interceptors;
 
 namespace JornadaMilhas.Infrastruture
 {
@@ -43,8 +44,9 @@ namespace JornadaMilhas.Infrastruture
 
         private static IServiceCollection AddServiceDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<JornadaMilhasDbContext>(opts => opts.UseSqlServer(
-            configuration["ConnectionStringSqlServer"]));
+            services.AddDbContext<JornadaMilhasDbContext>((serviceProvider, opts) => 
+                opts.UseSqlServer(configuration["ConnectionStringSqlServer"])
+                    .AddInterceptors(serviceProvider.GetRequiredService<PublishEventSendEmailToQueueObj>()));
 
             return services;
         }
@@ -83,6 +85,7 @@ namespace JornadaMilhas.Infrastruture
             services.AddScoped<ITokenGenerator, TokenGenerator>();
 
             services.AddSingleton<JwtSecurityTokenHandler>();
+            services.AddSingleton<PublishEventSendEmailToQueueObj>();
 
             return services;
 

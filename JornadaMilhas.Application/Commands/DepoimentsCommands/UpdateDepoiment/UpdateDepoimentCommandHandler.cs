@@ -1,5 +1,6 @@
 ﻿using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Depoiments;
+using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 using System;
@@ -14,12 +15,18 @@ public sealed class UpdateDepoimentCommandHandler : IRequestHandler<UpdateDepoim
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateDepoimentCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+    private readonly IDepoimentRepository _depoimentRepository;
+
+    public UpdateDepoimentCommandHandler(IUnitOfWork unitOfWork, IDepoimentRepository depoimentRepository) 
+    {
+        _unitOfWork = unitOfWork;
+        _depoimentRepository = depoimentRepository;
+    }
     
 
     public async Task<Result> Handle(UpdateDepoimentCommand request, CancellationToken cancellationToken)
     {
-        var depoiment = await _unitOfWork.DepoimentRepository.GetByIdAsync(request.Id, cancellationToken);
+        var depoiment = await _depoimentRepository.GetByIdAsync(request.Id, cancellationToken);
 
         if (depoiment is null)
             return Result.Fail(DepoimentErrors.NotFound);
@@ -40,7 +47,7 @@ public sealed class UpdateDepoimentCommandHandler : IRequestHandler<UpdateDepoim
 
         depoiment.Update(depoimentUpdate);
 
-        _unitOfWork.DepoimentRepository.Update(depoiment);
+        _depoimentRepository.Update(depoiment);
 
         var updated = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 

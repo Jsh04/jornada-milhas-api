@@ -1,5 +1,7 @@
 ﻿using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Users;
+using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Infrastruture.Persistence.Repository.UserRepository;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 using System;
@@ -13,12 +15,16 @@ namespace JornadaMilhas.Application.Commands.UserCommands.DeleteUserById
     public class DeleteUserByIdCommandHandler : IRequestHandler<DeleteUserByIdCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public DeleteUserByIdCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+        private readonly IUserRepository _userRepository;
+        public DeleteUserByIdCommandHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)  
+        {
+            _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
+        }
         
         public async Task<Result> Handle(DeleteUserByIdCommand request, CancellationToken cancellationToken)
         {
-            var deletedUserById = await _unitOfWork.UserRepository.GetByIdAsync(request.Id, cancellationToken);
+            var deletedUserById = await _userRepository.GetByIdAsync(request.Id, cancellationToken);
 
             if (deletedUserById is null)
                 return Result.Fail(UserErrors.NotFound);
@@ -27,7 +33,7 @@ namespace JornadaMilhas.Application.Commands.UserCommands.DeleteUserById
 
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            _unitOfWork.UserRepository.Delete(deletedUserById);
+            _userRepository.Delete(deletedUserById);
 
             await _unitOfWork.CommitAsync(cancellationToken);
 
