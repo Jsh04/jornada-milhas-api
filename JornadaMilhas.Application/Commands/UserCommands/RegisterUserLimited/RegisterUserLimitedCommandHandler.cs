@@ -50,8 +50,14 @@ public class RegisterUserLimitedCommandHandler : IRequestHandler<RegisterUserLim
 
         if (!created) 
             return Result.Fail<UserLimited>(UserErrors.CannotBeCreated);
-        
+
+        RaiseEventSendEmail(user);
+
         return Result.Ok(user);
     }
-    
+
+    private void RaiseEventSendEmail(UserLimited user)
+    {
+        throw new NotImplementedException();
+    }
 }
