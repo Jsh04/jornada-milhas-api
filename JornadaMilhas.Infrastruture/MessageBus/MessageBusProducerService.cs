@@ -73,7 +73,7 @@ public class MessageBusProducerService : IMessageBusProducerService
         return JsonSerializer.Deserialize<TDomainEvent>(message);
     }
 
-    public void Subscribe<TDomainEvent>(IDomainEventHandler<TDomainEvent> eventHandler, string queue) where TDomainEvent : DomainEventConsumeBase
+    public void Subscribe<TDomainEvent>(IDomainEventConsumeHandler<TDomainEvent> eventHandler, string queue) where TDomainEvent : DomainEventConsumeBase
     {
         using var connection = _connectionFactory.CreateConnection();
         using var channel = connection.CreateModel();

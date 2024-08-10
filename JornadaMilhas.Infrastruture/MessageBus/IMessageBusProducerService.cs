@@ -11,6 +11,6 @@ namespace JornadaMilhas.Infrastruture.MessageBus;
 public interface IMessageBusProducerService
     {
         void Publish<T>(string queue, T dataToSend);
-        void Subscribe<TDomainEvent>(IDomainEventHandler<TDomainEvent> eventHandler, string queue) where TDomainEvent : DomainEventConsumeBase;
+        void Subscribe<TDomainEvent>(IDomainEventConsumeHandler<TDomainEvent> eventHandler, string queue) where TDomainEvent : DomainEventConsumeBase;
     }
 
