@@ -1,10 +1,14 @@
-﻿using JornadaMilhas.Common.Results;
+﻿using JornadaMilhas.Common.DomainEvent;
+using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
+using JornadaMilhas.Core.Events;
+using JornadaMilhas.Core.Events.Shareds;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Repository.UserRepository;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
@@ -45,19 +49,23 @@ public class RegisterUserLimitedCommandHandler : IRequestHandler<RegisterUserLim
         var user = userResult.Value;
         
         _userLimitedRepository.Create(user);
-        
+
+        RaiseEventSendEmail(user);
+
         var created = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 
         if (!created) 
             return Result.Fail<UserLimited>(UserErrors.CannotBeCreated);
 
-        RaiseEventSendEmail(user);
+        
 
         return Result.Ok(user);
     }
 
-    private void RaiseEventSendEmail(UserLimited user)
+    private static void RaiseEventSendEmail(UserLimited user)
     {
-        throw new NotImplementedException();
+        var sendEmailEvent = new EmailCreateUserEvent(new UserEvent(user.Name, user.Email.Address, user.DtCreated));
+
+        user.ThrowEvent(sendEmailEvent);
     }
 }

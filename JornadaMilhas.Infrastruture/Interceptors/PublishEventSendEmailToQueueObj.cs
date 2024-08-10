@@ -1,4 +1,5 @@
-﻿using JornadaMilhas.Common.Entity;
+﻿using JornadaMilhas.Common.DomainEvent;
+using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Persistence.Queue;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -19,7 +20,6 @@ namespace JornadaMilhas.Infrastruture.Interceptors
             if (eventData.Context is null)
                 return await base.SavingChangesAsync(eventData, result, cancellationToken);
 
-
             if (eventData.Context is not null)
                 await InsertSendEmailQueueAsync(eventData.Context);
 
@@ -34,18 +34,21 @@ namespace JornadaMilhas.Infrastruture.Interceptors
                 .Select(entry => entry.Entity)
                 .SelectMany(entity =>
                 {
-                    var domainsEvent = entity.GetAllDomainsEvent();
+                    var listDomainsEventReturned = new List<IDomainEvent>(entity.GetAllDomainsEvent());
 
                     entity.ClearAllDomainEvents();
 
-                    return domainsEvent;
+                    return listDomainsEventReturned;
                 })
                 .Select(domainEvent => new QueueGeneric
                 {
                     Id = Guid.NewGuid(),
                     TimeCreated = DateTime.Now,
                     Type = domainEvent.GetType().Name,
-                    Content = JsonConvert.SerializeObject(domainEvent),
+                    Content = JsonConvert.SerializeObject(domainEvent, new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.All
+                    }),
                 }).ToList();
 
             await context.Set<QueueGeneric>().AddRangeAsync(queueEmailsObjs);

@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using JornadaMilhas.Common.Entities;
+using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Common.Persistence.Queue;
 using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Entities.Destinys;
@@ -24,5 +25,6 @@ public class JornadaMilhasDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ApplyConfiguration(new QueueGenericConfiguration());
     }
 }

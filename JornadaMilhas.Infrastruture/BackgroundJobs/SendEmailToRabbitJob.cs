@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace JornadaMilhas.Infrastruture.BackgroundJobs
 {
@@ -24,12 +23,22 @@ namespace JornadaMilhas.Infrastruture.BackgroundJobs
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var (context, publish) = ReturnTupleOfServicesRequired();
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                using var scope = _serviceProvider.CreateAsyncScope();
+                var context = scope.ServiceProvider.GetRequiredService<JornadaMilhasDbContext>();
+                var publish = scope.ServiceProvider.GetRequiredService<IPublisher>();
 
-            var queueObjs = await context.Set<QueueGeneric>().Where(queue => queue.ProcessedAt == null).Take(20)
-                .ToListAsync(stoppingToken);
+                var queueObjs = await context.Set<QueueGeneric>().Where(queue => queue.ProcessedAt == null).Take(20)
+                    .ToListAsync(stoppingToken);
 
-            await PublishToHandlerSendEmail(queueObjs, publish, stoppingToken);
+                await PublishToHandlerSendEmail(queueObjs, publish, stoppingToken);
+
+                if (queueObjs.Count > 0)
+                    await context.SaveChangesAsync(stoppingToken);
+
+                await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+            }
         }
 
         private async Task PublishToHandlerSendEmail(List<QueueGeneric> queues, IPublisher publisher, CancellationToken stoppingToken)
@@ -61,16 +70,10 @@ namespace JornadaMilhas.Infrastruture.BackgroundJobs
                     _loggerSendMailRabbitJob.LogError(ex, ex.Message);
 
                     queue.Error = ex.Message;
+                
                 }
             }
+            
         }
-
-        private  (JornadaMilhasDbContext context, IPublisher publish)
-            ReturnTupleOfServicesRequired()
-        {
-            using var scope = _serviceProvider.CreateAsyncScope();
-            return (scope.ServiceProvider.GetRequiredService<JornadaMilhasDbContext>(),
-                scope.ServiceProvider.GetRequiredService<IPublisher>());
-        } 
     }
 }

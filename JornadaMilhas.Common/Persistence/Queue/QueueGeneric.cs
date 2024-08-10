@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace JornadaMilhas.Common.Persistence.Queue;
 
-public class QueueGeneric
+public sealed class QueueGeneric
 {
     public Guid Id { get; set; }
 
-    public string Type { get; set; }
+    public string Type { get; set; } = string.Empty;
 
     public string Content { get; set; }
 

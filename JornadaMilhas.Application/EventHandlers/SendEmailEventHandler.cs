@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JornadaMilhas.Common.DomainEvent;
 using JornadaMilhas.Common.EventHandler;
+using JornadaMilhas.Core.Events;
 using JornadaMilhas.Infrastruture.MessageBus;
 
 namespace JornadaMilhas.Application.EventHandlers
@@ -23,7 +24,6 @@ namespace JornadaMilhas.Application.EventHandlers
             _messageBusProducerService.Publish(nameof(EmailCreateUserEvent), notification);
 
             return Task.CompletedTask;
-
         }
     }
 }

@@ -17,6 +17,8 @@ using System.IdentityModel.Tokens.Jwt;
 using JornadaMilhas.Infrastruture.Interceptors;
 using JornadaMilhas.Infrastruture.BackgroundJobs;
 using JornadaMilhas.Infrastruture.MessageBus;
+using MediatR;
+using JornadaMilhas.Common.DomainEvent;
 
 namespace JornadaMilhas.Infrastruture
 {
