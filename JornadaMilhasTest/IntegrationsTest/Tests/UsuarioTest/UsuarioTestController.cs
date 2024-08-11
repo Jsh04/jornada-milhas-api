@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Testing;
 namespace JornadaMilhasTest.IntegrationsTest.Tests.UsuarioTest;
 
 [TestFixture]
+[Explicit("Testes de integração")]
+[Category("IntegrationTest")]
 public class UsuarioTestController
 {
     private readonly HttpClient _client;
