@@ -14,6 +14,11 @@ using System.Text;
 using JornadaMilhas.Common.Options;
 using JornadaMilhas.Infrastruture.Security;
 using System.IdentityModel.Tokens.Jwt;
+using JornadaMilhas.Infrastruture.Interceptors;
+using JornadaMilhas.Infrastruture.BackgroundJobs;
+using JornadaMilhas.Infrastruture.MessageBus;
+using MediatR;
+using JornadaMilhas.Common.DomainEvent;
 
 namespace JornadaMilhas.Infrastruture
 {
@@ -24,6 +29,7 @@ namespace JornadaMilhas.Infrastruture
             return services.AddServiceDbContext(configuration)
                 .AddInjectionRepositorys()
                 .AddOptionsConfigure(configuration)
+                .AddInjectionBackgroundJobs()
                 .AddServicesTokenReader(configuration);
         }
 
@@ -43,8 +49,9 @@ namespace JornadaMilhas.Infrastruture
 
         private static IServiceCollection AddServiceDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<JornadaMilhasDbContext>(opts => opts.UseSqlServer(
-            configuration["ConnectionStringSqlServer"]));
+            services.AddDbContext<JornadaMilhasDbContext>((serviceProvider, opts) => 
+                opts.UseSqlServer(configuration["ConnectionStringSqlServer"])
+                    .AddInterceptors(serviceProvider.GetRequiredService<PublishEventSendEmailToQueueObj>()));
 
             return services;
         }
@@ -73,6 +80,12 @@ namespace JornadaMilhas.Infrastruture
             return services;
         }
 
+        private static IServiceCollection AddInjectionBackgroundJobs(this IServiceCollection services)
+        {
+            services.AddHostedService<SendEmailToRabbitJob>();
+            return services;
+        }
+
         private static IServiceCollection AddInjectionRepositorys(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryDestino, RepositoryDestino>();
@@ -83,9 +96,13 @@ namespace JornadaMilhas.Infrastruture
             services.AddScoped<ITokenGenerator, TokenGenerator>();
 
             services.AddSingleton<JwtSecurityTokenHandler>();
+            services.AddSingleton<PublishEventSendEmailToQueueObj>();
+            services.AddSingleton<IMessageBusProducerService, MessageBusProducerService>();
 
             return services;
 
         }
+
+
     }
 }

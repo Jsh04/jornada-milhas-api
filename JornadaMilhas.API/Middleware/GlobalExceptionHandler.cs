@@ -19,6 +19,7 @@ public sealed class GlobalExceptionHandler : IMiddleware
         }
         catch (Exception e)
         {
+            
             _logger.LogError(e, e.Message);
 
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

@@ -1,5 +1,6 @@
 ﻿using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 using System;
@@ -14,22 +15,23 @@ public class DeleteDestinyCommandHandler : IRequestHandler<DeleteDestinyCommand,
 {
 
     private readonly IUnitOfWork _unitWork;
-
-    public DeleteDestinyCommandHandler(IUnitOfWork unitWork)
+    private readonly IRepositoryDestino _destinyRepository;
+    public DeleteDestinyCommandHandler(IUnitOfWork unitWork, IRepositoryDestino destinyRepository)
     {
         _unitWork = unitWork;
+        _destinyRepository = destinyRepository;
     }
 
     public async Task<Result> Handle(DeleteDestinyCommand request, CancellationToken cancellationToken)
     {
-        var destiny = await _unitWork.DestinoRepository.GetByIdAsync(request.Id, cancellationToken);
+        var destiny = await _destinyRepository.GetByIdAsync(request.Id, cancellationToken);
 
         if (destiny is null)
             return Result.Fail(DestinyErrors.NotFound);
 
         destiny.Delete();
 
-        _unitWork.DestinoRepository.Update(destiny);
+        _destinyRepository.Update(destiny);
 
         var deleted = await _unitWork.CompleteAsync(cancellationToken) > 0;
 

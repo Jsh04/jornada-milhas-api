@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JornadaMilhas.Common.DomainEvent;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 
@@ -18,4 +19,13 @@ public abstract class BaseEntity
     public bool IsDeleted { get; protected set; }
 
     public virtual void Delete() => IsDeleted = true;
+
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public IReadOnlyList<IDomainEvent> GetAllDomainsEvent() => _domainEvents.AsReadOnly();
+    public void ClearAllDomainEvents()
+    => _domainEvents.Clear();
+
+    protected void RaiseDomainEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
+  
 }

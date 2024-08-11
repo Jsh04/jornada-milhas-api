@@ -4,6 +4,7 @@ using JornadaMilhas.Application.Util;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Interfaces.Services;
+using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
@@ -15,15 +16,18 @@ public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, Result<Logi
 
     private readonly ITokenService _tokenService;
 
-    public LoginUserQueryHandler(IUnitOfWork unitOfWork, ITokenService tokenService) 
+    private readonly IUserRepository _userRepository;
+
+    public LoginUserQueryHandler(IUnitOfWork unitOfWork, ITokenService tokenService, IUserRepository userRepository) 
     {
         _unitOfWork = unitOfWork;
         _tokenService = tokenService;
+        _userRepository = userRepository;
     }
     
     public async Task<Result<LoginResponseDto>> Handle(LoginUserQuery request, CancellationToken cancellationToken)
     {
-        var userResult = await _unitOfWork.UserRepository.GetByEmailAsync(request.Email, cancellationToken);
+        var userResult = await _userRepository.GetByEmailAsync(request.Email, cancellationToken);
 
         if (userResult is null)
             return Result.Fail<LoginResponseDto>(UserErrors.UserWithThisEmailNotFound);

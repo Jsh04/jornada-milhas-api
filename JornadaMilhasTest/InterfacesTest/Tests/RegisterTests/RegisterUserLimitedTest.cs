@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
-using JornadaMilhas.Common.InputDTO;
+using JornadaMilhas.Common.InputDto;
 using JornadaMilhasTest.InterfacesTest.PageObjects;
 using JornadaMilhas.Common.Enums;
 using OpenQA.Selenium;
@@ -23,7 +23,7 @@ public class RegisterUserLimitedTest
     public void DeverarAparecerPaginaDeConfirmacaoDeEmailAposCadastro()
     {
         //arrange
-        var usuario = new RegisterUserLimitedCommand("José Silvio Henrique Barros de Souza", DateTime.Parse("02-04-2004"), EnumGenre.Male, "12548169090", "81992659528", new AddressInputDTO(City: "Recife", State: "PE"), "josesilvio.bs@gmail.com", "josesilvio.bs@gmail.com", "Senha123", "Senha123");
+        var usuario = new RegisterUserLimitedCommand("José Silvio Henrique Barros de Souza", DateTime.Parse("02-04-2004"), EnumGenre.Male, "12548169090", "81992659528", new AddressInputDto(City: "Recife", State: "PE"), "josesilvio.bs@gmail.com", "josesilvio.bs@gmail.com", "Senha123", "Senha123");
 
         var registerPo = new RegisterPO(driver);
 

@@ -10,6 +10,9 @@ public class UserLimitedBuilder : UserBuilder<UserLimited, UserLimitedBuilder>
 
     public override Result<UserLimited> Build()
     {
+        if(_errors.Count > 0)
+            return Result.Fail<UserLimited>(_errors);
+
         var userLimitedResult = UserLimited.Create(_name, _dtBirth, _genre, _cpf, _phone, _adress, _picture, _mail, _confirmMail, _password);
 
         if (!userLimitedResult.Success)

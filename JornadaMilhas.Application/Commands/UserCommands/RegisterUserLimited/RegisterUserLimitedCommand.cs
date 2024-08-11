@@ -1,9 +1,9 @@
 ﻿using JornadaMilhas.Common.Results;
 using MediatR;
-using JornadaMilhas.Common.InputDTO;
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
 using JornadaMilhas.Common.Enums;
+using JornadaMilhas.Common.InputDto;
 
 namespace JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
 
@@ -13,7 +13,7 @@ public sealed record RegisterUserLimitedCommand(
     EnumGenre Genre,
     string Cpf,
     string Phone,
-    AddressInputDTO Address,
+    AddressInputDto Address,
     string Mail, 
     string ConfirmMail,
     string Password,

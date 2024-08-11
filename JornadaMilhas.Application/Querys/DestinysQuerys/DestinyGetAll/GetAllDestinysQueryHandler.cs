@@ -1,4 +1,5 @@
 ﻿using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 using System;
@@ -13,16 +14,16 @@ public class GetAllDestinysQueryHandler : IRequestHandler<GetAllDestinysQuery, L
 
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetAllDestinysQueryHandler(IUnitOfWork unitOfWork)
+    private readonly IRepositoryDestino _destinyRepository;
+
+    public GetAllDestinysQueryHandler(IUnitOfWork unitOfWork, IRepositoryDestino destinyRepository)
     {
         _unitOfWork = unitOfWork;
+        _destinyRepository = destinyRepository;
     }
 
     public async Task<List<Destiny>> Handle(GetAllDestinysQuery request, CancellationToken cancellationToken)
     {
-        var destinys = await _unitOfWork.DestinoRepository.GetAllAsync(request.Page, request.Size);
-
-        
-        return destinys.Data.ToList();
+        throw new NotImplementedException();
     }
 }

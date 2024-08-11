@@ -12,6 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 using JornadaMilhas.Core.Interfaces.Services;
 using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Common.DomainEvent;
+using MediatR;
+using JornadaMilhas.Application.EventHandlers;
+using JornadaMilhas.Core.Events;
 
 namespace JornadaMilhas.Application
 {
@@ -21,6 +25,7 @@ namespace JornadaMilhas.Application
         {
             return services.AddDependencyInjectionOfApplication()
                 .AddServicesOfMediat()
+                .AddHandlersNotification()
                 .AddServicesFluentValidation();
         }
 
@@ -36,6 +41,12 @@ namespace JornadaMilhas.Application
         {
             services.AddMediatR(opts => opts.RegisterServicesFromAssembly(typeof(RegisterDestinyCommand).Assembly));
 
+            return services;
+        }
+
+        private static IServiceCollection AddHandlersNotification(this IServiceCollection services)
+        {
+            services.AddScoped<INotificationHandler<EmailCreateUserEvent>, SendEmailEventHandler>();
             return services;
         }
 

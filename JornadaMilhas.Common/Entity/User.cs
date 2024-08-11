@@ -3,6 +3,7 @@ using JornadaMilhas.Common.ValueObjects;
 using JornadaMilhas.Common.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using JornadaMilhas.Common.DomainEvent;
 
 
 namespace JornadaMilhas.Common.Entities;
@@ -52,6 +53,9 @@ public abstract class User : BaseEntity
         ConfirmEmail = confirmEmail;
         Password = password;
     }
+
+    public void ThrowEvent(IDomainEvent domainEvent) =>
+       RaiseDomainEvent(domainEvent);
 }
     
     

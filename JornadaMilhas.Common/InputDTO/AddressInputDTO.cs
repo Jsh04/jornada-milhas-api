@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhas.Common.InputDTO;
+namespace JornadaMilhas.Common.InputDto;
 
-public sealed record AddressInputDTO(string City, string State, string? ZipCode = default, string? Address = default, string? District = default)
+public sealed record AddressInputDto(string City, string State, string? ZipCode = default, string? Address = default, string? District = default)
 {
 }

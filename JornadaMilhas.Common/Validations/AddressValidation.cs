@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
-using JornadaMilhas.Common.InputDTO;
+using JornadaMilhas.Common.InputDto;
 
 
 namespace JornadaMilhas.Common.Validations;
 
-public class AddressValidation : AbstractValidator<AddressInputDTO>
+public class AddressValidation : AbstractValidator<AddressInputDto>
 {
     public AddressValidation()
     {

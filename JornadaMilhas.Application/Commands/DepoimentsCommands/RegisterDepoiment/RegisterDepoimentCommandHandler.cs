@@ -17,12 +17,19 @@ namespace JornadaMilhas.Application.Commands.DepoimentsCommands.RegisterDepoimen
     {
 
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IDepoimentRepository _depoimentRepository;
+        private readonly IUserLimitedRepository _userLimitedRepository;
 
-        public RegisterDepoimentCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+        public RegisterDepoimentCommandHandler(IUnitOfWork unitOfWork, IDepoimentRepository depoimentRepository, IUserLimitedRepository userLimitedRepository)
+        {
+            _depoimentRepository = depoimentRepository;
+            _unitOfWork = unitOfWork;
+            _userLimitedRepository = userLimitedRepository;
+        }
 
         public async Task<Result<Depoiment>> Handle(RegisterDepoimentCommand request, CancellationToken cancellationToken)
         {
-            var userLimited = await _unitOfWork.UserLimitedRepository.GetByIdAsync(request.UserId, cancellationToken);
+            var userLimited = await _userLimitedRepository.GetByIdAsync(request.UserId, cancellationToken);
 
             if (userLimited is null)
                 return Result.Fail<Depoiment>(UserErrors.NotFound);
@@ -42,7 +49,7 @@ namespace JornadaMilhas.Application.Commands.DepoimentsCommands.RegisterDepoimen
 
             var depoiment = depoimentResult.Value;
 
-            _unitOfWork.DepoimentRepository.Create(depoiment);
+            _depoimentRepository.Create(depoiment);
 
             var created = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 

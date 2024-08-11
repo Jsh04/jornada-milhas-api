@@ -13,27 +13,11 @@ public class UnitOfWork : IUnitOfWork
 
     private IDbContextTransaction _transaction;
 
-    public IRepositoryDestino DestinoRepository { get; init; }
-
-    public IDepoimentRepository DepoimentRepository { get; init; }
-
-    public IUserRepository UserRepository { get; init; }
-    public IUserLimitedRepository UserLimitedRepository { get; init; }
 
     private readonly JornadaMilhasDbContext _context;
 
-    public UnitOfWork(
-        IUserLimitedRepository userLimitedRepository, 
-        IRepositoryDestino destinoRepository,
-        IDepoimentRepository depoimentRepository,
-        IUserRepository userRepository,
-        JornadaMilhasDbContext context
-        )
+    public UnitOfWork(JornadaMilhasDbContext context)
     {
-        UserLimitedRepository = userLimitedRepository;
-        DestinoRepository = destinoRepository;
-        DepoimentRepository = depoimentRepository;
-        UserRepository = userRepository;
         _context = context;
     }
 
