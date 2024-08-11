@@ -10,8 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UnitsTests\Builder\**" />
     <Compile Remove="UnitsTest\**" />
+    <EmbeddedResource Remove="UnitsTests\Builder\**" />
     <EmbeddedResource Remove="UnitsTest\**" />
+    <None Remove="UnitsTests\Builder\**" />
     <None Remove="UnitsTest\**" />
   </ItemGroup>
 
@@ -31,10 +34,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JornadaMilhas.API\JornadaMilhas.API.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="UnitsTests\Builder\" />
   </ItemGroup>
 
 </Project>
