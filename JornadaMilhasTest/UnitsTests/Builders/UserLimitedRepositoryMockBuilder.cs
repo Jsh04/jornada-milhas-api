@@ -32,7 +32,7 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             return this;
         }
 
-        public UserLimitedRepositoryMockBuilder AddIsUniqueAsync(bool isExists)
+        public UserLimitedRepositoryMockBuilder AddNotUniqueAsync(bool isExists)
         {
             _mock.Setup(repository => repository.IsUniqueAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(isExists);
 
