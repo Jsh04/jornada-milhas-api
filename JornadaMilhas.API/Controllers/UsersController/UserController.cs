@@ -20,7 +20,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllUsers([FromQuery] int size = 10, [FromQuery] int page = 1)
+    public async Task<IActionResult> GetAllUsers(GetAllUserQuery query)
     {
         return Ok();
     }

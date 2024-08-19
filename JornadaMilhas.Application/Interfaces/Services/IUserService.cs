@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace JornadaMilhas.Core.Interfaces.Services;
 
-public interface IUserService
+public interface IUserService 
 {
     Task<PaginationResult<User>> GetAllUsers(int size, int page, CancellationToken cancellationToken = default);
 

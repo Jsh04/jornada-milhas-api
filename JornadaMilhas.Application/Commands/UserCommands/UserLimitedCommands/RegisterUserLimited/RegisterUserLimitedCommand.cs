@@ -5,16 +5,16 @@ using JornadaMilhas.Core.Entities.Users.UserLimited;
 using JornadaMilhas.Common.Enums;
 using JornadaMilhas.Common.InputDto;
 
-namespace JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
+namespace JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 
 public sealed record RegisterUserLimitedCommand(
-    string Name, 
+    string Name,
     DateTime DtBirth,
     EnumGenre Genre,
     string Cpf,
     string Phone,
     AddressInputDto Address,
-    string Mail, 
+    string Mail,
     string ConfirmMail,
     string Password,
     string ConfirmPassword

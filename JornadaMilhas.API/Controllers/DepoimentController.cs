@@ -27,7 +27,9 @@ public class DepoimentController : ControllerBase
     public async Task<IActionResult> RegisterDepoiment([FromBody] RegisterDepoimentCommand command)
     {
         var resultDepoiment = await _mediator.Send(command);
-        return resultDepoiment.Success ? CreatedAtAction(nameof(GetDepoimentById), new { id = resultDepoiment.Value.Id }, resultDepoiment.Value) : BadRequest(resultDepoiment.Errors);
+        return resultDepoiment.Success
+            ? CreatedAtAction(nameof(GetDepoimentById), new { id = resultDepoiment.Value.Id }, resultDepoiment.Value)
+            : resultDepoiment.ToProblemDetails();
     }
 
     [HttpGet]

@@ -1,5 +1,5 @@
 ﻿using JornadaMilhas.Application.Commands.UserCommands.DeleteUserById;
-using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
+using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Querys.Dtos.UsersDto;
 using JornadaMilhas.Application.Querys.UserQuerys.GetUserById;

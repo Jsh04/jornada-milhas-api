@@ -1,7 +1,7 @@
 ﻿
 
 using JornadaMilhas.Application.Commands.UserCommands.DeleteUserById;
-using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
+using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhas.Application.Querys.Dtos.UsersDto;
 using JornadaMilhas.Application.Querys.UserQuerys.GetUserById;
 using JornadaMilhas.Common.Entities;
@@ -30,7 +30,7 @@ namespace JornadaMilhas.Application.Services
 
         public Task PostUserLimited(RegisterUserLimitedCommand registerUserLimitedCommand)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

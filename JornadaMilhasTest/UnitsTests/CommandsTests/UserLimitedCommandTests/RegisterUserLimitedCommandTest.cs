@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JornadaMilhas.Common.InputDto;
 using JornadaMilhas.Common.ValueObjects;
+using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 
 namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
 {
@@ -46,7 +47,7 @@ namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
         [Test]
         public async Task DeveraRetornarOkPassandoOsDadosCorretosQuandoNaoExistirUmRegistro()
         {
-            var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().Build();
+            var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
             var mockObjectUserLimited = UserLimitedRepositoryMockBuilder.CreateBuilder(_fixture).AddNotUniqueAsync(false).Build();
             var resgisterUserLimitedHandler = new RegisterUserLimitedCommandHandler(mockObjectUnitOfWork, mockObjectUserLimited);
 
@@ -54,6 +55,7 @@ namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
                 .Without(user => user.Address)
                 .With(user => user.Cpf, "76135350021")
                 .With(user => user.Mail, "josesilvio.bs@gmail.com")
+                .With(user => user.ConfirmMail, "josesilvio.bs@gmail.com")
                 .With(user => user.Phone, "(28) 97968-4227")
                 .With(user => user.Address, new AddressInputDto("Recife", "PE"))
                 .With(user => user.DtBirth, DateTime.Parse("04-02-2004"))
