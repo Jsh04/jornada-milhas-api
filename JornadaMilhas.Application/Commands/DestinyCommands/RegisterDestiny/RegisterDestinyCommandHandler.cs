@@ -1,5 +1,4 @@
 ﻿using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;

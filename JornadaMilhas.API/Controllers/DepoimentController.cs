@@ -3,8 +3,6 @@ using JornadaMilhas.API.Extensions;
 using JornadaMilhas.Application.Commands.DepoimentsCommands.RegisterDepoiment;
 using JornadaMilhas.Application.Querys.DepoimentQuerys.GetAllDepoiments;
 using JornadaMilhas.Application.Querys.DepoimentQuerys.GetByIdDepoiment;
-using JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll;
-using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
 using JornadaMilhas.Common.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

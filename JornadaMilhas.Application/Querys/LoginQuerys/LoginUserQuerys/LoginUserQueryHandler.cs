@@ -3,9 +3,7 @@ using JornadaMilhas.Application.Querys.Dtos.LoginResponseDto;
 using JornadaMilhas.Application.Util;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Users;
-using JornadaMilhas.Core.Interfaces.Services;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Querys.LoginQuerys.LoginUserQuerys;

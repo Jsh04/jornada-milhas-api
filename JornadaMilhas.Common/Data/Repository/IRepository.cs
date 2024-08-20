@@ -1,5 +1,4 @@
 ﻿using JornadaMilhas.Common.Entity;
-using JornadaMilhas.Common.PaginationResult;
 
 
 namespace JornadaMilhas.Common.Data.Repository;

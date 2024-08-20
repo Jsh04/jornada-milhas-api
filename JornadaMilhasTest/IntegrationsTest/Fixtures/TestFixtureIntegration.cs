@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using JornadaMilhas.Infrastruture.Persistence.Context;
+﻿using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhasTest.IntegrationsTest.Helper;
 using JornadaMilhasTest.IntegrationsTest.WebApplicationFactory;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 
 namespace JornadaMilhasTest.IntegrationsTest.Fixtures;

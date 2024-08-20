@@ -1,15 +1,9 @@
-﻿using JornadaMilhas.Common.Data.Repository;
-using JornadaMilhas.Common.Entities;
+﻿using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Repository.UserRepository;
 

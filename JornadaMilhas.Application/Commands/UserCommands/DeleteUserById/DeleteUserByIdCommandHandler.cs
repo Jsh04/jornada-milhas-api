@@ -1,14 +1,8 @@
 ﻿using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.Repository.UserRepository;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JornadaMilhas.Application.Commands.UserCommands.DeleteUserById
 {

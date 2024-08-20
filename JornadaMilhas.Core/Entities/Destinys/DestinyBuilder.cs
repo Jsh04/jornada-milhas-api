@@ -1,9 +1,5 @@
-﻿using JornadaMilhas.Common;
-using JornadaMilhas.Common.Builder;
+﻿using JornadaMilhas.Common.Builder;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Common.Results.Errors;
-using System.Numerics;
-
 
 
 namespace JornadaMilhas.Core.Entities.Destinys;

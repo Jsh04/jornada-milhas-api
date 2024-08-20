@@ -5,10 +5,7 @@ using JornadaMilhas.Application.Querys.Dtos.LoginResponseDto;
 using JornadaMilhas.Application.Querys.LoginQuerys.LoginUserQuerys;
 using JornadaMilhas.Common.Results;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace JornadaMilhas.API;
 

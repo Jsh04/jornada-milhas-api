@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JornadaMilhas.Application.Querys.Dtos.UsersDto;
+﻿using JornadaMilhas.Application.Querys.Dtos.UsersDto;
 using JornadaMilhas.Common.PaginationResult;
 using MediatR;
 

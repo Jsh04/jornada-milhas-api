@@ -23,6 +23,11 @@ namespace JornadaMilhas.Application.Services
             throw new NotImplementedException();
         }
 
+        public Task<PaginationResult<UserDto>> GetAllUsersAsync(int size, int page, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Result<UserDto>> GetUserById(GetUserByIdQuery query, CancellationToken cancellation = default)
         {
             throw new NotImplementedException();
@@ -30,7 +35,7 @@ namespace JornadaMilhas.Application.Services
 
         public Task PostUserLimited(RegisterUserLimitedCommand registerUserLimitedCommand)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

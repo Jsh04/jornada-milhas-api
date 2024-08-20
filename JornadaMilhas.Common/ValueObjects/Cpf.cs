@@ -2,7 +2,6 @@
 
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Results.Errors;
-using Microsoft.EntityFrameworkCore;
 
 namespace JornadaMilhas.Common.ValueObjects;
 

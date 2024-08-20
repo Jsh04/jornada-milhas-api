@@ -1,10 +1,8 @@
-﻿using AutoFixture;
-using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
+﻿using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhas.Common.InputDto;
 using JornadaMilhasTest.InterfacesTest.PageObjects;
 using JornadaMilhas.Common.Enums;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using JornadaMilhasTest.InterfacesTest.Helper;
 
 namespace JornadaMilhasTest.InterfacesTest.Tests.RegisterTests;

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using AutoFixture;
 using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhasTest.IntegrationsTest.Helper;
-using JornadaMilhasTest.IntegrationsTest.WebApplicationFactory;
-using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace JornadaMilhasTest.IntegrationsTest.Tests.UsuarioTest;
 

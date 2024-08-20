@@ -1,7 +1,6 @@
 ﻿
 
 
-using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Entities.Users.UserLimited;

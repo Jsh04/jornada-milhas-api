@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JornadaMilhas.Common.Enums;
+﻿namespace JornadaMilhas.Common.Enums;
 public enum EnumGenre
 {
     Male = 1,

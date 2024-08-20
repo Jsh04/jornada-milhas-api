@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
-using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Common.Validations;
 
 namespace JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;

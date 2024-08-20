@@ -1,13 +1,6 @@
 ﻿using JornadaMilhas.Common.Builder;
-using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Util;
-using JornadaMilhas.Core.Entities.Users.UserLimited;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JornadaMilhas.Core.Entities.Depoiments;
 

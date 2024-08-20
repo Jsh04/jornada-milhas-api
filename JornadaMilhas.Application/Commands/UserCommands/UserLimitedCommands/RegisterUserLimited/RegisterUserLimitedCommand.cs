@@ -1,6 +1,5 @@
 ﻿using JornadaMilhas.Common.Results;
 using MediatR;
-using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
 using JornadaMilhas.Common.Enums;
 using JornadaMilhas.Common.InputDto;

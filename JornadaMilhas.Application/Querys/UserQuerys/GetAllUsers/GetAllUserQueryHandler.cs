@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JornadaMilhas.Application.Querys.Dtos.UsersDto;
+﻿using JornadaMilhas.Application.Querys.Dtos.UsersDto;
+using JornadaMilhas.Common.DTO;
+using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using MediatR;
@@ -22,7 +19,15 @@ namespace JornadaMilhas.Application.Querys.UserQuerys.GetAllUsers
         {
             var usersFromDatabase = await _userRepository.GetAllAsync(request.Page, request.Size, cancellationToken);
 
+            var usersDtoToReturn = DtoExtensions<User, UserDto>.ToDto(usersFromDatabase.Data);
 
+            var paginationResult = new PaginationResult<UserDto>(usersFromDatabase.Page, 
+                usersFromDatabase.PageSize, 
+                usersFromDatabase.TotalCount,
+                usersFromDatabase.TotalPages, 
+                usersDtoToReturn.ToList());
+
+            return paginationResult;
         }
     }
 }
