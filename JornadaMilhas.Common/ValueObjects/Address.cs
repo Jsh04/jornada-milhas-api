@@ -1,6 +1,5 @@
 ﻿using JornadaMilhas.Common.Results.Errors;
 using JornadaMilhas.Common.Results;
-using Microsoft.EntityFrameworkCore;
 
 namespace JornadaMilhas.Common.ValueObjects;
 

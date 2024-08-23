@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
-using JornadaMilhas.Core.Entities;
+﻿using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 

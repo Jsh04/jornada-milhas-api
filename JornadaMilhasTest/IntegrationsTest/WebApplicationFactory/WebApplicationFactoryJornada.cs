@@ -1,8 +1,5 @@
 ﻿
 using JornadaMilhas.Infrastruture.Persistence.Context;
-using JornadaMilhas.Infrastruture.Persistence.Repository;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
-using JornadaMilhasTest.IntegrationsTest.Fixtures;
 using JornadaMilhasTest.IntegrationsTest.Helper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;

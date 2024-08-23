@@ -1,7 +1,6 @@
 ﻿using JornadaMilhasTest.InterfacesTest.Helper;
 using JornadaMilhasTest.InterfacesTest.PageObjects;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace JornadaMilhasTest.InterfacesTest.Tests.LoginTests;
 

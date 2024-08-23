@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
-using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Common.Validations;
 
-namespace JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
+namespace JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 
 public class RegisterUserValidation : AbstractValidator<RegisterUserLimitedCommand>
 {
@@ -17,7 +16,7 @@ public class RegisterUserValidation : AbstractValidator<RegisterUserLimitedComma
 
         RuleFor(x => x.Address)
             .SetValidator(new AddressValidation());
-        
+
         RuleFor(x => x.Mail)
             .NotNull()
             .NotEmpty()
@@ -28,9 +27,9 @@ public class RegisterUserValidation : AbstractValidator<RegisterUserLimitedComma
             .NotNull()
             .NotEmpty()
             .WithMessage("Senha é obrigatório");
-        
+
         RuleFor(x => x.ConfirmPassword)
             .Equal(x => x.Password)
             .WithMessage("Senha não estão iguais");
-    }   
+    }
 }

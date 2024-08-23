@@ -1,9 +1,4 @@
-﻿
-
-
-using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.Context;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
+﻿using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace JornadaMilhas.Infrastruture.Persistence.UOW;

@@ -1,15 +1,8 @@
 ﻿using AutoFixture;
-using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhasTest.UnitsTests.Helper;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JornadaMilhasTest.UnitsTests.Builders
 {
@@ -32,7 +25,7 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             return this;
         }
 
-        public UserLimitedRepositoryMockBuilder AddIsUniqueAsync(bool isExists)
+        public UserLimitedRepositoryMockBuilder AddNotUniqueAsync(bool isExists)
         {
             _mock.Setup(repository => repository.IsUniqueAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(isExists);
 

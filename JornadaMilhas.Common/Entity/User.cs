@@ -1,8 +1,6 @@
 ﻿using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.ValueObjects;
 using JornadaMilhas.Common.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 using JornadaMilhas.Common.DomainEvent;
 
 

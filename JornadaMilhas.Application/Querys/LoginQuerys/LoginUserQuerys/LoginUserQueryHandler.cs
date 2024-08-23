@@ -3,24 +3,19 @@ using JornadaMilhas.Application.Querys.Dtos.LoginResponseDto;
 using JornadaMilhas.Application.Util;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Users;
-using JornadaMilhas.Core.Interfaces.Services;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Querys.LoginQuerys.LoginUserQuerys;
 
 public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, Result<LoginResponseDto>>
 {
-    private readonly IUnitOfWork _unitOfWork;
-
     private readonly ITokenService _tokenService;
 
     private readonly IUserRepository _userRepository;
 
-    public LoginUserQueryHandler(IUnitOfWork unitOfWork, ITokenService tokenService, IUserRepository userRepository) 
+    public LoginUserQueryHandler(ITokenService tokenService, IUserRepository userRepository) 
     {
-        _unitOfWork = unitOfWork;
         _tokenService = tokenService;
         _userRepository = userRepository;
     }

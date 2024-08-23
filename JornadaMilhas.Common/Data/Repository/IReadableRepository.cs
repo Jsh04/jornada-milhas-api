@@ -1,11 +1,6 @@
 ﻿using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.PaginationResult;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JornadaMilhas.Common.Data.Repository;
 

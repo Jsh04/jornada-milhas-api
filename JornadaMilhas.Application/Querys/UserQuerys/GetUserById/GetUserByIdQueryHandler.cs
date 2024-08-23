@@ -6,7 +6,6 @@ using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 
 namespace JornadaMilhas.Application.Querys.UserQuerys.GetUserById
 {

@@ -1,11 +1,9 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Common.ValueObjects;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
+using JornadaMilhas.Common.InputDto;
 
 namespace JornadaMilhasTest.UnitsTests.Helper
 {
@@ -22,6 +20,22 @@ namespace JornadaMilhasTest.UnitsTests.Helper
 
             return user;
 
+        }
+
+        public static RegisterUserLimitedCommand GetUserCorrectDataTest(Fixture fixture)
+        {
+            var requestUserLimitedRegisterCommand = fixture.Build<RegisterUserLimitedCommand>()
+                .Without(user => user.Address)
+                .With(user => user.Cpf, "76135350021")
+                .With(user => user.Mail, "josesilvio.bs@gmail.com")
+                .With(user => user.ConfirmMail, "josesilvio.bs@gmail.com")
+                .With(user => user.Phone, "(28) 97968-4227")
+                .With(user => user.Address, new AddressInputDto("Recife", "PE"))
+                .With(user => user.DtBirth, DateTime.Parse("04-02-2004"))
+                .OmitAutoProperties()
+                .Create();
+
+            return requestUserLimitedRegisterCommand;
         }
 
     }

@@ -1,14 +1,10 @@
-﻿using JornadaMilhas.Application.Commands.DepoimentsCommands.RegisterDepoiment;
-using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
-using JornadaMilhas.Common.PaginationResult;
-using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Users.UserLimited;
+﻿using JornadaMilhas.Application.Querys.UserQuerys.GetAllUsers;
 using JornadaMilhas.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API.Controllers.UsersController;
 
-[Route("[controller]")]
+[Route("/ApiV1/[controller]")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -20,8 +16,14 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllUsers([FromQuery] int size = 10, [FromQuery] int page = 1)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetAllUsers([FromQuery] GetAllUsersQuery query)
     {
-        return Ok();
+        var paginationResult = await _service.GetAllUsersAsync(query.Size, query.Page);
+        return Ok(paginationResult);
     }
+
+
 }

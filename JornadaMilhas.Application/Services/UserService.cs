@@ -1,7 +1,7 @@
 ﻿
 
 using JornadaMilhas.Application.Commands.UserCommands.DeleteUserById;
-using JornadaMilhas.Application.Commands.UserCommands.RegisterUserLimited;
+using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhas.Application.Querys.Dtos.UsersDto;
 using JornadaMilhas.Application.Querys.UserQuerys.GetUserById;
 using JornadaMilhas.Common.Entities;
@@ -19,6 +19,11 @@ namespace JornadaMilhas.Application.Services
         }
 
         public Task<PaginationResult<User>> GetAllUsers(int size, int page, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PaginationResult<UserDto>> GetAllUsersAsync(int size, int page, CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

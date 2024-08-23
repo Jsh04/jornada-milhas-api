@@ -3,8 +3,6 @@ using JornadaMilhas.API.Extensions;
 using JornadaMilhas.Application.Commands.DepoimentsCommands.RegisterDepoiment;
 using JornadaMilhas.Application.Querys.DepoimentQuerys.GetAllDepoiments;
 using JornadaMilhas.Application.Querys.DepoimentQuerys.GetByIdDepoiment;
-using JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll;
-using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
 using JornadaMilhas.Common.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +25,9 @@ public class DepoimentController : ControllerBase
     public async Task<IActionResult> RegisterDepoiment([FromBody] RegisterDepoimentCommand command)
     {
         var resultDepoiment = await _mediator.Send(command);
-        return resultDepoiment.Success ? CreatedAtAction(nameof(GetDepoimentById), new { id = resultDepoiment.Value.Id }, resultDepoiment.Value) : BadRequest(resultDepoiment.Errors);
+        return resultDepoiment.Success
+            ? CreatedAtAction(nameof(GetDepoimentById), new { id = resultDepoiment.Value.Id }, resultDepoiment.Value)
+            : resultDepoiment.ToProblemDetails();
     }
 
     [HttpGet]

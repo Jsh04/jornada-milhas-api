@@ -1,14 +1,8 @@
 ﻿using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Core.Entities.Users.UserAdmin;
-using JornadaMilhas.Core.Interfaces.Services;
 using JornadaMilhas.Infrastruture.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JornadaMilhas.Application.Services;
 

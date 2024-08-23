@@ -3,7 +3,6 @@ using JornadaMilhas.Common.Enums;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.ValueObjects;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JornadaMilhas.Core.Entities.Users.UserAdmin;
 

@@ -13,14 +13,10 @@ namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetAllDepoiments;
 
 public class GetAllDepoimentQueryHandler : IRequestHandler<GetAllDepoimentQuery, Result<PaginationResult<DepoimentDto>>>
 {
-    private readonly IUnitOfWork _unitOfWork;
-
     private readonly IDepoimentRepository _depoimentRepository;
-
 
     public GetAllDepoimentQueryHandler(IUnitOfWork unitOfWork, IDepoimentRepository depoimentRepository) 
     {
-        _unitOfWork = unitOfWork;
         _depoimentRepository = depoimentRepository;
     }
 

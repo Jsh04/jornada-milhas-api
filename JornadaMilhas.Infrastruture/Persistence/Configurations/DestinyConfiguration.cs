@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JornadaMilhas.Common.Persistence.Configuration;
+﻿using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Core.Entities.Destinys;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

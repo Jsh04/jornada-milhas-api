@@ -2,12 +2,6 @@
 using JornadaMilhas.Application.Querys.Dtos.DepoimentsDto;
 using JornadaMilhas.Common.DTO;
 using JornadaMilhas.Core.Entities.Depoiments;
-using NUnit.Framework.Constraints;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JornadaMilhasTest.UnitsTests.DtoExtensionsTest;
 
