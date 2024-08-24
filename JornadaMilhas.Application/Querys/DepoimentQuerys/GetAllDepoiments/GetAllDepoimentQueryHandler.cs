@@ -15,7 +15,7 @@ public class GetAllDepoimentQueryHandler : IRequestHandler<GetAllDepoimentQuery,
 {
     private readonly IDepoimentRepository _depoimentRepository;
 
-    public GetAllDepoimentQueryHandler(IUnitOfWork unitOfWork, IDepoimentRepository depoimentRepository) 
+    public GetAllDepoimentQueryHandler( IDepoimentRepository depoimentRepository) 
     {
         _depoimentRepository = depoimentRepository;
     }

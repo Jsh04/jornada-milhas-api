@@ -32,6 +32,13 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             return this;
         }
 
+        public async Task<UserLimitedRepositoryMockBuilder> WithGetAllUsersAsync(int numberToCreate,int size = 10, int page = 1)
+        {
+            _mock.Setup(x => x.GetAllAsync(page, size, It.IsAny<CancellationToken>())).ReturnsAsync(await UnitTestHelper.GetAllUsersFakeData(_fixture, 10, page, size));
+            return this;
+        }
+
+
         public UserLimitedRepositoryMockBuilder AddVerifyCreateMethod()
         {
             _mock.Verify(x => x.Create(It.IsAny<UserLimited>()), Times.Once);
