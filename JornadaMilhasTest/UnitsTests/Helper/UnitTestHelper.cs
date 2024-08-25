@@ -16,8 +16,8 @@ namespace JornadaMilhasTest.UnitsTests.Helper
 
         public static UserLimited GetUserLimitedTest(Fixture fixture) 
         {
-            fixture = CustomReturnUserLimited(fixture);
             var user = fixture.Build<UserLimited>()
+                .FromFactory(CustomReturnUserLimited(fixture))
                 .With(user => user.Name, "José Silvio")
                 .With(user => user.Email, Email.Create("test@email.com").Value)
                 .With(user => user.Cpf, Cpf.Create("70188588442").Value)
@@ -47,9 +47,9 @@ namespace JornadaMilhasTest.UnitsTests.Helper
         public static async Task<PaginationResult<UserLimited>> GetAllUsersFakeData(Fixture fixture, 
             int numberToCreate, int page, int size)
         {
-            fixture = CustomReturnUserLimited(fixture);
 
             var listFakeUsers = fixture.Build<UserLimited>()
+                .FromFactory(CustomReturnUserLimited(fixture))
                 .OmitAutoProperties()
                 .CreateMany(numberToCreate).AsQueryable();
 
@@ -59,9 +59,9 @@ namespace JornadaMilhasTest.UnitsTests.Helper
         }
 
 
-        private static Fixture CustomReturnUserLimited(Fixture fixture)
+        private static Func<UserLimited> CustomReturnUserLimited(Fixture fixture)
         {
-            fixture.Customize<UserLimited>(custom => custom.FromFactory(() =>
+            return () =>
             {
                 var userFake = UserLimited.Create(
                     fixture.Create<string>(),
@@ -76,9 +76,7 @@ namespace JornadaMilhasTest.UnitsTests.Helper
                     fixture.Create<string>()).Value;
 
                 return userFake;
-            }));
-
-            return fixture;
+            };
         }
 
     }
