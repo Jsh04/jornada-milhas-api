@@ -4,11 +4,24 @@ using JornadaMilhas.Core.Entities.Users.UserLimited;
 
 using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhas.Common.InputDto;
+using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Common.Entities;
+using JornadaMilhas.Core.Entities;
 
 namespace JornadaMilhasTest.UnitsTests.Helper
 {
     public static class UnitTestHelper
     {
+
+        public static Destiny GetDestinyTest(Fixture fixture)
+        {
+            fixture.Customize<Destiny>(custom => custom.FromFactory(() =>
+            {
+                return Destiny.Create(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<decimal>(), fixture.Create<string>(), fixture.Create<string>(), new List<ImagemDestino>()).Value;
+            }));
+
+            return fixture.Build<Destiny>().OmitAutoProperties().Create();
+        }
 
         public static UserLimited GetUserLimitedTest(Fixture fixture) 
         {
