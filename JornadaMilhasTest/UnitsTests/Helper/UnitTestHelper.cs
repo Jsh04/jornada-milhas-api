@@ -7,6 +7,10 @@ using JornadaMilhas.Common.InputDto;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Core.Entities;
+using JornadaMilhas.Common.PaginationResult;
+using JornadaMilhas.Common.Enums;
+
+
 
 namespace JornadaMilhasTest.UnitsTests.Helper
 {
@@ -26,6 +30,7 @@ namespace JornadaMilhasTest.UnitsTests.Helper
         public static UserLimited GetUserLimitedTest(Fixture fixture) 
         {
             var user = fixture.Build<UserLimited>()
+                .FromFactory(CustomReturnUserLimited(fixture))
                 .With(user => user.Name, "José Silvio")
                 .With(user => user.Email, Email.Create("test@email.com").Value)
                 .With(user => user.Cpf, Cpf.Create("70188588442").Value)
@@ -49,6 +54,42 @@ namespace JornadaMilhasTest.UnitsTests.Helper
                 .Create();
 
             return requestUserLimitedRegisterCommand;
+        }
+
+
+        public static async Task<PaginationResult<UserLimited>> GetAllUsersFakeData(Fixture fixture, 
+            int numberToCreate, int page, int size)
+        {
+
+            var listFakeUsers = fixture.Build<UserLimited>()
+                .FromFactory(CustomReturnUserLimited(fixture))
+                .OmitAutoProperties()
+                .CreateMany(numberToCreate).AsQueryable();
+
+            var paginationResult = new PaginationResult<UserLimited>(page, size, listFakeUsers.Count());
+            paginationResult.SetData(listFakeUsers.ToList());
+            return paginationResult;
+        }
+
+
+        private static Func<UserLimited> CustomReturnUserLimited(Fixture fixture)
+        {
+            return () =>
+            {
+                var userFake = UserLimited.Create(
+                    fixture.Create<string>(),
+                    DateOfBirth.Create(DateTime.Parse("04-02-2004")).Value,
+                    EnumGenre.Male,
+                    Cpf.Create("77919691060").Value ?? default,
+                    Phone.Create("(28) 97968-4227").Value,
+                    Address.Create("Recife", "PE", default, default, default).Value,
+                    null,
+                    Email.Create("josesilvio.bs@gmail.com").Value,
+                    Email.Create("josesilvio.bs@gmail.com").Value,
+                    fixture.Create<string>()).Value;
+
+                return userFake;
+            };
         }
 
     }

@@ -2,12 +2,13 @@
 using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Querys.Dtos.UsersDto;
-using JornadaMilhas.Application.Querys.UserQuerys.GetAllUsers;
-using JornadaMilhas.Application.Querys.UserQuerys.GetUserById;
+using JornadaMilhas.Application.Querys.UserQuerys.UserLimitedQuerys.GetAllUsersLimited;
+using JornadaMilhas.Application.Querys.UserQuerys.UserLimitedQuerys.GetUserById;
 using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
+using JornadaMilhas.Core.Interfaces.Services;
 using MediatR;
 
 namespace JornadaMilhas.Application.Services
@@ -20,18 +21,18 @@ namespace JornadaMilhas.Application.Services
             _sender = sender;
         }
 
-        public async Task<Result> DeleteUserbyId(DeleteUserByIdCommand deleteUserByIdCommands, CancellationToken cancellation = default) 
-            => await _sender.Send(deleteUserByIdCommands, cancellation);
+        public async Task<Result> DeleteUserbyId(DeleteUserByIdCommand deleteUserByIdCommands, CancellationToken cancellation = default) => await _sender.Send(deleteUserByIdCommands, cancellation);
 
 
-        public async Task<PaginationResult<UserDto>> GetAllUsersAsync(int size, int page, CancellationToken cancellationToken = default)
+        public async Task<PaginationResult<UserLimitedDto>> GetAllUsersAsync(int size, int page, CancellationToken cancellationToken = default)
         {
-            var getAllQuery = new GetAllUsersQuery(page, size);
+            var getAllQuery = new GetAllUsersLimitedQuery(page, size);
             return await _sender.Send(getAllQuery, cancellationToken);
         }
 
-        public async Task<Result<UserDto>> GetUserById(GetUserByIdQuery query, CancellationToken cancellation = default) 
+        public async Task<Result<UserLimitedDto>> GetUserById(GetUserLimitedByIdQuery query, CancellationToken cancellation = default) 
             => await _sender.Send(query, cancellation);
+
 
         public Task<Result<UserLimited>> RegisterUserLimited(RegisterUserLimitedCommand command) => _sender.Send(command);
     }
