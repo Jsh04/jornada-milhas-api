@@ -2,7 +2,7 @@
 using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Querys.Dtos.UsersDto;
-using JornadaMilhas.Application.Querys.UserQuerys.GetUserById;
+using JornadaMilhas.Application.Querys.UserQuerys.UserLimitedQuerys.GetUserById;
 using JornadaMilhas.Common.Results;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,14 +32,24 @@ public class UserLimitedController : ControllerBase
             value => value.ToProblemDetails());
     }
 
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetAllUsersLimited([FromQuery] int size, [FromQuery] int page)
+    {
+        var resultRegister = await _service.GetAllUsersAsync(size, page);
+
+        return Ok(resultRegister);
+    }
+
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
     [ProducesResponseType( StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-
     public async Task<IActionResult> GetUserLimitedById(long id)
     {
-        var result = await _service.GetUserById(new GetUserByIdQuery(id));
+        var result = await _service.GetUserById(new GetUserLimitedByIdQuery(id));
 
         return result.Match(Ok, value => value.ToProblemDetails());
     }
