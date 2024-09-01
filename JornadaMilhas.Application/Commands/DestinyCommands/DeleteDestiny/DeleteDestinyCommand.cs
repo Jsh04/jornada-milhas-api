@@ -3,7 +3,7 @@ using MediatR;
 
 namespace JornadaMilhas.Application.Commands.DestinyCommands.DeleteDestiny;
 
-public record DeleteDestinyCommand(int Id) : IRequest<Result>
+public record DeleteDestinyCommand(long Id) : IRequest<Result>
 {
 }
 

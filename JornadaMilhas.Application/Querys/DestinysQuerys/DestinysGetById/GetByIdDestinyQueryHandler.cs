@@ -1,4 +1,6 @@
-﻿using JornadaMilhas.Common.Results;
+﻿using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
+using JornadaMilhas.Common.DTO;
+using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
@@ -6,25 +8,25 @@ using MediatR;
 
 namespace JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById
 {
-    public class GetByIdDestinyQueryHandler : IRequestHandler<GetByIdDestinyQuery, Result<Destiny>>
+    public class GetByIdDestinyQueryHandler : IRequestHandler<GetByIdDestinyQuery, Result<DestinyDto>>
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IRepositoryDestino _destinyRepository;
 
-        public GetByIdDestinyQueryHandler(IUnitOfWork unitOfWork, IRepositoryDestino destinyRepository)
+        public GetByIdDestinyQueryHandler(IRepositoryDestino destinyRepository)
         {
-            _unitOfWork = unitOfWork;
             _destinyRepository = destinyRepository;
         }
 
-        public async Task<Result<Destiny>> Handle(GetByIdDestinyQuery request, CancellationToken cancellationToken)
+        public async Task<Result<DestinyDto>> Handle(GetByIdDestinyQuery request, CancellationToken cancellationToken)
         {
             var destiny = await _destinyRepository.GetByIdAsync(request.id, cancellationToken);
 
             if (destiny is null)
-                return Result.Fail<Destiny>(DestinyErrors.NotFound);
+                return Result.Fail<DestinyDto>(DestinyErrors.NotFound);
 
-            return Result.Ok(destiny);
+            var destinyDto = DtoExtensions<Destiny, DestinyDto>.ToDto(destiny);
+
+            return Result.Ok(destinyDto);
         }
     }
 }

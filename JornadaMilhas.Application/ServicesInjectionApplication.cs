@@ -25,6 +25,7 @@ namespace JornadaMilhas.Application
         {
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserLimitedService, UserLimitedService>();
+            services.AddScoped<IDestinyService, DestinyService>();
 
             return services;
         }

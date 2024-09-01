@@ -10,6 +10,6 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             _mock = new Mock<TInterface>();
         }
 
-        public abstract TInterface Build();
+        public abstract Mock<TInterface> Build();
     }
 }

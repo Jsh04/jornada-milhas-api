@@ -20,7 +20,7 @@ namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
             //arrange
             var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().Build();
             var mockObjectUserLimited = UserLimitedRepositoryMockBuilder.CreateBuilder(_fixture).AddNotUniqueAsync(true).Build();
-            var resgisterUserLimitedHandler = new RegisterUserLimitedCommandHandler(mockObjectUnitOfWork, mockObjectUserLimited);
+            var resgisterUserLimitedHandler = new RegisterUserLimitedCommandHandler(mockObjectUnitOfWork.Object, mockObjectUserLimited.Object);
 
             var requestUserLimitedRegisterCommand = _fixture.Build<RegisterUserLimitedCommand>()
                 .Without(user => user.Address)
@@ -41,7 +41,7 @@ namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
         {
             var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
             var mockObjectUserLimited = UserLimitedRepositoryMockBuilder.CreateBuilder(_fixture).AddNotUniqueAsync(false).Build();
-            var resgisterUserLimitedHandler = new RegisterUserLimitedCommandHandler(mockObjectUnitOfWork, mockObjectUserLimited);
+            var resgisterUserLimitedHandler = new RegisterUserLimitedCommandHandler(mockObjectUnitOfWork.Object, mockObjectUserLimited.Object);
 
             var requestUserLimitedRegisterCommand = UnitTestHelper.GetUserCorrectDataTest(_fixture);
             //act
@@ -61,7 +61,7 @@ namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
             var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
             var mockObjectUserLimited = UserLimitedRepositoryMockBuilder.CreateBuilder(_fixture).AddNotUniqueAsync(false).Build();
 
-            var resgisterUserLimitedHandler = new RegisterUserLimitedCommandHandler(mockObjectUnitOfWork, mockObjectUserLimited);
+            var resgisterUserLimitedHandler = new RegisterUserLimitedCommandHandler(mockObjectUnitOfWork.Object, mockObjectUserLimited.Object);
 
             var requestUserLimitedRegisterCommand = UnitTestHelper.GetUserCorrectDataTest(_fixture);
             var result = await resgisterUserLimitedHandler.Handle(requestUserLimitedRegisterCommand, CancellationToken.None);
@@ -79,7 +79,7 @@ namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
             var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(0).Build();
             var mockObjectUserLimited = UserLimitedRepositoryMockBuilder.CreateBuilder(_fixture).AddNotUniqueAsync(false).Build();
 
-            var resgisterUserLimitedHandler = new RegisterUserLimitedCommandHandler(mockObjectUnitOfWork, mockObjectUserLimited);
+            var resgisterUserLimitedHandler = new RegisterUserLimitedCommandHandler(mockObjectUnitOfWork.Object, mockObjectUserLimited.Object);
 
             var requestUserLimitedRegisterCommand = UnitTestHelper.GetUserCorrectDataTest(_fixture);
 

@@ -14,6 +14,8 @@ namespace JornadaMilhasTest.UnitsTests.Builders
     {
         private readonly Fixture _fixture;
 
+        public static DestinyRepositoryMockBuilder Create(Fixture fixture) => new DestinyRepositoryMockBuilder(fixture);
+
         private DestinyRepositoryMockBuilder(Fixture fixture) : base()
         {
             _fixture = fixture;
@@ -26,9 +28,9 @@ namespace JornadaMilhasTest.UnitsTests.Builders
         }
 
 
-        public override IRepositoryDestino Build()
+        public override Mock<IRepositoryDestino> Build()
         {
-            return _mock.Object;
+            return _mock;
         }
     }
 }

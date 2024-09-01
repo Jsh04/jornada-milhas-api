@@ -21,7 +21,7 @@ namespace JornadaMilhasTest.UnitsTests.QuerysTests.UserQuerysTests
             //arrange
             var mockUserRepositoryTask = await UserLimitedRepositoryMockBuilder.CreateBuilder(_fixture).WithGetAllUsersAsync(10);
             var mockUserRepository = mockUserRepositoryTask.Build();
-            var getUsersHandler = new GetAllUserLimtedQueryHandler(mockUserRepository);
+            var getUsersHandler = new GetAllUserLimtedQueryHandler(mockUserRepository.Object);
             var getUserRequest = new GetAllUsersLimitedQuery(1, 10);
             //act
             var result = await getUsersHandler.Handle(getUserRequest, CancellationToken.None);

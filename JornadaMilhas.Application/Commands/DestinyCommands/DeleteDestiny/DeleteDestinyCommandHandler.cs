@@ -34,7 +34,6 @@ public class DeleteDestinyCommandHandler : IRequestHandler<DeleteDestinyCommand,
             return Result.Fail(DestinyErrors.CannotBeDeleted);
 
         return Result.Ok();
-
     }
 }
 
