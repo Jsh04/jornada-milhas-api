@@ -1,7 +1,10 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Application.Querys.UserQuerys.UserLimitedQuerys.GetAllUsers;
 using JornadaMilhas.Application.Querys.UserQuerys.UserLimitedQuerys.GetAllUsersLimited;
+using JornadaMilhas.Core.Entities.Users.UserLimited;
 using JornadaMilhasTest.UnitsTests.Builders;
+using Moq;
+using System.Linq.Expressions;
 
 namespace JornadaMilhasTest.UnitsTests.QuerysTests.UserQuerysTests
 {
@@ -29,7 +32,7 @@ namespace JornadaMilhasTest.UnitsTests.QuerysTests.UserQuerysTests
             //assert
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Data, Has.No.Empty);
-
+            mockUserRepository.Verify(x => x.GetAllAsync(1,10, CancellationToken.None), Times.Once());
         }
     }
 }

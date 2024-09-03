@@ -29,13 +29,15 @@ public class DestinoControllerTest
         List<string> randomsBase64 = new();
         var destinoDto = fixture.Create<RegisterDestinyCommand>();
 
+        destinoDto.Images.Clear();
+
         randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
         randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
         randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
 
         destinoDto.Images.AddRange(randomsBase64);
 
-        var url = "/destinos";
+        var url = "/destiny";
 
         var stringContent = new StringContent(TestHelper.SerializerObjToJson(destinoDto), encoding: Encoding.UTF8, TestHelper.ContentTypeJson);
 

@@ -12,6 +12,7 @@ public class UsuarioTestController
 {
     private readonly HttpClient _client;
     private readonly Fixture fixture;
+    private readonly string EndPoint = "api/v1/";
 
     public UsuarioTestController()
     {
@@ -23,7 +24,7 @@ public class UsuarioTestController
     public async Task TestarRetornoDoCadastroDeUsuario()
     {
         var usuario = fixture.Create<RegisterUserLimitedCommand>();
-        string url = "/usuarios";
+        string url = EndPoint + "userLimited";
 
 
         var stringContent = new StringContent(TestHelper.SerializerObjToJson(usuario), encoding: Encoding.UTF8, TestHelper.ContentTypeJson);
