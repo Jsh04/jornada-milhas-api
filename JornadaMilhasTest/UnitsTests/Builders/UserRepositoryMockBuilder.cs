@@ -22,9 +22,9 @@ namespace JornadaMilhasTest.UnitsTests.Builders
 
         public static UserRepositoryMockBuilder CreateBuilder(Fixture fixture) => new(fixture);
 
-        public override IUserRepository Build()
+        public override Mock<IUserRepository> Build()
         {
-            return _mock.Object;
+            return _mock;
         }
     }
 }

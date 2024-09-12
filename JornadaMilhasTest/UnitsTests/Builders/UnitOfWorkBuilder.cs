@@ -13,9 +13,9 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             return this;
         }
 
-        public override IUnitOfWork Build()
+        public override Mock<IUnitOfWork> Build()
         {
-            return _mock.Object;
+            return _mock;
         }
 
 

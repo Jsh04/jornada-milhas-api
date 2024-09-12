@@ -12,7 +12,7 @@ public class DtoExtensionTest
     private readonly Fixture fixture;
     public DtoExtensionTest()
     {
-        fixture = new Fixture();
+        fixture = SharingResources.AutoFixture;
     }
 
     [Test]

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JornadaMilhas.API.Controllers.UsersController;
 
 [ApiController]
-[Route("ApiV1/[controller]")]
+[Route("api/v1/[controller]")]
 public class UserLimitedController : ControllerBase
 {
     private readonly IUserLimitedService _service;

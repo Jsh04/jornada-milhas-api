@@ -46,9 +46,9 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             return this;
         }
 
-        public override IUserLimitedRepository Build()
+        public override Mock<IUserLimitedRepository> Build()
         {
-            return _mock.Object;
+            return _mock;
         }
     }
 }
