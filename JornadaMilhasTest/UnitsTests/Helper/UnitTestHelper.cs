@@ -9,6 +9,8 @@ using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Enums;
+using JornadaMilhas.Application.Util;
+using System.Security.Cryptography;
 
 
 
@@ -16,7 +18,6 @@ namespace JornadaMilhasTest.UnitsTests.Helper
 {
     public static class UnitTestHelper
     {
-
         public static Destiny GetDestinyTest(Fixture fixture)
         {
             fixture.Customize<Destiny>(custom => custom.FromFactory(() =>
@@ -27,17 +28,20 @@ namespace JornadaMilhasTest.UnitsTests.Helper
             return fixture.Build<Destiny>().OmitAutoProperties().Create();
         }
 
+        public static string GenerateSecretKey(int length = 32)
+        {
+            var ramdomNumbers = new byte[length];
+            RandomNumberGenerator.Fill(ramdomNumbers); 
+            return Convert.ToBase64String(ramdomNumbers);
+        }
+
         public static UserLimited GetUserLimitedTest(Fixture fixture) 
         {
             var user = fixture.Build<UserLimited>()
                 .FromFactory(CustomReturnUserLimited(fixture))
-                .With(user => user.Name, "José Silvio")
-                .With(user => user.Email, Email.Create("test@email.com").Value)
-                .With(user => user.Cpf, Cpf.Create("70188588442").Value)
                 .OmitAutoProperties().Create();
 
             return user;
-
         }
 
         public static RegisterUserLimitedCommand GetUserCorrectDataTest(Fixture fixture)
@@ -57,10 +61,9 @@ namespace JornadaMilhasTest.UnitsTests.Helper
         }
 
 
-        public static async Task<PaginationResult<UserLimited>> GetAllUsersFakeData(Fixture fixture, 
+        public static PaginationResult<UserLimited> GetAllUsersFakeData(Fixture fixture, 
             int numberToCreate, int page, int size)
         {
-
             var listFakeUsers = fixture.Build<UserLimited>()
                 .FromFactory(CustomReturnUserLimited(fixture))
                 .OmitAutoProperties()
@@ -86,8 +89,7 @@ namespace JornadaMilhasTest.UnitsTests.Helper
                     null,
                     Email.Create("josesilvio.bs@gmail.com").Value,
                     Email.Create("josesilvio.bs@gmail.com").Value,
-                    fixture.Create<string>()).Value;
-
+                    EncriptarSenha.CriptografarSenha(ConstantsUnitTest.PasswordTest)).Value;
                 return userFake;
             };
         }

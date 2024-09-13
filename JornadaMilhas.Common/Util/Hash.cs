@@ -151,8 +151,7 @@ public class Hash
 
     {
 
-        byte[] cryptoByte = _algorithm.ComputeHash(ASCIIEncoding.UTF8.GetBytes(plainText));
-
+        byte[] cryptoByte = _algorithm.ComputeHash(Encoding.UTF8.GetBytes(plainText));
 
 
         return Convert.ToBase64String(cryptoByte, 0, cryptoByte.Length);
