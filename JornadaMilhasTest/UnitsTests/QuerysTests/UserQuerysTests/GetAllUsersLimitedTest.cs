@@ -22,7 +22,7 @@ namespace JornadaMilhasTest.UnitsTests.QuerysTests.UserQuerysTests
         public async Task DeveraRetornarUsuariosPassandoOsParametrosCorretosQuandoSolicitadoTodos()
         {
             //arrange
-            var mockUserRepositoryTask = await UserLimitedRepositoryMockBuilder.CreateBuilder(_fixture).WithGetAllUsersAsync(10);
+            var mockUserRepositoryTask = UserLimitedRepositoryMockBuilder.CreateBuilder(_fixture).WithGetAllUsersAsync(10);
             var mockUserRepository = mockUserRepositoryTask.Build();
             var getUsersHandler = new GetAllUserLimtedQueryHandler(mockUserRepository.Object);
             var getUserRequest = new GetAllUsersLimitedQuery(1, 10);

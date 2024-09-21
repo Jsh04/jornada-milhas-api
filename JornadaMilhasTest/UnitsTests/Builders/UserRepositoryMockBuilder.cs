@@ -20,7 +20,22 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             _fixture = fixture;
         }
 
+
         public static UserRepositoryMockBuilder CreateBuilder(Fixture fixture) => new(fixture);
+
+        public UserRepositoryMockBuilder AddGetByIdAsync(long id)
+        {
+            _mock.Setup(repository => repository.GetByIdAsync(id, It.IsAny<CancellationToken>())).ReturnsAsync(UnitTestHelper.GetUserLimitedTest(_fixture));
+
+            return this;
+        }
+
+        public UserRepositoryMockBuilder AddGetByEmailAsync(string email)
+        {
+            _mock.Setup(x => x.GetByEmailAsync(email, CancellationToken.None)).ReturnsAsync(UnitTestHelper.GetUserLimitedTest(_fixture));
+            
+            return this;
+        }
 
         public override Mock<IUserRepository> Build()
         {
