@@ -2,6 +2,7 @@
 using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Common.Persistence.Queue;
+using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Core.Entities.Users.UserAdmin;
@@ -19,6 +20,8 @@ public class JornadaMilhasDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Depoiment> Depoimentos { get; set; }
     public DbSet<QueueGeneric> Queue { get; set; }
+
+    public DbSet<Company> Company { get; set; }
 
     public JornadaMilhasDbContext(DbContextOptions<JornadaMilhasDbContext> options) : base(options) { }
 

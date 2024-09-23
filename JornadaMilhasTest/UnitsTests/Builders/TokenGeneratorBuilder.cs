@@ -16,7 +16,7 @@ namespace JornadaMilhasTest.UnitsTests.Builders
 
         public TokenGeneratorBuilder()
         {
-            _tokenOptions = Options.Create(new TokenOptions() { SecretKey = UnitTestHelper.GenerateSecretKey() }).Value;
+            _tokenOptions = Options.Create(new TokenOptions { SecretKey = UnitTestHelper.GenerateSecretKey() }).Value;
         }
 
         public static TokenGeneratorBuilder CreateInstance() => new();
