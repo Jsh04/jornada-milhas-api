@@ -17,15 +17,14 @@ namespace JornadaMilhas.Infrastruture.Persistence.Repository
         private JornadaMilhasDbContext _context;
         public CompanyRepository(JornadaMilhasDbContext context) => _context = context;
         
-
         public void Create(Company entity)
         {
             _context.Company.Add(entity);
         }
 
-        public async Task<bool> IsUniqueAsync(string codeCompany, CancellationToken cancellationToken = default)
+        public async Task<bool> IsUniqueAsync(string name, CancellationToken cancellationToken = default)
         {
-            return await _context.Company.AnyAsync(company => company.CodeCompany == codeCompany, cancellationToken);
+            return await _context.Company.AnyAsync(company => company.Name == name, cancellationToken);
         }
     }
 }

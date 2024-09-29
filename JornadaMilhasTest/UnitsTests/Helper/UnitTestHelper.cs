@@ -18,16 +18,7 @@ namespace JornadaMilhasTest.UnitsTests.Helper
 {
     public static class UnitTestHelper
     {
-        public static Destiny GetDestinyTest(Fixture fixture)
-        {
-            fixture.Customize<Destiny>(custom => custom.FromFactory(() =>
-            {
-                return Destiny.Create(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<decimal>(), fixture.Create<string>(), fixture.Create<string>(), new List<ImagemDestino>()).Value;
-            }));
-
-            return fixture.Build<Destiny>().OmitAutoProperties().Create();
-        }
-
+        
         public static string GenerateSecretKey(int length = 32)
         {
             var ramdomNumbers = new byte[length];

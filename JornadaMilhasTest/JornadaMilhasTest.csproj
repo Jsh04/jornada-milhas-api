@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UnitsTests\Infraestruture\" />
+    <Folder Include="UnitsTests\Application\ValidationsTests\" />
   </ItemGroup>
 
 </Project>

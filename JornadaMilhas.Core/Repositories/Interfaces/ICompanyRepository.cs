@@ -10,6 +10,6 @@ namespace JornadaMilhas.Core.Repositories.Interfaces
 {
     public interface ICompanyRepository : ICreatableRepository<Company>
     {
-        Task<bool> IsUniqueAsync(string codeCompany, CancellationToken cancellationToken = default);
+        Task<bool> IsUniqueAsync(string name, CancellationToken cancellationToken = default);
     }
 }
