@@ -18,7 +18,6 @@ namespace JornadaMilhasTest.UnitsTests.Helper
 {
     public static class UnitTestHelper
     {
-        
         public static string GenerateSecretKey(int length = 32)
         {
             var ramdomNumbers = new byte[length];

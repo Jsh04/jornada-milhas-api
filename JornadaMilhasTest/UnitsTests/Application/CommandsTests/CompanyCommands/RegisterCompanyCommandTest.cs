@@ -32,7 +32,7 @@ namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.CompanyCommands
             var companyRepository = CompanyRepositoryMockBuilder.CreateBuilder(_fixture).Build();
             var companyHandler = new RegisterCompanyCommandHandler(companyRepository.Object, unitOfWork.Object);
 
-            var companyCommand = new RegisterCompanyCommand("Company1", "Company Description", _fixture.Create<string>());
+            var companyCommand = new RegisterCompanyCommand("Company1", "Company Description", _fixture.Create<string>(), _fixture.Create<DateTime>());
 
             //act 
             var result = await companyHandler.Handle(companyCommand, CancellationToken.None);
@@ -48,7 +48,7 @@ namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.CompanyCommands
             var companyRepository = CompanyRepositoryMockBuilder.CreateBuilder(_fixture).Build();
             var companyHandler = new RegisterCompanyCommandHandler(companyRepository.Object, unitOfWork.Object);
 
-            var companyCommand = new RegisterCompanyCommand("", "Company Description", _fixture.Create<string>());
+            var companyCommand = new RegisterCompanyCommand("", "Company Description", _fixture.Create<string>(), _fixture.Create<DateTime>());
 
             //act 
             var resulted = await _validator.ValidateAsync(companyCommand);
