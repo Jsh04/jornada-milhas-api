@@ -1,6 +1,7 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
+using JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock;
 using JornadaMilhasTest.UnitsTests.Seeds;
 using Moq;
 using System;
@@ -27,7 +28,7 @@ namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.RepositoryTest
         public async Task GetAllAsync_DeveraRetornarAQuantidadeCertaSolicitado_QuandoChamadoNoRepositorio(int page, int size, int numberObjects)
         {
             //arrange
-            var contextMock = JornadaMilhasContextMock.CreateInstance(_fixture).AddDbSetDestiny(numberObjects).Build();
+            var contextMock = ContextDestinyMock.CreateInstance(_fixture, numberObjects).AddDbSetDestiny().Build();
             var destinyRespository = new DestinyRepository(contextMock.Object);
 
             //act
@@ -46,17 +47,21 @@ namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.RepositoryTest
         }
 
         [Test]
-        public void Create_DeveraSerChamadoOMetodoCreateUmaVez_QuandoForCadastrar()
+        public async Task Create_DeveraSerChamadoOMetodoCreateUmaVez_QuandoForCadastrar()
         {
             //arrange
-            var contextMock = JornadaMilhasContextMock.CreateInstance(_fixture).AddDbSetDestiny(10).Build();
-            var destinyRespository = new DestinyRepository(contextMock.Object);
             var destiny = DestinySeed.GetDestinyTest(_fixture);
+
+            var contextMock = ContextDestinyMock.CreateInstance(_fixture).AddDbSetDestiny().AddDbSetEventAddObject(destiny).Build();
+
+            var destinyRespository = new DestinyRepository(contextMock.Object);
+            
             //act
             destinyRespository.Create(destiny);
-
+            var destinies = await destinyRespository.GetAllAsync(page: 2);
+            
             //assert
-            contextMock.Verify(x => x.Destinos, Times.Once);
+            Assert.That(destinies.Data, Has.Count.EqualTo(1));
         }
 
 

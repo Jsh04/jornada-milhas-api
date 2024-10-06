@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhasTest.UnitsTests.Seeds;
@@ -10,37 +11,23 @@ using System.Xml;
 
 namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence
 {
-    public class JornadaMilhasContextMock
+    public abstract class JornadaMilhasContextMock<TEntity> where TEntity : BaseEntity 
     {
-        private readonly Mock<JornadaMilhasDbContext> _mockDbContext;
+        protected readonly Mock<JornadaMilhasDbContext> _mockDbContext;
 
-        private readonly Fixture _fixture;
+        protected readonly Fixture _fixture;
 
-        private JornadaMilhasContextMock(Fixture fixture)
+        protected JornadaMilhasContextMock(Fixture fixture)
         {
             _mockDbContext = new Mock<JornadaMilhasDbContext>();
             _fixture = fixture;
-           
-        }
-        public static JornadaMilhasContextMock CreateInstance(Fixture fixture) => new(fixture);
-
-        public JornadaMilhasContextMock AddDbSetDestiny(int numberObjects)
-        {
-            var dbSetDestiny = GetDbSetToMock(numberObjects);
-            _mockDbContext.Setup(x => x.Destinos).Returns(dbSetDestiny.Object);
-
-            return this;
         }
 
-        public Mock<JornadaMilhasDbContext> Build()
-        {
-            return _mockDbContext;
-        }
+        public abstract JornadaMilhasContextMock<TEntity> AddDbSetDestiny();
 
-        private Mock<DbSet<Destiny>> GetDbSetToMock(int numberObjects)
-        {
-            return DestinySeed.GetDestiniesByNumberOfObjects(_fixture, numberObjects)
-                .AsQueryable().BuildMockDbSet();
-        }
+        public abstract JornadaMilhasContextMock<TEntity> AddDbSetEventAddObject(Destiny destiny);
+
+        public abstract Mock<JornadaMilhasDbContext> Build();
+
     }
 }
