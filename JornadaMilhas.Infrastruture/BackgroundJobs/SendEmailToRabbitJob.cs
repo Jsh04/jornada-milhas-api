@@ -29,7 +29,7 @@ namespace JornadaMilhas.Infrastruture.BackgroundJobs
                 var context = scope.ServiceProvider.GetRequiredService<JornadaMilhasDbContext>();
                 var publish = scope.ServiceProvider.GetRequiredService<IPublisher>();
 
-                var queueObjs = await context.Set<QueueGeneric>().Where(queue => queue.ProcessedAt == null).Take(20)
+                var queueObjs = await context.Set<OutboxMessage>().Where(queue => queue.ProcessedAt == null).Take(20)
                     .ToListAsync(stoppingToken);
 
                 await PublishToHandlerSendEmail(queueObjs, publish, stoppingToken);
@@ -41,7 +41,7 @@ namespace JornadaMilhas.Infrastruture.BackgroundJobs
             }
         }
 
-        private async Task PublishToHandlerSendEmail(List<QueueGeneric> queues, IPublisher publisher, CancellationToken stoppingToken)
+        private async Task PublishToHandlerSendEmail(List<OutboxMessage> queues, IPublisher publisher, CancellationToken stoppingToken)
         {
             foreach (var queue in queues)
             {

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JornadaMilhas.Common.Persistence.Configuration
 {
-    public class QueueGenericConfiguration : IEntityTypeConfiguration<QueueGeneric>
+    public class OutboxMessageConfiguration : IEntityTypeConfiguration<OutboxMessage>
     {
-        public void Configure(EntityTypeBuilder<QueueGeneric> builder)
+        public void Configure(EntityTypeBuilder<OutboxMessage> builder)
         {
             builder.HasKey(b => b.Id);
 

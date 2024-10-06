@@ -34,7 +34,7 @@ namespace JornadaMilhas.Infrastruture.Interceptors
 
                     return listDomainsEventReturned;
                 })
-                .Select(domainEvent => new QueueGeneric
+                .Select(domainEvent => new OutboxMessage
                 {
                     Id = Guid.NewGuid(),
                     TimeCreated = DateTime.Now,
@@ -45,7 +45,7 @@ namespace JornadaMilhas.Infrastruture.Interceptors
                     }),
                 }).ToList();
 
-            await context.Set<QueueGeneric>().AddRangeAsync(queueEmailsObjs);
+            await context.Set<OutboxMessage>().AddRangeAsync(queueEmailsObjs);
         }
     }
 }

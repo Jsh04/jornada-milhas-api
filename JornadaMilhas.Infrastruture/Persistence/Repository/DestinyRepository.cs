@@ -7,11 +7,11 @@ using System.Linq.Expressions;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Repository;
 
-public class RepositoryDestino : IRepositoryDestino
+public class DestinyRepository : IRepositoryDestino
 {
     private readonly JornadaMilhasDbContext _context;
 
-    public RepositoryDestino(JornadaMilhasDbContext context) => _context = context;
+    public DestinyRepository(JornadaMilhasDbContext context) => _context = context;
 
     public void Create(Destiny destino) => _context.Destinos.Add(destino);
     
@@ -41,7 +41,7 @@ public class RepositoryDestino : IRepositoryDestino
     {
         var updted = _context.Destinos.Update(obj);
 
-        return updted.State == EntityState.Modified;
+        return updted.State is EntityState.Modified;
     }
 
    

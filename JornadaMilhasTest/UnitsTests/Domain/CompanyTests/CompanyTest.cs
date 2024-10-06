@@ -26,9 +26,11 @@ namespace JornadaMilhasTest.UnitsTests.Domain.CompanyTests
             var name = _fixture.Create<string>();
             var description = _fixture.Create<string>();
             var codeCompany = _fixture.Create<string>();
+            var country = _fixture.Create<string>();
+            var dateFoundation = _fixture.Create<DateTime>();
 
             //act 
-            var result = Company.Create(name, description, codeCompany);
+            var result = Company.Create(name, description, country, dateFoundation);
 
             //assert
             Assert.Multiple(() =>

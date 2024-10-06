@@ -86,7 +86,7 @@ namespace JornadaMilhas.Infrastruture
 
         private static IServiceCollection AddInjectionRepositorys(this IServiceCollection services)
         {
-            services.AddScoped<IRepositoryDestino, RepositoryDestino>();
+            services.AddScoped<IRepositoryDestino, DestinyRepository>();
             services.AddScoped<IUserLimitedRepository, UserLimitedRepository>();
             services.AddScoped<IDepoimentRepository, DepoimentRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();

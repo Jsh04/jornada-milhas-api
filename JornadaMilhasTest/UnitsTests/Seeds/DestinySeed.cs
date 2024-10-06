@@ -14,26 +14,26 @@ namespace JornadaMilhasTest.UnitsTests.Seeds
     {
         public static Destiny GetDestinyTest(Fixture fixture)
         {
-            var fixtureCustom = CustomizeCreateDestiny(fixture);
-
-            return fixtureCustom.Build<Destiny>().OmitAutoProperties().Create();
+            return fixture.Build<Destiny>()
+                .FromFactory(CustomizeCreateDestiny(fixture))
+                .OmitAutoProperties()
+                .Create();
         }
 
         public static IEnumerable<Destiny> GetDestiniesByNumberOfObjects(Fixture fixture, int numberOfObjects)
         {
-            var fixtureCustom = CustomizeCreateDestiny(fixture);
-
-            return fixtureCustom.Build<Destiny>().OmitAutoProperties().CreateMany(numberOfObjects);
+            return fixture.Build<Destiny>()
+                .FromFactory(CustomizeCreateDestiny(fixture))
+                .OmitAutoProperties()
+                .CreateMany(numberOfObjects);
         }
 
-        private static Fixture CustomizeCreateDestiny(Fixture fixture)
+        private static Func<Destiny> CustomizeCreateDestiny(Fixture fixture)
         {
-            fixture.Customize<Destiny>(custom => custom.FromFactory(() =>
+            return () =>
             {
                 return Destiny.Create(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<decimal>(), fixture.Create<string>(), fixture.Create<string>(), new List<ImagemDestino>()).Value;
-            }));
-
-            return fixture;
+            };
         }
     }
 }
