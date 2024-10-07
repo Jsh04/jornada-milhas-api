@@ -1,25 +1,57 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
+name: Pipeline To Main
+
 on:
   pull_request:
     branches: 
-      - main
-
+      - 'main'
+  workflow_dispatch:
+    inputs:
+      dotnetVersion:
+        description: 'Versão do .NET'
+        required: true
+        default: '6.0.x'
+        type: choice
+        options:
+        - '6.0.x'
+        - '7.0.x'
+      testCategory:
+        description: 'Categoria de Testes'
+        required: true
+        default: 'UnitTests'
+        type: string
 jobs:
   build:
-    runs-on: windows-latest
+      runs-on: windows-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Setup  .NET
+          uses: actions/setup-dotnet@v3
+          with:
+            dotnet-version: '6.0.x'
+        - name: Restore dependencies
+          run: dotnet restore
+        - name: Build
+          run: dotnet build --no-restore --configuration Release
+        - name: Upload artifact
+          uses: actions/upload-artifact@v3 
+          with:
+            name: application
+            path: src/bin/Release/
+  tests:
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        dotnet-version: ['6.0.x', '7.0.x']
     steps:
-      - uses: actions/checkout@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v3
       - name: Configure .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.0.x'
-      - name: Restore dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build --no-restore
+          dotnet-version: ${{ matrix.dotnet-version }}
       - name: Test
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test --no-build --verbosity normal --filter "Category=UnitTests" 
