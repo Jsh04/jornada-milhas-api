@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhasTest.UnitsTests.CommandsTests.DestinyCommandTests;
+namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.DestinyCommandTests;
 
 [TestFixture]
 public class DeleteDestinyCommandTest

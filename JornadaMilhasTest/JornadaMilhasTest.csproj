@@ -22,8 +22,8 @@
     <PackageReference Include="AutoFixture" Version="4.18.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.28" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="MockQueryable.Moq" Version="6.0.1" />
     <PackageReference Include="Moq" Version="4.20.70" />
-    <PackageReference Include="Moq.EntityFrameworkCore" Version="6.0.1.4" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
     <PackageReference Include="NUnit.Analyzers" Version="3.6.1" />
@@ -35,6 +35,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JornadaMilhas.API\JornadaMilhas.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitsTests\Application\ValidationsTests\" />
   </ItemGroup>
 
 </Project>

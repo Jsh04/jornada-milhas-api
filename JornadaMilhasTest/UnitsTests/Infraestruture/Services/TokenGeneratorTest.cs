@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhasTest.UnitsTests.Services
+namespace JornadaMilhasTest.UnitsTests.Infraestruture.Services
 {
     internal class TokenGeneratorTest
     {

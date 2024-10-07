@@ -1,6 +1,7 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhasTest.UnitsTests.Helper;
+using JornadaMilhasTest.UnitsTests.Seeds;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,9 @@ namespace JornadaMilhasTest.UnitsTests.Builders
 
         public DestinyRepositoryMockBuilder AddGetDestinyById(long id)
         {
-            _mock.Setup(x => x.GetByIdAsync(id, It.IsAny<CancellationToken>())).ReturnsAsync(UnitTestHelper.GetDestinyTest(_fixture));
+            _mock.Setup(x => x.GetByIdAsync(id, It.IsAny<CancellationToken>())).ReturnsAsync(DestinySeed.GetDestinyTest(_fixture));
             return this;
         }
-
 
         public override Mock<IRepositoryDestino> Build()
         {

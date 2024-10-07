@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JornadaMilhasTest.UnitsTests.QuerysTests.LoginQueryTests
+namespace JornadaMilhasTest.UnitsTests.Application.QuerysTests.LoginQueryTests
 {
     [TestFixture]
     public class LoginQueryTest
@@ -44,10 +44,10 @@ namespace JornadaMilhasTest.UnitsTests.QuerysTests.LoginQueryTests
 
             //act
             var result = await loginQueryHandler.Handle(loginQuery, CancellationToken.None);
-            
+
             //assert
             Assert.Multiple(() =>
-            {    
+            {
                 Assert.That(result.Success, Is.True);
                 Assert.That(result.Value, Is.Not.Null);
             });

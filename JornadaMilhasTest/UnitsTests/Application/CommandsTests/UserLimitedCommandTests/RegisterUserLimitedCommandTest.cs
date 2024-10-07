@@ -3,7 +3,7 @@ using JornadaMilhasTest.UnitsTests.Builders;
 using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhasTest.UnitsTests.Helper;
 
-namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
+namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.UserLimitedCommandTests
 {
     [TestFixture]
     public class RegisterUserLimitedCommandTest
@@ -27,7 +27,7 @@ namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
                 .Create();
             //act
             var result = await resgisterUserLimitedHandler.Handle(requestUserLimitedRegisterCommand, CancellationToken.None);
-            
+
             //assert
             Assert.Multiple(() =>
             {
@@ -92,8 +92,8 @@ namespace JornadaMilhasTest.UnitsTests.CommandsTests.UserCommandTests
                 Assert.That(result.Errors, Is.Not.Empty);
                 Assert.That(result.Errors, Has.Count.EqualTo(1));
             });
-            
-;
+
+            ;
         }
     }
 }

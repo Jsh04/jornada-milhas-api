@@ -1,6 +1,6 @@
 ﻿namespace JornadaMilhas.Common.Persistence.Queue;
 
-public sealed class QueueGeneric
+public sealed class OutboxMessage
 {
     public Guid Id { get; set; }
 

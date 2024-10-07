@@ -13,6 +13,12 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             return this;
         }
 
+        public BaseMockBuilder<IUnitOfWork> AddCommitAsync(Task result)
+        {
+            _mock.Setup(x => x.CommitAsync(It.IsAny<CancellationToken>())).Returns(result);
+            return this;
+        }
+
         public override Mock<IUnitOfWork> Build()
         {
             return _mock;

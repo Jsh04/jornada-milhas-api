@@ -31,7 +31,7 @@ public abstract class UserBuilder<TUser, TBuilder>
 
     protected string _password;
 
-    private readonly TBuilder _builder = null;
+    private readonly TBuilder _builder;
 
     protected List<IError> _errors = new();
 
