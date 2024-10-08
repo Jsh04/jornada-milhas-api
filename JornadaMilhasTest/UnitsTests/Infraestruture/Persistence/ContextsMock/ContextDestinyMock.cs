@@ -11,9 +11,9 @@ namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock
     public class ContextDestinyMock : JornadaMilhasContextMock<Destiny>
     {
         private readonly List<Destiny> SeedObjects;
-        private ContextDestinyMock(Fixture fixture, int numberObjects) : base(fixture)
+        private ContextDestinyMock(Fixture fixture, int numberObjects, List<Destiny>? seedCustom = default) : base(fixture)
         {
-            SeedObjects = DestinySeed.GetDestiniesByNumberOfObjects(fixture, numberObjects).ToList();
+            SeedObjects = seedCustom ?? DestinySeed.GetDestiniesByNumberOfObjects(fixture, numberObjects).ToList();
         }
 
         public static ContextDestinyMock CreateInstance(Fixture fixture, int numberObjects = 10) => new(fixture, numberObjects);

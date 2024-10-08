@@ -20,7 +20,6 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             _fixture = fixture;
         }
 
-
         public static UserRepositoryMockBuilder CreateBuilder(Fixture fixture) => new(fixture);
 
         public UserRepositoryMockBuilder AddGetByIdAsync(long id)

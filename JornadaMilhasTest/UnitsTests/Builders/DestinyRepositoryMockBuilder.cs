@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JornadaMilhasTest.UnitsTests.Builders
 {
-    public class DestinyRepositoryMockBuilder : BaseMockBuilder<IRepositoryDestino>
+    public class DestinyRepositoryMockBuilder : BaseMockBuilder<IDestinyRepository>
     {
         private readonly Fixture _fixture;
 
@@ -28,7 +28,7 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             return this;
         }
 
-        public override Mock<IRepositoryDestino> Build()
+        public override Mock<IDestinyRepository> Build()
         {
             return _mock;
         }
