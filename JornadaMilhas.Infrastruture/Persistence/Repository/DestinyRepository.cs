@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Repository;
 
-public class DestinyRepository : IRepositoryDestino
+public class DestinyRepository : IDestinyRepository
 {
     private readonly JornadaMilhasDbContext _context;
 

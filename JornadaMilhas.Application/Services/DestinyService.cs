@@ -1,8 +1,10 @@
 ﻿using JornadaMilhas.Application.Commands.DestinyCommands.DeleteDestiny;
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll;
 using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
+using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Destinys;
 using MediatR;
@@ -27,6 +29,12 @@ namespace JornadaMilhas.Application.Services
         {
             var deleteDestinyCommand = new DeleteDestinyCommand(id);
             return await _sender.Send(deleteDestinyCommand);
+        }
+
+        public async Task<PaginationResult<DestinyDto>> GetAllDestinies(int size, int page)
+        {
+            var getAllDestiniesQuery = new GetAllDestinysQuery(page, size);
+            return await _sender.Send(getAllDestiniesQuery);
         }
 
         public async Task<Result<DestinyDto>> GetDestinyById(long id)

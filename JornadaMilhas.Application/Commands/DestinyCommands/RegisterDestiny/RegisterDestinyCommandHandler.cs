@@ -9,8 +9,8 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
     public class RegisterDestinyCommandHandler : IRequestHandler<RegisterDestinyCommand, Result<Destiny>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepositoryDestino _repositoryDestiny;
-        public RegisterDestinyCommandHandler(IUnitOfWork unitOfWork, IRepositoryDestino repositoryDestino)
+        private readonly IDestinyRepository _repositoryDestiny;
+        public RegisterDestinyCommandHandler(IUnitOfWork unitOfWork, IDestinyRepository repositoryDestino)
         {
             _unitOfWork = unitOfWork;
             _repositoryDestiny = repositoryDestino;
