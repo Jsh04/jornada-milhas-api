@@ -13,8 +13,6 @@ namespace JornadaMilhasTest.UnitsTests.Apresentation
     [TestFixture]
     public class DestinyControllerTest
     {
-
-
         [Test]
         public async Task GetAllDestiniesAsync_DeveraRetornarOk_PassandoUmaRequestValida()
         {
