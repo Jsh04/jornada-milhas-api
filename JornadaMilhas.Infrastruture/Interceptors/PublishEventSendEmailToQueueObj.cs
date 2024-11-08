@@ -16,8 +16,7 @@ namespace JornadaMilhas.Infrastruture.Interceptors
 
             if (eventData.Context is not null)
                 await InsertSendEmailQueueAsync(eventData.Context);
-
-
+            
             return await base.SavingChangesAsync(eventData, result, cancellationToken);
         }
 

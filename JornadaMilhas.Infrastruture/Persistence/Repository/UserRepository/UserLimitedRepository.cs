@@ -29,7 +29,8 @@ public class UserLimitedRepository : IUserLimitedRepository
         return resultQueryUsers;
     }
 
-    public async Task<UserLimited?> GetByIdAsync(long id, CancellationToken cancellation = default) => await _context.UsersLimited.SingleOrDefaultAsync(user => user.Id == id, cancellation);
+    public async Task<UserLimited?> GetByIdAsync(long id, CancellationToken cancellation = default) => 
+        await _context.UsersLimited.SingleOrDefaultAsync(user => user.Id == id, cancellation);
 
     public Task<UserLimited> GetSingleByAsync(Expression<Func<UserLimited, bool>> expression, CancellationToken cancellationToken = default)
     {

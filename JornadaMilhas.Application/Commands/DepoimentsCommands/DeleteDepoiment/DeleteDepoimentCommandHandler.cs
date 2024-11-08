@@ -34,9 +34,6 @@ public class DeleteDepoimentCommandHandler : IRequestHandler<DeleteDepoimentComm
 
         var deleted = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 
-        if (!deleted)
-            return Result.Fail(DestinyErrors.CannotBeDeleted);
-
-        return Result.Ok();
+        return !deleted ? Result.Fail(DestinyErrors.CannotBeDeleted) : Result.Ok();
     }
 }

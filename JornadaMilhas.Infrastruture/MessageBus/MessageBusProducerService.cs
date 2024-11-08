@@ -29,8 +29,7 @@ public class MessageBusProducerService : IMessageBusProducerService
     {
         using var connection = _connectionFactory.CreateConnection();
         using var channel = connection.CreateModel();
-
-
+        
         var bodyData = GetBodyMessage(dataToSend);
 
         var nameExchange = typeof(T).Name;

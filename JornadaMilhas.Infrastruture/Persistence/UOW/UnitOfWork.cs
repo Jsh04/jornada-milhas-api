@@ -5,10 +5,8 @@ namespace JornadaMilhas.Infrastruture.Persistence.UOW;
 
 public class UnitOfWork : IUnitOfWork
 {
-
     private IDbContextTransaction _transaction;
-
-
+    
     private readonly JornadaMilhasDbContext _context;
 
     public UnitOfWork(JornadaMilhasDbContext context)
@@ -46,6 +44,7 @@ public class UnitOfWork : IUnitOfWork
 
     protected virtual void Dispose(bool disposing)
     {
-        if(disposing) _context.Dispose();
+        if(disposing) 
+            _context.Dispose();
     }
 }
