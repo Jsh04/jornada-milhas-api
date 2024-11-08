@@ -4,11 +4,6 @@ using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock;
 using JornadaMilhasTest.UnitsTests.Seeds;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.RepositoryTests
 {
@@ -28,14 +23,18 @@ namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.RepositoryTest
         public async Task GetAllAsync_DeveraRetornarAQuantidadeCertaSolicitado_QuandoChamadoNoRepositorio(int page, int size, int numberObjects)
         {
             //arrange
-            var contextMock = ContextDestinyMock.CreateInstance(_fixture, numberObjects).AddDbSetDestiny().Build();
+            var contextMock = JornadaMilhasContextMock<Destiny>
+                .CreateInstance(
+                DestinySeed.GetDestiniesByNumberOfObjects(_fixture, numberObjects).ToList(), x => x.Destinos)
+                .AddDbSet()
+                .Build();
             var destinyRespository = new DestinyRepository(contextMock.Object);
 
             //act
             var result = await destinyRespository.GetAllAsync(page, size);
 
             //assert
-            
+           
             Assert.Multiple(() =>
             {
                 Assert.That(result, Is.Not.Null);
@@ -52,7 +51,11 @@ namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.RepositoryTest
             //arrange
             var destiny = DestinySeed.GetDestinyTest(_fixture);
 
-            var contextMock = ContextDestinyMock.CreateInstance(_fixture).AddDbSetDestiny().AddDbSetEventAddObject(destiny).Build();
+            var contextMock = JornadaMilhasContextMock<Destiny>.CreateInstance(
+                DestinySeed.GetDestiniesByNumberOfObjects(_fixture, 10).ToList(), x => x.Destinos)
+                .AddDbSet()
+                .AddDbSetEventAddObject(destiny)
+                .Build();
 
             var destinyRespository = new DestinyRepository(contextMock.Object);
             

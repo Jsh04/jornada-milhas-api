@@ -10,9 +10,9 @@ namespace JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById
 {
     public class GetByIdDestinyQueryHandler : IRequestHandler<GetByIdDestinyQuery, Result<DestinyDto>>
     {
-        private readonly IRepositoryDestino _destinyRepository;
+        private readonly IDestinyRepository _destinyRepository;
 
-        public GetByIdDestinyQueryHandler(IRepositoryDestino destinyRepository)
+        public GetByIdDestinyQueryHandler(IDestinyRepository destinyRepository)
         {
             _destinyRepository = destinyRepository;
         }

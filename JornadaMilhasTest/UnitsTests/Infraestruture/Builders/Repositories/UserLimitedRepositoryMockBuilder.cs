@@ -18,9 +18,9 @@ namespace JornadaMilhasTest.UnitsTests.Builders
 
         public static UserLimitedRepositoryMockBuilder CreateBuilder(Fixture fixture) => new (fixture);
 
-        public UserLimitedRepositoryMockBuilder AddGetByIdAsync()
+        public UserLimitedRepositoryMockBuilder AddGetByIdAsync(UserLimited userToReturn)
         {
-            _mock.Setup(repository => repository.GetByIdAsync(It.IsAny<long>(), It.IsAny<CancellationToken>())).ReturnsAsync(UnitTestHelper.GetUserLimitedTest(_fixture));
+            _mock.Setup(repository => repository.GetByIdAsync(It.IsAny<long>(), It.IsAny<CancellationToken>())).ReturnsAsync(userToReturn);
 
             return this;
         }
@@ -32,7 +32,7 @@ namespace JornadaMilhasTest.UnitsTests.Builders
             return this;
         }
 
-        public  UserLimitedRepositoryMockBuilder WithGetAllUsersAsync(int numberToCreate,int size = 10, int page = 1)
+        public  UserLimitedRepositoryMockBuilder WithGetAllUsersAsync(int numberToCreate, int size = 10, int page = 1)
         {
             _mock.Setup(x => x.GetAllAsync(page, size, It.IsAny<CancellationToken>())).ReturnsAsync(UnitTestHelper.GetAllUsersFakeData(_fixture, numberToCreate, page, size));
             return this;

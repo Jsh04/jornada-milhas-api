@@ -10,8 +10,8 @@ public class DeleteDestinyCommandHandler : IRequestHandler<DeleteDestinyCommand,
 {
 
     private readonly IUnitOfWork _unitWork;
-    private readonly IRepositoryDestino _destinyRepository;
-    public DeleteDestinyCommandHandler(IUnitOfWork unitWork, IRepositoryDestino destinyRepository)
+    private readonly IDestinyRepository _destinyRepository;
+    public DeleteDestinyCommandHandler(IUnitOfWork unitWork, IDestinyRepository destinyRepository)
     {
         _unitWork = unitWork;
         _destinyRepository = destinyRepository;

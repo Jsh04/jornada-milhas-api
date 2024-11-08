@@ -1,4 +1,5 @@
-﻿using AutoFixture;
+﻿using System.Security.Claims;
+using AutoFixture;
 using JornadaMilhas.Common.ValueObjects;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
 
@@ -18,6 +19,18 @@ namespace JornadaMilhasTest.UnitsTests.Helper
 {
     public static class UnitTestHelper
     {
+
+        public static List<Claim> GetClaimsToTest(User user)
+        {
+            var claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Email, user.Email.Address),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Role, nameof(UserLimited)),
+            };
+            return claims;
+        }
+        
         public static string GenerateSecretKey(int length = 32)
         {
             var ramdomNumbers = new byte[length];

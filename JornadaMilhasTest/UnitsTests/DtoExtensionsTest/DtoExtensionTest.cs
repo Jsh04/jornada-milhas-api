@@ -26,7 +26,6 @@ public class DtoExtensionTest
 
         //assert
         Assert.That(depoimentDto.Name, Is.EqualTo(depoimentTest.Name));
-
     }
 
 }

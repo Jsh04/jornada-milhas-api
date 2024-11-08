@@ -40,6 +40,7 @@ namespace JornadaMilhas.Application.Commands.CompanyCommands.RegisterCompany
             _companyRepository.Create(company);
 
             var isCreated = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
+
             if (!isCreated)
                 return Result.Fail<CompanyDto>(CompanyErrors.CompanyCannotBeCreated);
             

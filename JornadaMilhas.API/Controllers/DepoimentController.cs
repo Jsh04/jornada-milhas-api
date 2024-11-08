@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JornadaMilhas.API;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/v1/[controller]")]
 public class DepoimentController : ControllerBase
 {
 

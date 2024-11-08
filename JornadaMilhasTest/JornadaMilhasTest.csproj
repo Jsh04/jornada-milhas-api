@@ -16,6 +16,7 @@
     <EmbeddedResource Remove="UnitsTest\**" />
     <None Remove="UnitsTests\Builder\**" />
     <None Remove="UnitsTest\**" />
+    <Compile Remove="UnitsTests\Builders\TokenGeneratorMockBuilder.cs" />
   </ItemGroup>
 
   <ItemGroup>

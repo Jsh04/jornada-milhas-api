@@ -2,11 +2,6 @@
 using JornadaMilhas.Infrastruture.Security;
 using JornadaMilhasTest.UnitsTests.Helper;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JornadaMilhasTest.UnitsTests.Builders
 {

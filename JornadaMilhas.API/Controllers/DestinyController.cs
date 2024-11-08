@@ -2,14 +2,13 @@
 using JornadaMilhas.API.Extensions;
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Interfaces.Services;
-using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Destinys;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API;
+
 
 [ApiController]
 [Route("[controller]")]
@@ -36,6 +35,15 @@ public class DestinyController : ControllerBase
             value => value.ToProblemDetails());
     }
 
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<DestinyDto>))]
+    public async Task<IActionResult> GetAllDestinies([FromQuery] int page = 1, [FromQuery]int size = 10)
+    {
+        var result = await _destinyService.GetAllDestinies(page, size);
+        return Ok(result);
+    }
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
