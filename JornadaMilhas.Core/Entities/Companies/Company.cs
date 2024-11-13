@@ -12,25 +12,22 @@ namespace JornadaMilhas.Core.Entities.Companies
     public class Company : BaseEntity
     {
         public string Name { get; private set; }
-
-        public string Description { get; private set; }
-
+        
         public string OriginCountry { get; set; }
 
         public DateTime DtFoundation { get; set; }
 
 
-        private Company(string name, string description, string originCountry, DateTime dtFoundation)
+        private Company(string name, string originCountry, DateTime dtFoundation)
         {
             Name = name;
-            Description = description;
             OriginCountry = originCountry;
             DtFoundation = dtFoundation;
         }
 
-        public static Result<Company> Create(string name, string description, string originCountry, DateTime dtFoundation)
+        public static Result<Company> Create(string name, string originCountry, DateTime dtFoundation)
         {
-            var company = new Company(name, description, originCountry, dtFoundation);
+            var company = new Company(name,  originCountry, dtFoundation);
 
             return Result.Ok(company);
         }

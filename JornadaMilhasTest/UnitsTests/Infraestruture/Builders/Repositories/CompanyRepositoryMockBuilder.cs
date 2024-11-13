@@ -24,7 +24,7 @@ namespace JornadaMilhasTest.UnitsTests.Builders
 
         public CompanyRepositoryMockBuilder AddCreate(Company company)
         {
-            _mock.Setup(x => x.Create(company));
+            _mock.Setup(x => x.CreateAsync(company));
             return this;
         }
 

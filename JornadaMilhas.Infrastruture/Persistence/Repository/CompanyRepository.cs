@@ -10,9 +10,9 @@ namespace JornadaMilhas.Infrastruture.Persistence.Repository
         private readonly JornadaMilhasDbContext _context;
         public CompanyRepository(JornadaMilhasDbContext context) => _context = context;
         
-        public void Create(Company entity)
+        public async Task CreateAsync(Company entity)
         {
-            _context.Company.Add(entity);
+            await _context.Company.AddAsync(entity);
         }
 
         public async Task<bool> IsUniqueAsync(string name, CancellationToken cancellationToken = default)

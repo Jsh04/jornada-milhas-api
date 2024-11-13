@@ -20,6 +20,8 @@ public class JornadaMilhasDbContext : DbContext
     public virtual DbSet<UserAdmin> UsersAdmin { get; set; }
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<Depoiment> Depoimentos { get; set; }
+
+    public virtual DbSet<Company> Companies { get; set; }
     
     public virtual DbSet<OutboxMessage> OutboxMessage { get; set; }
 

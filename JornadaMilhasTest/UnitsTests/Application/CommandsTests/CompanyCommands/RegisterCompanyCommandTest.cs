@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoFixture;
 using JornadaMilhas.Application.Commands.CompanyCommands.RegisterCompany;
+using JornadaMilhas.Common.Results.Errors;
 using JornadaMilhasTest.UnitsTests.Builders;
+using static NUnit.Framework.Assert;
 
 namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.CompanyCommands
 {
@@ -14,47 +16,47 @@ namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.CompanyCommands
     {
         private readonly Fixture _fixture;
 
-        private RegisterCompanyCommandValidator _validator;
-
         public RegisterCompanyCommandTest()
         {
             _fixture = SharingResources.AutoFixture;
-            _validator = new RegisterCompanyCommandValidator();
         }
-
-
-
-
+        
         [Test]
-        public async Task DeverarRetornarOkPassandoOsDadosCorretosQuandoNaoExistirRegistroNoBanco()
+        public async Task Handle_DeverarRetornarOk_PassandoOsDadosCorretos()
         {
             var unitOfWork = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
             var companyRepository = CompanyRepositoryMockBuilder.CreateBuilder(_fixture).Build();
             var companyHandler = new RegisterCompanyCommandHandler(companyRepository.Object, unitOfWork.Object);
 
-            var companyCommand = new RegisterCompanyCommand("Company1", "Company Description", _fixture.Create<string>(), _fixture.Create<DateTime>());
+            var companyCommand = new RegisterCompanyCommand("Company1", _fixture.Create<string>(), _fixture.Create<DateTime>());
 
             //act 
             var result = await companyHandler.Handle(companyCommand, CancellationToken.None);
 
             //assert
-            Assert.That(result.Success, Is.True);
+            That(result.Success, Is.True);
         }
 
         [Test]
-        public async Task DeverarRetornarFalhaPassandoONomeNuloOuVazioQuandoNaoExistirRegistroNoBanco()
+        public async Task Handle_DeverarRetornarFalha_PassandoONomeNuloOuVazio()
         {
             var unitOfWork = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
             var companyRepository = CompanyRepositoryMockBuilder.CreateBuilder(_fixture).Build();
             var companyHandler = new RegisterCompanyCommandHandler(companyRepository.Object, unitOfWork.Object);
 
-            var companyCommand = new RegisterCompanyCommand("", "Company Description", _fixture.Create<string>(), _fixture.Create<DateTime>());
+            var companyCommand = new RegisterCompanyCommand("", _fixture.Create<string>(), _fixture.Create<DateTime>());
 
             //act 
-            var resulted = await _validator.ValidateAsync(companyCommand);
-
+            var resulted = await companyHandler.Handle(companyCommand, CancellationToken.None);
+            
             //assert
-            Assert.That(resulted.IsValid, Is.False);
+            Assert.Multiple(() =>
+            {
+                That(resulted.Success, Is.False);
+                That(resulted.Errors, Has.Count);
+                That(resulted.Errors[0].Type, Is.EqualTo(ErrorType.Validation));
+            });
+            
         }
     }
 }

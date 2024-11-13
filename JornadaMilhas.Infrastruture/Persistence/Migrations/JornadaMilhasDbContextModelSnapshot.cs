@@ -61,7 +61,7 @@ namespace JornadaMilhas.Infrastruture.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Common.Persistence.Queue.QueueGeneric", b =>
+            modelBuilder.Entity("JornadaMilhas.Common.Persistence.Queue.OutboxMessage", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,7 +88,41 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Queue");
+                    b.ToTable("OutboxMessage");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Companies.Company", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DtCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DtFoundation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DtUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("OriginCountry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Company");
                 });
 
             modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoiments.Depoiment", b =>

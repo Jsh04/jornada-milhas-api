@@ -23,7 +23,5 @@ namespace JornadaMilhasTest.UnitsTests.Builders
         {
             return _mock;
         }
-
-
     }
 }
