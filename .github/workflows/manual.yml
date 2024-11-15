@@ -54,4 +54,4 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Test
-        run: dotnet test --no-build --verbosity normal --filter "Category=UnitTests" 
+        run: dotnet test ./JornadaMilhasTest/JornadaMilhasTest.csproj --no-build --verbosity normal --filter "Category=UnitTests" 
