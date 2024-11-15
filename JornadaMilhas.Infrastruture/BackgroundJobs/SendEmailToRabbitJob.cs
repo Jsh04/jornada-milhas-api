@@ -25,7 +25,7 @@ namespace JornadaMilhas.Infrastruture.BackgroundJobs
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                using var scope = _serviceProvider.CreateAsyncScope();
+                await using var scope = _serviceProvider.CreateAsyncScope();
                 var context = scope.ServiceProvider.GetRequiredService<JornadaMilhasDbContext>();
                 var publish = scope.ServiceProvider.GetRequiredService<IPublisher>();
 

@@ -47,7 +47,7 @@ public class RegisterUserLimitedCommandHandler : IRequestHandler<RegisterUserLim
 
         var user = userResult.Value;
 
-        _userLimitedRepository.Create(user);
+        await _userLimitedRepository.CreateAsync(user);
 
         RaiseEventSendEmail(user);
 

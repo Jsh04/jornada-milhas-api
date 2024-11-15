@@ -14,7 +14,7 @@ public class UserLimitedRepository : IUserLimitedRepository
 
     public UserLimitedRepository(JornadaMilhasDbContext context) => _context = context;
 
-    public void Create(UserLimited obj) => _context.UsersLimited.Add(obj);
+    public async Task CreateAsync(UserLimited obj) => await _context.UsersLimited.AddAsync(obj);
 
     public Task<PaginationResult<UserLimited>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
     {

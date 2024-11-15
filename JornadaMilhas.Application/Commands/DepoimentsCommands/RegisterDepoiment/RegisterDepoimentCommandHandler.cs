@@ -43,7 +43,7 @@ namespace JornadaMilhas.Application.Commands.DepoimentsCommands.RegisterDepoimen
 
             var depoiment = depoimentResult.Value;
 
-            _depoimentRepository.Create(depoiment);
+            await _depoimentRepository.CreateAsync(depoiment);
 
             var created = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 

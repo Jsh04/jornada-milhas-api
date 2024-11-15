@@ -23,6 +23,7 @@ public class MessageBusProducerService : IMessageBusProducerService
             HostName = _rabbitMqOptions.HostName,
             Port = _rabbitMqOptions.Port
         };
+        
     }
 
     public void Publish<T>(string queue, T dataToSend)
@@ -85,13 +86,13 @@ public class MessageBusProducerService : IMessageBusProducerService
         QueueBindDynamicType(channel, eventName, queue);
 
         var consumer = new EventingBasicConsumer(channel);
-         consumer.Received += async (model, ea) =>
-         {
+        consumer.Received += async (model, ea) =>
+        {
+            var objDeserialized = GetDataOfBodyQueue<TDomainEvent>(ea);
 
-             var objDeserialized = GetDataOfBodyQueue<TDomainEvent>(ea);
-
-             await eventHandler.Handle(objDeserialized);
-         };
+            if (objDeserialized is not null)
+                await eventHandler.Handle(objDeserialized);
+        };
 
         channel.BasicConsume(queue: queue, autoAck: true, consumer: consumer);
     }

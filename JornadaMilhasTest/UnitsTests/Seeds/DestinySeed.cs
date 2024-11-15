@@ -32,7 +32,13 @@ namespace JornadaMilhasTest.UnitsTests.Seeds
         {
             return () =>
             {
-                return Destiny.Create(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<decimal>(), fixture.Create<string>(), fixture.Create<string>(), new List<ImagemDestino>()).Value;
+                return Destiny.Create(
+                    fixture.Create<string>(), 
+                    fixture.Create<string>(), 
+                    fixture.Create<decimal>(), 
+                    fixture.Create<string>(), 
+                    fixture.Create<string>(), 
+                    new List<ImagemDestino>()).Value;
             };
         }
     }

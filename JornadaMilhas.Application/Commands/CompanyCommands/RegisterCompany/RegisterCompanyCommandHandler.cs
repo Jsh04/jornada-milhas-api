@@ -33,11 +33,11 @@ namespace JornadaMilhas.Application.Commands.CompanyCommands.RegisterCompany
 
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            var companyResult = Company.Create(request.Name, request.Description, request.OriginCountry, request.DtFoundation);
+            var companyResult = Company.Create(request.Name, request.OriginCountry, request.DtFoundation);
 
             var company = companyResult.Value;
 
-            _companyRepository.Create(company);
+            await _companyRepository.CreateAsync(company);
 
             var isCreated = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 

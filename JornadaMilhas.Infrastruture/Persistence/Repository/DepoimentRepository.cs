@@ -13,7 +13,7 @@ public class DepoimentRepository : IDepoimentRepository
 
     public DepoimentRepository(JornadaMilhasDbContext context) => _context = context;
 
-    public void Create(Depoiment obj) => _context.Depoimentos.Add(obj);
+    public async Task CreateAsync(Depoiment obj) => await _context.Depoimentos.AddAsync(obj);
 
     public Task<PaginationResult<Depoiment>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
     {

@@ -9,6 +9,6 @@ using MediatR;
 
 namespace JornadaMilhas.Application.Commands.CompanyCommands.RegisterCompany;
 
-public record RegisterCompanyCommand(string Name, string Description, string OriginCountry, DateTime DtFoundation) : IRequest<Result<CompanyDto>>;
+public record RegisterCompanyCommand(string Name, string OriginCountry, DateTime DtFoundation) : IRequest<Result<CompanyDto>>;
     
 

@@ -13,7 +13,7 @@ public class DestinyRepository : IDestinyRepository
 
     public DestinyRepository(JornadaMilhasDbContext context) => _context = context;
 
-    public void Create(Destiny destino) => _context.Destinos.Add(destino);
+    public async Task CreateAsync(Destiny destino) => await _context.Destinos.AddAsync(destino);
     
     public Task<PaginationResult<Destiny>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
     {

@@ -35,7 +35,7 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
 
             var destiny = destinyResult.Value;
 
-            _repositoryDestiny.Create(destiny);
+            await _repositoryDestiny.CreateAsync(destiny);
 
             var created = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 

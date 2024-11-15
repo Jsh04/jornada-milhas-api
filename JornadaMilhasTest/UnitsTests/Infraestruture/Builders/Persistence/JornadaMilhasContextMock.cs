@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using MockQueryable.Moq;
 using Moq;
 using System.Linq.Expressions;
-
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 
 namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock
@@ -39,8 +41,12 @@ namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock
         {
             var mockDbSet = GetMockDbSet();
 
-            mockDbSet.Setup(m => m.Add(entity))
-                .Callback<TEntity>(entity => _seedObjects.Add(entity));
+            mockDbSet.Setup(m => m.AddAsync(entity, It.IsAny<CancellationToken>()))
+                .ReturnsAsync((TEntity entity, CancellationToken cancellationToken) =>
+                {
+                    _seedObjects.Add(entity);
+                    return null;
+                });
 
             _mockDbContext.Setup(_expression).Returns(mockDbSet.Object);
 

@@ -60,7 +60,7 @@ namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.RepositoryTest
             var destinyRespository = new DestinyRepository(contextMock.Object);
             
             //act
-            destinyRespository.Create(destiny);
+            await destinyRespository.CreateAsync(destiny);
             var destinies = await destinyRespository.GetAllAsync(page: 2);
             
             //assert
