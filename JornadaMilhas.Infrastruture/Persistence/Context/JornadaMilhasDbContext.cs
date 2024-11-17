@@ -4,7 +4,7 @@ using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Common.Persistence.Queue;
 using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Entities.Depoiments;
-using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Entities.Users.UserAdmin;
 using JornadaMilhas.Core.Entities.Users.UserLimited;
 using Microsoft.EntityFrameworkCore;

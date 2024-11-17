@@ -1,5 +1,5 @@
 ﻿using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Entities.Destinies;
 using MediatR;
 
 namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny

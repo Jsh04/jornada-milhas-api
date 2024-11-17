@@ -1,5 +1,5 @@
 ﻿using JornadaMilhas.Common.Persistence.Configuration;
-using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Entities.Destinies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -26,18 +26,6 @@ namespace JornadaMilhas.Infrastruture.Persistence.Configurations
             builder.Property(d => d.Subtitle)
                 .IsRequired()
                 .HasMaxLength(500);
-
-            builder.Property(d => d.Price)
-                .HasPrecision(18, 2)
-                .IsRequired();
-
-
-            builder.HasMany(u => u.Imagens)
-                .WithOne(d => d.Destino)
-                .HasForeignKey(d => d.IdDestino)
-                .OnDelete(DeleteBehavior.Cascade);
-
-
         }
     }
 }

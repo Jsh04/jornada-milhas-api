@@ -8,7 +8,7 @@ public sealed record DestinyDto(
     decimal Price,
     string DescriptionPortuguese,
     string DescriptionEnglish,
-    List<ImagemDestino> Imagens
+    List<Picture> Imagens
     )
 {
 }

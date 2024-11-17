@@ -1,5 +1,5 @@
 ﻿using AutoFixture;
-using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock;
 using JornadaMilhasTest.UnitsTests.Seeds;

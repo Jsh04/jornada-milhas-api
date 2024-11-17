@@ -2,12 +2,12 @@
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Core.Entities.Destinies;
 
 namespace JornadaMilhas.Application.Interfaces.Services
 {

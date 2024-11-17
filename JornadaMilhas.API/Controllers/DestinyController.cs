@@ -4,7 +4,7 @@ using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Entities.Destinies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API;

@@ -1,5 +1,7 @@
 ﻿using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Common.Results.Errors;
+using JornadaMilhas.Core.Entities;
+using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
@@ -27,13 +29,19 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
                 .AddSubtitle(request.Subtitle)
                 .AddDescriptionEnglish(request.DescriptionEnglish)
                 .AddDescriptionPortuguese(request.DescriptionPortuguese)
-                .AddImages(request.Images)
                 .Build();
 
             if (!destinyResult.Success)
                 return Result.Fail<Destiny>(destinyResult.Errors);
 
             var destiny = destinyResult.Value;
+
+            var pictures = ReturnListByteArray(request.Images);
+
+            if (!pictures.Success)
+                return Result.Fail<Destiny>(DestinyErrors.MustHavePictures);
+            
+            destiny.AddImagesDestiny(pictures.Value);
 
             await _repositoryDestiny.CreateAsync(destiny);
 
@@ -42,6 +50,20 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
             await _unitOfWork.CommitAsync(cancellationToken);
 
             return !created ? Result.Fail<Destiny>(DestinyErrors.CannotBeCreated) : Result.Ok(destiny);
+        }
+        private static Result<List<Picture>> ReturnListByteArray(List<string> pictures)
+        {
+            try
+            {
+                var listPictures = pictures
+                    .Select(stringBase64Image => Picture.Create(Convert.FromBase64String(stringBase64Image))).ToList();
+        
+                return Result.Ok(listPictures);
+            }
+            catch (Exception e)
+            {
+                return Result.Fail<List<Picture>>(new Error("RegisterDestinyCommandHandler.ReturnListByteArray", e.Message, ErrorType.Failure));
+            }
         }
     }
 }

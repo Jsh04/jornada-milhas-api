@@ -1,7 +1,7 @@
 ﻿using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.DTO;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;

@@ -2,7 +2,6 @@
 using FluentValidation;
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Services;
-using JornadaMilhas.Application.Validations;
 using Microsoft.Extensions.DependencyInjection;
 using JornadaMilhas.Application.Interfaces.Services;
 using MediatR;

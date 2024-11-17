@@ -1,14 +1,7 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Application.Commands.DestinyCommands.DeleteDestiny;
-using JornadaMilhas.Core.Entities.Destinys;
-using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhasTest.UnitsTests.Builders;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using JornadaMilhas.Core.Entities.Destinies;
 
 namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.DestinyCommandTests;
 

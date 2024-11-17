@@ -1,10 +1,10 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Util;
-using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhasTest.IntegrationsTest.Helper;
 using System.Text;
 using System.Text.Json;
+using JornadaMilhas.Core.Entities.Destinies;
 
 namespace JornadaMilhasTest.IntegrationsTest.Tests.DestinoTest;
 

@@ -24,13 +24,13 @@ namespace JornadaMilhasTest.UnitsTests.Application.QuerysTests.UserQuerysTests
             var mockUserRepository = mockUserRepositoryTask.Build();
             var getUsersHandler = new GetAllUserLimtedQueryHandler(mockUserRepository.Object);
             var getUserRequest = new GetAllUsersLimitedQuery(1, 10);
+            
             //act
             var result = await getUsersHandler.Handle(getUserRequest, CancellationToken.None);
 
             //assert
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Data, Has.No.Empty);
-
         }
     }
 }

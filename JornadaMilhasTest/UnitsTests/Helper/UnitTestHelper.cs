@@ -5,7 +5,6 @@ using JornadaMilhas.Core.Entities.Users.UserLimited;
 
 using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
 using JornadaMilhas.Common.InputDto;
-using JornadaMilhas.Core.Entities.Destinys;
 using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Common.PaginationResult;

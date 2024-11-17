@@ -6,13 +6,13 @@ using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinys;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Core.Entities.Destinies;
 
 namespace JornadaMilhas.Application.Services
 {

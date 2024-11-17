@@ -1,6 +1,6 @@
 ﻿
 using JornadaMilhas.Common.Data.Repository;
-using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Entities.Destinies;
 
 namespace JornadaMilhas.Core.Repositories.Interfaces;
 

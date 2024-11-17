@@ -4,7 +4,7 @@ using JornadaMilhas.Common.DTO;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Depoiments;
-using JornadaMilhas.Core.Entities.Destinys;
+using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using MediatR;

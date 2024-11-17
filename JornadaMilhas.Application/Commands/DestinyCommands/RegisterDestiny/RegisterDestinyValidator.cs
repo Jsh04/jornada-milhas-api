@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
-using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 
-
-namespace JornadaMilhas.Application.Validations;
+namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 
 public sealed class RegisterDestinyValidator : AbstractValidator<RegisterDestinyCommand>
 {
@@ -37,6 +35,7 @@ public sealed class RegisterDestinyValidator : AbstractValidator<RegisterDestiny
         RuleFor(x => x.Images)
             .Must(x => x.Count > 0)
             .WithMessage("Imagens são obrigatórias");
+            
     }
 
 }

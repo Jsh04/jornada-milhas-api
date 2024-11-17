@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Results;
 
@@ -13,9 +8,11 @@ namespace JornadaMilhas.Core.Entities.Companies
     {
         public string Name { get; private set; }
         
-        public string OriginCountry { get; set; }
+        public string OriginCountry { get; private set; }
 
-        public DateTime DtFoundation { get; set; }
+        public DateTime DtFoundation { get; private set; }
+
+        public List<Plane> Planes { get; private set; }
 
 
         private Company(string name, string originCountry, DateTime dtFoundation)
@@ -27,7 +24,7 @@ namespace JornadaMilhas.Core.Entities.Companies
 
         public static Result<Company> Create(string name, string originCountry, DateTime dtFoundation)
         {
-            var company = new Company(name,  originCountry, dtFoundation);
+            var company = new Company(name, originCountry, dtFoundation);
 
             return Result.Ok(company);
         }

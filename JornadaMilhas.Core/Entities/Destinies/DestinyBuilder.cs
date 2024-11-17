@@ -1,34 +1,30 @@
 ﻿using JornadaMilhas.Common.Builder;
 using JornadaMilhas.Common.Results;
 
-
-namespace JornadaMilhas.Core.Entities.Destinys;
+namespace JornadaMilhas.Core.Entities.Destinies;
 
 public class DestinyBuilder : Builder<Destiny, DestinyBuilder>
 {
     private readonly Destiny _destino;
 
-    protected string Name;
+    private string Name;
 
-    protected string Subtitle;
+    private string Subtitle;
 
-    protected decimal Price;
+    private decimal Price;
 
-    protected string DescriptionPortuguese;
+    private string DescriptionPortuguese;
 
-    protected string DescriptionEnglish;
+    private string DescriptionEnglish;
 
-    protected List<ImagemDestino> Images = new();
+    protected List<Picture> Images = new();
     
     public static DestinyBuilder Create() => new();
 
     public DestinyBuilder AddName(string name)
     {
-        if (string.IsNullOrEmpty(name))
-            Result.Fail<Destiny>(DestinyErrors.NameIsRequired);
-
+        
         Name = name;
-
         return this;
     }
 
@@ -55,48 +51,15 @@ public class DestinyBuilder : Builder<Destiny, DestinyBuilder>
         DescriptionEnglish = descriptionEnglish;
         return this;
     }
-
-    public DestinyBuilder AddImages(List<string> pictures)
-    {
-        Images = ReturnListByteArray(pictures);
-        return this;
-    }
-
     public override Result<Destiny> Build() 
     {
-
         if (_errors.Count > 0)
             return Result.Fail<Destiny>(_errors);
-
-
+        
         var destinyCreated = Destiny
-            .Create(Name, 
-            Subtitle, 
-            Price, 
-            DescriptionPortuguese, 
-            DescriptionEnglish,
-            Images);
+            .Create(Name, Subtitle, Price, DescriptionPortuguese, DescriptionEnglish);
 
         return destinyCreated;
 
     }
-
-    private static List<ImagemDestino> ReturnListByteArray(List<string> pictures)
-    {
-        List<ImagemDestino> listImgs = new();
-
-        pictures.ForEach(fileBase64 =>
-        {
-            listImgs.Add(new ImagemDestino
-            {
-                ImagemBytes = Convert.FromBase64String(fileBase64)
-            });
-
-        });
-
-        return listImgs;
-    }
-
-
-
 }
