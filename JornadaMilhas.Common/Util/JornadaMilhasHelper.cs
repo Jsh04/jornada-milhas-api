@@ -2,6 +2,8 @@
 
 public static class JornadaMilhasHelper
 {
-    public static byte[] ConvertBase64ToByteArray(string base64) => Convert.FromBase64String(base64);
-   
+    public static byte[] ConvertBase64ToByteArray(string base64)
+    {
+        return Convert.FromBase64String(base64);
+    }
 }

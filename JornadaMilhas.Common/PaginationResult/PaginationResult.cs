@@ -1,14 +1,7 @@
-﻿
-namespace JornadaMilhas.Common.PaginationResult;
+﻿namespace JornadaMilhas.Common.PaginationResult;
 
 public class PaginationResult<T>
 {
-    public int Page { get; }
-    public int PageSize { get; }
-    public int TotalCount { get; }
-    public int TotalPages { get; private set; }
-    public IReadOnlyList<T> Data { get; private set; } = new List<T>();
-
     public PaginationResult(int page, int pageSize, int totalCount)
     {
         Page = page;
@@ -25,7 +18,19 @@ public class PaginationResult<T>
         Data = data;
     }
 
-    public void SetData(List<T> data) => Data = data;
-    public void SetTotalPages(int totalPages) => TotalPages = totalPages;
-    
+    public int Page { get; }
+    public int PageSize { get; }
+    public int TotalCount { get; }
+    public int TotalPages { get; private set; }
+    public IReadOnlyList<T> Data { get; private set; } = new List<T>();
+
+    public void SetData(List<T> data)
+    {
+        Data = data;
+    }
+
+    public void SetTotalPages(int totalPages)
+    {
+        TotalPages = totalPages;
+    }
 }

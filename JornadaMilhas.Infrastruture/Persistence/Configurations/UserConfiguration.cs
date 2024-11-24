@@ -1,5 +1,7 @@
-﻿using JornadaMilhas.Common.Entities;
+﻿using JornadaMilhas.Common.Entity;
+using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.Persistence.Configuration;
+using JornadaMilhas.Core.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -56,7 +58,7 @@ public class UserConfiguration : BaseEntityConfiguration<User>
 
         builder.OwnsOne(user => user.Address, valueAddress =>
         {
-            valueAddress.Property(address => address.Adress)
+            valueAddress.Property(address => address.Street)
                 .HasMaxLength(150);
 
             valueAddress.Property(address => address.State)
@@ -81,7 +83,6 @@ public class UserConfiguration : BaseEntityConfiguration<User>
                 .IsRequired();
 
             confirmEmail.HasIndex(ce => ce.Address)
-
                 .IsUnique();
         });
 
@@ -89,8 +90,6 @@ public class UserConfiguration : BaseEntityConfiguration<User>
         {
             dtbirth.Property(dtBirth => dtBirth.Date)
                 .IsRequired();
-
         });
-
     }
 }

@@ -8,9 +8,10 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.DeleteDestiny;
 
 public class DeleteDestinyCommandHandler : IRequestHandler<DeleteDestinyCommand, Result>
 {
+    private readonly IDestinyRepository _destinyRepository;
 
     private readonly IUnitOfWork _unitWork;
-    private readonly IDestinyRepository _destinyRepository;
+
     public DeleteDestinyCommandHandler(IUnitOfWork unitWork, IDestinyRepository destinyRepository)
     {
         _unitWork = unitWork;
@@ -36,4 +37,3 @@ public class DeleteDestinyCommandHandler : IRequestHandler<DeleteDestinyCommand,
         return Result.Ok();
     }
 }
-

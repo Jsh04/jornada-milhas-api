@@ -13,6 +13,11 @@
     <EmbeddedResource Remove="Validations\**" />
     <None Remove="Querys\DestinysQuerys\DestinysGetAllByQuery\**" />
     <None Remove="Validations\**" />
+    <Compile Remove="Commands\UserCommands\UserLimitedCommands\**" />
+    <EmbeddedResource Remove="Commands\UserCommands\UserLimitedCommands\**" />
+    <None Remove="Commands\UserCommands\UserLimitedCommands\**" />
+    <Compile Remove="Interfaces\Services\IUserLimitedService.cs" />
+    <Compile Remove="Services\UserService.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,17 +8,16 @@ namespace JornadaMilhas.Application.Commands.DepoimentsCommands.DeleteDepoiment;
 
 public class DeleteDepoimentCommandHandler : IRequestHandler<DeleteDepoimentCommand, Result>
 {
+    private readonly IDepoimentRepository _depoimentRepository;
 
     private readonly IUnitOfWork _unitOfWork;
 
-    private readonly IDepoimentRepository _depoimentRepository;
-
-    public DeleteDepoimentCommandHandler(IUnitOfWork unitOfWork, IDepoimentRepository depoimentRepository) 
+    public DeleteDepoimentCommandHandler(IUnitOfWork unitOfWork, IDepoimentRepository depoimentRepository)
     {
         _unitOfWork = unitOfWork;
         _depoimentRepository = depoimentRepository;
     }
-    
+
 
     public async Task<Result> Handle(DeleteDepoimentCommand request, CancellationToken cancellationToken)
     {
@@ -33,6 +32,6 @@ public class DeleteDepoimentCommandHandler : IRequestHandler<DeleteDepoimentComm
 
         var deleted = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
 
-        return !deleted ? Result.Fail(DestinyErrors.CannotBeDeleted) : Result.Ok();
+        return !deleted ? Result.Fail(DepoimentErrors.CannotBeDeleted) : Result.Ok();
     }
 }

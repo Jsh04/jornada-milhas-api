@@ -8,16 +8,15 @@ namespace JornadaMilhas.Application.Commands.DepoimentsCommands.UpdateDepoiment;
 
 public sealed class UpdateDepoimentCommandHandler : IRequestHandler<UpdateDepoimentCommand, Result>
 {
+    private readonly IDepoimentRepository _depoimentRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    private readonly IDepoimentRepository _depoimentRepository;
-
-    public UpdateDepoimentCommandHandler(IUnitOfWork unitOfWork, IDepoimentRepository depoimentRepository) 
+    public UpdateDepoimentCommandHandler(IUnitOfWork unitOfWork, IDepoimentRepository depoimentRepository)
     {
         _unitOfWork = unitOfWork;
         _depoimentRepository = depoimentRepository;
     }
-    
+
 
     public async Task<Result> Handle(UpdateDepoimentCommand request, CancellationToken cancellationToken)
     {
@@ -26,7 +25,7 @@ public sealed class UpdateDepoimentCommandHandler : IRequestHandler<UpdateDepoim
         if (depoiment is null)
             return Result.Fail(DepoimentErrors.NotFound);
 
-        var depoimentResult = Depoiment.CreateBuilder()
+        var depoimentResult = DepoimentBuilder.Create()
             .WithName(request.Name)
             .WithDepoimentDescription(request.DepoimentDescription)
             .WithPicture(request.Picture)
@@ -49,6 +48,5 @@ public sealed class UpdateDepoimentCommandHandler : IRequestHandler<UpdateDepoim
         await _unitOfWork.CommitAsync(cancellationToken);
 
         return !updated ? Result.Fail(DepoimentErrors.CannotBeUpdate) : Result.Ok();
-
     }
 }

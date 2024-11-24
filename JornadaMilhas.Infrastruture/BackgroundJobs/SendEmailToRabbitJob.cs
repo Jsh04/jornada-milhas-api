@@ -1,5 +1,4 @@
-﻿
-using JornadaMilhas.Common.DomainEvent;
+﻿using JornadaMilhas.Common.DomainEvent;
 using JornadaMilhas.Common.Persistence.Queue;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using MediatR;
@@ -9,71 +8,68 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace JornadaMilhas.Infrastruture.BackgroundJobs
+namespace JornadaMilhas.Infrastruture.BackgroundJobs;
+
+public class SendEmailToRabbitJob : BackgroundService
 {
-    public class SendEmailToRabbitJob : BackgroundService
+    private readonly ILogger<SendEmailToRabbitJob> _loggerSendMailRabbitJob;
+    private readonly IServiceProvider _serviceProvider;
+
+    public SendEmailToRabbitJob(IServiceProvider service, ILogger<SendEmailToRabbitJob> loggerSendMailRabbitJob)
     {
-        private readonly IServiceProvider _serviceProvider;
-        private readonly ILogger<SendEmailToRabbitJob> _loggerSendMailRabbitJob;
+        _serviceProvider = service;
+        _loggerSendMailRabbitJob = loggerSendMailRabbitJob;
+    }
 
-        public SendEmailToRabbitJob(IServiceProvider service, ILogger<SendEmailToRabbitJob> loggerSendMailRabbitJob)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
         {
-            _serviceProvider = service;
-            _loggerSendMailRabbitJob = loggerSendMailRabbitJob;
+            await using var scope = _serviceProvider.CreateAsyncScope();
+            var context = scope.ServiceProvider.GetRequiredService<JornadaMilhasDbContext>();
+            var publish = scope.ServiceProvider.GetRequiredService<IPublisher>();
+
+            var queueObjs = await context.Set<OutboxMessage>().Where(queue => queue.ProcessedAt == null).Take(20)
+                .ToListAsync(stoppingToken);
+
+            await PublishToHandlerSendEmail(queueObjs, publish, stoppingToken);
+
+            if (queueObjs.Count > 0)
+                await context.SaveChangesAsync(stoppingToken);
+
+            await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
         }
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            while (!stoppingToken.IsCancellationRequested)
+    }
+
+    private async Task PublishToHandlerSendEmail(List<OutboxMessage> queues, IPublisher publisher,
+        CancellationToken stoppingToken)
+    {
+        foreach (var queue in queues)
+            try
             {
-                await using var scope = _serviceProvider.CreateAsyncScope();
-                var context = scope.ServiceProvider.GetRequiredService<JornadaMilhasDbContext>();
-                var publish = scope.ServiceProvider.GetRequiredService<IPublisher>();
+                var domainEvent =
+                    JsonConvert.DeserializeObject<IDomainEvent>(
+                        queue.Content,
+                        new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.All
+                        });
 
-                var queueObjs = await context.Set<OutboxMessage>().Where(queue => queue.ProcessedAt == null).Take(20)
-                    .ToListAsync(stoppingToken);
+                if (domainEvent is null)
+                {
+                    _loggerSendMailRabbitJob.LogError($"Domain event {queue.Type} cannot deserialize");
+                    continue;
+                }
 
-                await PublishToHandlerSendEmail(queueObjs, publish, stoppingToken);
+                await publisher.Publish(domainEvent, stoppingToken);
 
-                if (queueObjs.Count > 0)
-                    await context.SaveChangesAsync(stoppingToken);
-
-                await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+                queue.ProcessedAt = DateTime.Now;
             }
-        }
-
-        private async Task PublishToHandlerSendEmail(List<OutboxMessage> queues, IPublisher publisher, CancellationToken stoppingToken)
-        {
-            foreach (var queue in queues)
+            catch (Exception ex)
             {
-                try
-                {
-                    var domainEvent =
-                        JsonConvert.DeserializeObject<IDomainEvent>(
-                            queue.Content,
-                            new JsonSerializerSettings
-                            {
-                                TypeNameHandling = TypeNameHandling.All,
-                            });
+                _loggerSendMailRabbitJob.LogError(ex, ex.Message);
 
-                    if (domainEvent is null)
-                    {
-                        _loggerSendMailRabbitJob.LogError($"Domain event {queue.Type} cannot deserialize");
-                        continue;
-                    }
-
-                    await publisher.Publish(domainEvent, stoppingToken);
-
-                    queue.ProcessedAt = DateTime.Now;
-                }
-                catch (Exception ex)
-                {
-                    _loggerSendMailRabbitJob.LogError(ex, ex.Message);
-
-                    queue.Error = ex.Message;
-                
-                }
+                queue.Error = ex.Message;
             }
-            
-        }
     }
 }

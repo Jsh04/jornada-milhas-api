@@ -9,6 +9,6 @@ public sealed record DestinyDto(
     string DescriptionPortuguese,
     string DescriptionEnglish,
     List<Picture> Imagens
-    )
+)
 {
 }

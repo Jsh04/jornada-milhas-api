@@ -1,10 +1,10 @@
-﻿using AutoFixture;
+﻿using System.Text;
+using System.Text.Json;
+using AutoFixture;
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Util;
-using JornadaMilhasTest.IntegrationsTest.Helper;
-using System.Text;
-using System.Text.Json;
 using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhasTest.IntegrationsTest.Helper;
 
 namespace JornadaMilhasTest.IntegrationsTest.Tests.DestinoTest;
 
@@ -13,8 +13,8 @@ namespace JornadaMilhasTest.IntegrationsTest.Tests.DestinoTest;
 [Explicit("Testes de integração")]
 public class DestinoControllerTest
 {
-    private HttpClient client;
-    private Fixture fixture;
+    private readonly HttpClient client;
+    private readonly Fixture fixture;
 
     public DestinoControllerTest()
     {
@@ -22,7 +22,8 @@ public class DestinoControllerTest
         fixture = SharingResources.AutoFixture;
     }
 
-    [Test(Description = "Faz requisição para controller com um objeto destino fictício e é esperado que persista os dados")]
+    [Test(Description =
+        "Faz requisição para controller com um objeto destino fictício e é esperado que persista os dados")]
     public async Task DeverarCadastrarDestinoCriado()
     {
         //arrange
@@ -39,7 +40,8 @@ public class DestinoControllerTest
 
         var url = "/destiny";
 
-        var stringContent = new StringContent(TestHelper.SerializerObjToJson(destinoDto), encoding: Encoding.UTF8, TestHelper.ContentTypeJson);
+        var stringContent = new StringContent(TestHelper.SerializerObjToJson(destinoDto), Encoding.UTF8,
+            TestHelper.ContentTypeJson);
 
         //act
         var response = await client.PostAsync(url, stringContent);
@@ -60,14 +62,11 @@ public class DestinoControllerTest
         //act
         var response = await client.GetAsync(uri.ToString());
 
-        string content = await response.Content.ReadAsStringAsync();
+        var content = await response.Content.ReadAsStringAsync();
 
         var destinos = JsonSerializer.Deserialize<List<Destiny>>(content)!;
 
         //assert
         Assert.That(destinos, Has.Count.EqualTo(1));
     }
-
-
-
 }

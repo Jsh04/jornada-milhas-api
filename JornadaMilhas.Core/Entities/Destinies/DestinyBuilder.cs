@@ -7,23 +7,25 @@ public class DestinyBuilder : Builder<Destiny, DestinyBuilder>
 {
     private readonly Destiny _destino;
 
-    private string Name;
-
-    private string Subtitle;
-
-    private decimal Price;
+    private string DescriptionEnglish;
 
     private string DescriptionPortuguese;
 
-    private string DescriptionEnglish;
-
     protected List<Picture> Images = new();
-    
-    public static DestinyBuilder Create() => new();
+
+    private string Name;
+
+    private decimal Price;
+
+    private string Subtitle;
+
+    public static DestinyBuilder Create()
+    {
+        return new DestinyBuilder();
+    }
 
     public DestinyBuilder AddName(string name)
     {
-        
         Name = name;
         return this;
     }
@@ -51,15 +53,15 @@ public class DestinyBuilder : Builder<Destiny, DestinyBuilder>
         DescriptionEnglish = descriptionEnglish;
         return this;
     }
-    public override Result<Destiny> Build() 
+
+    public override Result<Destiny> Build()
     {
         if (_errors.Count > 0)
             return Result.Fail<Destiny>(_errors);
-        
+
         var destinyCreated = Destiny
             .Create(Name, Subtitle, Price, DescriptionPortuguese, DescriptionEnglish);
 
         return destinyCreated;
-
     }
 }

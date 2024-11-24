@@ -1,44 +1,35 @@
 ﻿using AutoFixture;
-using JornadaMilhas.Common.Entities;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhasTest.UnitsTests.Helper;
+using JornadaMilhasTest.UnitsTests.Builders;
+using JornadaMilhasTest.UnitsTests.Seeds;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace JornadaMilhasTest.UnitsTests.Builders
+namespace JornadaMilhasTest.UnitsTests.Infraestruture.Builders.Repositories;
+
+public class UserRepositoryMockBuilder : BaseMockBuilder<IUserRepository>
 {
-    public class UserRepositoryMockBuilder : BaseMockBuilder<IUserRepository>
+    private readonly Fixture _fixture;
+
+    private UserRepositoryMockBuilder(Fixture fixture)
     {
-        private readonly Fixture _fixture;
+        _fixture = fixture;
+    }
 
-        private UserRepositoryMockBuilder(Fixture fixture) : base()
-        {
-            _fixture = fixture;
-        }
+    public static UserRepositoryMockBuilder CreateBuilder(Fixture fixture)
+    {
+        return new UserRepositoryMockBuilder(fixture);
+    }
+    
+    public UserRepositoryMockBuilder AddGetByEmailAsync(string email)
+    {
+        _mock.Setup(x => x.GetByEmailAsync(email, CancellationToken.None))
+            .ReturnsAsync(CustomerSeed.GetCustomerTest(_fixture));
 
-        public static UserRepositoryMockBuilder CreateBuilder(Fixture fixture) => new(fixture);
+        return this;
+    }
 
-        public UserRepositoryMockBuilder AddGetByIdAsync(long id)
-        {
-            _mock.Setup(repository => repository.GetByIdAsync(id, It.IsAny<CancellationToken>())).ReturnsAsync(UnitTestHelper.GetUserLimitedTest(_fixture));
-
-            return this;
-        }
-
-        public UserRepositoryMockBuilder AddGetByEmailAsync(string email)
-        {
-            _mock.Setup(x => x.GetByEmailAsync(email, CancellationToken.None)).ReturnsAsync(UnitTestHelper.GetUserLimitedTest(_fixture));
-            
-            return this;
-        }
-
-        public override Mock<IUserRepository> Build()
-        {
-            return _mock;
-        }
+    public override Mock<IUserRepository> Build()
+    {
+        return _mock;
     }
 }

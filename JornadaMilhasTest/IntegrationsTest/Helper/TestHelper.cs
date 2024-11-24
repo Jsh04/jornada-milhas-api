@@ -2,7 +2,7 @@
 
 namespace JornadaMilhasTest.IntegrationsTest.Helper;
 
-public static class TestHelper 
+public static class TestHelper
 {
     public static readonly string ConnectionString = Environment.GetEnvironmentVariable("DATA_BASE_CONNECTION");
 
@@ -13,4 +13,3 @@ public static class TestHelper
         return JsonSerializer.Serialize(obj);
     }
 }
-

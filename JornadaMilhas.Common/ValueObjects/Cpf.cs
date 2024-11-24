@@ -1,20 +1,20 @@
-﻿
-
-using JornadaMilhas.Common.Results;
+﻿using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Results.Errors;
 
 namespace JornadaMilhas.Common.ValueObjects;
 
 public sealed record Cpf
 {
-    public string Number { get; }
-
     private Cpf(string number)
     {
         Number = number;
     }
 
-    private Cpf() { }
+    private Cpf()
+    {
+    }
+
+    public string Number { get; }
 
     public static Result<Cpf> Create(string number)
     {
@@ -38,11 +38,11 @@ public sealed record Cpf
 
     private static bool IsCpf(string number)
     {
-        int[] multiplier1 = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-        int[] multiplier2 = new int[] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplier1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplier2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
         string cpfTemp;
         string digit;
-        int sum = 0;
+        var sum = 0;
         int remainder;
 
         if (number.Length != 11)
@@ -50,7 +50,7 @@ public sealed record Cpf
 
         cpfTemp = number.Substring(0, 9);
 
-        for (int i = 0; i < 9; i++)
+        for (var i = 0; i < 9; i++)
             sum += int.Parse(cpfTemp[i].ToString()) * multiplier1[i];
 
         remainder = sum % 11;
@@ -66,7 +66,7 @@ public sealed record Cpf
 
         sum = 0;
 
-        for (int i = 0; i < 10; i++)
+        for (var i = 0; i < 10; i++)
             sum += int.Parse(cpfTemp[i].ToString()) * multiplier2[i];
 
         remainder = sum % 11;
@@ -88,6 +88,5 @@ public sealed record Cpf
 
         public static readonly Error CpfIsInvalid =
             new("Cpf.CpfIsInvalid", "CPF não é válido", ErrorType.Validation);
-
     }
 }

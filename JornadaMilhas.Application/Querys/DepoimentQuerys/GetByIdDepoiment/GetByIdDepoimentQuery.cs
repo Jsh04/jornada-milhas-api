@@ -2,9 +2,8 @@
 using JornadaMilhas.Common.Results;
 using MediatR;
 
-namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetByIdDepoiment
+namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetByIdDepoiment;
+
+public sealed record GetByIdDepoimentQuery(long Id) : IRequest<Result<DepoimentDto>>
 {
-    public sealed record GetByIdDepoimentQuery(long Id) : IRequest<Result<DepoimentDto>>
-    {
-    }
 }

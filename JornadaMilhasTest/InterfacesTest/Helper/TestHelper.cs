@@ -1,6 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System.Reflection;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System.Reflection;
 
 namespace JornadaMilhasTest.InterfacesTest.Helper;
 

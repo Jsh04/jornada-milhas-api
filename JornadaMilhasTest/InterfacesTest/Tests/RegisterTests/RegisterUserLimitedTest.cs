@@ -1,16 +1,16 @@
-﻿using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
-using JornadaMilhas.Common.InputDto;
-using JornadaMilhasTest.InterfacesTest.PageObjects;
-using JornadaMilhas.Common.Enums;
-using OpenQA.Selenium;
+﻿using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;
+using JornadaMilhas.Common.Entity.Users.Enums;
+using JornadaMilhas.Common.InputModels;
 using JornadaMilhasTest.InterfacesTest.Helper;
+using JornadaMilhasTest.InterfacesTest.PageObjects;
+using OpenQA.Selenium;
 
 namespace JornadaMilhasTest.InterfacesTest.Tests.RegisterTests;
 
 [TestFixture]
 public class RegisterUserLimitedTest
 {
-    private IWebDriver driver;
+    private readonly IWebDriver driver;
 
     public RegisterUserLimitedTest()
     {
@@ -21,7 +21,10 @@ public class RegisterUserLimitedTest
     public void DeverarAparecerPaginaDeConfirmacaoDeEmailAposCadastro()
     {
         //arrange
-        var usuario = new RegisterUserLimitedCommand("José Silvio Henrique Barros de Souza", DateTime.Parse("02-04-2004"), EnumGenre.Male, "12548169090", "81992659528", new AddressInputDto(City: "Recife", State: "PE"), "josesilvio.bs@gmail.com", "josesilvio.bs@gmail.com", "Senha123", "Senha123");
+        var usuario = new RegisterCustomerCommand("José Silvio Henrique Barros de Souza",
+            DateTime.Parse("02-04-2004"), EnumGenre.Male, "12548169090", "81992659528",
+            new AddressInputModel("Recife", "PE", string.Empty, string.Empty, string.Empty), "josesilvio.bs@gmail.com", "josesilvio.bs@gmail.com", "Senha123",
+            "Senha123");
 
         var registerPo = new RegisterPO(driver);
 
@@ -31,12 +34,9 @@ public class RegisterUserLimitedTest
             .SendDataUserLimited();
 
         //assert
-        bool isConfirmMailPage = TestHelper.ReturnValidationOfTimeWait(drv => drv.PageSource.Contains("Confirme Seu E-mail"), driver, 10);
+        var isConfirmMailPage =
+            TestHelper.ReturnValidationOfTimeWait(drv => drv.PageSource.Contains("Confirme Seu E-mail"), driver, 10);
 
         Assert.That(isConfirmMailPage, Is.True);
     }
-
-
-
 }
-

@@ -20,5 +20,8 @@ public static class DtoExtensions<TEntity, TDto> where TEntity : BaseEntity
         return dto;
     }
 
-    public static IEnumerable<TDto> ToDto(IEnumerable<TEntity> objs) => objs is not null ? objs.Select(obj => ToDto(obj)) : Enumerable.Empty<TDto>();
+    public static IEnumerable<TDto> ToDto(IEnumerable<TEntity> objs)
+    {
+        return objs is not null ? objs.Select(obj => ToDto(obj)) : Enumerable.Empty<TDto>();
+    }
 }

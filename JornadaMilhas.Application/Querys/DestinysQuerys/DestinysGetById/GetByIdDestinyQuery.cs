@@ -4,7 +4,6 @@ using MediatR;
 
 namespace JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
 
-public record GetByIdDestinyQuery(long id) : IRequest<Result<DestinyDto>>{};
-
-
-
+public record GetByIdDestinyQuery(long id) : IRequest<Result<DestinyDto>>
+{
+};

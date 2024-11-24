@@ -1,5 +1,3 @@
-
-
 using JornadaMilhas.API;
 using JornadaMilhas.API.Middleware;
 
@@ -19,10 +17,10 @@ var app = builder.Build();
 
 // Desactive Cors
 app.UseCors(x => x
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials()
-            .SetIsOriginAllowed(origin => true));
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()
+    .SetIsOriginAllowed(origin => true));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

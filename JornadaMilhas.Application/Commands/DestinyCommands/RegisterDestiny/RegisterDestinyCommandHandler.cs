@@ -1,29 +1,36 @@
-﻿using JornadaMilhas.Common.Results;
+﻿using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Application.Querys.Dtos.FilesDto;
+using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Results.Errors;
+using JornadaMilhas.Common.Util;
 using JornadaMilhas.Core.Entities;
 using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
-namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
+namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
+
+public class RegisterDestinyCommandHandler : IRequestHandler<RegisterDestinyCommand, Result<Destiny>>
 {
-    public class RegisterDestinyCommandHandler : IRequestHandler<RegisterDestinyCommand, Result<Destiny>>
+    private readonly IDestinyRepository _repositoryDestiny;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IUploadService _uploadService;
+
+    public RegisterDestinyCommandHandler(IUnitOfWork unitOfWork, IDestinyRepository repositoryDestino,
+        IUploadService uploadService)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IDestinyRepository _repositoryDestiny;
-        public RegisterDestinyCommandHandler(IUnitOfWork unitOfWork, IDestinyRepository repositoryDestino)
-        {
-            _unitOfWork = unitOfWork;
-            _repositoryDestiny = repositoryDestino;
-        }
+        _unitOfWork = unitOfWork;
+        _repositoryDestiny = repositoryDestino;
+        _uploadService = uploadService;
+    }
 
-        public async Task<Result<Destiny>> Handle(RegisterDestinyCommand request, CancellationToken cancellationToken)
-        {
-            await _unitOfWork.BeginTransactionAsync(cancellationToken);
+    public async Task<Result<Destiny>> Handle(RegisterDestinyCommand request, CancellationToken cancellationToken)
+    {
+        await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            var destinyResult = 
-                Destiny.CreateBuilder()
+        var destinyResult =
+            Destiny.CreateBuilder()
                 .AddName(request.Name)
                 .AddPrice(request.Price)
                 .AddSubtitle(request.Subtitle)
@@ -31,39 +38,72 @@ namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
                 .AddDescriptionPortuguese(request.DescriptionPortuguese)
                 .Build();
 
-            if (!destinyResult.Success)
-                return Result.Fail<Destiny>(destinyResult.Errors);
+        if (!destinyResult.Success)
+            return Result.Fail<Destiny>(destinyResult.Errors);
 
-            var destiny = destinyResult.Value;
+        var destiny = destinyResult.Value;
 
-            var pictures = ReturnListByteArray(request.Images);
+        var resultListFilesDto = GetFilesConverted(request.Images, destiny.Name);
 
-            if (!pictures.Success)
-                return Result.Fail<Destiny>(DestinyErrors.MustHavePictures);
-            
-            destiny.AddImagesDestiny(pictures.Value);
+        if (!resultListFilesDto.Success)
+            return Result.Fail<Destiny>(resultListFilesDto.Errors);
 
-            await _repositoryDestiny.CreateAsync(destiny);
+        var pictures = resultListFilesDto.Value.Select(fileDto => Picture.Create(fileDto.path));
 
-            var created = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
+        await UploadFilesToCloud(resultListFilesDto.Value);
 
-            await _unitOfWork.CommitAsync(cancellationToken);
+        destiny.AddImagesDestiny(pictures);
 
-            return !created ? Result.Fail<Destiny>(DestinyErrors.CannotBeCreated) : Result.Ok(destiny);
-        }
-        private static Result<List<Picture>> ReturnListByteArray(List<string> pictures)
+        await _repositoryDestiny.CreateAsync(destiny);
+
+        var created = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
+
+        await _unitOfWork.CommitAsync(cancellationToken);
+
+        return !created ? Result.Fail<Destiny>(DestinyErrors.CannotBeCreated) : Result.Ok(destiny);
+    }
+
+    private async Task UploadFilesToCloud(List<FileDto> listFilesDto)
+    {
+        var listTasks = listFilesDto
+            .Select(fileDto => _uploadService.UploadAsync(fileDto.byteArray, fileDto.path))
+            .Cast<Task>()
+            .ToList();
+
+        await Task.WhenAll(listTasks);
+    }
+
+    private static Result<List<FileDto>> GetFilesConverted(List<string> picturesBase64, string destinyName)
+    {
+        var listFileDtos = new List<FileDto>();
+
+        foreach (var picture in picturesBase64)
         {
-            try
-            {
-                var listPictures = pictures
-                    .Select(stringBase64Image => Picture.Create(Convert.FromBase64String(stringBase64Image))).ToList();
-        
-                return Result.Ok(listPictures);
-            }
-            catch (Exception e)
-            {
-                return Result.Fail<List<Picture>>(new Error("RegisterDestinyCommandHandler.ReturnListByteArray", e.Message, ErrorType.Failure));
-            }
+            var resultByteArray = GetByteArrayFromBase64(picture);
+
+            if (!resultByteArray.Success)
+                return Result.Fail<List<FileDto>>(resultByteArray.Errors);
+
+            var extension = picture.Split("/")[1].Split(";")[0];
+
+            var path = FileHelper.GetPathFileSaveInCloud(destinyName, extension);
+
+            listFileDtos.Add(new FileDto(resultByteArray.Value, path));
+        }
+
+        return Result.Ok(listFileDtos);
+    }
+
+    private static Result<byte[]> GetByteArrayFromBase64(string base64)
+    {
+        try
+        {
+            return Result.Ok(Convert.FromBase64String(base64));
+        }
+        catch (Exception e)
+        {
+            return Result.Fail<byte[]>(new Error("RegisterDestinyCommandHandler.GetByteArrayFromBase64", e.Message,
+                ErrorType.Failure));
         }
     }
 }

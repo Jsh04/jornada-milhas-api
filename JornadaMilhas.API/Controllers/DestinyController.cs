@@ -1,5 +1,4 @@
-﻿
-using JornadaMilhas.API.Extensions;
+﻿using JornadaMilhas.API.Extensions;
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
@@ -9,12 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API;
 
-
 [ApiController]
 [Route("[controller]")]
 public class DestinyController : ControllerBase
 {
-
     private readonly IDestinyService _destinyService;
 
     public DestinyController(IDestinyService destinyService)
@@ -31,7 +28,8 @@ public class DestinyController : ControllerBase
     {
         var resultRegisterDestiny = await _destinyService.RegisterDestiny(command);
 
-        return resultRegisterDestiny.Match((value) => CreatedAtAction(nameof(GetDestinoById), new { id = value.Id }, command),
+        return resultRegisterDestiny.Match(
+            value => CreatedAtAction(nameof(GetDestinoById), new { id = value.Id }, command),
             value => value.ToProblemDetails());
     }
 
@@ -39,7 +37,7 @@ public class DestinyController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<DestinyDto>))]
-    public async Task<IActionResult> GetAllDestinies([FromQuery] int page = 1, [FromQuery]int size = 10)
+    public async Task<IActionResult> GetAllDestinies([FromQuery] int page = 1, [FromQuery] int size = 10)
     {
         var result = await _destinyService.GetAllDestinies(page, size);
         return Ok(result);
@@ -51,7 +49,7 @@ public class DestinyController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<DestinyDto>))]
     public async Task<IActionResult> GetDestinoById(long id)
-    { 
+    {
         var result = await _destinyService.GetDestinyById(id);
         return result.Match(Ok, value => value.ToProblemDetails());
     }
@@ -65,5 +63,4 @@ public class DestinyController : ControllerBase
         var result = await _destinyService.DeleteDestinyById(id).ConfigureAwait(false);
         return result.Match(Ok, value => value.ToProblemDetails());
     }
-
 }

@@ -16,6 +16,17 @@
     <Compile Remove="Builders\**" />
     <EmbeddedResource Remove="Builders\**" />
     <None Remove="Builders\**" />
+    <Compile Remove="Entities\Users\UserAdmin\UserAdmin.cs" />
+    <Compile Remove="Entities\Users\UserAdmin\UserAdminBuilder.cs" />
+    <Compile Remove="Entities\Users\UserAdmin\**" />
+    <EmbeddedResource Remove="Entities\Users\UserAdmin\**" />
+    <None Remove="Entities\Users\UserAdmin\**" />
+    <Compile Remove="Entities\Users\UserLimited\UserLimited.cs" />
+    <Compile Remove="Entities\Users\UserLimited\UserLimitedBuilder.cs" />
+    <Compile Remove="Entities\Users\UserLimited\**" />
+    <EmbeddedResource Remove="Entities\Users\UserLimited\**" />
+    <None Remove="Entities\Users\UserLimited\**" />
+    <Compile Remove="Repositories\Interfaces\IUserLimitedRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

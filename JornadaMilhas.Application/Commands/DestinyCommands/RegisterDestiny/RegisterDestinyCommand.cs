@@ -2,7 +2,14 @@
 using JornadaMilhas.Core.Entities.Destinies;
 using MediatR;
 
-namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny
+namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
+
+public sealed record RegisterDestinyCommand(
+    string Name,
+    string Subtitle,
+    decimal Price,
+    string DescriptionPortuguese,
+    string DescriptionEnglish,
+    List<string> Images) : IRequest<Result<Destiny>>
 {
-    public sealed record RegisterDestinyCommand(string Name, string Subtitle, decimal Price, string DescriptionPortuguese, string DescriptionEnglish, List<string> Images) : IRequest<Result<Destiny>>{ }
 }

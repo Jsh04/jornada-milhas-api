@@ -1,32 +1,34 @@
 ﻿using System.Numerics;
 using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Results;
+using JornadaMilhas.Core.Entities.Admins;
 
-namespace JornadaMilhas.Core.Entities.Companies
+namespace JornadaMilhas.Core.Entities.Companies;
+
+public class Company : BaseEntity
 {
-    public class Company : BaseEntity
+    private Company(string name, string originCountry, DateTime dtFoundation)
     {
-        public string Name { get; private set; }
+        Name = name;
+        OriginCountry = originCountry;
+        DtFoundation = dtFoundation;
+    }
+
+    public string Name { get; private set; }
+
+    public string OriginCountry { get; private set; }
+
+    public DateTime DtFoundation { get; private set; }
+
+    public List<Plane> Planes { get; }
+    
+    public List<Admin> Admins { get; }
+
+    public static Result<Company> Create(string name, string originCountry, DateTime dtFoundation)
+    {
         
-        public string OriginCountry { get; private set; }
+        var company = new Company(name, originCountry, dtFoundation);
 
-        public DateTime DtFoundation { get; private set; }
-
-        public List<Plane> Planes { get; private set; }
-
-
-        private Company(string name, string originCountry, DateTime dtFoundation)
-        {
-            Name = name;
-            OriginCountry = originCountry;
-            DtFoundation = dtFoundation;
-        }
-
-        public static Result<Company> Create(string name, string originCountry, DateTime dtFoundation)
-        {
-            var company = new Company(name, originCountry, dtFoundation);
-
-            return Result.Ok(company);
-        }
+        return Result.Ok(company);
     }
 }

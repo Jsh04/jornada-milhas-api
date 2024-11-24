@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
-namespace JornadaMilhas.Common.DomainEvent
+namespace JornadaMilhas.Common.DomainEvent;
+
+public interface IDomainEvent : INotification
 {
-    public interface IDomainEvent : INotification
-    {
-    }
 }

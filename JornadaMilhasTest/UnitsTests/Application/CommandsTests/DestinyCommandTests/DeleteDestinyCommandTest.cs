@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Application.Commands.DestinyCommands.DeleteDestiny;
-using JornadaMilhasTest.UnitsTests.Builders;
 using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhasTest.UnitsTests.Builders;
 
 namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.DestinyCommandTests;
 
@@ -9,6 +9,7 @@ namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.DestinyCommandT
 public class DeleteDestinyCommandTest
 {
     private readonly Fixture _fixture;
+
     public DeleteDestinyCommandTest()
     {
         _fixture = SharingResources.AutoFixture;
@@ -20,7 +21,8 @@ public class DeleteDestinyCommandTest
         var unitOfWorkMockObject = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
         var destinyRepositoryMockObject = DestinyRepositoryMockBuilder.Create(_fixture).AddGetDestinyById(1).Build();
 
-        var deleteDestinyCommandHandler = new DeleteDestinyCommandHandler(unitOfWorkMockObject.Object, destinyRepositoryMockObject.Object);
+        var deleteDestinyCommandHandler =
+            new DeleteDestinyCommandHandler(unitOfWorkMockObject.Object, destinyRepositoryMockObject.Object);
 
         //act
         var result = await deleteDestinyCommandHandler.Handle(new DeleteDestinyCommand(1), CancellationToken.None);
@@ -39,7 +41,8 @@ public class DeleteDestinyCommandTest
         var unitOfWorkMockObject = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
         var destinyRepositoryMockObject = DestinyRepositoryMockBuilder.Create(_fixture).AddGetDestinyById(1).Build();
 
-        var deleteDestinyCommandHandler = new DeleteDestinyCommandHandler(unitOfWorkMockObject.Object, destinyRepositoryMockObject.Object);
+        var deleteDestinyCommandHandler =
+            new DeleteDestinyCommandHandler(unitOfWorkMockObject.Object, destinyRepositoryMockObject.Object);
 
         //act
         var result = await deleteDestinyCommandHandler.Handle(new DeleteDestinyCommand(2), CancellationToken.None);
@@ -54,4 +57,3 @@ public class DeleteDestinyCommandTest
         });
     }
 }
-

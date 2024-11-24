@@ -35,7 +35,5 @@ public sealed class RegisterDestinyValidator : AbstractValidator<RegisterDestiny
         RuleFor(x => x.Images)
             .Must(x => x.Count > 0)
             .WithMessage("Imagens são obrigatórias");
-            
     }
-
 }

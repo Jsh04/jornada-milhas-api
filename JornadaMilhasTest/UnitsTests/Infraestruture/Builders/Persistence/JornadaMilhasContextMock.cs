@@ -1,67 +1,64 @@
-﻿
+﻿using System.Linq.Expressions;
 using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using MockQueryable.Moq;
 using Moq;
-using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
+namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock;
 
-namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock
+public class JornadaMilhasContextMock<TEntity> where TEntity : BaseEntity
 {
-    public class JornadaMilhasContextMock<TEntity> where TEntity : BaseEntity
+    private readonly Expression<Func<JornadaMilhasDbContext, DbSet<TEntity>>> _expression;
+    private readonly Mock<JornadaMilhasDbContext> _mockDbContext;
+
+    private readonly ICollection<TEntity> _seedObjects;
+
+    private JornadaMilhasContextMock(ICollection<TEntity> seedObjects,
+        Expression<Func<JornadaMilhasDbContext, DbSet<TEntity>>> expression)
     {
-        private readonly Mock<JornadaMilhasDbContext> _mockDbContext;
+        _mockDbContext = new Mock<JornadaMilhasDbContext>();
+        _seedObjects = seedObjects;
+        _expression = expression;
+    }
 
-        private readonly ICollection<TEntity> _seedObjects;
+    public static JornadaMilhasContextMock<TEntity> CreateInstance(ICollection<TEntity> seedObjects,
+        Expression<Func<JornadaMilhasDbContext, DbSet<TEntity>>> expression)
+    {
+        return new JornadaMilhasContextMock<TEntity>(seedObjects, expression);
+    }
 
-        private readonly Expression<Func<JornadaMilhasDbContext, DbSet<TEntity>>> _expression;
+    public JornadaMilhasContextMock<TEntity> AddDbSet()
+    {
+        var dbSetMocked = GetMockDbSet().Object;
+        _mockDbContext.Setup(_expression).Returns(dbSetMocked);
 
-        private JornadaMilhasContextMock(ICollection<TEntity> seedObjects, Expression<Func<JornadaMilhasDbContext, DbSet<TEntity>>> expression)
-        {
-            _mockDbContext = new Mock<JornadaMilhasDbContext>();
-            _seedObjects = seedObjects;
-            _expression = expression;
-        }
+        return this;
+    }
 
-        public static JornadaMilhasContextMock<TEntity> CreateInstance(ICollection<TEntity> seedObjects, Expression<Func<JornadaMilhasDbContext, DbSet<TEntity>>> expression) => new(seedObjects, expression);
+    public JornadaMilhasContextMock<TEntity> AddDbSetEventAddObject(TEntity entity)
+    {
+        var mockDbSet = GetMockDbSet();
 
-        public JornadaMilhasContextMock<TEntity> AddDbSet()
-        {
-            var dbSetMocked = GetMockDbSet().Object;
-            _mockDbContext.Setup(_expression).Returns(dbSetMocked);
+        mockDbSet.Setup(m => m.AddAsync(entity, It.IsAny<CancellationToken>()))
+            .ReturnsAsync((TEntity entity, CancellationToken cancellationToken) =>
+            {
+                _seedObjects.Add(entity);
+                return null;
+            });
 
-            return this;
-        }
+        _mockDbContext.Setup(_expression).Returns(mockDbSet.Object);
 
-        public JornadaMilhasContextMock<TEntity> AddDbSetEventAddObject(TEntity entity)
-        {
-            var mockDbSet = GetMockDbSet();
+        return this;
+    }
 
-            mockDbSet.Setup(m => m.AddAsync(entity, It.IsAny<CancellationToken>()))
-                .ReturnsAsync((TEntity entity, CancellationToken cancellationToken) =>
-                {
-                    _seedObjects.Add(entity);
-                    return null;
-                });
+    public Mock<JornadaMilhasDbContext> Build()
+    {
+        return _mockDbContext;
+    }
 
-            _mockDbContext.Setup(_expression).Returns(mockDbSet.Object);
-
-            return this;
-        }
-
-        public Mock<JornadaMilhasDbContext> Build()
-        {
-            return _mockDbContext;
-        }
-
-        private Mock<DbSet<TEntity>> GetMockDbSet()
-        {
-            return _seedObjects.AsQueryable().BuildMockDbSet();
-        }
-
+    private Mock<DbSet<TEntity>> GetMockDbSet()
+    {
+        return _seedObjects.AsQueryable().BuildMockDbSet();
     }
 }

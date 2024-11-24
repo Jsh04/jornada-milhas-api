@@ -4,10 +4,10 @@ POST http://localhost:5045/depoiment
 Content-Type: application/json
 
 {
-    "Name": "José Silvio",
-    "DepoimentDescription": "Descrição Teste",
-    "Picture": "VGVzdGUgRm90bw==",
-    "UserId": 1
+  "Name": "Josï¿½ Silvio",
+  "DepoimentDescription": "Descriï¿½ï¿½o Teste",
+  "Picture": "VGVzdGUgRm90bw==",
+  "UserId": 1
 }
 
 

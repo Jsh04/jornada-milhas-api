@@ -9,13 +9,11 @@ public class CompanyConfiguration : BaseEntityConfiguration<Company>
     public override void Configure(EntityTypeBuilder<Company> builder)
     {
         base.Configure(builder);
-        
-        builder.HasKey(c => c.Id);
 
         builder.Property(c => c.Name)
             .IsRequired()
             .HasMaxLength(200);
-        
+
         builder.Property(c => c.DtFoundation)
             .IsRequired();
     }

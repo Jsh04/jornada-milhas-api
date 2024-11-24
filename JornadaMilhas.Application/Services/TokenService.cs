@@ -1,19 +1,24 @@
-﻿using JornadaMilhas.Application.Interfaces.Services;
-using JornadaMilhas.Common.Entities;
-using JornadaMilhas.Core.Entities.Users.UserAdmin;
+﻿using System.Security.Claims;
+using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Common.Entity;
+using JornadaMilhas.Common.Entity.Users;
+using JornadaMilhas.Core.Entities.Customers;
+using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Infrastruture.Security;
-using System.Security.Claims;
 
 namespace JornadaMilhas.Application.Services;
 
 public class TokenService : ITokenService
 {
+    private const string Employee = "Employee";
+    private const string Customer = "Customer";
     private readonly ITokenGenerator _tokenGenerator;
-    private const string UserAdmin = "UserAdmin";
-    private const string UserLimited = "UserLimited";
 
-    public TokenService(ITokenGenerator tokenGenerator) => _tokenGenerator = tokenGenerator;
-   
+    public TokenService(ITokenGenerator tokenGenerator)
+    {
+        _tokenGenerator = tokenGenerator;
+    }
+
     public string GenerateToken(User user)
     {
         var claimsToken = GetClaimsOfToken(user);
@@ -26,12 +31,14 @@ public class TokenService : ITokenService
         {
             new Claim(ClaimTypes.Email, user.Email.Address),
             new Claim(ClaimTypes.Name, user.Name),
-            new Claim(ClaimTypes.Role, GetRoleUser(user)),
+            new Claim(ClaimTypes.Role, GetRoleUser(user))
         };
 
         return claims;
     }
 
-    private static string GetRoleUser(User user) =>  user is UserAdmin ? UserAdmin : UserLimited;
-     
+    private static string GetRoleUser(User user)
+    {
+        return user is Customer ? Customer : Employee;
+    }
 }

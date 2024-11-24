@@ -8,8 +8,8 @@ namespace JornadaMilhasTest.UnitsTests.DtoExtensionsTest;
 [TestFixture]
 public class DtoExtensionTest
 {
-
     private readonly Fixture fixture;
+
     public DtoExtensionTest()
     {
         fixture = SharingResources.AutoFixture;
@@ -19,7 +19,8 @@ public class DtoExtensionTest
     public void DeveraCriarObjetoDtoApartirDeUmObjetoDepoimento()
     {
         //arrange
-        var depoimentTest = Depoiment.Create(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<byte[]>(), fixture.Create<long>()).ValueOrDefault;
+        var depoimentTest = Depoiment.Create(fixture.Create<string>(), fixture.Create<string>(),
+            fixture.Create<byte[]>(), fixture.Create<long>()).ValueOrDefault;
 
         //act
         var depoimentDto = DtoExtensions<Depoiment, DepoimentDto>.ToDto(depoimentTest);
@@ -27,5 +28,4 @@ public class DtoExtensionTest
         //assert
         Assert.That(depoimentDto.Name, Is.EqualTo(depoimentTest.Name));
     }
-
 }

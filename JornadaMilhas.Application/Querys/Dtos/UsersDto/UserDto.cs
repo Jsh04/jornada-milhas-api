@@ -1,4 +1,4 @@
-﻿using JornadaMilhas.Common.Enums;
+﻿using JornadaMilhas.Common.Entity.Users.Enums;
 using JornadaMilhas.Common.ValueObjects;
 
 namespace JornadaMilhas.Application.Querys.Dtos.UsersDto;
@@ -11,17 +11,13 @@ public record UserDto
 
     public EnumGenre Genre { get; set; }
 
-    public Cpf Cpf { get;  set; }
+    public Cpf Cpf { get; set; }
 
-    public Phone Phone { get;  set; }
+    public Phone Phone { get; set; }
 
     public Address Address { get; set; }
 
-    public byte[]? Picture { get;  set; }
+    public byte[]? Picture { get; set; }
 
     public Email Email { get; set; }
-
 }
-
-
-

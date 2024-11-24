@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using AutoFixture;
-using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
+using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;
 using JornadaMilhasTest.IntegrationsTest.Helper;
 
 namespace JornadaMilhasTest.IntegrationsTest.Tests.UsuarioTest;
@@ -23,11 +23,12 @@ public class UsuarioTestController
     [Test(Description = "Devera retornar o dados cadastrados do usuario")]
     public async Task TestarRetornoDoCadastroDeUsuario()
     {
-        var usuario = fixture.Create<RegisterUserLimitedCommand>();
-        string url = EndPoint + "userLimited";
+        var user = fixture.Create<RegisterCustomerCommand>();
+        var url = EndPoint + "userLimited";
 
 
-        var stringContent = new StringContent(TestHelper.SerializerObjToJson(usuario), encoding: Encoding.UTF8, TestHelper.ContentTypeJson);
+        var stringContent = new StringContent(TestHelper.SerializerObjToJson(user), Encoding.UTF8,
+            TestHelper.ContentTypeJson);
         var response = await _client.PostAsync(url, stringContent);
 
         response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -35,4 +36,3 @@ public class UsuarioTestController
             response.Content.Headers.ContentType.ToString());
     }
 }
-

@@ -1,5 +1,4 @@
-﻿
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
 using JornadaMilhas.Common.DomainEventConsumer;
 using JornadaMilhas.Common.EventHandler;
@@ -10,52 +9,95 @@ using RabbitMQ.Client.Events;
 
 namespace JornadaMilhas.Infrastruture.MessageBus;
 
-public class MessageBusProducerService : IMessageBusProducerService
+public class MessageBusProducerService : IMessageBusProducerService, IDisposable
 {
+    private readonly IModel _channelConsume;
+    private readonly IModel _channelPublisher;
+    private readonly IConnection _connection;
     private readonly RabbitMqOptions _rabbitMqOptions;
-    private readonly ConnectionFactory _connectionFactory;
+
     public MessageBusProducerService(IOptions<RabbitMqOptions> rabbitMqOptions)
     {
         _rabbitMqOptions = rabbitMqOptions.Value;
 
-        _connectionFactory = new ConnectionFactory
+        var connectionFactory = new ConnectionFactory
         {
             HostName = _rabbitMqOptions.HostName,
             Port = _rabbitMqOptions.Port
         };
-        
+
+        _connection = connectionFactory.CreateConnection();
+
+        _channelPublisher = _connection.CreateModel();
+        _channelConsume = _connection.CreateModel();
+    }
+
+    public void Dispose()
+    {
+        _connection?.Dispose();
+        _channelPublisher?.Dispose();
+        _channelConsume?.Dispose();
+
+        GC.SuppressFinalize(this);
     }
 
     public void Publish<T>(string queue, T dataToSend)
     {
-        using var connection = _connectionFactory.CreateConnection();
-        using var channel = connection.CreateModel();
-        
         var bodyData = GetBodyMessage(dataToSend);
 
         var nameExchange = typeof(T).Name;
 
-        ExchangeDeclareDynamicType(channel, nameExchange);
+        ExchangeDeclareDynamicType(_channelPublisher, nameExchange);
 
-        QueueDeclareDynamicType(channel, queue);
+        QueueDeclareDynamicType(_channelPublisher, queue);
 
-        QueueBindDynamicType(channel, nameExchange, queue);
+        QueueBindDynamicType(_channelPublisher, nameExchange, queue);
 
-        channel.BasicPublish(
-            exchange: nameExchange,
+        _channelPublisher.BasicPublish(
+            nameExchange,
             queue,
-            basicProperties: null,
-            body: bodyData);
+            null,
+            bodyData);
     }
 
-    private static void QueueBindDynamicType(IModel channel, string nameExchange, string queue) =>
-        channel.QueueBind(queue: queue, exchange: nameExchange, queue);
+    public void Subscribe<TDomainEvent>(IDomainEventConsumeHandler<TDomainEvent> eventHandler, string queue)
+        where TDomainEvent : DomainEventConsumeBase
+    {
+        var eventName = typeof(TDomainEvent).Name;
 
-    private static void ExchangeDeclareDynamicType(IModel channel, string exchangeName) => 
-        channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Direct);
+        ExchangeDeclareDynamicType(_channelConsume, eventName);
 
-    private static void QueueDeclareDynamicType(IModel channel, string queue) =>
-        channel.QueueDeclare(queue: queue, durable: false, exclusive: false, autoDelete: true, arguments: null);
+        QueueDeclareDynamicType(_channelConsume, queue);
+
+        QueueBindDynamicType(_channelConsume, eventName, queue);
+
+        var consumer = new EventingBasicConsumer(_channelConsume);
+
+        consumer.Received += async (model, ea) =>
+        {
+            var objDeserialized = GetDataOfBodyQueue<TDomainEvent>(ea);
+
+            if (objDeserialized is not null)
+                await eventHandler.Handle(objDeserialized);
+        };
+
+        _channelConsume.BasicConsume(queue, true, consumer);
+    }
+
+    private static void QueueBindDynamicType(IModel channel, string nameExchange, string queue)
+    {
+        channel.QueueBind(queue, nameExchange, queue);
+    }
+
+    private static void ExchangeDeclareDynamicType(IModel channel, string exchangeName)
+    {
+        channel.ExchangeDeclare(exchangeName, ExchangeType.Direct);
+    }
+
+    private static void QueueDeclareDynamicType(IModel channel, string queue)
+    {
+        channel.QueueDeclare(queue, false, false, true, null);
+    }
 
     private static byte[] GetBodyMessage<T>(T dataToSend)
     {
@@ -71,30 +113,4 @@ public class MessageBusProducerService : IMessageBusProducerService
         var message = Encoding.UTF8.GetString(byteArrayData);
         return JsonSerializer.Deserialize<TDomainEvent>(message);
     }
-
-    public void Subscribe<TDomainEvent>(IDomainEventConsumeHandler<TDomainEvent> eventHandler, string queue) where TDomainEvent : DomainEventConsumeBase
-    {
-        using var connection = _connectionFactory.CreateConnection();
-        using var channel = connection.CreateModel();
-
-        var eventName = typeof(TDomainEvent).Name;
-
-        ExchangeDeclareDynamicType(channel, eventName);
-
-        QueueDeclareDynamicType(channel, queue);
-
-        QueueBindDynamicType(channel, eventName, queue);
-
-        var consumer = new EventingBasicConsumer(channel);
-        consumer.Received += async (model, ea) =>
-        {
-            var objDeserialized = GetDataOfBodyQueue<TDomainEvent>(ea);
-
-            if (objDeserialized is not null)
-                await eventHandler.Handle(objDeserialized);
-        };
-
-        channel.BasicConsume(queue: queue, autoAck: true, consumer: consumer);
-    }
 }
-

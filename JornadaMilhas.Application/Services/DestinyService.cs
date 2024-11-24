@@ -6,43 +6,40 @@ using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using JornadaMilhas.Core.Entities.Destinies;
+using MediatR;
 
-namespace JornadaMilhas.Application.Services
+namespace JornadaMilhas.Application.Services;
+
+public class DestinyService : IDestinyService
 {
-    public class DestinyService : IDestinyService
+    private readonly ISender _sender;
+
+    public DestinyService(ISender sender)
     {
-        private readonly ISender _sender;
+        _sender = sender;
+    }
 
-        public DestinyService(ISender sender)
-        {
-            _sender = sender;
-        }
+    public async Task<Result> DeleteDestinyById(long id)
+    {
+        var deleteDestinyCommand = new DeleteDestinyCommand(id);
+        return await _sender.Send(deleteDestinyCommand);
+    }
 
-        public async Task<Result> DeleteDestinyById(long id) 
-        {
-            var deleteDestinyCommand = new DeleteDestinyCommand(id);
-            return await _sender.Send(deleteDestinyCommand);
-        }
+    public async Task<PaginationResult<DestinyDto>> GetAllDestinies(int size, int page)
+    {
+        var getAllDestiniesQuery = new GetAllDestinysQuery(page, size);
+        return await _sender.Send(getAllDestiniesQuery);
+    }
 
-        public async Task<PaginationResult<DestinyDto>> GetAllDestinies(int size, int page)
-        {
-            var getAllDestiniesQuery = new GetAllDestinysQuery(page, size);
-            return await _sender.Send(getAllDestiniesQuery);
-        }
+    public async Task<Result<DestinyDto>> GetDestinyById(long id)
+    {
+        var getDestinyById = new GetByIdDestinyQuery(id);
+        return await _sender.Send(getDestinyById);
+    }
 
-        public async Task<Result<DestinyDto>> GetDestinyById(long id)
-        {
-            var getDestinyById = new GetByIdDestinyQuery(id);
-            return await _sender.Send(getDestinyById);
-        }
-
-        public async Task<Result<Destiny>> RegisterDestiny(RegisterDestinyCommand command) => await _sender.Send(command);
+    public async Task<Result<Destiny>> RegisterDestiny(RegisterDestinyCommand command)
+    {
+        return await _sender.Send(command);
     }
 }

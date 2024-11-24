@@ -13,5 +13,4 @@ public sealed class OutboxMessage
     public DateTime? ProcessedAt { get; set; }
 
     public string? Error { get; set; }
-
 }

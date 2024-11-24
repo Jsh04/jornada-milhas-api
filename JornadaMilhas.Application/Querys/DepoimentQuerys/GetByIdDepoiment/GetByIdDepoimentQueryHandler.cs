@@ -10,8 +10,8 @@ namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetByIdDepoiment;
 
 public sealed class GetByIdDepoimentQueryHandler : IRequestHandler<GetByIdDepoimentQuery, Result<DepoimentDto>>
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IDepoimentRepository _depoimentRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
     public GetByIdDepoimentQueryHandler(IUnitOfWork unitOfWork, IDepoimentRepository depoimentRepository)
     {
@@ -29,6 +29,5 @@ public sealed class GetByIdDepoimentQueryHandler : IRequestHandler<GetByIdDepoim
         var depoimentDto = DtoExtensions<Depoiment, DepoimentDto>.ToDto(depoiment);
 
         return Result.Ok(depoimentDto);
-
     }
 }
