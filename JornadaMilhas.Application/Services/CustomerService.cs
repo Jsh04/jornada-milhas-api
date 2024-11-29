@@ -3,7 +3,6 @@ using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Querys.Dtos.UsersDto;
 using JornadaMilhas.Application.Querys.UserQuerys.GetCustomerById;
-using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Customers;
@@ -20,7 +19,7 @@ public class CustomerService : ICustomerService
         _sender = sender;
     }
     
-    public Task<PaginationResult<UserDto>> GetAllCustomersAsync(int size, int page, CancellationToken cancellationToken = default)
+    public Task<PaginationResult<CustomerDto>> GetAllCustomersAsync(int size, int page, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

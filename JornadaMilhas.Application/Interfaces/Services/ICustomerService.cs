@@ -13,7 +13,7 @@ namespace JornadaMilhas.Application.Interfaces.Services;
 
 public interface ICustomerService
 {
-    Task<PaginationResult<UserDto>> GetAllCustomersAsync(int size, int page, CancellationToken cancellationToken = default);
+    Task<PaginationResult<CustomerDto>> GetAllCustomersAsync(int size, int page, CancellationToken cancellationToken = default);
     
     Task<Result<Customer>> RegisterCustomer(RegisterCustomerCommand command);
 

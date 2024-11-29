@@ -25,7 +25,6 @@ public class CompanyRepositoryMockBuilder : BaseMockBuilder<ICompanyRepository>
         return this;
     }
 
-
     public override Mock<ICompanyRepository> Build()
     {
         return _mock;

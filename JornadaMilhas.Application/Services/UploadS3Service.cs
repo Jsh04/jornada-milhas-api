@@ -31,7 +31,7 @@ public class UploadS3Service : IUploadService
             await fileTransferUtility.UploadAsync(path, _bucketName);
             return Result.Ok();
         }
-        catch (Exception e)
+        catch
         {
             return Result.Fail(FileErrors.CannotUploadFile);
         }
