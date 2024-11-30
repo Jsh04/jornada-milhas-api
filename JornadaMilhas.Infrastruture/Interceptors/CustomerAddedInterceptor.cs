@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace JornadaMilhas.Infrastruture.Interceptors;
 
-public class DatabaseInterceptor : SaveChangesInterceptor
+public class CustomerAddedInterceptor : SaveChangesInterceptor
 {
     public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData,
         InterceptionResult<int> result, CancellationToken cancellationToken = default)

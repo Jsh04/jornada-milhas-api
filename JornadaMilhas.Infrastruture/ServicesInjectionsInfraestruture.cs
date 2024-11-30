@@ -49,7 +49,7 @@ public static class ServicesInjectionsInfraestruture
     {
         services.AddDbContext<JornadaMilhasDbContext>((serviceProvider, opts) =>
             opts.UseSqlServer(configuration["ConnectionStringSqlServer"])
-                .AddInterceptors(serviceProvider.GetRequiredService<CustomerRegisterInterceptor>()));
+                .AddInterceptors(serviceProvider.GetRequiredService<CustomerAddedInterceptor>()));
 
         return services;
     }
@@ -96,7 +96,7 @@ public static class ServicesInjectionsInfraestruture
         services.AddScoped<ITokenGenerator, TokenGenerator>();
 
         services.AddSingleton<JwtSecurityTokenHandler>();
-        services.AddSingleton<CustomerRegisterInterceptor>();
+        services.AddSingleton<CustomerAddedInterceptor>()l;
         services.AddSingleton<IMessageBusProducerService, MessageBusProducerService>();
 
         return services;

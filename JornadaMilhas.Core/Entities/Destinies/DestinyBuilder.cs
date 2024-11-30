@@ -9,11 +9,6 @@ public class DestinyBuilder : Builder<Destiny, DestinyBuilder>
 
     protected List<Picture> Images = new();
 
-    private string Name;
-
-    private decimal Price;
-
-    private string Subtitle;
 
     public static DestinyBuilder Create()
     {
