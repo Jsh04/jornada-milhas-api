@@ -4,7 +4,7 @@ namespace JornadaMilhas.Core.Entities.Users;
 
 public record UserErrors
 {
-    public static Error CannotBeCreated => new("UserErrors.CannotBeCreated", "Erro ao cadastrar Usuário", ErrorType.Failure);
+    public static IError CannotBeCreated => new Error("UserErrors.CannotBeCreated", "Erro ao cadastrar Usuário", ErrorType.Failure);
 
     public static Error NotFound => new("UserErrors.NotFound", "Erro ao encontrar Usuário", ErrorType.NotFound);
 

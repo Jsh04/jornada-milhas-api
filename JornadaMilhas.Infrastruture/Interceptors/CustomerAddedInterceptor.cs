@@ -1,29 +1,42 @@
 ﻿using JornadaMilhas.Common.DomainEvent;
 using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Persistence.Queue;
+using JornadaMilhas.Core.Entities.Customers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json;
 
 namespace JornadaMilhas.Infrastruture.Interceptors;
 
-public class PublishEventSendEmailToQueueObj : SaveChangesInterceptor
+public class DatabaseInterceptor : SaveChangesInterceptor
 {
     public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData,
         InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
-        if (eventData.Context is null)
+        var context = eventData.Context;
+
+        if (context is null)
             return await base.SavingChangesAsync(eventData, result, cancellationToken);
 
-        if (eventData.Context is not null)
-            await InsertSendEmailQueueAsync(eventData.Context);
+        var entriesEntities = context.ChangeTracker.Entries().Where(entityEntry => 
+        entityEntry.Entity is Customer && entityEntry.State == EntityState.Added);
+
+        if (!entriesEntities.Any())
+            return await base.SavingChangesAsync(eventData, result, cancellationToken);
+
+        var listEntitiesEntry = entriesEntities.Cast<EntityEntry<Customer>>();
+
+        var outBoxMessages = GetOutBoxMessages(listEntitiesEntry);
+
+        await context.Set<OutboxMessage>().AddRangeAsync(outBoxMessages, cancellationToken);
 
         return await base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 
-    private static async Task InsertSendEmailQueueAsync(DbContext context)
+    private static List<OutboxMessage> GetOutBoxMessages(IEnumerable<EntityEntry<Customer>> entryCustomerAdded)
     {
-        var queueEmailsObjs = context.ChangeTracker.Entries<BaseEntity>()
+        var queueEmailsObjs = entryCustomerAdded
             .Select(entry => entry.Entity)
             .SelectMany(entity =>
             {
@@ -44,6 +57,6 @@ public class PublishEventSendEmailToQueueObj : SaveChangesInterceptor
                 })
             }).ToList();
 
-        await context.Set<OutboxMessage>().AddRangeAsync(queueEmailsObjs);
+        return queueEmailsObjs;
     }
 }

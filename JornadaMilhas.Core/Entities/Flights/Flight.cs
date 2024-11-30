@@ -26,7 +26,7 @@ public class Flight : BaseEntity
 
     public IReadOnlyCollection<Passage> Passages => _passages.AsReadOnly();
 
-    private Result BuyPassageInFlight(Passage passage)
+    public Result BuyPassageInFlight(Passage passage)
     {
         if (_passages.Count >= MaxCount)
             return Result.Fail(FlightErrors.FlightAlreadyFull);

@@ -7,10 +7,6 @@ public class DestinyBuilder : Builder<Destiny, DestinyBuilder>
 {
     private readonly Destiny _destino;
 
-    private string DescriptionEnglish;
-
-    private string DescriptionPortuguese;
-
     protected List<Picture> Images = new();
 
     private string Name;

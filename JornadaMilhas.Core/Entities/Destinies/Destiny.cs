@@ -8,18 +8,20 @@ public class Destiny : BaseEntity
 {
     private readonly List<Picture> _pictures;
 
-    private Destiny(string name, string subtitle, string descriptionPortuguese, string descriptionEnglish)
+    private Destiny(DestinyBuilder builder)
     {
-        Name = name;
+        Name = builder;
         Subtitle = subtitle;
         DescriptionPortuguese = descriptionPortuguese;
         DescriptionEnglish = descriptionEnglish;
         _pictures = new List<Picture>();
     }
 
-    [JsonPropertyName("name")] public string Name { get; init; }
+    [JsonPropertyName("name")] 
+    public string Name { get; init; }
 
-    [JsonPropertyName("subtitle")] public string Subtitle { get; init; }
+    [JsonPropertyName("subtitle")] 
+    public string Subtitle { get; init; }
 
     [JsonPropertyName("descriptionPortuguese")]
     public string DescriptionPortuguese { get; init; }
@@ -44,10 +46,9 @@ public class Destiny : BaseEntity
         return DestinyBuilder.Create();
     }
 
-    public static Result<Destiny> Create(string name, string subtitle, decimal price, string descriptionPortuguese,
-        string descriptionEnglish)
+    public static Result<Destiny> Create(DestinyBuilder builder)
     {
-        var destiny = new Destiny(name, subtitle, descriptionPortuguese, descriptionEnglish);
+        var destiny = new Destiny(builder);
 
         return Result<Destiny>.Ok(destiny);
     }
