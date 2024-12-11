@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using JornadaMilhas.Common.PaginationResult;
-using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,12 +16,12 @@ public class DestinyRepository : IDestinyRepository
         _context = context;
     }
 
-    public async Task CreateAsync(Destiny destino)
+    public async Task CreateAsync(Locale destino)
     {
         await _context.Destinos.AddAsync(destino);
     }
 
-    public Task<PaginationResult<Destiny>> GetAllAsync(int page = 1, int pageSize = 10,
+    public Task<PaginationResult<Locale>> GetAllAsync(int page = 1, int pageSize = 10,
         CancellationToken cancellationToken = default)
     {
         var destinies = _context.Destinos.AsQueryable()
@@ -29,25 +29,25 @@ public class DestinyRepository : IDestinyRepository
         return destinies.ToPaginationResultAsync(page, pageSize, cancellationToken);
     }
 
-    public IQueryable<Destiny> GetAllBy(Expression<Func<Destiny, bool>> predicate)
+    public IQueryable<Locale> GetAllBy(Expression<Func<Locale, bool>> predicate)
     {
         return _context.Destinos.AsQueryable().Where(predicate);
     }
 
-    public async Task<Destiny> GetByIdAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<Locale> GetByIdAsync(long id, CancellationToken cancellationToken = default)
     {
         return await _context.Destinos
             .Include(destiny => destiny.Pictures)
             .SingleOrDefaultAsync(destiny => destiny.Id == id, cancellationToken);
     }
 
-    public Task<Destiny> GetSingleByAsync(Expression<Func<Destiny, bool>> expression,
+    public Task<Locale> GetSingleByAsync(Expression<Func<Locale, bool>> expression,
         CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public bool Update(Destiny obj)
+    public bool Update(Locale obj)
     {
         var updted = _context.Destinos.Update(obj);
 

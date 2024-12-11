@@ -1,8 +1,8 @@
 ﻿using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.DTO;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using MediatR;
 
 namespace JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
@@ -21,9 +21,9 @@ public class GetByIdDestinyQueryHandler : IRequestHandler<GetByIdDestinyQuery, R
         var destiny = await _destinyRepository.GetByIdAsync(request.id, cancellationToken);
 
         if (destiny is null)
-            return Result.Fail<DestinyDto>(DestinyErrors.NotFound);
+            return Result.Fail<DestinyDto>(LocaleErrors.NotFound);
 
-        var destinyDto = DtoExtensions<Destiny, DestinyDto>.ToDto(destiny);
+        var destinyDto = DtoExtensions<Locale, DestinyDto>.ToDto(destiny);
 
         return Result.Ok(destinyDto);
     }

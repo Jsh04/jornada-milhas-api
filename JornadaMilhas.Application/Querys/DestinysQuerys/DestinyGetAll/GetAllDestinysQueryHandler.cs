@@ -1,8 +1,8 @@
 ﻿using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.DTO;
 using JornadaMilhas.Common.PaginationResult;
-using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using MediatR;
 
 namespace JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll;
@@ -22,7 +22,7 @@ public class GetAllDestinysQueryHandler : IRequestHandler<GetAllDestinysQuery, P
         var paginationResultDestinies =
             await _destinyRepository.GetAllAsync(request.Page, request.Size, cancellationToken);
 
-        var destiniesDto = DtoExtensions<Destiny, DestinyDto>.ToDto(paginationResultDestinies.Data);
+        var destiniesDto = DtoExtensions<Locale, DestinyDto>.ToDto(paginationResultDestinies.Data);
 
         var paginationResultDestiniesDto = new PaginationResult<DestinyDto>
         (

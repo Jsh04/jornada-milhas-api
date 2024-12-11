@@ -1,5 +1,5 @@
 ﻿using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using MediatR;
 
 namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
@@ -10,6 +10,6 @@ public sealed record RegisterDestinyCommand(
     decimal Price,
     string DescriptionPortuguese,
     string DescriptionEnglish,
-    List<string> Images) : IRequest<Result<Destiny>>
+    List<string> Images) : IRequest<Result<Locale>>
 {
 }

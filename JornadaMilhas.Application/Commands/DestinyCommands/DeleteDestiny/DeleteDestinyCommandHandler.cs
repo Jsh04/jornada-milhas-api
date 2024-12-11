@@ -1,6 +1,6 @@
 ﻿using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
@@ -23,7 +23,7 @@ public class DeleteDestinyCommandHandler : IRequestHandler<DeleteDestinyCommand,
         var destiny = await _destinyRepository.GetByIdAsync(request.Id, cancellationToken);
 
         if (destiny is null)
-            return Result.Fail(DestinyErrors.NotFound);
+            return Result.Fail(LocaleErrors.NotFound);
 
         destiny.Delete();
 
@@ -32,7 +32,7 @@ public class DeleteDestinyCommandHandler : IRequestHandler<DeleteDestinyCommand,
         var deleted = await _unitWork.CompleteAsync(cancellationToken) > 0;
 
         if (!deleted)
-            return Result.Fail(DestinyErrors.CannotBeDeleted);
+            return Result.Fail(LocaleErrors.CannotBeDeleted);
 
         return Result.Ok();
     }

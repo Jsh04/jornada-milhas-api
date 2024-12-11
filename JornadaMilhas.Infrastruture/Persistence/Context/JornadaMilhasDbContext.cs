@@ -7,8 +7,8 @@ using JornadaMilhas.Core.Entities.Admins;
 using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhas.Core.Entities.Depoiments;
-using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Entities.Users;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using Microsoft.EntityFrameworkCore;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Context;
@@ -23,7 +23,7 @@ public class JornadaMilhasDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Destiny> Destinos { get; set; }
+    public virtual DbSet<Locale> Destinos { get; set; }
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<Depoiment> Depoimentos { get; set; }
 

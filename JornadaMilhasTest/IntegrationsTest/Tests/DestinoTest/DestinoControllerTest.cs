@@ -3,7 +3,7 @@ using System.Text.Json;
 using AutoFixture;
 using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Util;
-using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using JornadaMilhasTest.IntegrationsTest.Helper;
 
 namespace JornadaMilhasTest.IntegrationsTest.Tests.DestinoTest;
@@ -64,7 +64,7 @@ public class DestinoControllerTest
 
         var content = await response.Content.ReadAsStringAsync();
 
-        var destinos = JsonSerializer.Deserialize<List<Destiny>>(content)!;
+        var destinos = JsonSerializer.Deserialize<List<Locale>>(content)!;
 
         //assert
         Assert.That(destinos, Has.Count.EqualTo(1));

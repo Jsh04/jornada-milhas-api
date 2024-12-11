@@ -4,14 +4,14 @@ using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Results.Errors;
 using JornadaMilhas.Common.Util;
 using JornadaMilhas.Core.Entities;
-using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 
-public class RegisterDestinyCommandHandler : IRequestHandler<RegisterDestinyCommand, Result<Destiny>>
+public class RegisterDestinyCommandHandler : IRequestHandler<RegisterDestinyCommand, Result<Locale>>
 {
     private readonly IDestinyRepository _repositoryDestiny;
     private readonly IUnitOfWork _unitOfWork;
@@ -25,12 +25,12 @@ public class RegisterDestinyCommandHandler : IRequestHandler<RegisterDestinyComm
         _uploadService = uploadService;
     }
 
-    public async Task<Result<Destiny>> Handle(RegisterDestinyCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Locale>> Handle(RegisterDestinyCommand request, CancellationToken cancellationToken)
     {
         await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
         var destinyResult =
-            Destiny.CreateBuilder()
+            Locale.CreateBuilder()
                 .AddName(request.Name)
                 .AddPrice(request.Price)
                 .AddSubtitle(request.Subtitle)
@@ -39,14 +39,14 @@ public class RegisterDestinyCommandHandler : IRequestHandler<RegisterDestinyComm
                 .Build();
 
         if (!destinyResult.Success)
-            return Result.Fail<Destiny>(destinyResult.Errors);
+            return Result.Fail<Locale>(destinyResult.Errors);
 
         var destiny = destinyResult.Value;
 
         var resultListFilesDto = GetFilesConverted(request.Images, destiny.Name);
 
         if (!resultListFilesDto.Success)
-            return Result.Fail<Destiny>(resultListFilesDto.Errors);
+            return Result.Fail<Locale>(resultListFilesDto.Errors);
 
         var pictures = resultListFilesDto.Value.Select(fileDto => Picture.Create(fileDto.path));
 
@@ -60,7 +60,7 @@ public class RegisterDestinyCommandHandler : IRequestHandler<RegisterDestinyComm
 
         await _unitOfWork.CommitAsync(cancellationToken);
 
-        return !created ? Result.Fail<Destiny>(DestinyErrors.CannotBeCreated) : Result.Ok(destiny);
+        return !created ? Result.Fail<Locale>(LocaleErrors.CannotBeCreated) : Result.Ok(destiny);
     }
 
     private async Task UploadFilesToCloud(List<FileDto> listFilesDto)

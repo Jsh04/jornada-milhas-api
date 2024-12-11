@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Application.Commands.DestinyCommands.DeleteDestiny;
-using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using JornadaMilhasTest.UnitsTests.Builders;
 
 namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.DestinyCommandTests;
@@ -51,7 +51,7 @@ public class DeleteDestinyCommandTest
         var errorMessage = result.Errors[0].Message;
         Assert.Multiple(() =>
         {
-            StringAssert.AreEqualIgnoringCase(errorMessage, DestinyErrors.NotFound.Message);
+            StringAssert.AreEqualIgnoringCase(errorMessage, LocaleErrors.NotFound.Message);
             Assert.That(result.Errors, Is.Not.Empty);
             Assert.That(result.Errors, Has.Count.EqualTo(1));
         });

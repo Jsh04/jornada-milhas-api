@@ -3,7 +3,7 @@ using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JornadaMilhas.API;
@@ -23,7 +23,7 @@ public class DestinyController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Result<Destiny>))]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Result<Locale>))]
     public async Task<IActionResult> CreateDestino([FromBody] RegisterDestinyCommand command)
     {
         var resultRegisterDestiny = await _destinyService.RegisterDestiny(command);
@@ -32,6 +32,8 @@ public class DestinyController : ControllerBase
             value => CreatedAtAction(nameof(GetDestinoById), new { id = value.Id }, command),
             value => value.ToProblemDetails());
     }
+
+wh
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

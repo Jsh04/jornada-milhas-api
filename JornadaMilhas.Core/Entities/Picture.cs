@@ -1,5 +1,5 @@
 ﻿using JornadaMilhas.Common.Entity;
-using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhas.Core.ValueObjects.Locales;
 
 namespace JornadaMilhas.Core.Entities;
 
@@ -14,7 +14,7 @@ public class Picture : BaseEntity
 
     public long DestinyId { get; init; }
 
-    public Destiny Destiny { get; }
+    public Locale Destiny { get; }
 
     public static Picture Create(string pathS3)
     {

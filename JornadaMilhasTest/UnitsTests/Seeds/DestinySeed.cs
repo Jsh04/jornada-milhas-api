@@ -1,31 +1,31 @@
 ﻿using AutoFixture;
-using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhas.Core.ValueObjects.Locales;
 
 namespace JornadaMilhasTest.UnitsTests.Seeds;
 
 public static class DestinySeed
 {
-    public static Destiny GetDestinyTest(Fixture fixture)
+    public static Locale GetDestinyTest(Fixture fixture)
     {
-        return fixture.Build<Destiny>()
+        return fixture.Build<Locale>()
             .FromFactory(CustomizeCreateDestiny(fixture))
             .OmitAutoProperties()
             .Create();
     }
 
-    public static IEnumerable<Destiny> GetDestiniesByNumberOfObjects(Fixture fixture, int numberOfObjects)
+    public static IEnumerable<Locale> GetDestiniesByNumberOfObjects(Fixture fixture, int numberOfObjects)
     {
-        return fixture.Build<Destiny>()
+        return fixture.Build<Locale>()
             .FromFactory(CustomizeCreateDestiny(fixture))
             .OmitAutoProperties()
             .CreateMany(numberOfObjects);
     }
 
-    private static Func<Destiny> CustomizeCreateDestiny(Fixture fixture)
+    private static Func<Locale> CustomizeCreateDestiny(Fixture fixture)
     {
         return () =>
         {
-            return Destiny.Create(
+            return Locale.Create(
                 fixture.Create<string>(),
                 fixture.Create<string>(),
                 fixture.Create<decimal>(),

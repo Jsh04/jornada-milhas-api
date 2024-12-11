@@ -1,5 +1,5 @@
 ﻿using AutoFixture;
-using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock;
 using JornadaMilhasTest.UnitsTests.Seeds;
@@ -24,7 +24,7 @@ public class DestinyRepositoryTest
         int size, int numberObjects)
     {
         //arrange
-        var contextMock = JornadaMilhasContextMock<Destiny>
+        var contextMock = JornadaMilhasContextMock<Locale>
             .CreateInstance(
                 DestinySeed.GetDestiniesByNumberOfObjects(_fixture, numberObjects).ToList(), x => x.Destinos)
             .AddDbSet()
@@ -52,7 +52,7 @@ public class DestinyRepositoryTest
         //arrange
         var destiny = DestinySeed.GetDestinyTest(_fixture);
 
-        var contextMock = JornadaMilhasContextMock<Destiny>.CreateInstance(
+        var contextMock = JornadaMilhasContextMock<Locale>.CreateInstance(
                 DestinySeed.GetDestiniesByNumberOfObjects(_fixture, 10).ToList(), x => x.Destinos)
             .AddDbSet()
             .AddDbSetEventAddObject(destiny)

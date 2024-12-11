@@ -6,7 +6,7 @@ using JornadaMilhas.Application.Querys.DestinysQuerys.DestinysGetById;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using MediatR;
 
 namespace JornadaMilhas.Application.Services;
@@ -38,7 +38,7 @@ public class DestinyService : IDestinyService
         return await _sender.Send(getDestinyById);
     }
 
-    public async Task<Result<Destiny>> RegisterDestiny(RegisterDestinyCommand command)
+    public async Task<Result<Locale>> RegisterDestiny(RegisterDestinyCommand command)
     {
         return await _sender.Send(command);
     }

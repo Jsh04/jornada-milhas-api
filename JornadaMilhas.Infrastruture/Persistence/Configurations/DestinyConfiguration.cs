@@ -1,12 +1,12 @@
 ﻿using JornadaMilhas.Common.Persistence.Configuration;
-using JornadaMilhas.Core.Entities.Destinies;
+using JornadaMilhas.Core.ValueObjects.Locales;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations;
 
-internal class DestinoConfiguration : BaseEntityConfiguration<Destiny>
+internal class DestinoConfiguration : BaseEntityConfiguration<Locale>
 {
-    public void Configure(EntityTypeBuilder<Destiny> builder)
+    public void Configure(EntityTypeBuilder<Locale> builder)
     {
         base.Configure(builder);
 

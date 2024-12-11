@@ -1,9 +1,8 @@
-﻿using System.Numerics;
-using JornadaMilhas.Common.Entity;
+﻿using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Results;
-using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Entities.Passages;
-
+using JornadaMilhas.Core.ValueObjects.Locales;
+using Plane = JornadaMilhas.Core.Entities.Planes.Plane;
 namespace JornadaMilhas.Core.Entities.Flights;
 
 public class Flight : BaseEntity
@@ -17,15 +16,20 @@ public class Flight : BaseEntity
 
     public string FlightCode { get; }
 
-    public virtual Destiny Destiny { get; }
+    public Locale Locale { get; }
 
     public bool IsCanceled { get; private set; }
 
-    public virtual Plane Plane { get; }
-    public int MaxCount { get; }
+    public Plane Plane { get; }
+    public int MaxCountPassagens { get; }
 
     public IReadOnlyCollection<Passage> Passages => _passages.AsReadOnly();
 
+
+    private Flight(FlightBuilder builder)
+    {
+        
+    }
     public Result BuyPassageInFlight(Passage passage)
     {
         if (_passages.Count >= MaxCount)
