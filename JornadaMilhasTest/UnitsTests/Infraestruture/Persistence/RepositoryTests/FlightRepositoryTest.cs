@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.ValueObjects.Locales;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.ContextsMock;
@@ -8,11 +9,11 @@ using Moq;
 namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.RepositoryTests;
 
 [TestFixture]
-public class DestinyRepositoryTest
+public class FlightRepositoryTest
 {
     private readonly Fixture _fixture;
 
-    public DestinyRepositoryTest()
+    public FlightRepositoryTest()
     {
         _fixture = SharingResources.AutoFixture;
     }
@@ -24,12 +25,12 @@ public class DestinyRepositoryTest
         int size, int numberObjects)
     {
         //arrange
-        var contextMock = JornadaMilhasContextMock<Locale>
+        var contextMock = JornadaMilhasContextMock<Flight>
             .CreateInstance(
-                DestinySeed.GetDestiniesByNumberOfObjects(_fixture, numberObjects).ToList(), x => x.Destinos)
+                FlightSeed.GetDestiniesByNumberOfObjects(_fixture, numberObjects).ToList(), x => x.Flights)
             .AddDbSet()
             .Build();
-        var destinyRespository = new DestinyRepository(contextMock.Object);
+        var destinyRespository = new FlightRepository(contextMock.Object);
 
         //act
         var result = await destinyRespository.GetAllAsync(page, size);
@@ -43,22 +44,22 @@ public class DestinyRepositoryTest
             Assert.That(result.Data, Is.Not.Empty);
             Assert.That(result.PageSize, Is.EqualTo(size));
         });
-        contextMock.Verify(x => x.Destinos, Times.Once);
+        contextMock.Verify(x => x.Flights, Times.Once);
     }
 
     [Test]
     public async Task Create_DeveraSerChamadoOMetodoCreateUmaVez_QuandoForCadastrar()
     {
         //arrange
-        var destiny = DestinySeed.GetDestinyTest(_fixture);
+        var destiny = FlightSeed.GetFlightTest(_fixture);
 
-        var contextMock = JornadaMilhasContextMock<Locale>.CreateInstance(
-                DestinySeed.GetDestiniesByNumberOfObjects(_fixture, 10).ToList(), x => x.Destinos)
+        var contextMock = JornadaMilhasContextMock<Flight>.CreateInstance(
+                FlightSeed.GetDestiniesByNumberOfObjects(_fixture, 10).ToList(), x => x.Flights)
             .AddDbSet()
             .AddDbSetEventAddObject(destiny)
             .Build();
 
-        var destinyRespository = new DestinyRepository(contextMock.Object);
+        var destinyRespository = new FlightRepository(contextMock.Object);
 
         //act
         await destinyRespository.CreateAsync(destiny);

@@ -87,16 +87,18 @@ public static class ServicesInjectionsInfraestruture
 
     private static IServiceCollection AddInjectionRepositorys(this IServiceCollection services)
     {
-        services.AddScoped<IDestinyRepository, DestinyRepository>();
+        services.AddScoped<IFlightRepository, FlightRepository>();
         services.AddScoped<IDepoimentRepository, DepoimentRepository>();
         services.AddScoped<ICompanyRepository, CompanyRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IPlaneRepository, PlaneRepository>();
 
         services.AddScoped<ITokenGenerator, TokenGenerator>();
 
         services.AddSingleton<JwtSecurityTokenHandler>();
-        services.AddSingleton<CustomerAddedInterceptor>()l;
+        services.AddSingleton<CustomerAddedInterceptor>();
         services.AddSingleton<IMessageBusProducerService, MessageBusProducerService>();
 
         return services;

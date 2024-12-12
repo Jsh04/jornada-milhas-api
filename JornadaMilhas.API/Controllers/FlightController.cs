@@ -1,5 +1,5 @@
 ﻿using JornadaMilhas.API.Extensions;
-using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
+using JornadaMilhas.Application.Commands.FlightCommands.RegisterFlight;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.Results;
@@ -10,13 +10,13 @@ namespace JornadaMilhas.API;
 
 [ApiController]
 [Route("[controller]")]
-public class DestinyController : ControllerBase
+public class FlightController : ControllerBase
 {
-    private readonly IDestinyService _destinyService;
+    private readonly IFlightService _flightService;
 
-    public DestinyController(IDestinyService destinyService)
+    public FlightController(IFlightService flightService)
     {
-        _destinyService = destinyService;
+        _flightService = flightService;
     }
 
     [HttpPost]
@@ -24,24 +24,22 @@ public class DestinyController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Result<Locale>))]
-    public async Task<IActionResult> CreateDestino([FromBody] RegisterDestinyCommand command)
+    public async Task<IActionResult> CreateFlight([FromBody] RegisterFlightCommand command)
     {
-        var resultRegisterDestiny = await _destinyService.RegisterDestiny(command);
+        var resultRegisterDestiny = await _flightService.RegisterDestiny(command);
 
         return resultRegisterDestiny.Match(
-            value => CreatedAtAction(nameof(GetDestinoById), new { id = value.Id }, command),
+            value => CreatedAtAction(nameof(GetFlightById), new { id = value.Id }, command),
             value => value.ToProblemDetails());
     }
-
-wh
-
+    
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<DestinyDto>))]
-    public async Task<IActionResult> GetAllDestinies([FromQuery] int page = 1, [FromQuery] int size = 10)
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<FlightsDto>))]
+    public async Task<IActionResult> GetAllFlights([FromQuery] int page = 1, [FromQuery] int size = 10)
     {
-        var result = await _destinyService.GetAllDestinies(page, size);
+        var result = await _flightService.GetAllFlights(page, size);
         return Ok(result);
     }
 
@@ -49,10 +47,10 @@ wh
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<DestinyDto>))]
-    public async Task<IActionResult> GetDestinoById(long id)
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<FlightsDto>))]
+    public async Task<IActionResult> GetFlightById(long id)
     {
-        var result = await _destinyService.GetDestinyById(id);
+        var result = await _flightService.GetFlightById(id);
         return result.Match(Ok, value => value.ToProblemDetails());
     }
 
@@ -60,9 +58,9 @@ wh
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> DeleteDestinyById(long id)
+    public async Task<IActionResult> DeleteFlightById(long id)
     {
-        var result = await _destinyService.DeleteDestinyById(id).ConfigureAwait(false);
+        var result = await _flightService.DeleteDestinyById(id).ConfigureAwait(false);
         return result.Match(Ok, value => value.ToProblemDetails());
     }
 }

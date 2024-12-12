@@ -1,30 +1,31 @@
 ﻿using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 using JornadaMilhas.Common.DTO;
 using JornadaMilhas.Common.PaginationResult;
+using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Core.ValueObjects.Locales;
 using MediatR;
 
 namespace JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll;
 
-public class GetAllDestinysQueryHandler : IRequestHandler<GetAllDestinysQuery, PaginationResult<DestinyDto>>
+public class GetAllFlightsQueryHandler : IRequestHandler<GetAllFlightsQuery, PaginationResult<FlightsDto>>
 {
-    private readonly IDestinyRepository _destinyRepository;
+    private readonly IFlightRepository _flightRepository;
 
-    public GetAllDestinysQueryHandler(IDestinyRepository destinyRepository)
+    public GetAllFlightsQueryHandler(IFlightRepository flightRepository)
     {
-        _destinyRepository = destinyRepository;
+        _flightRepository = flightRepository;
     }
 
-    public async Task<PaginationResult<DestinyDto>> Handle(GetAllDestinysQuery request,
+    public async Task<PaginationResult<FlightsDto>> Handle(GetAllFlightsQuery request,
         CancellationToken cancellationToken)
     {
         var paginationResultDestinies =
-            await _destinyRepository.GetAllAsync(request.Page, request.Size, cancellationToken);
+            await _flightRepository.GetAllAsync(request.Page, request.Size, cancellationToken);
 
-        var destiniesDto = DtoExtensions<Locale, DestinyDto>.ToDto(paginationResultDestinies.Data);
+        var destiniesDto = DtoExtensions<Flight, FlightsDto>.ToDto(paginationResultDestinies.Data);
 
-        var paginationResultDestiniesDto = new PaginationResult<DestinyDto>
+        var paginationResultDestiniesDto = new PaginationResult<FlightsDto>
         (
             paginationResultDestinies.Page,
             paginationResultDestinies.PageSize,

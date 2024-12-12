@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
-using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
+using JornadaMilhas.Application.Commands.FlightCommands.RegisterFlight;
 using JornadaMilhas.Application.EventHandlers;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Services;
@@ -20,20 +20,20 @@ public static class ServicesInjectionApplication
             .AddServicesFluentValidation();
     }
 
-    public static IServiceCollection AddDependencyInjectionOfApplication(this IServiceCollection services)
+    private static IServiceCollection AddDependencyInjectionOfApplication(this IServiceCollection services)
     {
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<ICustomerService, CustomerService>();
-        services.AddScoped<IDestinyService, DestinyService>();
+        services.AddScoped<IFlightService, FlightService>();
 
         services.AddSingleton<IUploadService, UploadS3Service>();
 
         return services;
     }
 
-    public static IServiceCollection AddServicesOfMediat(this IServiceCollection services)
+    private static IServiceCollection AddServicesOfMediat(this IServiceCollection services)
     {
-        services.AddMediatR(opts => opts.RegisterServicesFromAssembly(typeof(RegisterDestinyCommand).Assembly));
+        services.AddMediatR(opts => opts.RegisterServicesFromAssembly(typeof(RegisterFlightCommand).Assembly));
 
         return services;
     }
@@ -44,9 +44,9 @@ public static class ServicesInjectionApplication
         return services;
     }
 
-    public static IServiceCollection AddServicesFluentValidation(this IServiceCollection services)
+    private static IServiceCollection AddServicesFluentValidation(this IServiceCollection services)
     {
-        services.AddValidatorsFromAssemblyContaining(typeof(RegisterDestinyValidator), ServiceLifetime.Transient);
+        services.AddValidatorsFromAssemblyContaining(typeof(RegisterFlightValidator), ServiceLifetime.Transient);
 
         services.AddFluentValidationAutoValidation();
 

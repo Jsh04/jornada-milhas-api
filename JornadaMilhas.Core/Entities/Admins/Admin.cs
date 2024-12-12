@@ -27,5 +27,8 @@ public class Admin : User
     {
         Position = builder.Position;
         Company = builder.Company;
+        Salary = builder.Salary;
     }
+
+    private Admin(): base() { }
 }

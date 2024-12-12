@@ -7,6 +7,8 @@ using JornadaMilhas.Core.Entities.Admins;
 using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhas.Core.Entities.Depoiments;
+using JornadaMilhas.Core.Entities.Flights;
+using JornadaMilhas.Core.Entities.Planes;
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.ValueObjects.Locales;
 using Microsoft.EntityFrameworkCore;
@@ -22,8 +24,8 @@ public class JornadaMilhasDbContext : DbContext
     public JornadaMilhasDbContext(DbContextOptions<JornadaMilhasDbContext> options) : base(options)
     {
     }
-
-    public virtual DbSet<Locale> Destinos { get; set; }
+    
+    public virtual DbSet<Flight> Flights { get; set; }
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<Depoiment> Depoimentos { get; set; }
 
@@ -33,6 +35,8 @@ public class JornadaMilhasDbContext : DbContext
 
     public virtual DbSet<Admin> Admins { get; set; }
     public virtual DbSet<Customer> Customers { get; set; }
+
+    public virtual DbSet<Plane> Planes { get; set; }
 
     public DbSet<Company> Company { get; set; }
 

@@ -6,17 +6,17 @@ using Moq;
 namespace JornadaMilhasTest.UnitsTests.Apresentation;
 
 [TestFixture]
-public class DestinyControllerTest
+public class FlightControllerTest
 {
     [Test]
     public async Task GetAllDestiniesAsync_DeveraRetornarOk_PassandoUmaRequestValida()
     {
-        var destinyServiceMock = new Mock<IDestinyService>();
+        var destinyServiceMock = new Mock<IFlightService>();
 
-        var destinyController = new DestinyController(destinyServiceMock.Object);
+        var destinyController = new FlightController(destinyServiceMock.Object);
 
         //act
-        var resultRequest = await destinyController.GetAllDestinies();
+        var resultRequest = await destinyController.GetAllFlights();
 
         //assert
         Assert.That(resultRequest, Is.InstanceOf<OkObjectResult>());

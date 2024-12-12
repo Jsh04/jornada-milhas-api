@@ -11,4 +11,5 @@ public static class LocaleErrors
     public static IError LatitudeIsRequired => new Error("LocaleErrors.LatitudeIsRequired", "Latittude é obrigatório", ErrorType.Validation);
 
     public static IError LongitudeIsRequired => new Error("LogintudeIsRequired.LatitudeIsRequired", "Longitude é obrigatório", ErrorType.Validation);
+    
 }

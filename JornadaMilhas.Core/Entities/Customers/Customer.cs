@@ -26,6 +26,11 @@ public class Customer : User
         _depoiments = new List<Depoiment>();
     }
 
+    private Customer() : base()
+    {
+        
+    }
+
     public static Customer Create(CustomerBuilder builder) => new(builder);
 
     public void AddDepoiment(Depoiment depoiment)

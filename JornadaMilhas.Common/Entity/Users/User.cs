@@ -57,6 +57,9 @@ public abstract class User : BaseEntity
         Password = password;
     }
     
+    protected User(){}
+        
+    
     public void ThrowEvent(IDomainEvent domainEvent)
     {
         RaiseDomainEvent(domainEvent);

@@ -2,7 +2,7 @@
 
 namespace JornadaMilhas.Application.Querys.Dtos.DestinysDto;
 
-public sealed record DestinyDto(
+public sealed record FlightsDto(
     long Id,
     string Name,
     decimal Price,

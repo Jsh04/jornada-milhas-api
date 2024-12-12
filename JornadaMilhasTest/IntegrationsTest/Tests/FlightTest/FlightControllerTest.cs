@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 using AutoFixture;
-using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
+using JornadaMilhas.Application.Commands.FlightCommands.RegisterFlight;
 using JornadaMilhas.Application.Util;
 using JornadaMilhas.Core.ValueObjects.Locales;
 using JornadaMilhasTest.IntegrationsTest.Helper;
@@ -11,12 +11,12 @@ namespace JornadaMilhasTest.IntegrationsTest.Tests.DestinoTest;
 [TestFixture]
 [Category("IntegrationTest")]
 [Explicit("Testes de integração")]
-public class DestinoControllerTest
+public class FlightControllerTest
 {
     private readonly HttpClient client;
     private readonly Fixture fixture;
 
-    public DestinoControllerTest()
+    public FlightControllerTest()
     {
         client = SharingResources.Fixture.client;
         fixture = SharingResources.AutoFixture;
@@ -28,7 +28,7 @@ public class DestinoControllerTest
     {
         //arrange
         List<string> randomsBase64 = new();
-        var destinoDto = fixture.Create<RegisterDestinyCommand>();
+        var destinoDto = fixture.Create<RegisterFlightCommand>();
 
         destinoDto.Images.Clear();
 

@@ -2,8 +2,8 @@
 
 public static class FileHelper
 {
-    public static string GetPathFileSaveInCloud(string destinyName, string extensionFile)
+    public static string GetPathFileSaveInCloud(string flightCode, string extensionFile)
     {
-        return $"jornadamilhas/destino-{destinyName}/{Guid.NewGuid().ToString()}.{extensionFile}";
+        return $"jornadamilhas/voo-{flightCode}.{extensionFile}";
     }
 }
