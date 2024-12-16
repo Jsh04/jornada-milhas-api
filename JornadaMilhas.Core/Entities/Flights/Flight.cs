@@ -24,6 +24,7 @@ public class Flight : BaseEntity
     public Locale Source { get; }
 
     public bool IsCanceled { get; private set; }
+
     public Plane Plane { get; }
     
     public IReadOnlyCollection<Passage> Passages => _passages.AsReadOnly();
@@ -37,7 +38,10 @@ public class Flight : BaseEntity
         FlightCode = builder.FlightCode;
         Destiny = builder.Destiny;
         Source = builder.Source;
+        Plane = builder.Plane;
     }
+
+    private Flight() { }
 
     public static Flight Create(FlightBuilder builder) => new(builder);
     
@@ -51,8 +55,6 @@ public class Flight : BaseEntity
         return Result.Ok();
     }
 
-    private Flight(){}
-    
     public int GetTotalYetAvailable () => Plane.TotalSeats - _passages.Count;
     
     public void CancelFlight()

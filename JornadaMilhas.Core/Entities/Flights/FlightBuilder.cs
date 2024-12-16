@@ -3,6 +3,7 @@ using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Planes;
 using JornadaMilhas.Core.ValueObjects;
 using JornadaMilhas.Core.ValueObjects.Locales;
+using System.Diagnostics.Metrics;
 
 namespace JornadaMilhas.Core.Entities.Flights;
 
@@ -28,12 +29,20 @@ public class FlightBuilder : Builder<Flight, FlightBuilder>
 
     public FlightBuilder AddDestiny(string country, string city, string latitude, string longitude)
     {
-        var result = Locale.Create(country, city, latitude, longitude);
-        
-        if (!result.Success)
-            _errors.AddRange(_errors);
-        else
-            Destiny = result.Value;
+        var destiny = CreateLocale(country, city, latitude, longitude);
+
+        if (destiny is not null)
+            Destiny = destiny;
+
+        return this;
+    }
+
+    public FlightBuilder AddSource(string country, string city, string latitude, string longitude)
+    {
+        var source = CreateLocale(country, city, latitude, longitude);
+
+        if (source is not null)
+            Source = source;
 
         return this;
     }
@@ -70,5 +79,17 @@ public class FlightBuilder : Builder<Flight, FlightBuilder>
             .Create(this);
 
         return Result.Ok(flight);
+    }
+
+    private Locale? CreateLocale(string country, string city, string latitude, string longitude)
+    {
+        var result = Locale.Create(country, city, latitude, longitude);
+
+        if (result.Success)
+            return result.Value;
+
+        _errors.AddRange(_errors);
+
+        return result.ValueOrDefault;
     }
 }
