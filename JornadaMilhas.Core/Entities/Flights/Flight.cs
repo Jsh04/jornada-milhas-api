@@ -11,22 +11,26 @@ public class Flight : BaseEntity
 
     private readonly List<Picture> _pictures = new();
     
-    public DateTime DepartureDate { get; }
+    public DateTime DepartureDate { get; private set; }
 
-    public DateTime LandingDate { get; }
+    public DateTime LandingDate { get; private set; }
 
-    public decimal BasePrice { get; }
+    public decimal BasePrice { get; private set; }
 
-    public string FlightCode { get; }
+    public string FlightCode { get; private set; }
 
-    public Locale Destiny { get; }
+    public string Description { get; private set; }
 
-    public Locale Source { get; }
+    public Locale Destiny { get; private set; }
+
+    public Locale Source { get; private set; }
 
     public bool IsCanceled { get; private set; }
 
-    public Plane Plane { get; }
-    
+    public Plane Plane { get; private set; }
+
+    public int PlaneId { get; private set; }
+
     public IReadOnlyCollection<Passage> Passages => _passages.AsReadOnly();
     
     public IReadOnlyCollection<Picture> Pictures => _pictures.AsReadOnly();
@@ -39,6 +43,7 @@ public class Flight : BaseEntity
         Destiny = builder.Destiny;
         Source = builder.Source;
         Plane = builder.Plane;
+        Description = builder.Description;
     }
 
     private Flight() { }

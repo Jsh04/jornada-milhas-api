@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations;
 
-public class UserConfiguration : BaseEntityConfiguration<User>
+public class UserConfiguration<TUser> : BaseEntityConfiguration<TUser> where TUser : User
 {
-    public override void Configure(EntityTypeBuilder<User> builder)
+    public override void Configure(EntityTypeBuilder<TUser> builder)
     {
         base.Configure(builder);
 

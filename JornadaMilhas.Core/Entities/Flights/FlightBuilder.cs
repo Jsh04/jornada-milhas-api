@@ -16,8 +16,9 @@ public class FlightBuilder : Builder<Flight, FlightBuilder>
     public string FlightCode  { get; private set; }
 
     public Locale Destiny  { get; private set; }
-    
-    
+
+    public string Description { get; private set; }
+
     public Locale Source  { get; private set; }
     
     public Plane Plane  { get; private set; }
@@ -62,6 +63,12 @@ public class FlightBuilder : Builder<Flight, FlightBuilder>
     public FlightBuilder AddDepartureDate(DateTime departureDate)
     {
         DepartureDate = departureDate;
+        return this;
+    }
+
+    public FlightBuilder AddDescription(string description)
+    {
+        Description = description;
         return this;
     }
 

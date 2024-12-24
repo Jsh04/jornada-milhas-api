@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domains\**" />
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Domains\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Domains\**" />
+    <None Remove="Services\**" />
+    <Compile Remove="Builders\**" />
+    <EmbeddedResource Remove="Builders\**" />
+    <None Remove="Builders\**" />
+    <Compile Remove="Entities\Users\UserAdmin\UserAdmin.cs" />
+    <Compile Remove="Entities\Users\UserAdmin\UserAdminBuilder.cs" />
+    <Compile Remove="Entities\Users\UserAdmin\**" />
+    <EmbeddedResource Remove="Entities\Users\UserAdmin\**" />
+    <None Remove="Entities\Users\UserAdmin\**" />
+    <Compile Remove="Entities\Users\UserLimited\UserLimited.cs" />
+    <Compile Remove="Entities\Users\UserLimited\UserLimitedBuilder.cs" />
+    <Compile Remove="Entities\Users\UserLimited\**" />
+    <EmbeddedResource Remove="Entities\Users\UserLimited\**" />
+    <None Remove="Entities\Users\UserLimited\**" />
+    <Compile Remove="Repositories\Interfaces\IUserLimitedRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.26" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.1" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JornadaMilhas.Common\JornadaMilhas.Common.csproj" />
+  </ItemGroup>
+
+</Project>

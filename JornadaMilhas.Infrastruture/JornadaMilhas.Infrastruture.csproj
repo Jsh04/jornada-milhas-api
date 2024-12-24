@@ -4,7 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-    </PropertyGroup>
+      <UserSecretsId>50e723cb-e795-4718-b265-f94bf94b0457</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
         <Compile Remove="Persistence\Configurations\UserLimited\**" />

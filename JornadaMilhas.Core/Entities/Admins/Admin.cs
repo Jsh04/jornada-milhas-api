@@ -7,7 +7,9 @@ namespace JornadaMilhas.Core.Entities.Admins;
 
 public class Admin : User
 {
-    public Company Company;
+    public virtual Company Company { get; }
+
+    public long CompanyId { get; }
 
     public decimal Salary { get; }
 

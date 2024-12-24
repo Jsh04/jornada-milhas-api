@@ -26,7 +26,9 @@ public class JornadaMilhasDbContext : DbContext
     }
     
     public virtual DbSet<Flight> Flights { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
+
     public virtual DbSet<Depoiment> Depoimentos { get; set; }
 
     public virtual DbSet<Company> Companies { get; set; }

@@ -2,6 +2,7 @@
 using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Admins;
+using Plane = JornadaMilhas.Core.Entities.Planes.Plane;
 
 namespace JornadaMilhas.Core.Entities.Companies;
 
