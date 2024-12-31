@@ -1,24 +1,22 @@
 ﻿using JornadaMilhas.Common.Entity;
+using JornadaMilhas.Core.Entities.Classes;
 using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Entities.Flights;
+using JornadaMilhas.Core.Entities.Passages.Enums;
 
 namespace JornadaMilhas.Core.Entities.Planes;
 
 public class Plane : BaseEntity
 {
-    public Plane(string model, string manufacturer, string identificationCode, bool inOperation, int totalSeats)
+    private Plane(PlaneBuilder planeBuilder)
     {
         Model = model;
         Manufacturer = manufacturer;
         IdentificationCode = identificationCode;
         InOperation = inOperation;
-        TotalSeats = totalSeats;
     }
 
-    private Plane()
-    {
-        
-    }
+
     public string Model { get; }
 
     public string Manufacturer { get; }
@@ -27,11 +25,26 @@ public class Plane : BaseEntity
 
     public bool InOperation { get; }
 
-    public int TotalSeats { get; }
-
     public virtual ICollection<Flight> Flights { get; }
 
     public virtual Company Company { get; }
 
-    public long CompanyId { get; set; }
+    public long CompanyId { get; }
+
+    public BusinessClass BusinessClass { get; }
+
+    public EconomicClass EconomicClass { get; }
+
+    public Class GetTypeClass(EnumTypeClassPlane typeClass)
+    {
+        switch (typeClass)
+        {
+            case EnumTypeClassPlane.Economic:
+                return EconomicClass;
+            case EnumTypeClassPlane.Executive:
+                return BusinessClass;
+            default:
+                throw new ArgumentException(null, nameof(typeClass));
+        }
+    }
 }

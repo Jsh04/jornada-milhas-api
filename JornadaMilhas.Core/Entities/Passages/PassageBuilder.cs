@@ -11,6 +11,8 @@ namespace JornadaMilhas.Core.Entities.Passages
 {
     public class PassageBuilder : Builder<Passage, PassageBuilder>
     {
+        public static PassageBuilder Create() => new();
+
         public override Result<Passage> Build()
         {
             if (_errors.Count > 0)

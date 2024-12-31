@@ -52,7 +52,12 @@ public class Flight : BaseEntity
     
     public Result BuyPassageInFlight(Passage passage)
     {
-        if (_passages.Count >= Plane.TotalSeats)
+        if (Plane is null)
+            return Result.Fail(FlightErrors.PlaneNotDefined);
+
+        var classe = Plane.GetTypeClass(passage.EnumTypeClass);
+
+        if (!classe.SeatAvailable(1))
             return Result.Fail(FlightErrors.FlightAlreadyFull);
 
         _passages.Add(passage);
@@ -60,11 +65,16 @@ public class Flight : BaseEntity
         return Result.Ok();
     }
 
-    public int GetTotalYetAvailable () => Plane.TotalSeats - _passages.Count;
-    
     public void CancelFlight()
     {
         IsCanceled = true;
+    }
+
+    public decimal GetTotalValue()
+    {
+        if
+
+        return BasePrice + Plane.
     }
 
     public void AddImagesLocaleDestiny(ICollection<Picture> pictures)

@@ -11,8 +11,8 @@ public class Passage : BaseEntity
     public EnumTypeSeat EnumTypeSeat { get; private set; }
 
     public int SeatNumber { get; }
- 
-    public decimal Price { get; }
+
+    public EnumTypeClassPlane EnumTypeClass { get; private set; }
 
     public virtual Flight Flight { get; }
 
@@ -23,8 +23,8 @@ public class Passage : BaseEntity
 
     }
 
-    internal static Passage Create(PassageBuilder passageBuilder)
+    public static Passage Create(PassageBuilder passageBuilder)
     {
-        throw new NotImplementedException();
+        return new Passage(passageBuilder);
     }
 }

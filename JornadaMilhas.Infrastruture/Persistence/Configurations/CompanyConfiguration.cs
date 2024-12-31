@@ -1,4 +1,5 @@
 ﻿using JornadaMilhas.Common.Persistence.Configuration;
+using JornadaMilhas.Core.Entities.Admins;
 using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Entities.Planes;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -18,6 +19,11 @@ public class CompanyConfiguration : BaseEntityConfiguration<Company>
         builder.HasMany<Plane>()
             .WithOne(p => p.Company)
             .HasForeignKey(p => p.CompanyId);
+
+        builder.HasMany<Admin>()
+            .WithOne(a => a.Company)
+            .HasForeignKey(a => a.CompanyId);
+
 
         builder.Property(c => c.DtFoundation)
             .IsRequired();

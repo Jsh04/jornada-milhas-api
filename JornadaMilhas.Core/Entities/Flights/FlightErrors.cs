@@ -11,4 +11,6 @@ public static class FlightErrors
     
     public static IError CannotBeDeleted => new Error("FlightErrors.CannotBeDeleted", "Erro ao deletar voo", ErrorType.Failure);
     public static IError CannotBeCreated => new Error("FlightErrors.CannotBeCreated", "Erro ao cadastrar voo", ErrorType.Failure);
+
+    public static IError PlaneNotDefined => new Error("FlightErrors.PlaneNotDefined", "Avião não definido, por favor, procure outro voou", ErrorType.Validation);
 }
