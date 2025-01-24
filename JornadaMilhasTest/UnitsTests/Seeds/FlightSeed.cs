@@ -32,7 +32,7 @@ public static class FlightSeed
                     fixture.Create<string>())
                 .AddDepartureDate(fixture.Create<DateTime>())
                 .AddFlightCode(Guid.NewGuid().ToString())
-                .AddPlane(new Plane(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<string>(), true, 80))
+                .AddPlane(PlaneBuilder.Create().Build().Value)
                 .Build();
 
             return flight.Value;

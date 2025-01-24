@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Core.Entities.Classes;
+using JornadaMilhas.Core.Entities.Passages.Enums;
+using JornadaMilhas.Core.Entities.Planes;
 
 namespace JornadaMilhasTest.UnitsTests.Domain.FlightsTests;
 
@@ -35,20 +38,23 @@ public class FlightTest
     {
         //arrange
 
-        var plane = Plane
+        var plane = PlaneBuilder.Create()
+            .WithEconomicClass(new EconomicClass(40, 50, 0))
+            .Build().Value;
 
         var flight = FlightBuilder.Create()
-            .AddPlane(PLane)
+            .AddPlane(plane)
             .Build().Value;
 
         var passage = PassageBuilder.Create()
+            .WithEnumTypePassage(EnumTypeClassPlane.Economic)
             .Build().Value;
 
         //act
         var result = flight.BuyPassageInFlight(passage);
 
         //assert
-        result.Success.Should().BeFalse();
+        result.Success.Should().BeTrue();
     }
 }
 

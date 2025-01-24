@@ -5,26 +5,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Core.Entities.Classes;
 
 namespace JornadaMilhas.Core.Entities.Planes
 {
     public class PlaneBuilder : Builder<Plane, PlaneBuilder>
     {
-        public string Model { get; }
+        public string Model { get; private set; }
 
-        public string Manufacturer { get; }
+        public string Manufacturer { get; private set; }
 
-        public string IdentificationCode { get; }
+        public string IdentificationCode { get; private set; }
 
-        public bool InOperation { get; }
+        public bool InOperation { get; private set; }
 
-        public int TotalSeats { get; }
+        public int TotalSeats { get; private set; }
 
-        public
+        public EconomicClass  EconomicClass { get; private set; }
+
+        public static PlaneBuilder Create() => new();
+        
+        public PlaneBuilder WithEconomicClass(EconomicClass economicClass)
+        {
+            EconomicClass = economicClass;
+            return this;
+        }
 
         public override Result<Plane> Build()
         {
-            throw new NotImplementedException();
+            var plane = new Plane(this);
+            
+            return Result.Ok(plane);
         }
     }
 }

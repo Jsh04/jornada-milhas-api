@@ -20,7 +20,7 @@ public class Passage : BaseEntity
 
     private Passage(PassageBuilder builder)
     {
-
+        EnumTypeClass = builder.TypeClassPlane;
     }
 
     public static Passage Create(PassageBuilder passageBuilder)

@@ -55,9 +55,9 @@ public class Flight : BaseEntity
         if (Plane is null)
             return Result.Fail(FlightErrors.PlaneNotDefined);
 
-        var classe = Plane.GetTypeClass(passage.EnumTypeClass);
+        var @class = Plane.GetTypeClass(passage.EnumTypeClass);
 
-        if (!classe.SeatAvailable(1))
+        if (!@class.SeatAvailable(1))
             return Result.Fail(FlightErrors.FlightAlreadyFull);
 
         _passages.Add(passage);
@@ -72,9 +72,9 @@ public class Flight : BaseEntity
 
     public decimal GetTotalValue()
     {
-        if
+        //TODO
 
-        return BasePrice + Plane.
+        return 0;
     }
 
     public void AddImagesLocaleDestiny(ICollection<Picture> pictures)
