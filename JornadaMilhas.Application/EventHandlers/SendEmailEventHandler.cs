@@ -2,22 +2,21 @@
 using JornadaMilhas.Core.Events;
 using JornadaMilhas.Infrastruture.MessageBus;
 
-namespace JornadaMilhas.Application.EventHandlers
+namespace JornadaMilhas.Application.EventHandlers;
+
+public class SendEmailEventHandler : IDomainEventHandler<EmailCreateUserEvent>
 {
-    public class SendEmailEventHandler : IDomainEventHandler<EmailCreateUserEvent>
+    private readonly IMessageBusProducerService _messageBusProducerService;
+
+    public SendEmailEventHandler(IMessageBusProducerService messageBusProducerService)
     {
-        private readonly IMessageBusProducerService _messageBusProducerService;
+        _messageBusProducerService = messageBusProducerService;
+    }
 
-        public SendEmailEventHandler(IMessageBusProducerService messageBusProducerService)
-        {
-            _messageBusProducerService = messageBusProducerService;
-        }
+    public Task Handle(EmailCreateUserEvent notification, CancellationToken cancellationToken)
+    {
+        _messageBusProducerService.Publish(nameof(EmailCreateUserEvent), notification);
 
-        public Task Handle(EmailCreateUserEvent notification, CancellationToken cancellationToken)
-        {
-            _messageBusProducerService.Publish(nameof(EmailCreateUserEvent), notification);
-
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
     }
 }

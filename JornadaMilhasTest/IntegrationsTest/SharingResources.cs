@@ -1,7 +1,6 @@
 ﻿using AutoFixture;
 using JornadaMilhasTest.IntegrationsTest.Fixtures;
 
-
 namespace JornadaMilhasTest.IntegrationsTest;
 
 [SetUpFixture]
@@ -23,4 +22,3 @@ public class SharingResources
         Fixture.Dispose();
     }
 }
-

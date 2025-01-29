@@ -6,11 +6,15 @@ namespace JornadaMilhasTest.InterfacesTest.Fixtures;
 
 public class TestFixtureJornada : IDisposable
 {
-
     public IWebDriver driver;
 
-    public TestFixtureJornada() => driver = new ChromeDriver(TestHelper.PastaDoExecutavel);
-    
-    public void Dispose() => GC.SuppressFinalize(this); 
+    public TestFixtureJornada()
+    {
+        driver = new ChromeDriver(TestHelper.PastaDoExecutavel);
+    }
 
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
+    }
 }

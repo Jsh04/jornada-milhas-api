@@ -5,5 +5,4 @@
 [Explicit("Testes de integração")]
 public class LoginControllerTest
 {
-
 }

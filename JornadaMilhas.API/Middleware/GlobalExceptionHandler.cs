@@ -1,5 +1,4 @@
-﻿
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,8 +8,11 @@ public sealed class GlobalExceptionHandler : IMiddleware
 {
     private readonly ILogger _logger;
 
-    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) => _logger = logger; 
-    
+    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
+    {
+        _logger = logger;
+    }
+
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try
@@ -19,7 +21,6 @@ public sealed class GlobalExceptionHandler : IMiddleware
         }
         catch (Exception e)
         {
-            
             _logger.LogError(e, e.Message);
 
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -40,4 +41,3 @@ public sealed class GlobalExceptionHandler : IMiddleware
         }
     }
 }
-

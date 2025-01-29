@@ -1,5 +1,4 @@
-﻿
-namespace JornadaMilhas.Application.Querys.Dtos.DepoimentsDto;
+﻿namespace JornadaMilhas.Application.Querys.Dtos.DepoimentsDto;
 
 public sealed record DepoimentDto
 {
@@ -8,10 +7,4 @@ public sealed record DepoimentDto
     public string DepoimentDescription { get; set; }
     public byte[] Picture { get; set; }
     public long IdUser { get; set; }
-
-    public DepoimentDto()
-    {}
 }
-
-
-

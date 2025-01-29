@@ -4,7 +4,6 @@ using OpenQA.Selenium;
 
 namespace JornadaMilhasTest.InterfacesTest.Tests.LoginTests;
 
-
 [TestFixture]
 public class LoginTest
 {
@@ -18,17 +17,16 @@ public class LoginTest
     [Test]
     public void DeveraAparecerModalComLoginSucesso()
     {
-
         //arrange
         var loginPO = new LoginPageObject(driver);
 
         //act
         loginPO.NavigateToPage()
-           .FillFormsLogin("josesilvio.bs@gmail.com", "Senha123")
-           .SubmitForm();
+            .FillFormsLogin("josesilvio.bs@gmail.com", "Senha123")
+            .SubmitForm();
         //assert
-        
-        bool dashboardUrl = TestHelper.ReturnValidationOfTimeWait(drv => drv.Url.Contains('/'), driver);
+
+        var dashboardUrl = TestHelper.ReturnValidationOfTimeWait(drv => drv.Url.Contains('/'), driver);
         Assert.That(dashboardUrl);
     }
 }

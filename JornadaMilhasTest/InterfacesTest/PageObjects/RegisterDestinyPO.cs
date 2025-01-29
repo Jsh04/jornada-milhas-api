@@ -4,21 +4,20 @@ namespace JornadaMilhasTest.InterfacesTest.PageObjects;
 
 public class RegisterDestinyPO
 {
-    private readonly IWebDriver driver;
-
-    private readonly By _inputFiles;
-
-    private readonly By _nameDestiny;
-
-    private readonly By _subtitleDestiny;
-
-    private readonly By _priceDestiny;
+    private readonly By _btnSendData;
 
     private readonly By _descriptionPortuguese;
 
     private readonly By _destinationEnglish;
 
-    private readonly By _btnSendData;
+    private readonly By _inputFiles;
+
+    private readonly By _nameDestiny;
+
+    private readonly By _priceDestiny;
+
+    private readonly By _subtitleDestiny;
+    private readonly IWebDriver driver;
 
     public RegisterDestinyPO(IWebDriver driver)
     {
@@ -38,10 +37,11 @@ public class RegisterDestinyPO
         return this;
     }
 
-    public RegisterDestinyPO SendKeysInFormDestinyRegister(List<string> pathsFiles, string name, string subtitle, string price, string descriptionPort, string descriptionEnglish)
+    public RegisterDestinyPO SendKeysInFormDestinyRegister(List<string> pathsFiles, string name, string subtitle,
+        string price, string descriptionPort, string descriptionEnglish)
     {
         var inputFile = driver.FindElement(_inputFiles);
-        
+
         pathsFiles.ForEach(filePath =>
         {
             inputFile.SendKeys(filePath);
@@ -63,5 +63,4 @@ public class RegisterDestinyPO
         driver.FindElement(_btnSendData).Click();
         return this;
     }
-
 }

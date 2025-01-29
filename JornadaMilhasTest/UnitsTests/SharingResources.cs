@@ -1,22 +1,20 @@
 ﻿using AutoFixture;
 
-namespace JornadaMilhasTest.UnitsTests
+namespace JornadaMilhasTest.UnitsTests;
+
+[SetUpFixture]
+public class SharingResources
 {
-    [SetUpFixture]
-    public class SharingResources
+    public static Fixture AutoFixture;
+
+    [OneTimeSetUp]
+    public void InicializeObjects()
     {
-        public static Fixture AutoFixture;
+        AutoFixture = new Fixture();
+    }
 
-        [OneTimeSetUp]
-        public void InicializeObjects() 
-        {
-            AutoFixture = new Fixture();
-        }
-
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            
-        }
+    [OneTimeTearDown]
+    public void TearDown()
+    {
     }
 }

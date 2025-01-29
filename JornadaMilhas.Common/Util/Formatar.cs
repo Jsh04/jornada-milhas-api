@@ -1,6 +1,4 @@
-﻿
-using System.Text.RegularExpressions;
-
+﻿using System.Text.RegularExpressions;
 
 namespace JornadaMilhas.Application.Util;
 
@@ -11,8 +9,8 @@ public static class Formatar
         if (string.IsNullOrEmpty(campo))
             return string.Empty;
 
-        Regex regex = new (@"\D");
-        
+        Regex regex = new(@"\D");
+
         return regex.Replace(campo, string.Empty);
     }
 }

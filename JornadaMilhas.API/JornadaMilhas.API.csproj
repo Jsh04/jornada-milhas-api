@@ -26,5 +26,17 @@
   <ItemGroup>
     <ProjectReference Include="..\JornadaMilhas.Application\JornadaMilhas.Application.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\UsersController\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Controllers\UsersController\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Controllers\UsersController\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controllers\UsersController\**" />
+  </ItemGroup>
 
 </Project>

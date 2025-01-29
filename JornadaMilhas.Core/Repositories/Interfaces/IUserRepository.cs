@@ -1,10 +1,11 @@
 ﻿using JornadaMilhas.Common.Data.Repository;
-using JornadaMilhas.Common.Entities;
-
+using JornadaMilhas.Common.Entity;
+using JornadaMilhas.Common.Entity.Users;
+using JornadaMilhas.Core.Entities.Users;
 
 namespace JornadaMilhas.Core.Repositories.Interfaces;
 
-
-public interface IUserRepository : IReadableRepository<User>, IDeletableRepository<User>, IGetUserByEmail<User>
+public interface IUserRepository : IDeletableRepository<User>
 {
+    Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
 }

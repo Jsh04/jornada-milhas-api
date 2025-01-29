@@ -13,4 +13,21 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.28" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Repository\IUserGenericRepository.cs" />
+    <Compile Remove="Data\Repository\IGetUserByEmail.cs" />
+    <Compile Remove="Validations\**" />
+    <Compile Remove="Enums\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Validations\**" />
+    <EmbeddedResource Remove="Enums\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Validations\**" />
+    <None Remove="Enums\**" />
+  </ItemGroup>
+
 </Project>

@@ -1,36 +1,35 @@
 ﻿using AutoFixture;
-using JornadaMilhas.Application.Querys.UserQuerys.UserLimitedQuerys.GetAllUsers;
-using JornadaMilhas.Application.Querys.UserQuerys.UserLimitedQuerys.GetAllUsersLimited;
+using JornadaMilhas.Application.Querys.UserQuerys.GetAllCustomers;
 using JornadaMilhasTest.UnitsTests.Builders;
+using JornadaMilhasTest.UnitsTests.Infraestruture.Builders.Repositories;
 
-namespace JornadaMilhasTest.UnitsTests.Application.QuerysTests.UserQuerysTests
+namespace JornadaMilhasTest.UnitsTests.Application.QuerysTests.UserQuerysTests;
+
+[TestFixture]
+public class GetAllUsersLimitedTest
 {
-    [TestFixture]
-    public class GetAllUsersLimitedTest
+    private readonly Fixture _fixture;
+
+    public GetAllUsersLimitedTest()
     {
-        private readonly Fixture _fixture;
+        _fixture = SharingResources.AutoFixture;
+    }
 
-        public GetAllUsersLimitedTest()
-        {
-            _fixture = SharingResources.AutoFixture;
-        }
+    [Test]
+    public async Task DeveraRetornarUsuariosPassandoOsParametrosCorretosQuandoSolicitadoTodos()
+    {
+        //arrange
+        var mockUserRepositoryTask =
+            CustomerRepositoryMockBuilder.CreateBuilder(_fixture).WithGetAllCustomersAsync(10);
+        var mockUserRepository = mockUserRepositoryTask.Build();
+        var getUsersHandler = new GetAllCustomersQueryHandler(mockUserRepository.Object);
+        var getUserRequest = new GetAllCustomersQuery(1, 10);
 
-        [Test]
-        public async Task DeveraRetornarUsuariosPassandoOsParametrosCorretosQuandoSolicitadoTodos()
-        {
-            //arrange
-            var mockUserRepositoryTask =
-                UserLimitedRepositoryMockBuilder.CreateBuilder(_fixture).WithGetAllUsersAsync(10);
-            var mockUserRepository = mockUserRepositoryTask.Build();
-            var getUsersHandler = new GetAllUserLimtedQueryHandler(mockUserRepository.Object);
-            var getUserRequest = new GetAllUsersLimitedQuery(1, 10);
-            //act
-            var result = await getUsersHandler.Handle(getUserRequest, CancellationToken.None);
+        //act
+        var result = await getUsersHandler.Handle(getUserRequest, CancellationToken.None);
 
-            //assert
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Data, Has.No.Empty);
-
-        }
+        //assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Data, Has.No.Empty);
     }
 }

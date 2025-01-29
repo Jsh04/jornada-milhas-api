@@ -6,12 +6,14 @@ namespace JornadaMilhas.Core.Entities.Depoiments;
 
 public class DepoimentBuilder : Builder<Depoiment, DepoimentBuilder>
 {
-    protected string _name;
-    protected string _depoimentDescription;
-    protected byte[] _picture;
-    protected long _userId;
+    private string _depoimentDescription;
+    private string _name;
+    private byte[] _picture;
+    private long _userId;
 
 
+    public static DepoimentBuilder Create() => new();
+    
     public DepoimentBuilder WithName(string name)
     {
         _name = name;

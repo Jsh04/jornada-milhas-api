@@ -5,17 +5,18 @@ namespace JornadaMilhas.Infrastruture.Persistence.UOW;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private IDbContextTransaction _transaction;
-    
     private readonly JornadaMilhasDbContext _context;
+    private IDbContextTransaction _transaction;
 
     public UnitOfWork(JornadaMilhasDbContext context)
     {
         _context = context;
     }
 
-
-    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default) => _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+    }
 
 
     public async Task CommitAsync(CancellationToken cancellationToken = default)
@@ -44,7 +45,7 @@ public class UnitOfWork : IUnitOfWork
 
     protected virtual void Dispose(bool disposing)
     {
-        if(disposing) 
+        if (disposing)
             _context.Dispose();
     }
 }

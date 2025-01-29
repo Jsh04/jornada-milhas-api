@@ -1,5 +1,4 @@
-﻿
-using JornadaMilhas.API.Extensions;
+﻿using JornadaMilhas.API.Extensions;
 using JornadaMilhas.Application.Commands.DepoimentsCommands.RegisterDepoiment;
 using JornadaMilhas.Application.Querys.DepoimentQuerys.GetAllDepoiments;
 using JornadaMilhas.Application.Querys.DepoimentQuerys.GetByIdDepoiment;
@@ -13,10 +12,12 @@ namespace JornadaMilhas.API;
 [Route("api/v1/[controller]")]
 public class DepoimentController : ControllerBase
 {
-
     private readonly IMediator _mediator;
 
-    public DepoimentController(IMediator mediator) => _mediator = mediator;
+    public DepoimentController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -39,8 +40,8 @@ public class DepoimentController : ControllerBase
         var paginationResult = await _mediator.Send(query);
 
         return paginationResult.Match(
-            Ok, 
-            (value) => value.ToProblemDetails());
+            Ok,
+            value => value.ToProblemDetails());
     }
 
     [HttpGet("{id}")]
@@ -53,9 +54,4 @@ public class DepoimentController : ControllerBase
         var resultDepoiment = await _mediator.Send(new GetByIdDepoimentQuery(id));
         return resultDepoiment.Success ? Ok(resultDepoiment.Value) : NotFound(resultDepoiment.Errors);
     }
-    
-        
-    
-
-
 }

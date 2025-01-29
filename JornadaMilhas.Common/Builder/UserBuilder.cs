@@ -1,6 +1,5 @@
-﻿
-using JornadaMilhas.Common.Entities;
-using JornadaMilhas.Common.Enums;
+﻿using JornadaMilhas.Common.Entity.Users;
+using JornadaMilhas.Common.Entity.Users.Enums;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Results.Errors;
 using JornadaMilhas.Common.ValueObjects;
@@ -11,61 +10,62 @@ public abstract class UserBuilder<TUser, TBuilder>
     where TUser : User
     where TBuilder : UserBuilder<TUser, TBuilder>
 {
-    protected string _name;
+    protected readonly List<IError> _errors = new();
+    
+    public string Name { get; private set; }
 
-    protected DateOfBirth _dtBirth;
+    public DateOfBirth DtBirth { get; private set; }
 
-    protected EnumGenre _genre;
+    public EnumGenre Genre { get; private set; }
 
-    protected Cpf _cpf;
+    public Cpf Cpf { get; private set; }
 
-    protected Phone _phone;
+    public Phone Phone { get; private set; }
 
-    protected Address _adress;
+    public Address Address { get; private set; }
 
-    protected byte[]? _picture;
+    public byte[]? Picture { get; private set; }
 
-    protected Email _mail;
+    public Email Mail { get; private set; }
 
-    protected Email _confirmMail;
+    public Email ConfirmMail { get; private set; }
 
-    protected string _password;
+    public string Password { get; private set; }
 
     private readonly TBuilder _builder;
-
-    protected List<IError> _errors = new();
 
     protected UserBuilder()
     {
         _builder = this as TBuilder;
     }
-
+    
     public TBuilder WithName(string name)
     {
-        _name = name;
+        Name = name;
         return _builder;
     }
 
     public TBuilder WithDtOfBirth(DateTime? dateTime)
     {
         var dtBirthResult = DateOfBirth.Create(dateTime);
+
         if (!dtBirthResult.Success)
             _errors.AddRange(dtBirthResult.Errors);
-
-        _dtBirth = dtBirthResult.ValueOrDefault;
+        else
+            DtBirth = dtBirthResult.Value;
         
         return _builder;
     }
 
     public TBuilder WithGenre(EnumGenre genre)
     {
-        _genre = genre;
+        Genre = genre;
         return _builder;
     }
 
     public TBuilder WithPicture(byte[]? picture)
     {
-        _picture = picture;
+        Picture = picture;
         return _builder;
     }
 
@@ -75,21 +75,21 @@ public abstract class UserBuilder<TUser, TBuilder>
 
         if (!phoneResult.Success)
             _errors.AddRange(phoneResult.Errors);
-
-        _phone = phoneResult.ValueOrDefault;
+        else
+            Phone = phoneResult.ValueOrDefault;
 
         return _builder;
     }
 
-    public TBuilder WithAddress(string? street, string city, string state, string? district, string? zipCode)
+    public TBuilder WithAddress(string street, string city, string state, string district, string zipCode)
     {
         var address = Address.Create(city, state, zipCode, street, district);
 
         if (!address.Success)
             _errors.AddRange(address.Errors);
-
-        _adress = address.ValueOrDefault;
-
+        else
+            Address = address.ValueOrDefault;
+        
         return _builder;
     }
 
@@ -99,40 +99,39 @@ public abstract class UserBuilder<TUser, TBuilder>
 
         if (!cpfResult.Success)
             _errors.AddRange(cpfResult.Errors);
-        
-        _cpf = cpfResult.ValueOrDefault;
-        
+        else
+            Cpf = cpfResult.ValueOrDefault;
+
         return _builder;
-        
     }
 
-    public TBuilder WithEmail(string email) 
+    public TBuilder WithEmail(string email)
     {
         var emailResult = Email.Create(email);
         if (!emailResult.Success)
             _errors.AddRange(emailResult.Errors);
-
-        _mail = emailResult.ValueOrDefault;
+        else
+            Mail = emailResult.ValueOrDefault;
 
         return _builder;
     }
+
     public TBuilder WithConfirmMail(string confirmMail)
     {
         var confirmMailResult = Email.Create(confirmMail);
 
         if (!confirmMailResult.Success)
-            _errors.AddRange(confirmMailResult.Errors); 
-
-        _confirmMail = confirmMailResult.ValueOrDefault;
+            _errors.AddRange(confirmMailResult.Errors);
+        else
+            ConfirmMail = confirmMailResult.ValueOrDefault;
 
         return _builder;
     }
 
     public TBuilder WithPassword(string password)
     {
-        _password = password;
+        Password = password;
         return _builder;
     }
     
-    public abstract Result<TUser> Build();
 }

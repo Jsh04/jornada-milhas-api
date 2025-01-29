@@ -4,25 +4,24 @@ using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetAllDepoiments;
-
-
 
 public class GetAllDepoimentQueryHandler : IRequestHandler<GetAllDepoimentQuery, Result<PaginationResult<DepoimentDto>>>
 {
     private readonly IDepoimentRepository _depoimentRepository;
 
-    public GetAllDepoimentQueryHandler( IDepoimentRepository depoimentRepository) 
+    public GetAllDepoimentQueryHandler(IDepoimentRepository depoimentRepository)
     {
         _depoimentRepository = depoimentRepository;
     }
 
-    public async Task<Result<PaginationResult<DepoimentDto>>> Handle(GetAllDepoimentQuery request, CancellationToken cancellationToken)
+    public async Task<Result<PaginationResult<DepoimentDto>>> Handle(GetAllDepoimentQuery request,
+        CancellationToken cancellationToken)
     {
-        var paginationResultDepoiments = await _depoimentRepository.GetAllAsync(request.Page, request.Size, cancellationToken);
+        var paginationResultDepoiments =
+            await _depoimentRepository.GetAllAsync(request.Page, request.Size, cancellationToken);
 
         var depoimentsDto = DtoExtensions<Depoiment, DepoimentDto>.ToDto(paginationResultDepoiments.Data);
 
@@ -36,6 +35,5 @@ public class GetAllDepoimentQueryHandler : IRequestHandler<GetAllDepoimentQuery,
         );
 
         return Result.Ok(paginationResultDepoimentsDto);
-
     }
 }

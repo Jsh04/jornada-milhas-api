@@ -1,4 +1,4 @@
-﻿using JornadaMilhas.Application.Commands.UserCommands.UserLimitedCommands.RegisterUserLimited;
+﻿using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -6,35 +6,34 @@ namespace JornadaMilhasTest.InterfacesTest.PageObjects;
 
 public class RegisterPO
 {
-    private IWebDriver driver;
+    private readonly By btnRegister;
+    private readonly IWebDriver driver;
 
-    private By btnRegister;
+    private readonly By inputCity;
 
-    private By inputName;
+    private readonly By inputConfirmEmail;
 
-    private By inputDtBirth;
+    private readonly By inputConfirmPassword;
 
-    private By inputGenreMale;
+    private readonly By inputCpf;
+
+    private readonly By inputDtBirth;
+
+    private readonly By inputEmail;
 
     private By inputGenreFemale;
 
-    private By inputCpf;
+    private readonly By inputGenreMale;
 
-    private By inputPhone;
+    private readonly By inputName;
 
-    private By inputCity;
+    private readonly By inputPassword;
 
-    private By selectState;
+    private readonly By inputPhone;
 
-    private By inputEmail;
+    private readonly By inputTerms;
 
-    private By inputConfirmEmail;
-
-    private By inputPassword;
-
-    private By inputConfirmPassword;
-
-    private By inputTerms;
+    private readonly By selectState;
 
     public RegisterPO(IWebDriver driver)
     {
@@ -62,7 +61,7 @@ public class RegisterPO
         return this;
     }
 
-    public RegisterPO SendKeysToUserLimited(RegisterUserLimitedCommand usuario)
+    public RegisterPO SendKeysToUserLimited(RegisterCustomerCommand usuario)
     {
         driver.FindElement(inputName).SendKeys(usuario.Name);
         driver.FindElement(inputDtBirth).SendKeys(usuario.DtBirth.ToString());
@@ -70,8 +69,8 @@ public class RegisterPO
         driver.FindElement(inputCpf).SendKeys(usuario.Cpf);
         driver.FindElement(inputPhone).SendKeys(usuario.Phone);
         driver.FindElement(inputCity).SendKeys(usuario.Address.City);
-        
-        SelectElement select = new SelectElement(driver.FindElement(selectState));
+
+        var select = new SelectElement(driver.FindElement(selectState));
         select.SelectByValue("PE");
         driver.FindElement(inputEmail).SendKeys(usuario.Mail);
         driver.FindElement(inputConfirmEmail).SendKeys(usuario.ConfirmMail);
@@ -79,8 +78,8 @@ public class RegisterPO
         driver.FindElement(inputConfirmPassword).SendKeys(usuario.ConfirmPassword);
 
 
-        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        IWebElement termsCheckbox = wait.Until(drv => drv.FindElement(inputTerms));
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        var termsCheckbox = wait.Until(drv => drv.FindElement(inputTerms));
         termsCheckbox.Click();
 
         return this;
@@ -92,4 +91,3 @@ public class RegisterPO
         return this;
     }
 }
-

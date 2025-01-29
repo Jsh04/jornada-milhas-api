@@ -10,18 +10,15 @@ public interface IResultBase
 
 public abstract class ResultBase : IResultBase
 {
+    protected readonly List<IError> _errors = new();
     public IReadOnlyList<IError> Errors => _errors.AsReadOnly();
 
     public bool Success => _errors.Count == 0;
-
-    protected readonly List<IError> _errors = new();
 }
 
 public abstract class ResultBase<TValue> : ResultBase
 {
+    protected TValue? _value;
     public TValue? Value => _value;
     public TValue? ValueOrDefault => _value ?? default;
-
-    protected TValue? _value;
 }
-

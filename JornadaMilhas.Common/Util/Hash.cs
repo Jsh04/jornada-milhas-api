@@ -6,75 +6,50 @@ namespace JornadaMilhas.Application.Util;
 public enum HashProvider
 
 {
-
     /// <summary>
-
-    /// Computa um hash SHA1 hash para os dados.
-
+    ///     Computa um hash SHA1 hash para os dados.
     /// </summary>
-
     SHA1,
 
     /// <summary>
-
-    /// Computa um hash SHA256 hash para os dados.
-
+    ///     Computa um hash SHA256 hash para os dados.
     /// </summary>
-
     SHA256,
 
     /// <summary>
-
-    /// Computa um hash SHA384 hash para os dados.
-
+    ///     Computa um hash SHA384 hash para os dados.
     /// </summary>
-
     SHA384,
 
     /// <summary>
-
-    /// Computa um hash SHA512 hash para os dados.
-
+    ///     Computa um hash SHA512 hash para os dados.
     /// </summary>
-
     SHA512,
 
     /// <summary>
-
-    /// Representa a classe abstrata para implementações dos algoritmos para criação de hash usando MD5.
-
+    ///     Representa a classe abstrata para implementações dos algoritmos para criação de hash usando MD5.
     /// </summary>
-
     MD5
-
 }
 
 /// <summary>
-
-/// Classe auxiliar com métodos para crição de hash dos dados inseridos.
-
+///     Classe auxiliar com métodos para crição de hash dos dados inseridos.
 /// </summary>
-
 public class Hash
 
 {
-
     #region Private members
 
-    private HashAlgorithm _algorithm;
+    private readonly HashAlgorithm _algorithm;
 
     #endregion
-
 
 
     #region Constructors
 
     /// <summary>
-
-    /// Contrutor padrão da classe, é setado um tipo de hash padrão.
-
+    ///     Contrutor padrão da classe, é setado um tipo de hash padrão.
     /// </summary>
-
     public Hash()
 
     {
@@ -82,21 +57,15 @@ public class Hash
     }
 
     /// <summary>
-
-    /// Construtor com o tipo de hash a ser usado.
-
+    ///     Construtor com o tipo de hash a ser usado.
     /// </summary>
-
     /// <param name="hashProvider">Tipo de Hash.</param>
-
     public Hash(HashProvider hashProvider)
 
     {
-
         switch (hashProvider)
 
         {
-
             case HashProvider.MD5:
 
                 _algorithm = new MD5CryptoServiceProvider();
@@ -126,54 +95,37 @@ public class Hash
                 _algorithm = new SHA512Managed();
 
                 break;
-
         }
-
     }
 
     #endregion
 
 
-
     #region Public methods
 
     /// <summary>
-
-    /// Monta hash para algum dado texto.
-
+    ///     Monta hash para algum dado texto.
     /// </summary>
-
     /// <param name="plainText">Texto a ser criado o hash.</param>
-
     /// <returns>Hash do texto inserido.</returns>
-
     public string GetHash(string plainText)
 
     {
-
-        byte[] cryptoByte = _algorithm.ComputeHash(Encoding.UTF8.GetBytes(plainText));
+        var cryptoByte = _algorithm.ComputeHash(Encoding.UTF8.GetBytes(plainText));
 
 
         return Convert.ToBase64String(cryptoByte, 0, cryptoByte.Length);
-
     }
 
     /// <summary>
-
-    /// Cria hash para algum tipo de stream.
-
+    ///     Cria hash para algum tipo de stream.
     /// </summary>
-
     /// <param name="fileStream">Stream a ser criado o hash.</param>
-
     /// <returns>Hash do stream inserido.</returns>
-
     public string GetHash(FileStream fileStream)
 
     {
-
         byte[] cryptoByte;
-
 
 
         cryptoByte = _algorithm.ComputeHash(fileStream);
@@ -181,11 +133,8 @@ public class Hash
         fileStream.Close();
 
 
-
         return Convert.ToBase64String(cryptoByte, 0, cryptoByte.Length);
-
     }
 
     #endregion
-
 }

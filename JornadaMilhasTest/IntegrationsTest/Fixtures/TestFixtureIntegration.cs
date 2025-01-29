@@ -3,24 +3,13 @@ using JornadaMilhasTest.IntegrationsTest.Helper;
 using JornadaMilhasTest.IntegrationsTest.WebApplicationFactory;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace JornadaMilhasTest.IntegrationsTest.Fixtures;
 
 public class TestFixtureIntegration
 {
-
-    #region Privates Props
-
-
-    private static readonly object _lock = new();
-
-    private static bool _databaseInitialized;
-
-    #endregion
+    public HttpClient client;
 
     public JornadaMilhasDbContext context;
-
-    public HttpClient client;
 
     public TestFixtureIntegration()
     {
@@ -28,8 +17,12 @@ public class TestFixtureIntegration
         client = new WebApplicationFactoryJornada<Program>().CreateClient();
     }
 
-    public static JornadaMilhasDbContext CreateContext() => 
-        new(new DbContextOptionsBuilder<JornadaMilhasDbContext>().UseSqlServer(TestHelper.ConnectionString).Options);
+    public static JornadaMilhasDbContext CreateContext()
+    {
+        return new JornadaMilhasDbContext(new DbContextOptionsBuilder<JornadaMilhasDbContext>()
+            .UseSqlServer(TestHelper.ConnectionString)
+            .Options);
+    }
 
     private void PrepareTestDatabase()
     {
@@ -49,7 +42,16 @@ public class TestFixtureIntegration
         }
     }
 
-    public void Dispose() => context.Dispose();
+    public void Dispose()
+    {
+        context.Dispose();
+    }
 
+    #region Privates Props
+
+    private static readonly object _lock = new();
+
+    private static bool _databaseInitialized;
+
+    #endregion
 }
-

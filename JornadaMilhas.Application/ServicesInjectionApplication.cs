@@ -1,55 +1,55 @@
-﻿using FluentValidation.AspNetCore;
-using FluentValidation;
-using JornadaMilhas.Application.Commands.DestinyCommands.RegisterDestiny;
-using JornadaMilhas.Application.Services;
-using JornadaMilhas.Application.Validations;
-using Microsoft.Extensions.DependencyInjection;
-using JornadaMilhas.Application.Interfaces.Services;
-using MediatR;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using JornadaMilhas.Application.Commands.FlightCommands.RegisterFlight;
 using JornadaMilhas.Application.EventHandlers;
+using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Application.Services;
 using JornadaMilhas.Core.Events;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace JornadaMilhas.Application
+namespace JornadaMilhas.Application;
+
+public static class ServicesInjectionApplication
 {
-    public static class ServicesInjectionApplication
+    public static IServiceCollection GetServicesInjectiosOfApplication(this IServiceCollection services)
     {
-        public static IServiceCollection GetServicesInjectiosOfApplication(this IServiceCollection services)
-        {
-            return services.AddDependencyInjectionOfApplication()
-                .AddServicesOfMediat()
-                .AddHandlersNotification()
-                .AddServicesFluentValidation();
-        }
+        return services.AddDependencyInjectionOfApplication()
+            .AddServicesOfMediat()
+            .AddHandlersNotification()
+            .AddServicesFluentValidation();
+    }
 
-        public static IServiceCollection AddDependencyInjectionOfApplication(this IServiceCollection services)
-        {
-            services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IUserLimitedService, UserLimitedService>();
-            services.AddScoped<IDestinyService, DestinyService>();
+    private static IServiceCollection AddDependencyInjectionOfApplication(this IServiceCollection services)
+    {
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<ICustomerService, CustomerService>();
+        services.AddScoped<IFlightService, FlightService>();
 
-            return services;
-        }
+        services.AddSingleton<IUploadService, UploadS3Service>();
 
-        public static IServiceCollection AddServicesOfMediat(this IServiceCollection services)
-        {
-            services.AddMediatR(opts => opts.RegisterServicesFromAssembly(typeof(RegisterDestinyCommand).Assembly));
+        return services;
+    }
 
-            return services;
-        }
+    private static IServiceCollection AddServicesOfMediat(this IServiceCollection services)
+    {
+        services.AddMediatR(opts => opts.RegisterServicesFromAssembly(typeof(RegisterFlightCommand).Assembly));
 
-        private static IServiceCollection AddHandlersNotification(this IServiceCollection services)
-        {
-            services.AddScoped<INotificationHandler<EmailCreateUserEvent>, SendEmailEventHandler>();
-            return services;
-        }
+        return services;
+    }
 
-        public static IServiceCollection AddServicesFluentValidation(this IServiceCollection services)
-        {
-            services.AddValidatorsFromAssemblyContaining(typeof(RegisterDestinyValidator), ServiceLifetime.Transient);
+    private static IServiceCollection AddHandlersNotification(this IServiceCollection services)
+    {
+        services.AddScoped<INotificationHandler<EmailCreateUserEvent>, SendEmailEventHandler>();
+        return services;
+    }
 
-            services.AddFluentValidationAutoValidation();
+    private static IServiceCollection AddServicesFluentValidation(this IServiceCollection services)
+    {
+        services.AddValidatorsFromAssemblyContaining(typeof(RegisterFlightValidator), ServiceLifetime.Transient);
 
-            return services;
-        }
+        services.AddFluentValidationAutoValidation();
+
+        return services;
     }
 }

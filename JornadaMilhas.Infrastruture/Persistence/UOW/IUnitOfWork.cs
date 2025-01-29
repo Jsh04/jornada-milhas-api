@@ -5,5 +5,4 @@ public interface IUnitOfWork : IDisposable
     Task BeginTransactionAsync(CancellationToken cancellationToken);
     Task CommitAsync(CancellationToken cancellationToken);
     Task<int> CompleteAsync(CancellationToken cancellationToken);
-
 }

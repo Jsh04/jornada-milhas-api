@@ -11,9 +11,9 @@ public static class PaginationResultExtension
 
         var paginatioResult = new PaginationResult<T>(page, pageSize, totalCount);
 
-        var pageCount = (double) totalCount / pageSize;
+        var pageCount = (double)totalCount / pageSize;
 
-        var totalPages = (int) Math.Ceiling(pageCount);
+        var totalPages = (int)Math.Ceiling(pageCount);
 
         paginatioResult.SetTotalPages(totalPages);
 

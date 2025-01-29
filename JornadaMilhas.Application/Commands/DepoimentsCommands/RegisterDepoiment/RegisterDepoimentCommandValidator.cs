@@ -17,7 +17,7 @@ public class RegisterDepoimentCommandValidator : AbstractValidator<RegisterDepoi
             .WithMessage("DepoimentDescription é obrigatório")
             .MaximumLength(500)
             .WithMessage("Descrição do depoimento deverá ser menor que 500 characters");
-            
+
         RuleFor(x => x.UserId)
             .NotEmpty()
             .NotNull()
@@ -25,6 +25,6 @@ public class RegisterDepoimentCommandValidator : AbstractValidator<RegisterDepoi
 
         RuleFor(x => x.Picture)
             .NotEmpty()
-            .WithMessage("Picture is required");    
+            .WithMessage("Picture is required");
     }
 }

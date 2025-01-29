@@ -8,33 +8,33 @@ using MediatR;
 
 namespace JornadaMilhas.Application.Querys.LoginQuerys.LoginUserQuerys;
 
-public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, Result<LoginResponseDto>>
+public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, Result<LoginOutputModel>>
 {
     private readonly ITokenService _tokenService;
 
     private readonly IUserRepository _userRepository;
 
-    public LoginUserQueryHandler(ITokenService tokenService, IUserRepository userRepository) 
+    public LoginUserQueryHandler(ITokenService tokenService, IUserRepository userRepository)
     {
         _tokenService = tokenService;
         _userRepository = userRepository;
     }
-    
-    public async Task<Result<LoginResponseDto>> Handle(LoginUserQuery request, CancellationToken cancellationToken)
+
+    public async Task<Result<LoginOutputModel>> Handle(LoginUserQuery request, CancellationToken cancellationToken)
     {
         var userResult = await _userRepository.GetByEmailAsync(request.Email, cancellationToken);
 
         if (userResult is null)
-            return Result.Fail<LoginResponseDto>(UserErrors.UserWithThisEmailNotFound);
+            return Result.Fail<LoginOutputModel>(UserErrors.UserWithThisEmailNotFound);
 
         if (!VerifiyPasswordIsEquals(request.Password, userResult.Password))
-            return Result.Fail<LoginResponseDto>(UserErrors.PasswordNotEqual);
-            
+            return Result.Fail<LoginOutputModel>(UserErrors.PasswordNotEqual);
+
         var tokenGenerated = _tokenService.GenerateToken(userResult);
 
-        var loginResponse = LoginResponseDto.CreateResponseLogin(userResult, tokenGenerated);
-        
-        return Result<LoginResponseDto>.Ok(loginResponse);
+        var loginResponse = LoginOutputModel.CreateResponseLogin(userResult, tokenGenerated);
+
+        return Result<LoginOutputModel>.Ok(loginResponse);
     }
 
     private static bool VerifiyPasswordIsEquals(string requestPassword, string databasePassword)

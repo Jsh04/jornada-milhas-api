@@ -1,6 +1,4 @@
-﻿
-
-using JornadaMilhas.API.Extensions;
+﻿using JornadaMilhas.API.Extensions;
 using JornadaMilhas.Application.Querys.Dtos.LoginResponseDto;
 using JornadaMilhas.Application.Querys.LoginQuerys.LoginUserQuerys;
 using JornadaMilhas.Common.Results;
@@ -20,7 +18,7 @@ public class LoginController : ControllerBase
         _sender = sender;
     }
 
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<LoginResponseDto>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<LoginOutputModel>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [HttpPost]
@@ -28,6 +26,5 @@ public class LoginController : ControllerBase
     {
         var result = await _sender.Send(loginQuery);
         return result.Match(Ok, loginResponse => loginResponse.ToProblemDetails());
-        
     }
 }

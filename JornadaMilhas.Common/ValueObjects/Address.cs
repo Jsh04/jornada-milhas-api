@@ -1,32 +1,35 @@
-﻿using JornadaMilhas.Common.Results.Errors;
-using JornadaMilhas.Common.Results;
+﻿using JornadaMilhas.Common.Results;
+using JornadaMilhas.Common.Results.Errors;
 
 namespace JornadaMilhas.Common.ValueObjects;
 
 public sealed record Address
 {
+    private Address()
+    {
+    }
+
+    private Address(string city, string state, string? cep, string? street, string? district)
+    {
+        City = city;
+        State = state;
+        Cep = cep;
+        Street = street;
+        District = district;
+    }
+
     public string City { get; }
 
     public string State { get; }
 
     public string? Cep { get; }
 
-    public string? Adress { get; }
+    public string? Street { get; }
 
     public string? District { get; }
 
-    private Address() { }
-
-    private Address(string city, string state, string? cep, string? adress, string? district)
-    {
-        City = city;
-        State = state;
-        Cep = cep;
-        Adress = adress;
-        District = district;
-    }
-
-    public static Result<Address> Create(string city, string state, string? cep, string? addressRequest, string? district)
+    public static Result<Address> Create(string city, string state, string? cep, string? addressRequest,
+        string? district)
     {
         var cityFormated = city.Trim();
 
@@ -40,7 +43,7 @@ public sealed record Address
 
         if (cep is not null && cep.Trim().Length < 8)
             return Result.Fail<Address>(AddressErrors.ZipCodeIsInvalid);
-        
+
         if (addressRequest is not null && addressRequest.Trim().Length < 5)
             return Result.Fail<Address>(AddressErrors.StreetIsTooShort);
 
@@ -51,7 +54,7 @@ public sealed record Address
 
         return Result.Ok(address);
     }
-    
+
     private static string FormatCep(string cep)
     {
         return cep.Trim().Replace("-", "");
