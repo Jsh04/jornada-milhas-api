@@ -119,7 +119,7 @@ ipch/
 *.sap
 
 *.env
-/JornadaMilhas.API/.env
+**/.env
 
 # Visual Studio Trace Files
 *.e2e
