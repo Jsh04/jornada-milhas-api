@@ -22,6 +22,8 @@ public class Passage : BaseEntity
     {
         EnumTypeClass = builder.TypeClassPlane;
     }
+    private Passage(){}
+    
 
     public static Passage Create(PassageBuilder passageBuilder)
     {

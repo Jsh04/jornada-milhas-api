@@ -8,8 +8,6 @@ public abstract class BaseEntityConfiguration<TBase> : IEntityTypeConfiguration<
 {
     public virtual void Configure(EntityTypeBuilder<TBase> builder)
     {
-        builder.HasKey(b => b.Id);
-
         builder.Property(baseEntity => baseEntity.Id).ValueGeneratedOnAdd();
 
         builder.Property(b => b.DtCreated)

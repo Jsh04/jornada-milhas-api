@@ -56,5 +56,30 @@ public class FlightTest
         //assert
         result.Success.Should().BeTrue();
     }
+    
+    [Test]
+    public void BuyPassageInFlight_ShouldBeFalse_WhenAlreadyClassIsFull()
+    {
+        //arrange
+
+        var plane = PlaneBuilder.Create()
+            .WithEconomicClass(new EconomicClass(40, 50, 40))
+            .Build().Value;
+
+        var flight = FlightBuilder.Create()
+            .AddPlane(plane)
+            .Build().Value;
+
+        var passage = PassageBuilder.Create()
+            .WithEnumTypePassage(EnumTypeClassPlane.Economic)
+            .Build().Value;
+
+        //act
+        var result = flight.BuyPassageInFlight(passage);
+
+        //assert
+        Assert.That(result.Success, Is.False);
+        StringAssert.AreEqualIgnoringCase("FlightErrors.FlightAlreadyFull", result.Errors[0].Code);
+    }
 }
 

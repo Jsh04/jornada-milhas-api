@@ -29,7 +29,7 @@ public class Flight : BaseEntity
 
     public Plane Plane { get; private set; }
 
-    public int PlaneId { get; private set; }
+    public long PlaneId { get; private set; }
 
     public IReadOnlyCollection<Passage> Passages => _passages.AsReadOnly();
     

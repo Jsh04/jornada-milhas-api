@@ -8,15 +8,6 @@ namespace JornadaMilhas.Core.Entities.Planes;
 
 public class Plane : BaseEntity
 {
-    public Plane(PlaneBuilder planeBuilder)
-    {
-        Model = planeBuilder.Model;
-        Manufacturer = planeBuilder.Manufacturer;
-        IdentificationCode = planeBuilder.IdentificationCode;
-        InOperation = planeBuilder.InOperation;
-        EconomicClass = planeBuilder.EconomicClass;
-    }
-    
     public string Model { get; }
 
     public string Manufacturer { get; }
@@ -35,6 +26,21 @@ public class Plane : BaseEntity
 
     public EconomicClass EconomicClass { get; }
 
+    public static Plane Create(PlaneBuilder planeBuilder) => new(planeBuilder);
+
+    private Plane(PlaneBuilder planeBuilder)
+    {
+        Model = planeBuilder.Model;
+        Manufacturer = planeBuilder.Manufacturer;
+        IdentificationCode = planeBuilder.IdentificationCode;
+        InOperation = planeBuilder.InOperation;
+        EconomicClass = planeBuilder.EconomicClass;
+    }
+
+    private Plane()
+    {
+        
+    }
     public Class GetTypeClass(EnumTypeClassPlane typeClass)
     {
         switch (typeClass)

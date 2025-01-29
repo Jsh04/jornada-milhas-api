@@ -33,7 +33,7 @@ namespace JornadaMilhas.Core.Entities.Planes
 
         public override Result<Plane> Build()
         {
-            var plane = new Plane(this);
+            var plane = Plane.Create(this);
             
             return Result.Ok(plane);
         }
