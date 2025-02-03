@@ -1,7 +1,7 @@
-﻿using JornadaMilhas.Common.Results;
+﻿using JornadaMilhas.Application.Interfaces.UOW;
+using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Commands.DepoimentsCommands.UpdateDepoiment;

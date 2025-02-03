@@ -1,4 +1,5 @@
 using JornadaMilhas.API;
+using JornadaMilhas.API.Extensions;
 using JornadaMilhas.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.AddApiConfiguration();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 
 var app = builder.Build();

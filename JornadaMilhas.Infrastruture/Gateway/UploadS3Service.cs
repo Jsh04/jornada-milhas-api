@@ -3,11 +3,11 @@ using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Transfer;
 using JornadaMilhas.Application.Constants;
-using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Application.Interfaces.Gateways;
 using JornadaMilhas.Common.Results;
 using Microsoft.Extensions.Configuration;
 
-namespace JornadaMilhas.Application.Services;
+namespace JornadaMilhas.Infrastruture.Gateway;
 
 public class UploadS3Service : IUploadService
 {

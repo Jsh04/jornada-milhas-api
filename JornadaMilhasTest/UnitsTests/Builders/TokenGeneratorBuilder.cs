@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using JornadaMilhas.Application.Interfaces.Security;
 using JornadaMilhas.Common.Options;
 using JornadaMilhas.Infrastruture.Security;
 using JornadaMilhasTest.UnitsTests.Helper;

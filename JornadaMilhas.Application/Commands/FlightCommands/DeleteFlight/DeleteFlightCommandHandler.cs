@@ -1,7 +1,7 @@
-﻿using JornadaMilhas.Common.Results;
+﻿using JornadaMilhas.Application.Interfaces.UOW;
+using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Commands.FlightCommands.DeleteFlight;

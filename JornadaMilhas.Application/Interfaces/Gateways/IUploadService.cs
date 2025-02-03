@@ -1,6 +1,6 @@
 ﻿using JornadaMilhas.Common.Results;
 
-namespace JornadaMilhas.Application.Interfaces.Services;
+namespace JornadaMilhas.Application.Interfaces.Gateways;
 
 public interface IUploadService
 {

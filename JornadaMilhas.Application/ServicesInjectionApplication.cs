@@ -2,6 +2,7 @@
 using FluentValidation.AspNetCore;
 using JornadaMilhas.Application.Commands.FlightCommands.RegisterFlight;
 using JornadaMilhas.Application.EventHandlers;
+using JornadaMilhas.Application.Interfaces.Gateways;
 using JornadaMilhas.Application.Interfaces.Services;
 using JornadaMilhas.Application.Services;
 using JornadaMilhas.Core.Events;
@@ -25,8 +26,9 @@ public static class ServicesInjectionApplication
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<ICustomerService, CustomerService>();
         services.AddScoped<IFlightService, FlightService>();
+        services.AddScoped<IPassageService, PassageService>();
 
-        services.AddSingleton<IUploadService, UploadS3Service>();
+       
 
         return services;
     }

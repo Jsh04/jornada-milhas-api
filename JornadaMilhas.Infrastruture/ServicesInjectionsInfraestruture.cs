@@ -1,5 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using JornadaMilhas.Application.Interfaces.MessageBus;
+using JornadaMilhas.Application.Interfaces.Security;
+using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Application.Interfaces.UOW;
 using JornadaMilhas.Common.Options;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.BackgroundJobs;
@@ -9,6 +13,7 @@ using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using JornadaMilhas.Infrastruture.Security;
+using JornadaMilhas.Infrastruture.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +31,7 @@ public static class ServicesInjectionsInfraestruture
             .AddInjectionRepositorys()
             .AddOptionsConfigure(configuration)
             .AddInjectionBackgroundJobs()
+            .AddInjectionServices()
             .AddServicesTokenReader(configuration);
     }
 
@@ -40,6 +46,13 @@ public static class ServicesInjectionsInfraestruture
         services.Configure<RabbitMqOptions>(configuration.GetSection("RabbitMq"))
             .AddOptions<RabbitMqOptions>()
             .ValidateDataAnnotations();
+
+        return services;
+    }
+
+    private static IServiceCollection AddInjectionServices(this IServiceCollection services)
+    {
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }

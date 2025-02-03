@@ -1,4 +1,6 @@
-﻿using JornadaMilhas.Application.Interfaces.Services;
+﻿using JornadaMilhas.Application.Interfaces.Gateways;
+using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Application.Interfaces.UOW;
 using JornadaMilhas.Application.Querys.Dtos.FilesDto;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Common.Results.Errors;
@@ -8,7 +10,6 @@ using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Entities.Planes;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Core.ValueObjects.Locales;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Commands.FlightCommands.RegisterFlight;

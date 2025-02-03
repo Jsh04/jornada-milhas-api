@@ -1,9 +1,9 @@
-﻿using JornadaMilhas.Application.Querys.Dtos.CompaniesDto;
+﻿using JornadaMilhas.Application.Interfaces.UOW;
+using JornadaMilhas.Application.Querys.Dtos.CompaniesDto;
 using JornadaMilhas.Common.DTO;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Commands.CompanyCommands.RegisterCompany;

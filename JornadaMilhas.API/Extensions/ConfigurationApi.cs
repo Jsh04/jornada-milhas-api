@@ -3,7 +3,7 @@ using JornadaMilhas.API.Middleware;
 using JornadaMilhas.Application;
 using JornadaMilhas.Infrastruture;
 
-namespace JornadaMilhas.API;
+namespace JornadaMilhas.API.Extensions;
 
 public static class ConfigurationApi
 {
