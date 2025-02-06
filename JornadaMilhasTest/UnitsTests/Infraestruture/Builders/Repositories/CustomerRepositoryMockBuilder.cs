@@ -18,11 +18,8 @@ public class CustomerRepositoryMockBuilder : BaseMockBuilder<ICustomerRepository
         _fixture = fixture;
     }
 
-    public static CustomerRepositoryMockBuilder CreateBuilder(Fixture fixture)
-    {
-        return new CustomerRepositoryMockBuilder(fixture);
-    }
-
+    public static CustomerRepositoryMockBuilder CreateBuilder(Fixture fixture) => new (fixture);
+    
     public CustomerRepositoryMockBuilder AddGetByIdAsync(Customer userToReturn)
     {
         _mock.Setup(repository => repository.GetByIdAsync(It.IsAny<long>(), It.IsAny<CancellationToken>()))

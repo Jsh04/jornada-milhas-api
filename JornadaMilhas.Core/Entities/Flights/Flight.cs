@@ -69,14 +69,7 @@ public class Flight : BaseEntity
     {
         IsCanceled = true;
     }
-
-    public decimal GetTotalValue()
-    {
-        //TODO
-
-        return 0;
-    }
-
+    
     public void AddImagesLocaleDestiny(ICollection<Picture> pictures)
     {
         if (!pictures.Any())

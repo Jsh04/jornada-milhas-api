@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhasTest.UnitsTests.Builders;
 using JornadaMilhasTest.UnitsTests.Seeds;
@@ -20,10 +21,10 @@ public class FlightRepositoryMockBuilder : BaseMockBuilder<IFlightRepository>
         return new FlightRepositoryMockBuilder(fixture);
     }
 
-    public FlightRepositoryMockBuilder AddGetDestinyById(long id)
+    public FlightRepositoryMockBuilder AddGetFlightById(Flight flightReturn)
     {
-        _mock.Setup(x => x.GetByIdAsync(id, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(FlightSeed.GetFlightTest(_fixture));
+        _mock.Setup(x => x.GetByIdAsync(It.IsAny<long>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(flightReturn);
         return this;
     }
 

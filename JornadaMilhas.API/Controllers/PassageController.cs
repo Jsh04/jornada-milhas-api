@@ -36,7 +36,6 @@ public class PassageController : ControllerBase
         
         var serviceResult = await _passageService.PayPassagesAsync(resultCustomerId.Value, passageInputModels);
         
-            
         return serviceResult.Match(Ok, result => result.ToProblemDetails());
     }
 }

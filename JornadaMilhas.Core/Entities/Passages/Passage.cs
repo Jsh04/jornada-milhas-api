@@ -10,7 +10,7 @@ public class Passage : BaseEntity
 {
     public EnumTypeSeat EnumTypeSeat { get; private set; }
 
-    public int SeatNumber { get; }
+    public int SeatNumber { get; private set; }
 
     public EnumTypeClassPlane EnumTypeClass { get; private set; }
 

@@ -4,6 +4,7 @@ using FluentAssertions;
 using JornadaMilhas.API.Controllers;
 using JornadaMilhas.Application.Commands.PassagesCommands.InputModels;
 using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Application.Querys.Dtos.OrdersDto;
 using JornadaMilhas.Common.Results;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -31,7 +32,7 @@ public class PassageControllerTest
             .Returns(Result.Ok(10L));
 
         serviceMock.Setup(x => x.PayPassagesAsync(It.IsAny<long>(), It.IsAny<List<PaidPassageInputModel>>()))
-            .ReturnsAsync(Result.Ok);
+            .ReturnsAsync(Result.Ok<OrderDto>(null));
         
         var passageController = new PassageController(serviceMock.Object, userServiceMock.Object);
 

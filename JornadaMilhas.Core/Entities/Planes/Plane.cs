@@ -43,14 +43,19 @@ public class Plane : BaseEntity
     }
     public Class GetTypeClass(EnumTypeClassPlane typeClass)
     {
-        switch (typeClass)
+        var classesInPlane = GetClassesDictionary();
+        
+        return classesInPlane[typeClass];
+    }
+
+    private Dictionary<EnumTypeClassPlane, Class> GetClassesDictionary()
+    {
+        var classes = new Dictionary<EnumTypeClassPlane, Class>
         {
-            case EnumTypeClassPlane.Economic:
-                return EconomicClass;
-            case EnumTypeClassPlane.Executive:
-                return BusinessClass;
-            default:
-                throw new ArgumentException(null, nameof(typeClass));
-        }
+            { EnumTypeClassPlane.Economic, EconomicClass },
+            { EnumTypeClassPlane.Executive, BusinessClass }
+        };
+
+        return classes;
     }
 }
