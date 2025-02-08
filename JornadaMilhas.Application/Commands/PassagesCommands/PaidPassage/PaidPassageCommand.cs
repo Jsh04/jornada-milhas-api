@@ -6,6 +6,6 @@ using MediatR;
 
 namespace JornadaMilhas.Application.Commands.PassagesCommands.PaidPassage;
 
-public record PaidPassageCommand(long CustomerId, List<PaidPassageInputModel> PaidPassages) : IRequest<Result<OrderDto>>;
+public record PaidPassageCommand(long CustomerId, List<PaidPassageInputModel> PaidPassages) : IRequest<Result<CreateOrderDto>>;
 
     

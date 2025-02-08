@@ -8,6 +8,8 @@ namespace JornadaMilhas.Core.Entities.Passages;
 
 public class Passage : BaseEntity
 {
+    public decimal Value { get; private set; }
+
     public EnumTypeSeat EnumTypeSeat { get; private set; }
 
     public int SeatNumber { get; private set; }
@@ -21,9 +23,18 @@ public class Passage : BaseEntity
     private Passage(PassageBuilder builder)
     {
         EnumTypeClass = builder.TypeClassPlane;
+        EnumTypeSeat = builder.TypeSeat;
+        SeatNumber = builder.SeatNumber;
     }
-    private Passage(){}
-    
+
+    private Passage()
+    {
+    }
+
+    public void SetValuePassage(decimal value)
+    {
+        Value = value;
+    }
 
     public static Passage Create(PassageBuilder passageBuilder)
     {

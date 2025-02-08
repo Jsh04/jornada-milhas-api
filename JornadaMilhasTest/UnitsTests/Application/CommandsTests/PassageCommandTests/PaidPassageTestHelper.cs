@@ -7,6 +7,7 @@ using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhasTest.UnitsTests.Builders;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Builders.Repositories;
 using JornadaMilhasTest.UnitsTests.Seeds;
+using Moq;
 
 namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.PassageCommandTests;
 
@@ -21,7 +22,7 @@ public static class PaidPassageTestHelper
         var mockUnitOfWork = UnitOfWorkBuilder.CreateBuilder()
             .Build();
 
-        var customerRepository = CustomerRepositoryMockBuilder.CreateBuilder(fixture)
+        var customerRepository = CustomerRepositoryMockBuilder.CreateBuilder(It.IsAny<IQueryable<Customer>>())
             .AddGetByIdAsync(customerReturn)
             .Build();
         

@@ -32,7 +32,7 @@ public class PassageControllerTest
             .Returns(Result.Ok(10L));
 
         serviceMock.Setup(x => x.PayPassagesAsync(It.IsAny<long>(), It.IsAny<List<PaidPassageInputModel>>()))
-            .ReturnsAsync(Result.Ok<OrderDto>(null));
+            .ReturnsAsync(Result.Ok<CreateOrderDto>(null));
         
         var passageController = new PassageController(serviceMock.Object, userServiceMock.Object);
 

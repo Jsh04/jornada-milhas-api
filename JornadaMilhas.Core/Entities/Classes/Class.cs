@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Core.Entities.Passages.Enums;
 
 namespace JornadaMilhas.Core.Entities.Classes
 {
@@ -17,10 +18,7 @@ namespace JornadaMilhas.Core.Entities.Classes
 
         public int ReservedSeats { get; protected set; }
 
-        public bool SeatAvailable(int quantity)
-        {
-            return TotalSeats - ReservedSeats >= quantity;
-        }
+        public bool SeatAvailable(int quantity) => TotalSeats - ReservedSeats >= quantity;
 
         public virtual decimal CalculatePrice(int quantity)
         {
@@ -32,6 +30,11 @@ namespace JornadaMilhas.Core.Entities.Classes
             TotalSeats = totalSeats;
             PriceSeat = priceSeat;
             ReservedSeats = reservedSeats;
+        }
+
+        public void OccupedSeat(int quantity)
+        {
+            ReservedSeats += quantity;
         }
     }
 }

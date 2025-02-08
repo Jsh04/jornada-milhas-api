@@ -14,6 +14,8 @@ namespace JornadaMilhas.Core.Entities.Passages
     {
         public EnumTypeClassPlane TypeClassPlane { get; private set; }
 
+        public EnumTypeSeat TypeSeat { get; private set; }
+        
         public int SeatNumber { get; private set; }
         
         public static PassageBuilder Create() => new();
@@ -27,6 +29,12 @@ namespace JornadaMilhas.Core.Entities.Passages
         public PassageBuilder WithNumberSeat(int numberSeat)
         {
             SeatNumber = numberSeat;
+            return this;
+        }
+        
+        public PassageBuilder WithEnumTypeSeat(EnumTypeSeat typeSeat)
+        {
+            TypeSeat = typeSeat;
             return this;
         }
         

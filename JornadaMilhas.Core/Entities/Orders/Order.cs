@@ -1,26 +1,29 @@
 ﻿using JornadaMilhas.Common.Entity;
+using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhas.Core.Entities.Passages;
 
 namespace JornadaMilhas.Core.Entities.Orders;
 
 public class Order : BaseEntity
 {
+    public Customer Customer { get; private set; }
+    public decimal TotalValue => _passages.Sum(passage => passage.Value);
+    
     private List<Passage> _passages = new();
     
     public IReadOnlyCollection<Passage> Passages => _passages.AsReadOnly();
     
-    public Order(List<Passage>? passagesCreatedValue)
+    public Order(Customer customer)
     {
-        if (passagesCreatedValue is null)
-            throw new ArgumentNullException(nameof(passagesCreatedValue));
-        
-        _passages.AddRange(passagesCreatedValue);
+        Customer = customer;
     }
 
-    public decimal GetValueTotal()
+    public void AddPassagesInOrder(IEnumerable<Passage> passages)
     {
-        //TODO
-        return default;
+        if (passages is null)
+            throw new ArgumentNullException(nameof(passages));
+            
+        _passages.AddRange(passages);
     }
     
     public void AddPassage(Passage passage)

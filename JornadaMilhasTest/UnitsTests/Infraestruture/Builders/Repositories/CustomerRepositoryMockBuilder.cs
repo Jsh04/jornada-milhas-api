@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Common.Entity.Users;
+using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhasTest.UnitsTests.Builders;
@@ -11,14 +12,14 @@ namespace JornadaMilhasTest.UnitsTests.Infraestruture.Builders.Repositories;
 
 public class CustomerRepositoryMockBuilder : BaseMockBuilder<ICustomerRepository>
 {
-    private readonly Fixture _fixture;
+    private IQueryable<Customer> _customers;
 
-    private CustomerRepositoryMockBuilder(Fixture fixture)
+    private CustomerRepositoryMockBuilder(IQueryable<Customer> customers)
     {
-        _fixture = fixture;
+        _customers = customers;
     }
 
-    public static CustomerRepositoryMockBuilder CreateBuilder(Fixture fixture) => new (fixture);
+    public static CustomerRepositoryMockBuilder CreateBuilder(IQueryable<Customer> customers) => new(customers);
     
     public CustomerRepositoryMockBuilder AddGetByIdAsync(Customer userToReturn)
     {
@@ -37,11 +38,20 @@ public class CustomerRepositoryMockBuilder : BaseMockBuilder<ICustomerRepository
         return this;
     }
 
-    public CustomerRepositoryMockBuilder WithGetAllCustomersAsync(int numberToCreate, int size = 10, int page = 1)
+    public CustomerRepositoryMockBuilder WithGetAllCustomersAsync(int page, int size)
     {
+        var paginationResult = GetPaginationResultObject(page, size);
         _mock.Setup(x => x.GetAllAsync(page, size, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(CustomerSeed.GetAllCustomersFakeData(_fixture, numberToCreate, page, size));
+            .ReturnsAsync(paginationResult);
         return this;
+    }
+
+    private PaginationResult<Customer> GetPaginationResultObject(int page, int size)
+    {
+        var customerList = _customers.Skip((page - 1) * size).Take(size).ToList();
+        var pagination = new PaginationResult<Customer>(page, size, customerList.Count);
+        pagination.SetData(customerList);
+        return pagination;
     }
 
     public override Mock<ICustomerRepository> Build()

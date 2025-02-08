@@ -16,7 +16,7 @@ public class PassageService : IPassageService
         _mediator = mediator;
     }
     
-    public async Task<Result<OrderDto>> PayPassagesAsync(long customerId, List<PaidPassageInputModel> passageInputModels)
+    public async Task<Result<CreateOrderDto>> PayPassagesAsync(long customerId, List<PaidPassageInputModel> passageInputModels)
     {
         var payPassagesCommands = new PaidPassageCommand(customerId, passageInputModels);
         return await _mediator.Send(payPassagesCommands);

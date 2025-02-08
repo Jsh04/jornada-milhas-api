@@ -7,5 +7,5 @@ namespace JornadaMilhas.Application.Interfaces.Services;
 
 public interface IPassageService
 {
-    Task<Result<OrderDto>> PayPassagesAsync(long customerId, List<PaidPassageInputModel> passageInputModels);
+    Task<Result<CreateOrderDto>> PayPassagesAsync(long customerId, List<PaidPassageInputModel> passageInputModels);
 }
