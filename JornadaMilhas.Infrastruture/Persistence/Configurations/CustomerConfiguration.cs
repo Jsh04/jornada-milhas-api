@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Core.Entities.Orders;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations
 {
@@ -28,6 +29,9 @@ namespace JornadaMilhas.Infrastruture.Persistence.Configurations
                 .WithOne()
                 .HasForeignKey<Customer>(c => c.Id);
                 
+            builder.HasMany<Order>()
+                .WithOne(o => o.Customer)
+                .HasForeignKey(o => o.CustomerId);
         }
     }
 }

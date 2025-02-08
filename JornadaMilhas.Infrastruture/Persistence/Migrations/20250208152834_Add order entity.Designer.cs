@@ -4,6 +4,7 @@ using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JornadaMilhas.Infrastruture.Migrations
 {
     [DbContext(typeof(JornadaMilhasDbContext))]
-    partial class JornadaMilhasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250208152834_Add order entity")]
+    partial class Addorderentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,86 +92,6 @@ namespace JornadaMilhas.Infrastruture.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OutboxMessage");
-                });
-
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Classes.BusinessClass", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("DtCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DtUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<long>("PlaneId")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal>("PriceSeat")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<int>("ReservedSeats")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("TotalSeats")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlaneId")
-                        .IsUnique();
-
-                    b.ToTable("BusinessClass");
-                });
-
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Classes.EconomicClass", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("DtCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DtUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<long>("PlaneId")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal>("PriceSeat")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<int>("ReservedSeats")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("TotalSeats")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlaneId")
-                        .IsUnique();
-
-                    b.ToTable("EconomicClass");
                 });
 
             modelBuilder.Entity("JornadaMilhas.Core.Entities.Companies.Company", b =>
@@ -413,9 +335,6 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<long>("BusinessClassId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("CompanyId")
                         .HasColumnType("bigint");
 
@@ -425,39 +344,17 @@ namespace JornadaMilhas.Infrastruture.Migrations
                     b.Property<DateTime>("DtUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("EconomicClassId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("IdentificationCode")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool>("InOperation")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Manufacturer")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("BusinessClassId")
-                        .IsUnique();
-
                     b.HasIndex("CompanyId");
-
-                    b.HasIndex("EconomicClassId")
-                        .IsUnique();
 
                     b.ToTable("Planes");
                 });
@@ -484,28 +381,6 @@ namespace JornadaMilhas.Infrastruture.Migrations
                     b.HasBaseType("JornadaMilhas.Common.Entity.Users.User");
 
                     b.ToTable("Customer", (string)null);
-                });
-
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Classes.BusinessClass", b =>
-                {
-                    b.HasOne("JornadaMilhas.Core.Entities.Planes.Plane", "Plane")
-                        .WithOne()
-                        .HasForeignKey("JornadaMilhas.Core.Entities.Classes.BusinessClass", "PlaneId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Plane");
-                });
-
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Classes.EconomicClass", b =>
-                {
-                    b.HasOne("JornadaMilhas.Core.Entities.Planes.Plane", "Plane")
-                        .WithOne()
-                        .HasForeignKey("JornadaMilhas.Core.Entities.Classes.EconomicClass", "PlaneId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Plane");
                 });
 
             modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoiments.Depoiment", b =>
@@ -645,29 +520,13 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
             modelBuilder.Entity("JornadaMilhas.Core.Entities.Planes.Plane", b =>
                 {
-                    b.HasOne("JornadaMilhas.Core.Entities.Classes.BusinessClass", "BusinessClass")
-                        .WithOne()
-                        .HasForeignKey("JornadaMilhas.Core.Entities.Planes.Plane", "BusinessClassId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("JornadaMilhas.Core.Entities.Companies.Company", "Company")
                         .WithMany("Planes")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JornadaMilhas.Core.Entities.Classes.EconomicClass", "EconomicClass")
-                        .WithOne()
-                        .HasForeignKey("JornadaMilhas.Core.Entities.Planes.Plane", "EconomicClassId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("BusinessClass");
-
                     b.Navigation("Company");
-
-                    b.Navigation("EconomicClass");
                 });
 
             modelBuilder.Entity("JornadaMilhas.Core.Entities.Admins.Admin", b =>

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Core.Entities.Companies;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations
 {
@@ -22,6 +23,11 @@ namespace JornadaMilhas.Infrastruture.Persistence.Configurations
             builder.HasOne<User>()
                 .WithOne()
                 .HasForeignKey<Admin>(a => a.Id);
+
+            builder.HasOne<Company>()
+                .WithMany(c => c.Admins)
+                .HasForeignKey(a => a.CompanyId);
+
         }
     }
 }

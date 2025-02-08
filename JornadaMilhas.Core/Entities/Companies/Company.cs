@@ -21,9 +21,9 @@ public class Company : BaseEntity
 
     public DateTime DtFoundation { get; private set; }
 
-    public List<Plane> Planes { get; }
-    
-    public List<Admin> Admins { get; }
+    public ICollection<Plane> Planes { get; }
+
+    public ICollection<Admin> Admins { get; } = new List<Admin>();
 
     public static Result<Company> Create(string name, string originCountry, DateTime dtFoundation)
     {

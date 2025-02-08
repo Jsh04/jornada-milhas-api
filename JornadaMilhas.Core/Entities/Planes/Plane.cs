@@ -24,7 +24,12 @@ public class Plane : BaseEntity
 
     public BusinessClass? BusinessClass { get; }
 
+    public long BusinessClassId { get; private set; }
+
     public EconomicClass? EconomicClass { get; }
+    
+
+    public long EconomicClassId { get; private set; }
 
     public static Plane Create(PlaneBuilder planeBuilder) => new(planeBuilder);
 
@@ -36,7 +41,6 @@ public class Plane : BaseEntity
         InOperation = planeBuilder.InOperation;
         EconomicClass = planeBuilder.EconomicClass;
         BusinessClass = planeBuilder.BusinessClass;
-        CompanyId = planeBuilder.CompanyId;
     }
 
     private Plane() { }

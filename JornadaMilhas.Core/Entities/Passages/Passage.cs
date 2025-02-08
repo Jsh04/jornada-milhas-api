@@ -1,6 +1,7 @@
 ﻿using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Core.Entities.Flights;
+using JornadaMilhas.Core.Entities.Orders;
 using JornadaMilhas.Core.Entities.Passages.Enums;
 using JornadaMilhas.Core.Entities.Users;
 
@@ -18,7 +19,11 @@ public class Passage : BaseEntity
 
     public virtual Flight Flight { get; }
 
+    public virtual Order Order { get; }
+    
     public long FlightId { get; }
+    
+    public long OrderId { get; }
 
     private Passage(PassageBuilder builder)
     {

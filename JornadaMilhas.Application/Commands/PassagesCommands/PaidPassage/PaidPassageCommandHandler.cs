@@ -19,20 +19,17 @@ public class PaidPassageCommandHandler : IRequestHandler<PaidPassageCommand, Res
     private readonly IUnitOfWork _unitOfWork;
     private readonly IFlightRepository _flightRepository;
     private readonly ICustomerRepository _customerRepository;
-    private readonly IPassageRepository _passageRepository;
     private readonly IOrderRepository _orderRepository;
 
     public PaidPassageCommandHandler(
         IUnitOfWork unitOfWork, 
         IFlightRepository flightRepository,
         ICustomerRepository customerRepository, 
-        IPassageRepository passageRepository, 
         IOrderRepository orderRepository)
     {
         _unitOfWork = unitOfWork;
         _flightRepository = flightRepository;
         _customerRepository = customerRepository;
-        _passageRepository = passageRepository;
         _orderRepository = orderRepository;
     }
 
@@ -59,6 +56,8 @@ public class PaidPassageCommandHandler : IRequestHandler<PaidPassageCommand, Res
         
         order.AddPassagesInOrder(passagesCreatedList);
         
+        order.SetTotalValue();
+        
         await _orderRepository.CreateAsync(order);
         
         await _unitOfWork.CommitAsync(cancellationToken);
@@ -74,25 +73,35 @@ public class PaidPassageCommandHandler : IRequestHandler<PaidPassageCommand, Res
         
         foreach (var passageInputModel in request.PaidPassages)
         {
-            var flight = await _flightRepository.GetByIdAsync(passageInputModel.FlightId, cancellationToken);
-
-            if (flight is null)
-                return Result<List<Passage>>.Fail<List<Passage>>(FlightErrors.NotFound);
-
-            var passageCreate = CreatePassageByInputModel(passageInputModel);
-
-            if (!passageCreate.Success)
-                return Result<List<Passage>>.Fail<List<Passage>>(passageCreate.Errors);
+            var passageCreatedFromInputModel = await GetListPassagesFromInputModel(passageInputModel, cancellationToken);
             
-            var buyPassageResult = flight.BuyPassageInFlight(passageCreate.Value);
-
-            if (!buyPassageResult.Success)
-                return Result<List<Passage>>.Fail<List<Passage>>(buyPassageResult.Errors);
+            if (!passageCreatedFromInputModel.Success)
+                return Result.Fail<List<Passage>>(passageCreatedFromInputModel.Errors);
             
-            passages.Add(passageCreate.Value);
+            passages.Add(passageCreatedFromInputModel.Value);
         }
 
         return Result.Ok(passages);
+    }
+
+    private async Task<Result<Passage>> GetListPassagesFromInputModel(PaidPassageInputModel passageInputModel, CancellationToken cancellationToken = default)
+    {
+        var flight = await _flightRepository.GetByIdAsync(passageInputModel.FlightId, cancellationToken);
+
+        if (flight is null)
+            return Result<Passage>.Fail<Passage>(FlightErrors.NotFound);
+
+        var passageCreate = CreatePassageByInputModel(passageInputModel);
+
+        if (!passageCreate.Success)
+            return Result<Passage>.Fail<Passage>(passageCreate.Errors);
+            
+        var buyPassageResult = flight.BuyPassageInFlight(passageCreate.Value);
+
+        if (!buyPassageResult.Success)
+            return Result<Passage>.Fail<Passage>(buyPassageResult.Errors);
+            
+        return passageCreate;
     }
 
     private static Result<Passage> CreatePassageByInputModel(PaidPassageInputModel passageInputModel)
@@ -106,5 +115,4 @@ public class PaidPassageCommandHandler : IRequestHandler<PaidPassageCommand, Res
 
     private PassageDto MappingPassageEntityToDto(Passage passage) => 
         new PassageDto(passage.EnumTypeSeat, passage.EnumTypeClass, passage.SeatNumber, passage.Value);
-    
 }

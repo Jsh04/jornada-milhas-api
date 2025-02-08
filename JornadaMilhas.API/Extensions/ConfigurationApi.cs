@@ -10,7 +10,7 @@ public static class ConfigurationApi
     public static void AddApiConfiguration(this WebApplicationBuilder builder)
     {
         builder.Services.AddMemoryCache();
-        builder.Services.GetServicesInjectiosOfInfraestruture(builder.Configuration);
+        builder.Services.GetServicesInjectionsOfInfrastructure(builder.Configuration);
         builder.Services.GetServicesInjectiosOfApplication();
 
         builder.Services.AddTransient<GlobalExceptionHandler>();

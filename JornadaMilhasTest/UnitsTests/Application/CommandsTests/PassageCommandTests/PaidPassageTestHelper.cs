@@ -13,35 +13,5 @@ namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.PassageCommandT
 
 public static class PaidPassageTestHelper
 {
-
-    public static PaidPassageCommandHandler CreateHandlerToTest(
-        Fixture fixture, 
-        Customer customerReturn = null, 
-        Flight flightReturn = null)
-    {
-        var mockUnitOfWork = UnitOfWorkBuilder.CreateBuilder()
-            .Build();
-
-        var customerRepository = CustomerRepositoryMockBuilder.CreateBuilder(It.IsAny<IQueryable<Customer>>())
-            .AddGetByIdAsync(customerReturn)
-            .Build();
-        
-        var flightRepository = FlightRepositoryMockBuilder.Create(fixture)
-            .AddGetFlightById(flightReturn)
-            .Build();
-        
-        var passageRepository = PassageRepositoryMockBuilder.Create()
-            .Build();
-        var orderRepository = OrderRepositoryMockBuilder.Create()
-            .Build();
-        
-        var passagePaidHandler = new PaidPassageCommandHandler(
-            mockUnitOfWork.Object, 
-            flightRepository.Object, 
-            customerRepository.Object, 
-            passageRepository.Object,
-            orderRepository.Object);
-        
-        return passagePaidHandler;
-    }
+    
 }
