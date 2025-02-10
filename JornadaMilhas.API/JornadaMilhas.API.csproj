@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JornadaMilhas.Application\JornadaMilhas.Application.csproj" />
+    <ProjectReference Include="..\JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\UsersController\**" />

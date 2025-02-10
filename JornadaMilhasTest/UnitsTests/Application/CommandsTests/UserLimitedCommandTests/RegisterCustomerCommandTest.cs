@@ -1,8 +1,10 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;
+using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhasTest.UnitsTests.Builders;
 using JornadaMilhasTest.UnitsTests.Helper;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Builders.Repositories;
+using Moq;
 
 namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.UserLimitedCommandTests;
 
@@ -22,7 +24,7 @@ public class RegisterCustomerCommandTest
         //arrange
         var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().Build();
         var mockObjectUserLimited =
-            CustomerRepositoryMockBuilder.CreateBuilder(_fixture).AddNotUniqueAsync(true).Build();
+            CustomerRepositoryMockBuilder.CreateBuilder(It.IsAny<IQueryable<Customer>>()).AddNotUniqueAsync(true).Build();
         var resgisterUserLimitedHandler =
             new RegisterCustomerCommandHandler(mockObjectUnitOfWork.Object, mockObjectUserLimited.Object);
 
@@ -46,7 +48,7 @@ public class RegisterCustomerCommandTest
     {
         var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
         var mockObjectUserLimited =
-            CustomerRepositoryMockBuilder.CreateBuilder(_fixture).AddNotUniqueAsync(false).Build();
+            CustomerRepositoryMockBuilder.CreateBuilder(It.IsAny<IQueryable<Customer>>()).AddNotUniqueAsync(false).Build();
         var resgisterUserLimitedHandler =
             new RegisterCustomerCommandHandler(mockObjectUnitOfWork.Object, mockObjectUserLimited.Object);
 
@@ -68,7 +70,7 @@ public class RegisterCustomerCommandTest
     {
         var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
         var mockObjectCustomer =
-            CustomerRepositoryMockBuilder.CreateBuilder(_fixture).AddNotUniqueAsync(false).Build();
+            CustomerRepositoryMockBuilder.CreateBuilder(It.IsAny<IQueryable<Customer>>()).AddNotUniqueAsync(false).Build();
 
         var resgisterUserLimitedHandler =
             new RegisterCustomerCommandHandler(mockObjectUnitOfWork.Object, mockObjectCustomer.Object);
@@ -89,7 +91,7 @@ public class RegisterCustomerCommandTest
     {
         var mockObjectUnitOfWork = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(0).Build();
         var mockObjectUserLimited =
-            CustomerRepositoryMockBuilder.CreateBuilder(_fixture).AddNotUniqueAsync(false).Build();
+            CustomerRepositoryMockBuilder.CreateBuilder(It.IsAny<IQueryable<Customer>>()).AddNotUniqueAsync(false).Build();
 
         var resgisterUserLimitedHandler =
             new RegisterCustomerCommandHandler(mockObjectUnitOfWork.Object, mockObjectUserLimited.Object);

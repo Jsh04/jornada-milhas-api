@@ -2,6 +2,7 @@
 using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Core.Entities.Depoiments;
+using JornadaMilhas.Core.Entities.Orders;
 using JornadaMilhas.Core.Entities.Users;
 
 namespace JornadaMilhas.Core.Entities.Customers;
@@ -9,8 +10,11 @@ namespace JornadaMilhas.Core.Entities.Customers;
 public class Customer : User
 {
     private readonly List<Depoiment> _depoiments;
+    
+    private readonly List<Order> _orders;
 
     public IReadOnlyCollection<Depoiment> Depoiments => _depoiments.AsReadOnly();
+    public IReadOnlyCollection<Order> Orders => _orders.AsReadOnly();
     
     private Customer(CustomerBuilder builder) : base(builder.Name, 
         builder.DtBirth, 
@@ -24,6 +28,7 @@ public class Customer : User
         builder.Password)
     {
         _depoiments = new List<Depoiment>();
+        _orders = new List<Order>();
     }
 
     private Customer() : base()

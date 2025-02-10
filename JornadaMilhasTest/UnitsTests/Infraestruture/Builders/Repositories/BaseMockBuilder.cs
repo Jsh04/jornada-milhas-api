@@ -11,5 +11,8 @@ public abstract class BaseMockBuilder<TInterface> where TInterface : class
         _mock = new Mock<TInterface>();
     }
 
-    public abstract Mock<TInterface> Build();
+    public virtual Mock<TInterface> Build()
+    {
+        return _mock;
+    }
 }

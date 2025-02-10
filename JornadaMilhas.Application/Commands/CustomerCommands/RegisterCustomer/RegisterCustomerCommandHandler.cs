@@ -1,11 +1,11 @@
-﻿using JornadaMilhas.Common.Entity.Users;
+﻿using JornadaMilhas.Application.Interfaces.UOW;
+using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Events;
 using JornadaMilhas.Core.Events.Shareds;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;

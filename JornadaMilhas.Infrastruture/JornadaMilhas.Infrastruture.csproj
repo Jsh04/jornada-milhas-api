@@ -34,7 +34,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\JornadaMilhas.Core\JornadaMilhas.Core.csproj" />
+        <ProjectReference Include="..\JornadaMilhas.Application\JornadaMilhas.Application.csproj" />
     </ItemGroup>
 
 </Project>

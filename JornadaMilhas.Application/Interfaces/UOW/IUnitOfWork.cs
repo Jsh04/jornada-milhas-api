@@ -1,4 +1,4 @@
-﻿namespace JornadaMilhas.Infrastruture.Persistence.UOW;
+﻿namespace JornadaMilhas.Application.Interfaces.UOW;
 
 public interface IUnitOfWork : IDisposable
 {

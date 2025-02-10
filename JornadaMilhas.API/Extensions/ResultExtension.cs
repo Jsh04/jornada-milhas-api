@@ -36,6 +36,7 @@ public static class ResultExtension
             ErrorType.Validation => StatusCodes.Status400BadRequest,
             ErrorType.NotFound => StatusCodes.Status404NotFound,
             ErrorType.Conflict => StatusCodes.Status409Conflict,
+            ErrorType.Unauthorized => StatusCodes.Status401Unauthorized,
             _ => StatusCodes.Status500InternalServerError
         };
     }
@@ -47,6 +48,7 @@ public static class ResultExtension
             ErrorType.Validation => "Bad Request",
             ErrorType.NotFound => "Not Found",
             ErrorType.Conflict => "Conflict",
+            ErrorType.Unauthorized => "Unauthorized",
             _ => "Internal Server Error"
         };
     }
@@ -58,6 +60,7 @@ public static class ResultExtension
             ErrorType.Validation => "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1",
             ErrorType.NotFound => "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.4",
             ErrorType.Conflict => "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.8",
+            ErrorType.Unauthorized => "https://datatracker.ietf.org/doc/html/rfc7235#section-3.1",
             _ => "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1"
         };
     }

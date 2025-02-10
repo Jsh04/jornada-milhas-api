@@ -22,9 +22,14 @@ public class Plane : BaseEntity
 
     public long CompanyId { get; }
 
-    public BusinessClass BusinessClass { get; }
+    public BusinessClass? BusinessClass { get; }
 
-    public EconomicClass EconomicClass { get; }
+    public long BusinessClassId { get; private set; }
+
+    public EconomicClass? EconomicClass { get; }
+    
+
+    public long EconomicClassId { get; private set; }
 
     public static Plane Create(PlaneBuilder planeBuilder) => new(planeBuilder);
 
@@ -35,22 +40,31 @@ public class Plane : BaseEntity
         IdentificationCode = planeBuilder.IdentificationCode;
         InOperation = planeBuilder.InOperation;
         EconomicClass = planeBuilder.EconomicClass;
+        BusinessClass = planeBuilder.BusinessClass;
     }
 
-    private Plane()
-    {
-        
-    }
+    private Plane() { }
+    
     public Class GetTypeClass(EnumTypeClassPlane typeClass)
     {
-        switch (typeClass)
+        var classesInPlane = GetClassesDictionary();
+        
+        var classChosen = classesInPlane[typeClass];
+        
+        if (classChosen is null)
+            throw new ApplicationException("Class not exists");
+        
+        return classChosen;
+    }
+
+    private Dictionary<EnumTypeClassPlane, Class> GetClassesDictionary()
+    {
+        var classes = new Dictionary<EnumTypeClassPlane, Class?>
         {
-            case EnumTypeClassPlane.Economic:
-                return EconomicClass;
-            case EnumTypeClassPlane.Executive:
-                return BusinessClass;
-            default:
-                throw new ArgumentException(null, nameof(typeClass));
-        }
+            { EnumTypeClassPlane.Economic, EconomicClass },
+            { EnumTypeClassPlane.Executive, BusinessClass }
+        };
+
+        return classes;
     }
 }

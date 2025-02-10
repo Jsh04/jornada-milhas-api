@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Application.Querys.UserQuerys.GetAllCustomers;
+using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhasTest.UnitsTests.Builders;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Builders.Repositories;
 
@@ -19,8 +20,9 @@ public class GetAllUsersLimitedTest
     public async Task DeveraRetornarUsuariosPassandoOsParametrosCorretosQuandoSolicitadoTodos()
     {
         //arrange
+        var customers = _fixture.CreateMany<Customer>(10).AsQueryable();
         var mockUserRepositoryTask =
-            CustomerRepositoryMockBuilder.CreateBuilder(_fixture).WithGetAllCustomersAsync(10);
+            CustomerRepositoryMockBuilder.CreateBuilder(customers).WithGetAllCustomersAsync(1, 10);
         var mockUserRepository = mockUserRepositoryTask.Build();
         var getUsersHandler = new GetAllCustomersQueryHandler(mockUserRepository.Object);
         var getUserRequest = new GetAllCustomersQuery(1, 10);

@@ -1,7 +1,7 @@
 ﻿using JornadaMilhas.Common.DomainEventConsumer;
 using JornadaMilhas.Common.EventHandler;
 
-namespace JornadaMilhas.Infrastruture.MessageBus;
+namespace JornadaMilhas.Application.Interfaces.MessageBus;
 
 public interface IMessageBusProducerService
 {

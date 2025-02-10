@@ -8,7 +8,7 @@ public class PaginationResult<T>
         PageSize = pageSize;
         TotalCount = totalCount;
     }
-
+    
     public PaginationResult(int page, int pageSize, int totalCount, int totalPages, List<T> data)
     {
         Page = page;

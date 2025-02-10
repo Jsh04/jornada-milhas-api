@@ -1,5 +1,7 @@
 ﻿using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Core.Entities.Flights;
+using JornadaMilhas.Core.Entities.Planes;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations;
@@ -50,11 +52,11 @@ public class FlightConfiguration : BaseEntityConfiguration<Flight>
 
         });
 
-        builder.HasOne(f => f.Plane)
-            .WithMany(p => p.Flights)
-            .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade)
-            .HasForeignKey(f => f.PlaneId);
-
+        builder.HasOne<Plane>()
+            .WithMany(x => x.Flights)
+            .OnDelete(DeleteBehavior.Cascade)
+            .HasForeignKey(x => x.PlaneId);
+        
         builder.HasMany(f => f.Passages)
             .WithOne(p => p.Flight)
             .HasForeignKey(p => p.FlightId);

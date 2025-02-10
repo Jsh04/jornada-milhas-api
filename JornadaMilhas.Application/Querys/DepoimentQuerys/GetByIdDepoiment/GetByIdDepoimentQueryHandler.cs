@@ -1,9 +1,9 @@
-﻿using JornadaMilhas.Application.Querys.Dtos.DepoimentsDto;
+﻿using JornadaMilhas.Application.Interfaces.UOW;
+using JornadaMilhas.Application.Querys.Dtos.DepoimentsDto;
 using JornadaMilhas.Common.DTO;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Infrastruture.Persistence.UOW;
 using MediatR;
 
 namespace JornadaMilhas.Application.Querys.DepoimentQuerys.GetByIdDepoiment;

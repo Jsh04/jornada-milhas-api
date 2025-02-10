@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using JornadaMilhas.Application.Interfaces.MessageBus;
 using JornadaMilhas.Common.DomainEventConsumer;
 using JornadaMilhas.Common.EventHandler;
 using JornadaMilhas.Common.Options;

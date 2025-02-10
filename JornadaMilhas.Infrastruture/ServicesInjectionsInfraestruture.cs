@@ -1,14 +1,21 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using JornadaMilhas.Application.Interfaces.Gateways;
+using JornadaMilhas.Application.Interfaces.MessageBus;
+using JornadaMilhas.Application.Interfaces.Security;
+using JornadaMilhas.Application.Interfaces.Services;
+using JornadaMilhas.Application.Interfaces.UOW;
 using JornadaMilhas.Common.Options;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhas.Infrastruture.BackgroundJobs;
+using JornadaMilhas.Infrastruture.Gateway;
 using JornadaMilhas.Infrastruture.Interceptors;
 using JornadaMilhas.Infrastruture.MessageBus;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
 using JornadaMilhas.Infrastruture.Security;
+using JornadaMilhas.Infrastruture.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,13 +26,15 @@ namespace JornadaMilhas.Infrastruture;
 
 public static class ServicesInjectionsInfraestruture
 {
-    public static IServiceCollection GetServicesInjectiosOfInfraestruture(this IServiceCollection services,
+    public static IServiceCollection GetServicesInjectionsOfInfrastructure(this IServiceCollection services,
         IConfiguration configuration)
     {
         return services.AddServiceDbContext(configuration)
-            .AddInjectionRepositorys()
+            .AddInjectionRepositories()
             .AddOptionsConfigure(configuration)
             .AddInjectionBackgroundJobs()
+            .AddInjectionServices()
+            .AddInjectionGateways()
             .AddServicesTokenReader(configuration);
     }
 
@@ -41,6 +50,20 @@ public static class ServicesInjectionsInfraestruture
             .AddOptions<RabbitMqOptions>()
             .ValidateDataAnnotations();
 
+        return services;
+    }
+
+    private static IServiceCollection AddInjectionGateways(this IServiceCollection services)
+    {
+        services.AddTransient<IUploadService, UploadS3Service>();
+        
+        return services;
+    }
+    
+    private static IServiceCollection AddInjectionServices(this IServiceCollection services)
+    {
+        services.AddScoped<IUserService, UserService>();
+        
         return services;
     }
 
@@ -85,7 +108,7 @@ public static class ServicesInjectionsInfraestruture
         return services;
     }
 
-    private static IServiceCollection AddInjectionRepositorys(this IServiceCollection services)
+    private static IServiceCollection AddInjectionRepositories(this IServiceCollection services)
     {
         services.AddScoped<IFlightRepository, FlightRepository>();
         services.AddScoped<IDepoimentRepository, DepoimentRepository>();
@@ -94,6 +117,7 @@ public static class ServicesInjectionsInfraestruture
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IPlaneRepository, PlaneRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
 
         services.AddScoped<ITokenGenerator, TokenGenerator>();
 

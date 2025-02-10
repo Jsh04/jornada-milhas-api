@@ -22,7 +22,7 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("JornadaMilhas.Common.Entities.User", b =>
+            modelBuilder.Entity("JornadaMilhas.Common.Entity.Users.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,8 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<byte[]>("Picture")
                         .HasMaxLength(1000)
@@ -58,7 +59,7 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("JornadaMilhas.Common.Persistence.Queue.OutboxMessage", b =>
@@ -89,6 +90,86 @@ namespace JornadaMilhas.Infrastruture.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OutboxMessage");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Classes.BusinessClass", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DtCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DtUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("PlaneId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("PriceSeat")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("ReservedSeats")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("TotalSeats")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaneId")
+                        .IsUnique();
+
+                    b.ToTable("BusinessClass");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Classes.EconomicClass", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DtCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DtUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("PlaneId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("PriceSeat")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("ReservedSeats")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("TotalSeats")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaneId")
+                        .IsUnique();
+
+                    b.ToTable("EconomicClass");
                 });
 
             modelBuilder.Entity("JornadaMilhas.Core.Entities.Companies.Company", b =>
@@ -133,6 +214,9 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("DepoimentDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -142,9 +226,6 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
                     b.Property<DateTime>("DtUpdated")
                         .HasColumnType("datetime2");
-
-                    b.Property<long>("IdUser")
-                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -157,17 +238,14 @@ namespace JornadaMilhas.Infrastruture.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Depoimentos");
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Destinys.Destiny", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Flights.Flight", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,13 +253,61 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("DescriptionEnglish")
+                    b.Property<decimal>("BasePrice")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("DepartureDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DescriptionPortuguese")
+                    b.Property<DateTime>("DtCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DtUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FlightCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LandingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("PlaneId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("PlaneId1")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaneId");
+
+                    b.HasIndex("PlaneId1");
+
+                    b.ToTable("Flights");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Orders.Order", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<long>("CustomerId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("DtCreated")
                         .HasColumnType("datetime2");
@@ -192,23 +318,18 @@ namespace JornadaMilhas.Infrastruture.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Subtitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("TotalValue")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Destinos");
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.ImagemDestino", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Passages.Passage", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -216,7 +337,86 @@ namespace JornadaMilhas.Infrastruture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<long>("DestinoId")
+                    b.Property<DateTime>("DtCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DtUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EnumTypeClass")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnumTypeSeat")
+                        .HasColumnType("int");
+
+                    b.Property<long>("FlightId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("SeatNumber")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Value")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Passage");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Picture", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DtCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DtUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("FlightId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PathS3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightId");
+
+                    b.ToTable("Picture");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Planes.Plane", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<long>("BusinessClassId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("CompanyId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("DtCreated")
@@ -225,98 +425,273 @@ namespace JornadaMilhas.Infrastruture.Migrations
                     b.Property<DateTime>("DtUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("IdDestino")
+                    b.Property<long>("EconomicClassId")
                         .HasColumnType("bigint");
 
-                    b.Property<byte[]>("ImagemBytes")
+                    b.Property<string>("IdentificationCode")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("InOperation")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Manufacturer")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DestinoId");
+                    b.HasIndex("BusinessClassId")
+                        .IsUnique();
 
-                    b.ToTable("ImagemDestino");
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("EconomicClassId")
+                        .IsUnique();
+
+                    b.ToTable("Planes");
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Users.UserAdmin.UserAdmin", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Admins.Admin", b =>
                 {
-                    b.HasBaseType("JornadaMilhas.Common.Entities.User");
+                    b.HasBaseType("JornadaMilhas.Common.Entity.Users.User");
 
-                    b.Property<string>("CodeEmployee")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("CodeEmployee");
+                    b.Property<long>("CompanyId")
+                        .HasColumnType("bigint");
 
-                    b.ToTable("UserAdmin", (string)null);
+                    b.Property<long?>("CompanyId1")
+                        .HasColumnType("bigint");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("CompanyId1");
+
+                    b.ToTable("Admin", (string)null);
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Customers.Customer", b =>
                 {
-                    b.HasBaseType("JornadaMilhas.Common.Entities.User");
+                    b.HasBaseType("JornadaMilhas.Common.Entity.Users.User");
 
-                    b.Property<bool>("EmailExists")
-                        .HasColumnType("bit");
-
-                    b.ToTable("UserLimited", (string)null);
+                    b.ToTable("Customer", (string)null);
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Common.Entities.User", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Classes.BusinessClass", b =>
                 {
-                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "ConfirmEmail", b1 =>
+                    b.HasOne("JornadaMilhas.Core.Entities.Planes.Plane", "Plane")
+                        .WithOne()
+                        .HasForeignKey("JornadaMilhas.Core.Entities.Classes.BusinessClass", "PlaneId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Plane");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Classes.EconomicClass", b =>
+                {
+                    b.HasOne("JornadaMilhas.Core.Entities.Planes.Plane", "Plane")
+                        .WithOne()
+                        .HasForeignKey("JornadaMilhas.Core.Entities.Classes.EconomicClass", "PlaneId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Plane");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoiments.Depoiment", b =>
+                {
+                    b.HasOne("JornadaMilhas.Core.Entities.Customers.Customer", null)
+                        .WithMany("Depoiments")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Flights.Flight", b =>
+                {
+                    b.HasOne("JornadaMilhas.Core.Entities.Planes.Plane", "Plane")
+                        .WithMany()
+                        .HasForeignKey("PlaneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JornadaMilhas.Core.Entities.Planes.Plane", null)
+                        .WithMany("Flights")
+                        .HasForeignKey("PlaneId1");
+
+                    b.OwnsOne("JornadaMilhas.Core.ValueObjects.Locales.Locale", "Destiny", b1 =>
                         {
-                            b1.Property<long>("UserId")
+                            b1.Property<long>("FlightId")
                                 .HasColumnType("bigint");
 
-                            b1.Property<string>("Address")
+                            b1.Property<string>("City")
                                 .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("nvarchar(100)");
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
 
-                            b1.HasKey("UserId");
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
 
-                            b1.HasIndex("Address")
-                                .IsUnique();
+                            b1.Property<string>("Latitude")
+                                .IsRequired()
+                                .HasMaxLength(30)
+                                .HasColumnType("nvarchar(30)");
 
-                            b1.ToTable("Users");
+                            b1.Property<string>("Longitude")
+                                .IsRequired()
+                                .HasMaxLength(30)
+                                .HasColumnType("nvarchar(30)");
+
+                            b1.HasKey("FlightId");
+
+                            b1.ToTable("Flights");
 
                             b1.WithOwner()
-                                .HasForeignKey("UserId");
+                                .HasForeignKey("FlightId");
                         });
 
-                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "Email", b1 =>
+                    b.OwnsOne("JornadaMilhas.Core.ValueObjects.Locales.Locale", "Source", b1 =>
                         {
-                            b1.Property<long>("UserId")
+                            b1.Property<long>("FlightId")
                                 .HasColumnType("bigint");
 
-                            b1.Property<string>("Address")
+                            b1.Property<string>("City")
                                 .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("nvarchar(100)");
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
 
-                            b1.HasKey("UserId");
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
 
-                            b1.HasIndex("Address")
-                                .IsUnique();
+                            b1.Property<string>("Latitude")
+                                .IsRequired()
+                                .HasMaxLength(30)
+                                .HasColumnType("nvarchar(30)");
 
-                            b1.ToTable("Users");
+                            b1.Property<string>("Longitude")
+                                .IsRequired()
+                                .HasMaxLength(30)
+                                .HasColumnType("nvarchar(30)");
+
+                            b1.HasKey("FlightId");
+
+                            b1.ToTable("Flights");
 
                             b1.WithOwner()
-                                .HasForeignKey("UserId");
+                                .HasForeignKey("FlightId");
                         });
+
+                    b.Navigation("Destiny")
+                        .IsRequired();
+
+                    b.Navigation("Plane");
+
+                    b.Navigation("Source")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Orders.Order", b =>
+                {
+                    b.HasOne("JornadaMilhas.Core.Entities.Customers.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Passages.Passage", b =>
+                {
+                    b.HasOne("JornadaMilhas.Core.Entities.Flights.Flight", "Flight")
+                        .WithMany("Passages")
+                        .HasForeignKey("FlightId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JornadaMilhas.Core.Entities.Orders.Order", null)
+                        .WithMany("Passages")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flight");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Picture", b =>
+                {
+                    b.HasOne("JornadaMilhas.Core.Entities.Flights.Flight", "Flight")
+                        .WithMany("Pictures")
+                        .HasForeignKey("FlightId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flight");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Planes.Plane", b =>
+                {
+                    b.HasOne("JornadaMilhas.Core.Entities.Classes.BusinessClass", "BusinessClass")
+                        .WithOne()
+                        .HasForeignKey("JornadaMilhas.Core.Entities.Planes.Plane", "BusinessClassId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("JornadaMilhas.Core.Entities.Companies.Company", "Company")
+                        .WithMany("Planes")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JornadaMilhas.Core.Entities.Classes.EconomicClass", "EconomicClass")
+                        .WithOne()
+                        .HasForeignKey("JornadaMilhas.Core.Entities.Planes.Plane", "EconomicClassId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BusinessClass");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("EconomicClass");
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Admins.Admin", b =>
+                {
+                    b.HasOne("JornadaMilhas.Core.Entities.Companies.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JornadaMilhas.Core.Entities.Companies.Company", null)
+                        .WithMany("Admins")
+                        .HasForeignKey("CompanyId1");
+
+                    b.HasOne("JornadaMilhas.Common.Entity.Users.User", null)
+                        .WithOne()
+                        .HasForeignKey("JornadaMilhas.Core.Entities.Admins.Admin", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
 
                     b.OwnsOne("JornadaMilhas.Common.ValueObjects.Address", "Address", b1 =>
                         {
-                            b1.Property<long>("UserId")
+                            b1.Property<long>("AdminId")
                                 .HasColumnType("bigint");
-
-                            b1.Property<string>("Adress")
-                                .HasMaxLength(150)
-                                .HasColumnType("nvarchar(150)");
 
                             b1.Property<string>("Cep")
                                 .HasMaxLength(8)
@@ -336,17 +711,43 @@ namespace JornadaMilhas.Infrastruture.Migrations
                                 .HasMaxLength(2)
                                 .HasColumnType("nvarchar(2)");
 
-                            b1.HasKey("UserId");
+                            b1.Property<string>("Street")
+                                .HasMaxLength(150)
+                                .HasColumnType("nvarchar(150)");
 
-                            b1.ToTable("Users");
+                            b1.HasKey("AdminId");
+
+                            b1.ToTable("Admin");
 
                             b1.WithOwner()
-                                .HasForeignKey("UserId");
+                                .HasForeignKey("AdminId");
+                        });
+
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "ConfirmEmail", b1 =>
+                        {
+                            b1.Property<long>("AdminId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Address")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
+                            b1.HasKey("AdminId");
+
+                            b1.HasIndex("Address")
+                                .IsUnique()
+                                .HasFilter("[ConfirmEmail_Address] IS NOT NULL");
+
+                            b1.ToTable("Admin");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AdminId");
                         });
 
                     b.OwnsOne("JornadaMilhas.Common.ValueObjects.Cpf", "Cpf", b1 =>
                         {
-                            b1.Property<long>("UserId")
+                            b1.Property<long>("AdminId")
                                 .HasColumnType("bigint");
 
                             b1.Property<string>("Number")
@@ -354,36 +755,59 @@ namespace JornadaMilhas.Infrastruture.Migrations
                                 .HasMaxLength(11)
                                 .HasColumnType("nvarchar(11)");
 
-                            b1.HasKey("UserId");
+                            b1.HasKey("AdminId");
 
                             b1.HasIndex("Number")
-                                .IsUnique();
+                                .IsUnique()
+                                .HasFilter("[Cpf_Number] IS NOT NULL");
 
-                            b1.ToTable("Users");
+                            b1.ToTable("Admin");
 
                             b1.WithOwner()
-                                .HasForeignKey("UserId");
+                                .HasForeignKey("AdminId");
                         });
 
                     b.OwnsOne("JornadaMilhas.Common.ValueObjects.DateOfBirth", "DtBirth", b1 =>
                         {
-                            b1.Property<long>("UserId")
+                            b1.Property<long>("AdminId")
                                 .HasColumnType("bigint");
 
                             b1.Property<DateTime>("Date")
                                 .HasColumnType("datetime2");
 
-                            b1.HasKey("UserId");
+                            b1.HasKey("AdminId");
 
-                            b1.ToTable("Users");
+                            b1.ToTable("Admin");
 
                             b1.WithOwner()
-                                .HasForeignKey("UserId");
+                                .HasForeignKey("AdminId");
+                        });
+
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "Email", b1 =>
+                        {
+                            b1.Property<long>("AdminId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Address")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
+                            b1.HasKey("AdminId");
+
+                            b1.HasIndex("Address")
+                                .IsUnique()
+                                .HasFilter("[Email_Address] IS NOT NULL");
+
+                            b1.ToTable("Admin");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AdminId");
                         });
 
                     b.OwnsOne("JornadaMilhas.Common.ValueObjects.Phone", "Phone", b1 =>
                         {
-                            b1.Property<long>("UserId")
+                            b1.Property<long>("AdminId")
                                 .HasColumnType("bigint");
 
                             b1.Property<string>("Number")
@@ -391,12 +815,176 @@ namespace JornadaMilhas.Infrastruture.Migrations
                                 .HasMaxLength(11)
                                 .HasColumnType("nvarchar(11)");
 
-                            b1.HasKey("UserId");
+                            b1.HasKey("AdminId");
 
-                            b1.ToTable("Users");
+                            b1.ToTable("Admin");
 
                             b1.WithOwner()
-                                .HasForeignKey("UserId");
+                                .HasForeignKey("AdminId");
+                        });
+
+                    b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("ConfirmEmail")
+                        .IsRequired();
+
+                    b.Navigation("Cpf")
+                        .IsRequired();
+
+                    b.Navigation("DtBirth")
+                        .IsRequired();
+
+                    b.Navigation("Email")
+                        .IsRequired();
+
+                    b.Navigation("Phone")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Customers.Customer", b =>
+                {
+                    b.HasOne("JornadaMilhas.Common.Entity.Users.User", null)
+                        .WithOne()
+                        .HasForeignKey("JornadaMilhas.Core.Entities.Customers.Customer", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Address", "Address", b1 =>
+                        {
+                            b1.Property<long>("CustomerId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Cep")
+                                .HasMaxLength(8)
+                                .HasColumnType("nvarchar(8)");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
+
+                            b1.Property<string>("District")
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
+
+                            b1.Property<string>("State")
+                                .IsRequired()
+                                .HasMaxLength(2)
+                                .HasColumnType("nvarchar(2)");
+
+                            b1.Property<string>("Street")
+                                .HasMaxLength(150)
+                                .HasColumnType("nvarchar(150)");
+
+                            b1.HasKey("CustomerId");
+
+                            b1.ToTable("Customer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
+                        });
+
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "ConfirmEmail", b1 =>
+                        {
+                            b1.Property<long>("CustomerId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Address")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
+                            b1.HasKey("CustomerId");
+
+                            b1.HasIndex("Address")
+                                .IsUnique()
+                                .HasFilter("[ConfirmEmail_Address] IS NOT NULL");
+
+                            b1.ToTable("Customer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
+                        });
+
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Cpf", "Cpf", b1 =>
+                        {
+                            b1.Property<long>("CustomerId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasMaxLength(11)
+                                .HasColumnType("nvarchar(11)");
+
+                            b1.HasKey("CustomerId");
+
+                            b1.HasIndex("Number")
+                                .IsUnique()
+                                .HasFilter("[Cpf_Number] IS NOT NULL");
+
+                            b1.ToTable("Customer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
+                        });
+
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.DateOfBirth", "DtBirth", b1 =>
+                        {
+                            b1.Property<long>("CustomerId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<DateTime>("Date")
+                                .HasColumnType("datetime2");
+
+                            b1.HasKey("CustomerId");
+
+                            b1.ToTable("Customer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
+                        });
+
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Email", "Email", b1 =>
+                        {
+                            b1.Property<long>("CustomerId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Address")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
+                            b1.HasKey("CustomerId");
+
+                            b1.HasIndex("Address")
+                                .IsUnique()
+                                .HasFilter("[Email_Address] IS NOT NULL");
+
+                            b1.ToTable("Customer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
+                        });
+
+                    b.OwnsOne("JornadaMilhas.Common.ValueObjects.Phone", "Phone", b1 =>
+                        {
+                            b1.Property<long>("CustomerId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasMaxLength(11)
+                                .HasColumnType("nvarchar(11)");
+
+                            b1.HasKey("CustomerId");
+
+                            b1.ToTable("Customer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
                         });
 
                     b.Navigation("Address")
@@ -418,54 +1006,35 @@ namespace JornadaMilhas.Infrastruture.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Depoiments.Depoiment", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Companies.Company", b =>
                 {
-                    b.HasOne("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", "User")
-                        .WithMany("Depoimentos")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Admins");
 
-                    b.Navigation("User");
+                    b.Navigation("Planes");
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.ImagemDestino", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Flights.Flight", b =>
                 {
-                    b.HasOne("JornadaMilhas.Core.Entities.Destinys.Destiny", "Destino")
-                        .WithMany("Imagens")
-                        .HasForeignKey("DestinoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Passages");
 
-                    b.Navigation("Destino");
+                    b.Navigation("Pictures");
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Users.UserAdmin.UserAdmin", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Orders.Order", b =>
                 {
-                    b.HasOne("JornadaMilhas.Common.Entities.User", null)
-                        .WithOne()
-                        .HasForeignKey("JornadaMilhas.Core.Entities.Users.UserAdmin.UserAdmin", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                    b.Navigation("Passages");
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Planes.Plane", b =>
                 {
-                    b.HasOne("JornadaMilhas.Common.Entities.User", null)
-                        .WithOne()
-                        .HasForeignKey("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                    b.Navigation("Flights");
                 });
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Destinys.Destiny", b =>
+            modelBuilder.Entity("JornadaMilhas.Core.Entities.Customers.Customer", b =>
                 {
-                    b.Navigation("Imagens");
-                });
+                    b.Navigation("Depoiments");
 
-            modelBuilder.Entity("JornadaMilhas.Core.Entities.Users.UserLimited.UserLimited", b =>
-                {
-                    b.Navigation("Depoimentos");
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

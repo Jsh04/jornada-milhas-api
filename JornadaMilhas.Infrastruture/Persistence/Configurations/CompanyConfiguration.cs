@@ -21,8 +21,8 @@ public class CompanyConfiguration : BaseEntityConfiguration<Company>
             .HasForeignKey(p => p.CompanyId);
 
         builder.HasMany<Admin>()
-            .WithOne(a => a.Company)
-            .HasForeignKey(a => a.CompanyId);
+            .WithOne(c => c.Company)
+            .HasForeignKey(c => c.CompanyId);
 
 
         builder.Property(c => c.DtFoundation)

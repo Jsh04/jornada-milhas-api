@@ -60,6 +60,10 @@ public class Flight : BaseEntity
         if (!@class.SeatAvailable(1))
             return Result.Fail(FlightErrors.FlightAlreadyFull);
 
+        @class.OccupedSeat(1);
+        
+        passage.SetValuePassage(@class.CalculatePrice(1));
+        
         _passages.Add(passage);
 
         return Result.Ok();
@@ -69,14 +73,7 @@ public class Flight : BaseEntity
     {
         IsCanceled = true;
     }
-
-    public decimal GetTotalValue()
-    {
-        //TODO
-
-        return 0;
-    }
-
+    
     public void AddImagesLocaleDestiny(ICollection<Picture> pictures)
     {
         if (!pictures.Any())

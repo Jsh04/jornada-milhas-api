@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using JornadaMilhas.Core.Entities.Classes;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Entities.Planes;
 using JornadaMilhas.Core.ValueObjects.Locales;
@@ -27,15 +28,17 @@ public static class FlightSeed
     {
         return () =>
         {
-            var flight = FlightBuilder.Create()
-                .AddDestiny(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<string>(),
-                    fixture.Create<string>())
+            var flight = FlightBuilder
+                .Create()
+                .AddDestiny(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<string>(), fixture.Create<string>())
                 .AddDepartureDate(fixture.Create<DateTime>())
                 .AddFlightCode(Guid.NewGuid().ToString())
-                .AddPlane(PlaneBuilder.Create().Build().Value)
+                .AddPlane(PlaneSeed.GetPlaneTest(fixture))
                 .Build();
 
             return flight.Value;
         };
     }
+    
+    
 }

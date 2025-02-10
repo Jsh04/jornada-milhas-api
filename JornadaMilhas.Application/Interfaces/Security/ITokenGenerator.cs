@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace JornadaMilhas.Infrastruture.Security;
+namespace JornadaMilhas.Application.Interfaces.Security;
 
 public interface ITokenGenerator
 {

@@ -21,13 +21,23 @@ namespace JornadaMilhas.Core.Entities.Planes
 
         public int TotalSeats { get; private set; }
 
+        public int CompanyId { get; private set; }
+
         public EconomicClass  EconomicClass { get; private set; }
+
+        public BusinessClass BusinessClass { get; private set; }
 
         public static PlaneBuilder Create() => new();
         
         public PlaneBuilder WithEconomicClass(EconomicClass economicClass)
         {
             EconomicClass = economicClass;
+            return this;
+        }
+        
+        public PlaneBuilder WithBusinessClass(BusinessClass businessClass)
+        {
+            BusinessClass = businessClass;
             return this;
         }
 

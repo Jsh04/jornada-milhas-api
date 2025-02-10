@@ -3,6 +3,7 @@ using JornadaMilhas.Application.Commands.FlightCommands.DeleteFlight;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhasTest.UnitsTests.Builders;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Builders.Repositories;
+using JornadaMilhasTest.UnitsTests.Seeds;
 
 namespace JornadaMilhasTest.UnitsTests.Application.CommandsTests.FlightCommandTests;
 
@@ -20,7 +21,9 @@ public class DeleteFlightCommandTest
     public async Task DeveraRetornarSucessoPassandoOIdCorretoQuandoDeletarDestino()
     {
         var unitOfWorkMockObject = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
-        var destinyRepositoryMockObject = FlightRepositoryMockBuilder.Create(_fixture).AddGetDestinyById(1).Build();
+        
+        var flight = FlightSeed.GetFlightTest(_fixture);
+        var destinyRepositoryMockObject = FlightRepositoryMockBuilder.Create(_fixture).AddGetFlightById(flight).Build();
 
         var deleteDestinyCommandHandler =
             new DeleteFlightCommandHandler(unitOfWorkMockObject.Object, destinyRepositoryMockObject.Object);
@@ -40,7 +43,7 @@ public class DeleteFlightCommandTest
     public async Task DeveraRetornarFalhaPassandoOIdErroQuandoDeletarDestino()
     {
         var unitOfWorkMockObject = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
-        var destinyRepositoryMockObject = FlightRepositoryMockBuilder.Create(_fixture).AddGetDestinyById(1).Build();
+        var destinyRepositoryMockObject = FlightRepositoryMockBuilder.Create(_fixture).AddGetFlightById(null).Build();
 
         var deleteDestinyCommandHandler =
             new DeleteFlightCommandHandler(unitOfWorkMockObject.Object, destinyRepositoryMockObject.Object);

@@ -1,6 +1,6 @@
-﻿using JornadaMilhas.Common.EventHandler;
+﻿using JornadaMilhas.Application.Interfaces.MessageBus;
+using JornadaMilhas.Common.EventHandler;
 using JornadaMilhas.Core.Events;
-using JornadaMilhas.Infrastruture.MessageBus;
 
 namespace JornadaMilhas.Application.EventHandlers;
 

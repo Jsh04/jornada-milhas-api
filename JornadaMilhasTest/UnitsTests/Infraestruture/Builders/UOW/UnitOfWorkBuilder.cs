@@ -1,4 +1,4 @@
-﻿using JornadaMilhas.Infrastruture.Persistence.UOW;
+﻿using JornadaMilhas.Application.Interfaces.UOW;
 using Moq;
 
 namespace JornadaMilhasTest.UnitsTests.Builders;
