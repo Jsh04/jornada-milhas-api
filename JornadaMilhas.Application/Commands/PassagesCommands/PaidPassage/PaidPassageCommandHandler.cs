@@ -64,7 +64,7 @@ public class PaidPassageCommandHandler : IRequestHandler<PaidPassageCommand, Res
 
         var orderDto = new CreateOrderDto(passagesCreatedList.Select(MappingPassageEntityToDto), order.TotalValue, DateTime.Now);
         
-        return Result.Ok<CreateOrderDto>(orderDto);
+        return Result.Ok(orderDto);
     }
 
     private async Task<Result<List<Passage>>> CreateOrderByPassagesFromRequest(PaidPassageCommand request, Customer customer, CancellationToken cancellationToken = default)

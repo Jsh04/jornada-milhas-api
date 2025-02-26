@@ -33,7 +33,6 @@ public sealed class RegisterDepoimentCommandHandler : IRequestHandler<RegisterDe
             .Create()
             .WithName(request.Name)
             .WithDepoimentDescription(request.DepoimentDescription)
-            .WithPicture(request.Picture)
             .WithUserId(request.UserId)
             .Build();
 

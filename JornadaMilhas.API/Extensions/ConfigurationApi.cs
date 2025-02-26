@@ -12,7 +12,6 @@ public static class ConfigurationApi
         builder.Services.AddMemoryCache();
         builder.Services.GetServicesInjectionsOfInfrastructure(builder.Configuration);
         builder.Services.GetServicesInjectiosOfApplication();
-
         builder.Services.AddTransient<GlobalExceptionHandler>();
 
         builder.Services.AddControllers().AddJsonOptions(x =>

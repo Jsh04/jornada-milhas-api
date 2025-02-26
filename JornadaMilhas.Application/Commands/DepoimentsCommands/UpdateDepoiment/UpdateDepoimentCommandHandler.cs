@@ -28,7 +28,6 @@ public sealed class UpdateDepoimentCommandHandler : IRequestHandler<UpdateDepoim
         var depoimentResult = DepoimentBuilder.Create()
             .WithName(request.Name)
             .WithDepoimentDescription(request.DepoimentDescription)
-            .WithPicture(request.Picture)
             .WithUserId(request.UserId)
             .Build();
 

@@ -19,8 +19,7 @@ public class DtoExtensionTest
     public void DeveraCriarObjetoDtoApartirDeUmObjetoDepoimento()
     {
         //arrange
-        var depoimentTest = Depoiment.Create(fixture.Create<string>(), fixture.Create<string>(),
-            fixture.Create<byte[]>(), fixture.Create<long>()).ValueOrDefault;
+        var depoimentTest = Depoiment.Create(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<long>()).ValueOrDefault;
 
         //act
         var depoimentDto = DtoExtensions<Depoiment, DepoimentDto>.ToDto(depoimentTest);

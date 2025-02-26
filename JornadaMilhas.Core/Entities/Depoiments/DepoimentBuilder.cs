@@ -8,7 +8,6 @@ public class DepoimentBuilder : Builder<Depoiment, DepoimentBuilder>
 {
     private string _depoimentDescription;
     private string _name;
-    private byte[] _picture;
     private long _userId;
 
 
@@ -31,28 +30,13 @@ public class DepoimentBuilder : Builder<Depoiment, DepoimentBuilder>
         _userId = userId;
         return this;
     }
-
-    public DepoimentBuilder WithPicture(string picture)
-    {
-        try
-        {
-            _picture = JornadaMilhasHelper.ConvertBase64ToByteArray(picture);
-        }
-        catch (Exception)
-        {
-            _errors.Add(DepoimentErrors.CannotConvertStringInByteArray);
-        }
-
-        return this;
-    }
-
-
+    
     public override Result<Depoiment> Build()
     {
         if (_errors.Count > 0)
             return Result.Fail<Depoiment>(_errors);
 
-        var depoimentResult = Depoiment.Create(_name, _depoimentDescription, _picture, _userId);
+        var depoimentResult = Depoiment.Create(_name, _depoimentDescription,_userId);
 
         return depoimentResult;
     }

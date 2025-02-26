@@ -36,7 +36,7 @@ public class Passage : BaseEntity
     {
     }
 
-    public void SetValuePassage(decimal value)
+    public void SetPricePassage(decimal value)
     {
         Value = value;
     }

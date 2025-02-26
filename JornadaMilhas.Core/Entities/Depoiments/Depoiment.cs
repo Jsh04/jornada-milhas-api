@@ -10,20 +10,21 @@ public class Depoiment : BaseEntity
 {
     public string Name { get; private set; }
     public string DepoimentDescription { get; private set; }
-    public byte[] Picture { get; private set; }
 
+    
+    
     public virtual Customer Customer { get; }
     public long CustomerId { get; private set; }
     
-    public static Result<Depoiment> Create(string name, string depoimentDescription, byte[] picture, long userId)
+    public static Result<Depoiment> Create(string name, string depoimentDescription, long userId)
     {
         var depoiment = new Depoiment
         {
             Name = name,
             DepoimentDescription = depoimentDescription,
-            Picture = picture,
             CustomerId = userId
         };
+        
         return Result<Depoiment>.Ok(depoiment);
     }
 
@@ -31,6 +32,5 @@ public class Depoiment : BaseEntity
     {
         Name = depoiment.Name;
         DepoimentDescription = depoiment.DepoimentDescription;
-        Picture = depoiment.Picture;
     }
 }

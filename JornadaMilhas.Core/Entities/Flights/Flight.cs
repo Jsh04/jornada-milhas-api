@@ -1,5 +1,6 @@
 ﻿using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Results;
+using JornadaMilhas.Core.Entities.Classes;
 using JornadaMilhas.Core.Entities.Passages;
 using JornadaMilhas.Core.ValueObjects.Locales;
 using Plane = JornadaMilhas.Core.Entities.Planes.Plane;
@@ -52,17 +53,19 @@ public class Flight : BaseEntity
     
     public Result BuyPassageInFlight(Passage passage)
     {
-        if (Plane is null)
-            return Result.Fail(FlightErrors.PlaneNotDefined);
-
+        if (IsCanceled)
+            return Result.Fail(FlightErrors.FlightIsCancelled);
+        
         var @class = Plane.GetTypeClass(passage.EnumTypeClass);
 
         if (!@class.SeatAvailable(1))
             return Result.Fail(FlightErrors.FlightAlreadyFull);
 
         @class.OccupedSeat(1);
+
+        var priceTotalPassage = @class.CalculatePrice(1) + BasePrice;
         
-        passage.SetValuePassage(@class.CalculatePrice(1));
+        passage.SetPricePassage(priceTotalPassage);
         
         _passages.Add(passage);
 
