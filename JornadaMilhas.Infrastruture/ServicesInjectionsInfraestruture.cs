@@ -17,9 +17,11 @@ using JornadaMilhas.Infrastruture.Persistence.UOW;
 using JornadaMilhas.Infrastruture.Security;
 using JornadaMilhas.Infrastruture.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
 namespace JornadaMilhas.Infrastruture;
@@ -27,7 +29,7 @@ namespace JornadaMilhas.Infrastruture;
 public static class ServicesInjectionsInfraestruture
 {
     public static IServiceCollection GetServicesInjectionsOfInfrastructure(this IServiceCollection services,
-        IConfiguration configuration)
+        IConfiguration configuration, IWebHostEnvironment environment)
     {
         return services.AddServiceDbContext(configuration)
             .AddInjectionRepositories()
@@ -35,7 +37,7 @@ public static class ServicesInjectionsInfraestruture
             .AddInjectionBackgroundJobs()
             .AddInjectionServices()
             .AddInjectionGateways()
-            .AddServicesTokenReader(configuration);
+            .AddServicesTokenReader(configuration, environment);
     }
 
     private static IServiceCollection AddOptionsConfigure(this IServiceCollection services,
@@ -78,27 +80,38 @@ public static class ServicesInjectionsInfraestruture
     }
 
     private static IServiceCollection AddServicesTokenReader(this IServiceCollection services,
-        IConfiguration configuration)
+        IConfiguration configuration, IWebHostEnvironment environment)
     {
         var secretKey = configuration["SymmetricSecurityKey"];
-        services.AddAuthentication(x =>
+        var key = Encoding.ASCII.GetBytes(secretKey);
+
+        services.AddAuthentication(options =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(x =>
+            .AddJwtBearer(options =>
             {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
+                options.RequireHttpsMetadata = !environment.IsDevelopment();
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+
+                    ValidateIssuer = true,
+                    ValidIssuer = configuration["Jwt:Issuer"],
+
+                    ValidateAudience = true,
+                    ValidAudience = configuration["Jwt:Audience"],
+
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,
+
+                    RequireExpirationTime = true,
+                    ValidAlgorithms = new[] { SecurityAlgorithms.HmacSha256Signature }
                 };
             });
-
         return services;
     }
 

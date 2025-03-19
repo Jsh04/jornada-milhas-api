@@ -4,6 +4,7 @@ using JornadaMilhas.Core.Entities.Planes;
 using JornadaMilhas.Core.ValueObjects;
 using JornadaMilhas.Core.ValueObjects.Locales;
 using System.Diagnostics.Metrics;
+using JornadaMilhas.Core.Entities.Destinies;
 
 namespace JornadaMilhas.Core.Entities.Flights;
 
@@ -15,9 +16,7 @@ public class FlightBuilder : Builder<Flight, FlightBuilder>
     
     public string FlightCode  { get; private set; }
 
-    public Locale Destiny  { get; private set; }
-
-    public string Description { get; private set; }
+    public Destination Destiny  { get; private set; }
 
     public Locale Source  { get; private set; }
     
@@ -28,13 +27,10 @@ public class FlightBuilder : Builder<Flight, FlightBuilder>
     
     public static FlightBuilder Create() => new();
 
-    public FlightBuilder AddDestiny(string country, string city, string latitude, string longitude)
+    public FlightBuilder AddDestiny(Destination destiny)
     {
-        var destiny = CreateLocale(country, city, latitude, longitude);
-
-        if (destiny is not null)
-            Destiny = destiny;
-
+        Destiny = destiny;
+        
         return this;
     }
 
@@ -65,13 +61,8 @@ public class FlightBuilder : Builder<Flight, FlightBuilder>
         DepartureDate = departureDate;
         return this;
     }
-
-    public FlightBuilder AddDescription(string description)
-    {
-        Description = description;
-        return this;
-    }
-
+    
+    
     public FlightBuilder AddLandingDate(DateTime landingDate)
     {
         LandingDate = landingDate;

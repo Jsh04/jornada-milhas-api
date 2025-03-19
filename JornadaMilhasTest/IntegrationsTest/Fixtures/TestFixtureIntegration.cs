@@ -17,7 +17,7 @@ public class TestFixtureIntegration
         client = new WebApplicationFactoryJornada<Program>().CreateClient();
     }
 
-    public static JornadaMilhasDbContext CreateContext()
+    private static JornadaMilhasDbContext CreateContext()
     {
         return new JornadaMilhasDbContext(new DbContextOptionsBuilder<JornadaMilhasDbContext>()
             .UseSqlServer(TestHelper.ConnectionString)

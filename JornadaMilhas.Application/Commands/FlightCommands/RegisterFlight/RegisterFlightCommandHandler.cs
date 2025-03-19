@@ -18,19 +18,18 @@ public class RegisterFlightCommandHandler : IRequestHandler<RegisterFlightComman
 {
     private readonly IFlightRepository _repositoryFlight;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IUploadService _uploadService;
     private readonly IPlaneRepository _planeRepository;
+    private readonly IDestinationRepository _destinationRepository;
 
     public RegisterFlightCommandHandler(
         IUnitOfWork unitOfWork, 
-        IFlightRepository repositoryDestino,
-        IUploadService uploadService,
-        IPlaneRepository planeRepository )
+        IFlightRepository repositoryFlight,
+        IPlaneRepository planeRepository, IDestinationRepository destinationRepository)
     {
         _unitOfWork = unitOfWork;
-        _repositoryFlight = repositoryDestino;
-        _uploadService = uploadService;
+        _repositoryFlight = repositoryFlight;
         _planeRepository = planeRepository;
+        _destinationRepository = destinationRepository;
     }
 
     public async Task<Result<Flight>> Handle(RegisterFlightCommand request, CancellationToken cancellationToken)
@@ -40,6 +39,11 @@ public class RegisterFlightCommandHandler : IRequestHandler<RegisterFlightComman
         if (plane is null)
             return Result.Fail<Flight>(PlaneErrors.PlaneNotFound);
         
+        var destination = await _destinationRepository.GetByIdAsync(request.DestinationId, cancellationToken);
+
+        if (destination is null)
+            return Result.Fail<Flight>(PlaneErrors.PlaneNotFound);
+        
         await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
         var flightResult =
@@ -47,7 +51,7 @@ public class RegisterFlightCommandHandler : IRequestHandler<RegisterFlightComman
                 .AddPlane(plane)
                 .AddLandingDate(request.LandingDate)
                 .AddDepartureDate(request.DepartureDate)
-                .AddDestiny(request.Destiny.Country, request.Destiny.City, request.Destiny.Latitude, request.Destiny.Longitude)
+                .AddDestiny(destination)
                 .AddFlightCode(Guid.NewGuid().ToString())
                 .Build();
 
@@ -55,18 +59,7 @@ public class RegisterFlightCommandHandler : IRequestHandler<RegisterFlightComman
             return Result.Fail<Flight>(flightResult.Errors);
 
         var flight = flightResult.Value;
-
-        var resultListFilesDto = GetFilesConverted(request.Images, flight.FlightCode);
-
-        if (!resultListFilesDto.Success)
-            return Result.Fail<Flight>(resultListFilesDto.Errors);
-
-        var pictures = resultListFilesDto.Value.Select(fileDto => Picture.Create(fileDto.Path));
-
-        await UploadFilesToCloud(resultListFilesDto.Value);
-
-        flight.AddImagesLocaleDestiny(pictures.ToList());
-
+        
         await _repositoryFlight.CreateAsync(flight);
 
         var created = await _unitOfWork.CompleteAsync(cancellationToken) > 0;
@@ -75,48 +68,5 @@ public class RegisterFlightCommandHandler : IRequestHandler<RegisterFlightComman
 
         return !created ? Result.Fail<Flight>(FlightErrors.CannotBeCreated) : Result.Ok(flight);
     }
-
-    private async Task UploadFilesToCloud(List<FileDto> listFilesDto)
-    {
-        var listTasks = listFilesDto
-            .Select(fileDto => _uploadService.UploadAsync(fileDto.ByteArray, fileDto.Path))
-            .Cast<Task>()
-            .ToList();
-
-        await Task.WhenAll(listTasks);
-    }
-
-    private static Result<List<FileDto>> GetFilesConverted(List<string> picturesBase64, string flightCode)
-    {
-        var listFileDtos = new List<FileDto>();
-
-        foreach (var picture in picturesBase64)
-        {
-            var resultByteArray = GetByteArrayFromBase64(picture);
-
-            if (!resultByteArray.Success)
-                return Result.Fail<List<FileDto>>(resultByteArray.Errors);
-
-            var extension = picture.Split("/")[1].Split(";")[0];
-
-            var path = FileHelper.GetPathFileSaveInCloud(flightCode, extension);
-
-            listFileDtos.Add(new FileDto(resultByteArray.Value, path));
-        }
-
-        return Result.Ok(listFileDtos);
-    }
-
-    private static Result<byte[]> GetByteArrayFromBase64(string base64)
-    {
-        try
-        {
-            return Result.Ok(Convert.FromBase64String(base64));
-        }
-        catch (Exception e)
-        {
-            return Result.Fail<byte[]>(new Error("RegisterDestinyCommandHandler.GetByteArrayFromBase64", e.Message,
-                ErrorType.Failure));
-        }
-    }
+    
 }

@@ -1,4 +1,5 @@
 ﻿using JornadaMilhas.Common.Entity;
+using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.ValueObjects.Locales;
 
@@ -13,9 +14,9 @@ public class Picture : BaseEntity
 
     public string PathS3 { get; init; }
 
-    public long FlightId { get; init; }
+    public long DestinationId { get; init; }
 
-    public Flight Flight { get; }
+    public Destination Destination { get; private set; }
 
     public static Picture Create(string pathS3)
     {

@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using JornadaMilhas.Core.Entities.Classes;
+using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Entities.Planes;
 using JornadaMilhas.Core.ValueObjects.Locales;
@@ -8,32 +9,16 @@ namespace JornadaMilhasTest.UnitsTests.Seeds;
 
 public static class FlightSeed
 {
-    public static Flight GetFlightTest(Fixture fixture)
-    {
-        return fixture.Build<Flight>()
-            .FromFactory(CustomizeCreateFlight(fixture))
-            .OmitAutoProperties()
-            .Create();
-    }
-
-    public static IEnumerable<Flight> GetDestiniesByNumberOfObjects(Fixture fixture, int numberOfObjects)
-    {
-        return fixture.Build<Flight>()
-            .FromFactory(CustomizeCreateFlight(fixture))
-            .OmitAutoProperties()
-            .CreateMany(numberOfObjects);
-    }
-
-    private static Func<Flight> CustomizeCreateFlight(Fixture fixture)
+    public static Func<Flight> CustomizeCreateFlight(Fixture fixture, Plane plane = null, Destination destination = null)
     {
         return () =>
         {
             var flight = FlightBuilder
                 .Create()
-                .AddDestiny(fixture.Create<string>(), fixture.Create<string>(), fixture.Create<string>(), fixture.Create<string>())
+                .AddDestiny(destination)
                 .AddDepartureDate(fixture.Create<DateTime>())
                 .AddFlightCode(Guid.NewGuid().ToString())
-                .AddPlane(PlaneSeed.GetPlaneTest(fixture))
+                .AddPlane(plane)
                 .Build();
 
             return flight.Value;

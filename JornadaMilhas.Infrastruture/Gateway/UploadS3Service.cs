@@ -12,6 +12,7 @@ namespace JornadaMilhas.Infrastruture.Gateway;
 public class UploadS3Service : IUploadService
 {
     private readonly string _bucketName;
+    
     private readonly IConfiguration _configuration;
 
     private readonly IAmazonS3 s3Client;

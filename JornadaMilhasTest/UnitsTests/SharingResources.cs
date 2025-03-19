@@ -6,6 +6,7 @@ namespace JornadaMilhasTest.UnitsTests;
 public class SharingResources
 {
     public static Fixture AutoFixture;
+    
 
     [OneTimeSetUp]
     public void InicializeObjects()

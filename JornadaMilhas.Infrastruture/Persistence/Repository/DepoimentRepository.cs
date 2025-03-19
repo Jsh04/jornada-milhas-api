@@ -18,31 +18,31 @@ public class DepoimentRepository : IDepoimentRepository
 
     public async Task CreateAsync(Depoiment obj)
     {
-        await _context.Depoimentos.AddAsync(obj);
+        await _context.Testimonials.AddAsync(obj);
     }
 
     public Task<PaginationResult<Depoiment>> GetAllAsync(int page = 1, int pageSize = 10,
         CancellationToken cancellationToken = default)
     {
-        var depoiments = _context.Depoimentos.AsQueryable().Where(depoiment => !depoiment.IsDeleted);
+        var depoiments = _context.Testimonials.AsQueryable().Where(depoiment => !depoiment.IsDeleted);
 
         return depoiments.ToPaginationResultAsync(page, pageSize, cancellationToken);
     }
 
     public async Task<Depoiment?> GetByIdAsync(long id, CancellationToken cancellation = default)
     {
-        return await _context.Depoimentos
+        return await _context.Testimonials
             .SingleOrDefaultAsync(depoiment => depoiment.Id == id, cancellation);
     }
 
     public bool Update(Depoiment entity)
     {
-        var updated = _context.Depoimentos.Update(entity);
+        var updated = _context.Testimonials.Update(entity);
 
         return updated.State == EntityState.Modified;
     }
 
-    public Task<Depoiment> GetSingleByAsync(Expression<Func<Depoiment, bool>> expression,
+    public Task<Depoiment?> GetSingleByAsync(Expression<Func<Depoiment, bool>> expression,
         CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
@@ -50,6 +50,6 @@ public class DepoimentRepository : IDepoimentRepository
 
     public IQueryable<Depoiment> GetAllBy(Expression<Func<Depoiment, bool>> predicate)
     {
-        return _context.Depoimentos.AsQueryable().Where(predicate);
+        return _context.Testimonials.AsQueryable().Where(predicate);
     }
 }

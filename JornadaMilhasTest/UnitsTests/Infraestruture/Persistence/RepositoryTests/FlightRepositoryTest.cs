@@ -12,7 +12,7 @@ namespace JornadaMilhasTest.UnitsTests.Infraestruture.Persistence.RepositoryTest
 public class FlightRepositoryTest
 {
     private readonly Fixture _fixture;
-
+    
     public FlightRepositoryTest()
     {
         _fixture = SharingResources.AutoFixture;
@@ -27,7 +27,7 @@ public class FlightRepositoryTest
         //arrange
         var contextMock = JornadaMilhasContextMock<Flight>
             .CreateInstance(
-                FlightSeed.GetDestiniesByNumberOfObjects(_fixture, numberObjects).ToList(), x => x.Flights)
+                GenericSeed<Flight>.GetObjectCreatedByNumberObjects(_fixture, FlightSeed.CustomizeCreateFlight(_fixture), numberObjects).ToList(), x => x.Flights)
             .AddDbSet()
             .Build();
         var destinyRespository = new FlightRepository(contextMock.Object);
@@ -51,10 +51,14 @@ public class FlightRepositoryTest
     public async Task Create_DeveraSerChamadoOMetodoCreateUmaVez_QuandoForCadastrar()
     {
         //arrange
-        var destiny = FlightSeed.GetFlightTest(_fixture);
+        var destiny = GenericSeed<Flight>.GetObjectTest(_fixture, FlightSeed.CustomizeCreateFlight(_fixture));
 
         var contextMock = JornadaMilhasContextMock<Flight>.CreateInstance(
-                FlightSeed.GetDestiniesByNumberOfObjects(_fixture, 10).ToList(), x => x.Flights)
+                GenericSeed<Flight>.GetObjectCreatedByNumberObjects(
+                    _fixture, 
+                    FlightSeed.CustomizeCreateFlight(_fixture), 
+                    10).ToList(), 
+                x => x.Flights)
             .AddDbSet()
             .AddDbSetEventAddObject(destiny)
             .Build();

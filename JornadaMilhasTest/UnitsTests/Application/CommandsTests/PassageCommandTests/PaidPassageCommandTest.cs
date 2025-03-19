@@ -74,7 +74,7 @@ public class PaidPassageCommandTest
         var listInputModels = _fixture.CreateMany<PaidPassageInputModel>(10).ToList();
         var command = new PaidPassageCommand(5, listInputModels);
         var customerTest = CustomerSeed.GetCustomerTest(_fixture);
-        var flightTest = FlightSeed.GetFlightTest(_fixture);
+        var flightTest =GenericSeed<Flight>.GetObjectTest(_fixture, FlightSeed.CustomizeCreateFlight(_fixture));
         var handler = CreateHandlerToTest(customerTest, flightTest);
         
         //act

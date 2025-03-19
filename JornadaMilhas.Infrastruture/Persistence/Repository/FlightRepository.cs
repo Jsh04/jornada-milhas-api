@@ -26,7 +26,7 @@ public class FlightRepository : IFlightRepository
         CancellationToken cancellationToken = default)
     {
         var destinies = _context.Flights.AsQueryable()
-            .Where(flight => !flight.IsDeleted).Include(flight => flight.Pictures);
+            .Where(flight => !flight.IsDeleted);
         return destinies.ToPaginationResultAsync(page, pageSize, cancellationToken);
     }
 
@@ -35,14 +35,13 @@ public class FlightRepository : IFlightRepository
         return _context.Flights.AsQueryable().Where(predicate);
     }
 
-    public async Task<Flight> GetByIdAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<Flight?> GetByIdAsync(long id, CancellationToken cancellationToken = default)
     {
         return await _context.Flights
-            .Include(flight => flight.Pictures)
             .SingleOrDefaultAsync(flight => flight.Id == id, cancellationToken);
     }
 
-    public async Task<Flight> GetSingleByAsync(Expression<Func<Flight, bool>> expression,
+    public async Task<Flight?> GetSingleByAsync(Expression<Func<Flight, bool>> expression,
         CancellationToken cancellationToken = default)
     {
         return await _context.Flights.AsQueryable().SingleOrDefaultAsync(expression, cancellationToken);

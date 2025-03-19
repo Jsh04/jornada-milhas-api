@@ -24,7 +24,7 @@ public sealed class RegisterFlightValidator : AbstractValidator<RegisterFlightCo
             .NotEmpty()
             .WithMessage("Local de partida obrigatória");
 
-        RuleFor(x => x.Destiny)
+        RuleFor(x => x.DestinationId)
             .NotNull()
             .NotEmpty()
             .WithMessage("Local de destino obrigatório");
@@ -33,9 +33,5 @@ public sealed class RegisterFlightValidator : AbstractValidator<RegisterFlightCo
             .NotNull()
             .NotEmpty()
             .WithMessage("Date de chegada obrigatória");
-        
-        RuleFor(x => x.Images)
-            .Must(x => x.Count > 0)
-            .WithMessage("Imagens são obrigatórias");
     }
 }

@@ -1,6 +1,7 @@
 ﻿using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Classes;
+using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Entities.Passages;
 using JornadaMilhas.Core.ValueObjects.Locales;
 using Plane = JornadaMilhas.Core.Entities.Planes.Plane;
@@ -9,8 +10,6 @@ namespace JornadaMilhas.Core.Entities.Flights;
 public class Flight : BaseEntity
 {
     private readonly List<Passage> _passages = new();
-
-    private readonly List<Picture> _pictures = new();
     
     public DateTime DepartureDate { get; private set; }
 
@@ -20,9 +19,7 @@ public class Flight : BaseEntity
 
     public string FlightCode { get; private set; }
 
-    public string Description { get; private set; }
-
-    public Locale Destiny { get; private set; }
+    public Destination Destiny { get; private set; }
 
     public Locale Source { get; private set; }
 
@@ -32,9 +29,9 @@ public class Flight : BaseEntity
 
     public long PlaneId { get; private set; }
 
+    public long DestinationId { get; private set; }
+
     public IReadOnlyCollection<Passage> Passages => _passages.AsReadOnly();
-    
-    public IReadOnlyCollection<Picture> Pictures => _pictures.AsReadOnly();
     
     private Flight(FlightBuilder builder)
     {
@@ -44,7 +41,6 @@ public class Flight : BaseEntity
         Destiny = builder.Destiny;
         Source = builder.Source;
         Plane = builder.Plane;
-        Description = builder.Description;
     }
 
     private Flight() { }
@@ -75,13 +71,5 @@ public class Flight : BaseEntity
     public void CancelFlight()
     {
         IsCanceled = true;
-    }
-    
-    public void AddImagesLocaleDestiny(ICollection<Picture> pictures)
-    {
-        if (!pictures.Any())
-            throw new ArgumentException(null, nameof(pictures));
-        
-        _pictures.AddRange(pictures);
     }
 }

@@ -3,10 +3,9 @@ using JornadaMilhas.Common.DTO;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Repositories.Interfaces;
-using JornadaMilhas.Core.ValueObjects.Locales;
 using MediatR;
 
-namespace JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll;
+namespace JornadaMilhas.Application.Querys.FlightsQuerys.FlightGetAll;
 
 public class GetAllFlightsQueryHandler : IRequestHandler<GetAllFlightsQuery, PaginationResult<FlightsDto>>
 {

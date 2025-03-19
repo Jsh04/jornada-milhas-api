@@ -12,7 +12,7 @@ public interface IReadableRepository<TEntity> where TEntity : BaseEntity
 
     Task<TEntity?> GetByIdAsync(long id, CancellationToken cancellation = default);
 
-    Task<TEntity> GetSingleByAsync(Expression<Func<TEntity, bool>> expression,
+    Task<TEntity?> GetSingleByAsync(Expression<Func<TEntity, bool>> expression,
         CancellationToken cancellationToken = default);
 
     IQueryable<TEntity> GetAllBy(Expression<Func<TEntity, bool>> predicate);

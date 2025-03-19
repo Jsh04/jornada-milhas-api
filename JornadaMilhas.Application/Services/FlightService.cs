@@ -1,8 +1,8 @@
 ﻿using JornadaMilhas.Application.Commands.FlightCommands.DeleteFlight;
 using JornadaMilhas.Application.Commands.FlightCommands.RegisterFlight;
 using JornadaMilhas.Application.Interfaces.Services;
-using JornadaMilhas.Application.Querys.DestinysQuerys.DestinyGetAll;
 using JornadaMilhas.Application.Querys.Dtos.DestinysDto;
+using JornadaMilhas.Application.Querys.FlightsQuerys.FlightGetAll;
 using JornadaMilhas.Application.Querys.FlightsQuerys.FlightsGetById;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Results;

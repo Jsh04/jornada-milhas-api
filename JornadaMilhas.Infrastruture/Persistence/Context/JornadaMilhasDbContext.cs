@@ -7,6 +7,7 @@ using JornadaMilhas.Core.Entities.Admins;
 using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhas.Core.Entities.Depoiments;
+using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Entities.Planes;
 using JornadaMilhas.Core.Entities.Users;
@@ -28,8 +29,10 @@ public class JornadaMilhasDbContext : DbContext
     public virtual DbSet<Flight> Flights { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
-    public virtual DbSet<Depoiment> Depoimentos { get; set; }
+    
+    public virtual DbSet<Destination> Destinations { get; set; }
+    
+    public virtual DbSet<Depoiment> Testimonials { get; set; }
 
     public virtual DbSet<Company> Companies { get; set; }
 

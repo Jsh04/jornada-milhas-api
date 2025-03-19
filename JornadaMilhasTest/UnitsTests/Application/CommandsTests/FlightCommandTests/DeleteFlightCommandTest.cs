@@ -22,7 +22,7 @@ public class DeleteFlightCommandTest
     {
         var unitOfWorkMockObject = UnitOfWorkBuilder.CreateBuilder().AddCompleteAsync(1).Build();
         
-        var flight = FlightSeed.GetFlightTest(_fixture);
+        var flight = GenericSeed<Flight>.GetObjectTest(_fixture, FlightSeed.CustomizeCreateFlight(_fixture));
         var destinyRepositoryMockObject = FlightRepositoryMockBuilder.Create(_fixture).AddGetFlightById(flight).Build();
 
         var deleteDestinyCommandHandler =

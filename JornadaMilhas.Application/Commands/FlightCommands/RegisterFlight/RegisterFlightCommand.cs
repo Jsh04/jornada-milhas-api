@@ -6,11 +6,9 @@ using MediatR;
 namespace JornadaMilhas.Application.Commands.FlightCommands.RegisterFlight;
 
 public sealed record RegisterFlightCommand(
-    Locale Destiny,
     Locale Source,
     DateTime DepartureDate,
     DateTime LandingDate,
     long PlaneId,
-    string Description,
-    List<string> Images
+    long DestinationId
 ) : IRequest<Result<Flight>>{}
