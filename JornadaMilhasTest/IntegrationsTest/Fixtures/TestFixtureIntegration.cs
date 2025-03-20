@@ -28,17 +28,17 @@ public class TestFixtureIntegration
     {
         lock (_lock)
         {
-            if (!_databaseInitialized)
-            {
-                using (var context = CreateContext())
-                {
-                    context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
-                    this.context = context;
-                }
+            if (_databaseInitialized) 
+                return;
 
-                _databaseInitialized = true;
-            }
+            using var context = CreateContext();
+            
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+            this.context = context;
+            
+
+            _databaseInitialized = true;
         }
     }
 

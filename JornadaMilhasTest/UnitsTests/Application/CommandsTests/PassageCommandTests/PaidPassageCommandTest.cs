@@ -5,9 +5,11 @@ using JornadaMilhas.Application.Commands.PassagesCommands.InputModels;
 using JornadaMilhas.Application.Commands.PassagesCommands.PaidPassage;
 using JornadaMilhas.Application.Interfaces.UOW;
 using JornadaMilhas.Common.Results.Errors;
+using JornadaMilhas.Core.Entities.Classes;
 using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Entities.Orders;
+using JornadaMilhas.Core.Entities.Planes;
 using JornadaMilhas.Core.Repositories.Interfaces;
 using JornadaMilhasTest.UnitsTests.Builders;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Builders.Repositories;
@@ -71,10 +73,15 @@ public class PaidPassageCommandTest
     public async Task PaidPassageCommandHandler_ShouldBeCreatedOrder_WhenPassedPassageInputModelIsValid()
     {
         //arrange
+        var planeTest = PlaneBuilder.Create()
+            .WithBusinessClass(new BusinessClass(40, 200, 10))
+            .WithEconomicClass(new EconomicClass(40, 200, 10))
+            .Build();
+            
         var listInputModels = _fixture.CreateMany<PaidPassageInputModel>(10).ToList();
         var command = new PaidPassageCommand(5, listInputModels);
         var customerTest = CustomerSeed.GetCustomerTest(_fixture);
-        var flightTest =GenericSeed<Flight>.GetObjectTest(_fixture, FlightSeed.CustomizeCreateFlight(_fixture));
+        var flightTest = GenericSeed<Flight>.GetObjectTest(_fixture, FlightSeed.CustomizeCreateFlight(_fixture, plane: planeTest.Value));
         var handler = CreateHandlerToTest(customerTest, flightTest);
         
         //act

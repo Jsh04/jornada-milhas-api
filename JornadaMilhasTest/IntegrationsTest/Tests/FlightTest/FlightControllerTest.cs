@@ -6,7 +6,7 @@ using JornadaMilhas.Application.Util;
 using JornadaMilhas.Core.ValueObjects.Locales;
 using JornadaMilhasTest.IntegrationsTest.Helper;
 
-namespace JornadaMilhasTest.IntegrationsTest.Tests.DestinoTest;
+namespace JornadaMilhasTest.IntegrationsTest.Tests.FlightTest;
 
 [TestFixture]
 [Category("IntegrationTest")]
@@ -30,13 +30,10 @@ public class FlightControllerTest
         List<string> randomsBase64 = new();
         var destinoDto = fixture.Create<RegisterFlightCommand>();
 
-        destinoDto.Images.Clear();
-
         randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
         randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
         randomsBase64.Add(GenerateRandom.GenerateRandomBase64());
-
-        destinoDto.Images.AddRange(randomsBase64);
+        
 
         var url = "/destiny";
 

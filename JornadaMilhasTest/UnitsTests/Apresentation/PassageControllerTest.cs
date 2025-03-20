@@ -32,7 +32,7 @@ public class PassageControllerTest
             .Returns(Result.Ok(10L));
 
         serviceMock.Setup(x => x.PayPassagesAsync(It.IsAny<long>(), It.IsAny<List<PaidPassageInputModel>>()))
-            .ReturnsAsync(Result.Ok<CreateOrderDto>(null));
+            .ReturnsAsync(Result.Ok(_fixture.Create<CreateOrderDto>()));
         
         var passageController = new PassageController(serviceMock.Object, userServiceMock.Object);
 
@@ -42,8 +42,8 @@ public class PassageControllerTest
         var result = await passageController.PostPayPassages(listPassageInputModel);
         
         //assert
-        result.Should().BeOfType<OkResult>();
-        var okResult = result as OkResult;
+        result.Should().BeOfType<OkObjectResult>();
+        var okResult = result as OkObjectResult;
         okResult?.StatusCode.Should().Be(200);
     }
 }

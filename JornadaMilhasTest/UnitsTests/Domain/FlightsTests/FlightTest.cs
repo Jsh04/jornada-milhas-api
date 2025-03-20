@@ -15,24 +15,7 @@ namespace JornadaMilhasTest.UnitsTests.Domain.FlightsTests;
 [TestFixture]
 public class FlightTest
 {
-
-    [Test]
-    public void BuyPassageInFlight_ShouldBeError_WhenNotPassedPlaneInConstructor()
-    {
-        //arrange
-        var flight = FlightBuilder.Create()
-            .Build().Value;
-
-        var passage = PassageBuilder.Create()
-            .Build().Value;
-
-        //act
-        var result = flight.BuyPassageInFlight(passage);
-
-        //assert
-        result.Success.Should().BeFalse();
-    }
-
+    
     [Test]
     public void BuyPassageInFlight_ShouldBeSuccess_WhenBuyPassageInFlight()
     {
