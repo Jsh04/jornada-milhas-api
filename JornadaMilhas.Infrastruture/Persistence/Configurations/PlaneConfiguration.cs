@@ -17,7 +17,7 @@ namespace JornadaMilhas.Infrastruture.Persistence.Configurations
                 .WithMany(c => c.Planes)
                 .HasForeignKey(p => p.CompanyId);
 
-            builder.HasMany<Flight>()
+            builder.HasMany(p => p.Flights)
                 .WithOne(f => f.Plane)
                 .HasForeignKey(f => f.PlaneId);
 
@@ -37,12 +37,12 @@ namespace JornadaMilhas.Infrastruture.Persistence.Configurations
                 .IsRequired();
             
 
-            builder.HasOne<BusinessClass>()
+            builder.HasOne<BusinessClass>(p => p.BusinessClass)
                 .WithOne(b => b.Plane)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey<BusinessClass>(b => b.PlaneId);
             
-            builder.HasOne<EconomicClass>()
+            builder.HasOne<EconomicClass>(p => p.EconomicClass)
                 .WithOne(b => b.Plane)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey<EconomicClass>(b => b.PlaneId);

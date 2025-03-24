@@ -32,8 +32,8 @@ public class FlightConfiguration : BaseEntityConfiguration<Flight>
             .IsRequired();
 
         });
-
-        builder.HasOne<Plane>()
+        
+        builder.HasOne(f => f.Plane)
             .WithMany(x => x.Flights)
             .OnDelete(DeleteBehavior.Cascade)
             .HasForeignKey(x => x.PlaneId);
@@ -42,7 +42,7 @@ public class FlightConfiguration : BaseEntityConfiguration<Flight>
             .WithOne(p => p.Flight)
             .HasForeignKey(p => p.FlightId);
         
-        builder.HasOne<Destination>()
+        builder.HasOne(f => f.Destination)
             .WithMany(d => d.Flights)
             .OnDelete(DeleteBehavior.Cascade)
             .HasForeignKey(f => f.DestinationId);

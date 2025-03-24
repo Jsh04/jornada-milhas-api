@@ -16,11 +16,11 @@ public class CompanyConfiguration : BaseEntityConfiguration<Company>
             .IsRequired()
             .HasMaxLength(200);
 
-        builder.HasMany<Plane>()
+        builder.HasMany(c => c.Planes)
             .WithOne(p => p.Company)
             .HasForeignKey(p => p.CompanyId);
 
-        builder.HasMany<Admin>()
+        builder.HasMany(c => c.Admins)
             .WithOne(c => c.Company)
             .HasForeignKey(c => c.CompanyId);
 

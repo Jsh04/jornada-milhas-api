@@ -11,7 +11,7 @@ public class PassageConfiguration : BaseEntityConfiguration<Passage>
     {
         base.Configure(builder);
         
-        builder.HasOne<Order>()
+        builder.HasOne<Order>(p => p.Order)
             .WithMany(o => o.Passages)
             .HasForeignKey(passage => passage.OrderId);
 

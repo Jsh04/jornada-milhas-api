@@ -11,8 +11,6 @@ public class ClassConfiguration<TClass> : BaseEntityConfiguration<TClass> where 
     {
         base.Configure(builder);
         
-        base.Configure(builder);
-        
         builder.Property(x => x.ReservedSeats)
             .HasDefaultValue(0)
             .IsRequired();

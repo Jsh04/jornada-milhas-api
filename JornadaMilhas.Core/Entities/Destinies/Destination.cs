@@ -16,6 +16,7 @@ public class Destination : BaseEntity
     private readonly List<Picture> _pictures = new();
     
     public IReadOnlyCollection<Picture> Pictures => _pictures.AsReadOnly();
+    
     public IReadOnlyCollection<Flight> Flights => _flights.AsReadOnly();
 
     private Destination(Locale locale, string title, string subtitle, string description)
@@ -25,6 +26,8 @@ public class Destination : BaseEntity
         Subtitle = subtitle;
         Description = description;
     }
+    
+    private Destination(){}
     
     public static Destination Create(string title, string subtitle, Locale locale, string description) => 
         new Destination(locale, title, subtitle, description);

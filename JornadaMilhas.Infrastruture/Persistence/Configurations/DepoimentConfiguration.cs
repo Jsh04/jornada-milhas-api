@@ -11,7 +11,7 @@ public class DepoimentConfiguration : BaseEntityConfiguration<Depoiment>
     {
         base.Configure(builder);
 
-        builder.HasOne<Customer>()
+        builder.HasOne(d => d.Customer)
             .WithMany(c => c.Depoiments)
             .HasForeignKey(d => d.CustomerId);
 

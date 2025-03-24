@@ -73,7 +73,7 @@ public static class ServicesInjectionsInfraestruture
         IConfiguration configuration)
     {
         services.AddDbContext<JornadaMilhasDbContext>((serviceProvider, opts) =>
-            opts.UseSqlServer(configuration["ConnectionStringSqlServer"])
+            opts.UseSqlServer(configuration["ConnectionStringSqlServer"], options => options.MigrationsAssembly(("JornadaMilhas.Infrastruture")))
                 .AddInterceptors(serviceProvider.GetRequiredService<CustomerAddedInterceptor>()));
 
         return services;
@@ -131,6 +131,7 @@ public static class ServicesInjectionsInfraestruture
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IPlaneRepository, PlaneRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IDestinationRepository, DestinationRepository>();
 
         services.AddScoped<ITokenGenerator, TokenGenerator>();
 

@@ -12,11 +12,11 @@ public class OrderConfiguration : BaseEntityConfiguration<Order>
     {
         base.Configure(builder);
 
-        builder.HasMany<Passage>()
+        builder.HasMany(o => o.Passages)
             .WithOne(passage => passage.Order)
             .HasForeignKey(passage => passage.OrderId);
         
-        builder.Property<decimal>(o => o.TotalValue)
+        builder.Property(o => o.TotalValue)
             .HasPrecision(10, 2)
             .IsRequired();
         

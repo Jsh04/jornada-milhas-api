@@ -19,7 +19,7 @@ public class Flight : BaseEntity
 
     public string FlightCode { get; private set; }
 
-    public Destination Destiny { get; private set; }
+    public Destination Destination { get; private set; }
 
     public Locale Source { get; private set; }
 
@@ -38,7 +38,7 @@ public class Flight : BaseEntity
         DepartureDate = builder.DepartureDate;
         LandingDate = builder.LandingDate;
         FlightCode = builder.FlightCode;
-        Destiny = builder.Destiny;
+        Destination = builder.Destiny;
         Source = builder.Source;
         Plane = builder.Plane;
     }

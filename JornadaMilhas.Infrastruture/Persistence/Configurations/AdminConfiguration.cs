@@ -24,7 +24,7 @@ namespace JornadaMilhas.Infrastruture.Persistence.Configurations
                 .WithOne()
                 .HasForeignKey<Admin>(a => a.Id);
 
-            builder.HasOne<Company>()
+            builder.HasOne<Company>(a => a.Company)
                 .WithMany(c => c.Admins)
                 .HasForeignKey(a => a.CompanyId);
 

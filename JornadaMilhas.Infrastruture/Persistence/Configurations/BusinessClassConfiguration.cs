@@ -12,7 +12,7 @@ public class BusinessClassConfiguration : ClassConfiguration<BusinessClass>
     {
         base.Configure(builder);
         
-        builder.HasOne<Plane>()
+        builder.HasOne<Plane>(p => p.Plane)
             .WithOne(x => x.BusinessClass)
             .OnDelete(DeleteBehavior.NoAction)
             .HasForeignKey<Plane>(p => p.BusinessClassId);

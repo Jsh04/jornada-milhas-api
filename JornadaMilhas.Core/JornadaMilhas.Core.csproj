@@ -40,8 +40,4 @@
     <ProjectReference Include="..\JornadaMilhas.Common\JornadaMilhas.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DomainsService\" />
-  </ItemGroup>
-
 </Project>

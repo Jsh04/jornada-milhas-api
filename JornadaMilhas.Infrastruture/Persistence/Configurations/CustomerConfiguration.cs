@@ -21,7 +21,7 @@ namespace JornadaMilhas.Infrastruture.Persistence.Configurations
 
             builder.ToTable(nameof(Customer));
 
-            builder.HasMany<Depoiment>()
+            builder.HasMany<Depoiment>(c => c.Depoiments)
                 .WithOne(d => d.Customer)
                 .HasForeignKey(d => d.CustomerId);
 

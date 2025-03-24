@@ -42,11 +42,11 @@ public class DestinationConfiguration : BaseEntityConfiguration<Destination>
             .HasMaxLength(500)
             .IsRequired();
 
-        builder.HasMany<Flight>()
-            .WithOne(f => f.Destiny)
+        builder.HasMany(f => f.Flights)
+            .WithOne(f => f.Destination)
             .HasForeignKey(f => f.DestinationId);
-        
-        builder.HasMany<Picture>()
+
+        builder.HasMany(p => p.Pictures)
             .WithOne(p => p.Destination)
             .HasForeignKey(f => f.DestinationId);
     }
