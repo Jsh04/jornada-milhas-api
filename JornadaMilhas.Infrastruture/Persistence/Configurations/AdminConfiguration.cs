@@ -8,11 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Core.Entities.Companies;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations
 {
-    public class AdminConfiguration : UserConfiguration<Admin>
+    public class AdminConfiguration : BaseEntityConfiguration<Admin>
     {
         public override void Configure(EntityTypeBuilder<Admin> builder)
         {

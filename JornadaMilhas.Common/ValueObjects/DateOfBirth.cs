@@ -14,7 +14,7 @@ public sealed record DateOfBirth
         Date = dateOfBirth;
     }
 
-    public DateTime Date { get; }
+    public DateTime Date { get; private set;}
 
     public static Result<DateOfBirth> Create(DateTime? dateOfBirth)
     {

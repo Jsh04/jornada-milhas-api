@@ -18,15 +18,15 @@ public sealed record Address
         District = district;
     }
 
-    public string City { get; }
+    public string City { get; private set; }
 
-    public string State { get; }
+    public string State { get; private set; }
 
-    public string? Cep { get; }
+    public string? Cep { get; private set; }
 
-    public string? Street { get; }
+    public string? Street { get; private set;}
 
-    public string? District { get; }
+    public string? District { get;private set; }
 
     public static Result<Address> Create(string city, string state, string? cep, string? addressRequest,
         string? district)

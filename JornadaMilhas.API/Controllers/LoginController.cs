@@ -5,7 +5,7 @@ using JornadaMilhas.Common.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JornadaMilhas.API;
+namespace JornadaMilhas.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]

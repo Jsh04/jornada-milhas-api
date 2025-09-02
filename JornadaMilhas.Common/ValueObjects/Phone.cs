@@ -17,7 +17,7 @@ public sealed record Phone
         Number = number;
     }
 
-    public string Number { get; }
+    public string Number { get; private set; }
 
     public static Result<Phone> Create(string number)
     {

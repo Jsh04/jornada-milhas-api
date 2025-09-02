@@ -9,11 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Core.Entities.Orders;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations
 {
-    public class CustomerConfiguration : UserConfiguration<Customer>
+    public class CustomerConfiguration : BaseEntityConfiguration<Customer>
     {
         public override void Configure(EntityTypeBuilder<Customer> builder)
         {

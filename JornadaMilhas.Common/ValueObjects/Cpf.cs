@@ -10,11 +10,11 @@ public sealed record Cpf
         Number = number;
     }
 
-    private Cpf()
+    public Cpf()
     {
     }
 
-    public string Number { get; }
+    public string Number { get; private set; }
 
     public static Result<Cpf> Create(string number)
     {

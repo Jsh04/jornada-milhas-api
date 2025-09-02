@@ -8,8 +8,7 @@ namespace JornadaMilhas.Common.Entity.Users;
 
 public abstract class User : BaseEntity 
 {
-
-    [MaxLength(200)]
+    
     public string Name { get; protected set; }
 
     public DateOfBirth DtBirth { get; protected set; }

@@ -17,7 +17,7 @@ public sealed record Email
         Address = mail;
     }
 
-    public string Address { get; } = string.Empty;
+    public string Address { get; private set; } = string.Empty;
 
     public static Result<Email> Create(string mail)
     {

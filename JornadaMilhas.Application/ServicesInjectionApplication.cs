@@ -15,24 +15,14 @@ public static class ServicesInjectionApplication
 {
     public static IServiceCollection GetServicesInjectiosOfApplication(this IServiceCollection services)
     {
-        return services.AddDependencyInjectionOfApplication()
+        return services
+            .AddServicesExternals()
             .AddServicesOfMediat()
             .AddHandlersNotification()
             .AddServicesFluentValidation();
     }
-
-    private static IServiceCollection AddDependencyInjectionOfApplication(this IServiceCollection services)
-    {
-        services.AddScoped<ITokenService, TokenService>();
-        services.AddScoped<ICustomerService, CustomerService>();
-        services.AddScoped<IFlightService, FlightService>();
-        services.AddScoped<IPassageService, PassageService>();
-
-       
-
-        return services;
-    }
-
+    
+    
     private static IServiceCollection AddServicesOfMediat(this IServiceCollection services)
     {
         services.AddMediatR(opts => opts.RegisterServicesFromAssembly(typeof(RegisterFlightCommand).Assembly));
@@ -43,6 +33,12 @@ public static class ServicesInjectionApplication
     private static IServiceCollection AddHandlersNotification(this IServiceCollection services)
     {
         services.AddScoped<INotificationHandler<EmailCreateUserEvent>, SendEmailEventHandler>();
+        return services;
+    }
+    
+    private static IServiceCollection AddServicesExternals(this IServiceCollection services)
+    {
+        services.AddTransient<ITokenService, TokenService>();
         return services;
     }
 

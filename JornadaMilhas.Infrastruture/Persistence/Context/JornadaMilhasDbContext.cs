@@ -3,6 +3,7 @@ using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Common.Persistence.Queue;
+using JornadaMilhas.Common.ValueObjects;
 using JornadaMilhas.Core.Entities.Admins;
 using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Entities.Customers;
@@ -41,10 +42,13 @@ public class JornadaMilhasDbContext : DbContext
 
     public virtual DbSet<Plane> Planes { get; set; }
 
-    public DbSet<Company> Company { get; set; }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Owned<Address>();
+        modelBuilder.Owned<Cpf>();
+        modelBuilder.Owned<DateOfBirth>();
+        modelBuilder.Owned<Email>();
+        modelBuilder.Owned<Phone>();
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration());
     }

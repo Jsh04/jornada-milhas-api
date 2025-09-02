@@ -14,7 +14,7 @@ public record LoginOutputModel
 
     public string Token { get; private set; }
     public User User { get; private set; }
-
+    
     public static LoginOutputModel CreateResponseLogin(User user, string token)
     {
         return new LoginOutputModel(user, token);

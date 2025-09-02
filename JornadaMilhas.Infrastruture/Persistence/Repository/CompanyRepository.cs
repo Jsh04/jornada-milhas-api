@@ -16,11 +16,11 @@ public class CompanyRepository : ICompanyRepository
 
     public async Task CreateAsync(Company entity)
     {
-        await _context.Company.AddAsync(entity);
+        await _context.Companies.AddAsync(entity);
     }
 
     public async Task<bool> IsUniqueAsync(string name, CancellationToken cancellationToken = default)
     {
-        return await _context.Company.AnyAsync(company => company.Name == name, cancellationToken);
+        return await _context.Companies.AnyAsync(company => company.Name == name, cancellationToken);
     }
 }

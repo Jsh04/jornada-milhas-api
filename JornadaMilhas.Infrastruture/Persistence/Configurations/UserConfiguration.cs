@@ -33,6 +33,7 @@ public class UserConfiguration<TUser> : BaseEntityConfiguration<TUser> where TUs
         {
             cpf.Property(c => c.Number)
                 .HasMaxLength(11)
+                .HasColumnName("Cpf")
                 .IsRequired();
 
             cpf.HasIndex(c => c.Number)
@@ -42,6 +43,7 @@ public class UserConfiguration<TUser> : BaseEntityConfiguration<TUser> where TUs
         builder.OwnsOne(user => user.Phone, phone =>
         {
             phone.Property(p => p.Number)
+                .HasColumnName("Phone")
                 .HasMaxLength(11)
                 .IsRequired();
         });
@@ -49,36 +51,43 @@ public class UserConfiguration<TUser> : BaseEntityConfiguration<TUser> where TUs
         builder.OwnsOne(user => user.Email, email =>
         {
             email.Property(e => e.Address)
+                .HasColumnName("Email")
                 .HasMaxLength(100)
                 .IsRequired();
 
             email.HasIndex(e => e.Address)
                 .IsUnique();
         });
-
+        
         builder.OwnsOne(user => user.Address, valueAddress =>
         {
             valueAddress.Property(address => address.Street)
+                .HasColumnName("AddressStreet")
                 .HasMaxLength(150);
 
             valueAddress.Property(address => address.State)
                 .HasMaxLength(2)
+                .HasColumnName("AddressState")
                 .IsRequired();
 
             valueAddress.Property(address => address.City)
                 .HasMaxLength(50)
+                .HasColumnName("AddressCity")
                 .IsRequired();
 
             valueAddress.Property(address => address.Cep)
+                .HasColumnName("AddressCep")
                 .HasMaxLength(8);
 
             valueAddress.Property(address => address.District)
+                .HasColumnName("AddressDistrict")
                 .HasMaxLength(50);
         });
 
         builder.OwnsOne(user => user.ConfirmEmail, confirmEmail =>
         {
             confirmEmail.Property(ce => ce.Address)
+                .HasColumnName("ConfirmEmail")
                 .HasMaxLength(100)
                 .IsRequired();
 
@@ -89,6 +98,7 @@ public class UserConfiguration<TUser> : BaseEntityConfiguration<TUser> where TUs
         builder.OwnsOne(user => user.DtBirth, dtbirth =>
         {
             dtbirth.Property(dtBirth => dtBirth.Date)
+                .HasColumnName("DtBirth")
                 .IsRequired();
         });
     }
