@@ -1,10 +1,9 @@
-﻿using JornadaMilhas.Common.Entity.Users;
-using JornadaMilhas.Common.Entity.Users.Enums;
-using JornadaMilhas.Common.Results;
+﻿using JornadaMilhas.Common.Entity.Users.Enums;
 using JornadaMilhas.Common.Results.Errors;
 using JornadaMilhas.Common.ValueObjects;
+using JornadaMilhas.Core.Users;
 
-namespace JornadaMilhas.Common.Builder;
+namespace JornadaMilhas.Core.Entities.Users;
 
 public abstract class UserBuilder<TUser, TBuilder>
     where TUser : User

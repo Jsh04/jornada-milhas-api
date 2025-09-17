@@ -1,4 +1,4 @@
-﻿using JornadaMilhas.Common.Data.Repository;
+﻿using JornadaMilhas.Common.Interfaces.Repository;
 using JornadaMilhas.Core.Entities.Depoiments;
 
 namespace JornadaMilhas.Core.Repositories.Interfaces;

@@ -4,6 +4,7 @@ using JornadaMilhas.Application.Interfaces.MessageBus;
 using JornadaMilhas.Common.DomainEventConsumer;
 using JornadaMilhas.Common.EventHandler;
 using JornadaMilhas.Common.Options;
+using JornadaMilhas.Infrastruture.Options;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -12,8 +13,6 @@ namespace JornadaMilhas.Infrastruture.MessageBus;
 
 public class MessageBusProducerService : IMessageBusProducerService, IDisposable
 {
-    private readonly IModel _channelConsume;
-    private readonly IModel _channelPublisher;
     private readonly IConnection _connection;
     private readonly RabbitMqOptions _rabbitMqOptions;
 
@@ -28,33 +27,30 @@ public class MessageBusProducerService : IMessageBusProducerService, IDisposable
         };
 
         _connection = connectionFactory.CreateConnection();
-
-        _channelPublisher = _connection.CreateModel();
-        _channelConsume = _connection.CreateModel();
     }
 
     public void Dispose()
     {
         _connection?.Dispose();
-        _channelPublisher?.Dispose();
-        _channelConsume?.Dispose();
-
+        
         GC.SuppressFinalize(this);
     }
 
     public void Publish<T>(string queue, T dataToSend)
     {
+        using var channelPublisher = _connection.CreateModel();
+        
         var bodyData = GetBodyMessage(dataToSend);
 
         var nameExchange = typeof(T).Name;
 
-        ExchangeDeclareDynamicType(_channelPublisher, nameExchange);
+        ExchangeDeclareDynamicType(channelPublisher, nameExchange);
 
-        QueueDeclareDynamicType(_channelPublisher, queue);
+        QueueDeclareDynamicType(channelPublisher, queue);
 
-        QueueBindDynamicType(_channelPublisher, nameExchange, queue);
+        QueueBindDynamicType(channelPublisher, nameExchange, queue);
 
-        _channelPublisher.BasicPublish(
+        channelPublisher.BasicPublish(
             nameExchange,
             queue,
             null,
@@ -64,15 +60,17 @@ public class MessageBusProducerService : IMessageBusProducerService, IDisposable
     public void Subscribe<TDomainEvent>(IDomainEventConsumeHandler<TDomainEvent> eventHandler, string queue)
         where TDomainEvent : DomainEventConsumeBase
     {
+        using var channelPublisher = _connection.CreateModel();
+        
         var eventName = typeof(TDomainEvent).Name;
 
-        ExchangeDeclareDynamicType(_channelConsume, eventName);
+        ExchangeDeclareDynamicType(channelPublisher, eventName);
 
-        QueueDeclareDynamicType(_channelConsume, queue);
+        QueueDeclareDynamicType(channelPublisher, queue);
 
-        QueueBindDynamicType(_channelConsume, eventName, queue);
+        QueueBindDynamicType(channelPublisher, eventName, queue);
 
-        var consumer = new EventingBasicConsumer(_channelConsume);
+        var consumer = new EventingBasicConsumer(channelPublisher);
 
         consumer.Received += async (model, ea) =>
         {
@@ -82,7 +80,7 @@ public class MessageBusProducerService : IMessageBusProducerService, IDisposable
                 await eventHandler.Handle(objDeserialized);
         };
 
-        _channelConsume.BasicConsume(queue, true, consumer);
+        channelPublisher.BasicConsume(queue, true, consumer);
     }
 
     private static void QueueBindDynamicType(IModel channel, string nameExchange, string queue)

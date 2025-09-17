@@ -2,6 +2,7 @@
 using JornadaMilhas.Application.Util;
 using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.PaginationResult;
+using JornadaMilhas.Common.Util;
 using JornadaMilhas.Core.Entities.Customers;
 
 namespace JornadaMilhasTest.UnitsTests.Seeds;

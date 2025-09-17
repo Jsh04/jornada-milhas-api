@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Core.Entities.Orders;
+using JornadaMilhas.Core.Users;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations
 {

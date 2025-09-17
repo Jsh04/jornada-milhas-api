@@ -46,7 +46,10 @@ public class UnitOfWork : IUnitOfWork
 
     protected virtual void Dispose(bool disposing)
     {
-        if (disposing)
-            _context.Dispose();
+        if (!disposing) 
+            return;
+        
+        _transaction.Dispose();
+        _context.Dispose();
     }
 }

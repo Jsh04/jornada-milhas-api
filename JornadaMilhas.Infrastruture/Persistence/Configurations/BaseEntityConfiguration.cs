@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace JornadaMilhas.Common.Persistence.Configuration;
+namespace JornadaMilhas.Infrastruture.Persistence.Configurations;
 
 public abstract class BaseEntityConfiguration<TBase> : IEntityTypeConfiguration<TBase> where TBase : BaseEntity
 {

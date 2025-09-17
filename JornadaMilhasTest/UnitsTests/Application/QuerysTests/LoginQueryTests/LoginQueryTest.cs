@@ -1,5 +1,5 @@
 ﻿using AutoFixture;
-using JornadaMilhas.Application.Querys.LoginQuerys.LoginUserQuerys;
+using JornadaMilhas.Application.Authentication.Queries.Login;
 using JornadaMilhas.Application.Services;
 using JornadaMilhasTest.UnitsTests.Builders;
 using JornadaMilhasTest.UnitsTests.Infraestruture.Builders.Repositories;
@@ -31,7 +31,7 @@ public class LoginQueryTest
 
         var loginQueryHandler = new LoginUserQueryHandler(tokenService, userRepositoryMock.Object);
 
-        var loginQuery = new LoginUserQuery(email, ConstantsUnitTest.PasswordTest);
+        var loginQuery = new LoginQuery(email, ConstantsUnitTest.PasswordTest);
 
         //act
         var result = await loginQueryHandler.Handle(loginQuery, CancellationToken.None);
@@ -43,6 +43,6 @@ public class LoginQueryTest
             Assert.That(result.Value, Is.Not.Null);
         });
 
-        userRepositoryMock.Verify(x => x.GetByEmailAsync(email, It.IsAny<CancellationToken>()), Times.Once);
+        userRepositoryMock.Verify(x => x.GetByEmailOrCpfAsync(email, It.IsAny<CancellationToken>()), Times.Once);
     }
 }

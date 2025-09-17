@@ -2,6 +2,7 @@
 using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.Persistence.Configuration;
 using JornadaMilhas.Core.Entities.Users;
+using JornadaMilhas.Core.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -21,9 +22,6 @@ public class UserConfiguration<TUser> : BaseEntityConfiguration<TUser> where TUs
 
         builder.Property(user => user.Password)
             .IsRequired();
-
-        builder.Property(user => user.Picture)
-            .HasMaxLength(1000);
 
         builder.Property(user => user.Genre)
             .HasMaxLength(1)

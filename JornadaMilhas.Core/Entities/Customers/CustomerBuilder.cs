@@ -1,6 +1,7 @@
 ﻿using JornadaMilhas.Common.Builder;
 using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.Results;
+using JornadaMilhas.Core.Entities.Users;
 
 namespace JornadaMilhas.Core.Entities.Customers;
 

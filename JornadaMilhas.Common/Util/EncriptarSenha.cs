@@ -1,4 +1,6 @@
-﻿namespace JornadaMilhas.Application.Util;
+﻿using JornadaMilhas.Application.Util;
+
+namespace JornadaMilhas.Common.Util;
 
 public static class EncriptarSenha
 {

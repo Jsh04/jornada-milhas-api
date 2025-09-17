@@ -12,6 +12,7 @@ using JornadaMilhas.Core.Entities.Destinies;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Entities.Planes;
 using JornadaMilhas.Core.Entities.Users;
+using JornadaMilhas.Core.Users;
 using JornadaMilhas.Core.ValueObjects.Locales;
 using Microsoft.EntityFrameworkCore;
 

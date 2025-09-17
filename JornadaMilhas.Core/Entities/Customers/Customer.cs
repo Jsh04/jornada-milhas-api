@@ -4,6 +4,7 @@ using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Entities.Orders;
 using JornadaMilhas.Core.Entities.Users;
+using JornadaMilhas.Core.Users;
 
 namespace JornadaMilhas.Core.Entities.Customers;
 
@@ -22,7 +23,6 @@ public class Customer : User
         builder.Cpf, 
         builder.Phone, 
         builder.Address, 
-        builder.Picture, 
         builder.Mail, 
         builder.ConfirmMail, 
         builder.Password)

@@ -1,6 +1,5 @@
 ﻿using JornadaMilhas.API.Extensions;
-using JornadaMilhas.Application.Querys.Dtos.LoginResponseDto;
-using JornadaMilhas.Application.Querys.LoginQuerys.LoginUserQuerys;
+using JornadaMilhas.Application.Authentication.Queries.Login;
 using JornadaMilhas.Common.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JornadaMilhas.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class LoginController : ControllerBase
 {
     private readonly ISender _sender;
@@ -18,13 +17,13 @@ public class LoginController : ControllerBase
         _sender = sender;
     }
 
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<LoginOutputModel>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Result<LoginQueryResult>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [HttpPost]
-    public async Task<IActionResult> PostLoginCredentials([FromBody] LoginUserQuery loginQuery)
+    public async Task<IActionResult> PostLoginCredentials([FromBody] LoginQuery loginQuery, CancellationToken cancellationToken = default)
     {
-        var result = await _sender.Send(loginQuery);
+        var result = await _sender.Send(loginQuery, cancellationToken);
         return result.Match(Ok, loginResponse => loginResponse.ToProblemDetails());
     }
 }

@@ -1,6 +1,6 @@
 ﻿using JornadaMilhas.Common.Entity;
 
-namespace JornadaMilhas.Common.Data.Repository;
+namespace JornadaMilhas.Common.Interfaces.Repository;
 
 public interface IDeletableRepository<TEntity> where TEntity : BaseEntity
 {

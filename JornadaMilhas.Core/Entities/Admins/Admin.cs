@@ -2,6 +2,7 @@
 using JornadaMilhas.Core.Entities.Admins.Enums;
 using JornadaMilhas.Core.Entities.Companies;
 using JornadaMilhas.Core.Entities.Flights;
+using JornadaMilhas.Core.Users;
 
 namespace JornadaMilhas.Core.Entities.Admins;
 
@@ -22,7 +23,6 @@ public class Admin : User
         builder.Cpf,
         builder.Phone,
         builder.Address,
-        builder.Picture,
         builder.Mail,
         builder.ConfirmMail,
         builder.Password)

@@ -6,6 +6,7 @@ using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Events;
 using JornadaMilhas.Core.Events.Shareds;
 using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Core.Users;
 using MediatR;
 
 namespace JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;

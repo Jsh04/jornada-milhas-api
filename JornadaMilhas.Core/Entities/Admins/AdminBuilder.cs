@@ -1,6 +1,7 @@
 ﻿using JornadaMilhas.Common.Builder;
 using JornadaMilhas.Core.Entities.Admins.Enums;
 using JornadaMilhas.Core.Entities.Companies;
+using JornadaMilhas.Core.Entities.Users;
 
 namespace JornadaMilhas.Core.Entities.Admins;
 

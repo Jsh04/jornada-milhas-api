@@ -1,10 +1,9 @@
-﻿using JornadaMilhas.Common.Entity;
-using JornadaMilhas.Common.Entity.Users;
-using JornadaMilhas.Core.Entities.Users;
+﻿using JornadaMilhas.Application.Authentication.Shared;
+using JornadaMilhas.Core.Users;
 
 namespace JornadaMilhas.Application.Interfaces.Services;
 
 public interface ITokenService
 {
-    string GenerateToken(User user);
+    TokenInfoDto GenerateToken(User user);
 }

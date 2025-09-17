@@ -1,4 +1,4 @@
-﻿namespace JornadaMilhas.Common.Options;
+﻿namespace JornadaMilhas.Infrastruture.Options;
 
 public sealed class RabbitMqOptions
 {

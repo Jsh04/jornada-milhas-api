@@ -7,7 +7,8 @@ public abstract class BaseEntity
 {
     private readonly List<IDomainEvent> _domainEvents = new();
 
-    [JsonPropertyName("id")] public long Id { get; protected set; }
+    [JsonPropertyName("id")] 
+    public long Id { get; protected set; }
 
     [JsonPropertyName("dtCreated")] public DateTime DtCreated { get; protected set; }
 

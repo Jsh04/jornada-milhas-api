@@ -31,4 +31,9 @@
     <ProjectReference Include="..\JornadaMilhas.Core\JornadaMilhas.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Authentication\Dtos\" />
+    <Folder Include="Authentication\Queries\" />
+  </ItemGroup>
+
 </Project>

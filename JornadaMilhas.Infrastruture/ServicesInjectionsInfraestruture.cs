@@ -11,6 +11,7 @@ using JornadaMilhas.Infrastruture.BackgroundJobs;
 using JornadaMilhas.Infrastruture.Gateway;
 using JornadaMilhas.Infrastruture.Interceptors;
 using JornadaMilhas.Infrastruture.MessageBus;
+using JornadaMilhas.Infrastruture.Options;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using JornadaMilhas.Infrastruture.Persistence.Repository;
 using JornadaMilhas.Infrastruture.Persistence.UOW;
@@ -117,7 +118,7 @@ public static class ServicesInjectionsInfraestruture
 
     private static IServiceCollection AddInjectionBackgroundJobs(this IServiceCollection services)
     {
-        services.AddHostedService<SendEmailToRabbitJob>();
+        //services.AddHostedService<SendEmailToRabbitJob>();
         return services;
     }
 

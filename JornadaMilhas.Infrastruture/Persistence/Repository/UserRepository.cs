@@ -2,6 +2,7 @@
 using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Repositories.Interfaces;
+using JornadaMilhas.Core.Users;
 using JornadaMilhas.Infrastruture.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,9 +23,9 @@ public class UserRepository : IUserRepository
         return objUpdated.State == EntityState.Modified;
     }
     
-    public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
+    public async Task<User?> GetByEmailOrCpfAsync(string emailOrCpf, CancellationToken cancellationToken = default)
     {
-        return await _context.Users.SingleOrDefaultAsync(user => user.Email.Address.Equals(email), cancellationToken);
+        return await _context.Users.SingleOrDefaultAsync(user => user.Email.Address.Equals(emailOrCpf) || user.Cpf.Number.Equals(emailOrCpf), cancellationToken);
     }
     
 }

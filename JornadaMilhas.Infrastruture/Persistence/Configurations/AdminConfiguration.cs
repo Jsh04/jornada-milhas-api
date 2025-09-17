@@ -3,13 +3,9 @@ using JornadaMilhas.Core.Entities.Admins;
 using JornadaMilhas.Core.Entities.Customers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JornadaMilhas.Common.Persistence.Configuration;
+
 using JornadaMilhas.Core.Entities.Companies;
+using JornadaMilhas.Core.Users;
 
 namespace JornadaMilhas.Infrastruture.Persistence.Configurations
 {

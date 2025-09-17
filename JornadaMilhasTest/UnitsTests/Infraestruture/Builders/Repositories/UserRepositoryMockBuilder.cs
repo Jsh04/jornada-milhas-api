@@ -20,9 +20,9 @@ public class UserRepositoryMockBuilder : BaseMockBuilder<IUserRepository>
         return new UserRepositoryMockBuilder(fixture);
     }
     
-    public UserRepositoryMockBuilder AddGetByEmailAsync(string email)
+    public UserRepositoryMockBuilder AddGetByEmailAsync(string emailOrCpf)
     {
-        _mock.Setup(x => x.GetByEmailAsync(email, CancellationToken.None))
+        _mock.Setup(x => x.GetByEmailOrCpfAsync(emailOrCpf, CancellationToken.None))
             .ReturnsAsync(CustomerSeed.GetCustomerTest(_fixture));
 
         return this;

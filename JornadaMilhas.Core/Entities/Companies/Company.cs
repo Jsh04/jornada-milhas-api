@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+﻿
 using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Admins;

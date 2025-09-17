@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using JornadaMilhas.Common.Builder;
 using JornadaMilhas.Common.DomainEvent;
+using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.Entity.Users.Enums;
 using JornadaMilhas.Common.ValueObjects;
+using JornadaMilhas.Core.Entities.Customers;
+using JornadaMilhas.Core.Entities.Users.Enums;
 
-namespace JornadaMilhas.Common.Entity.Users;
+namespace JornadaMilhas.Core.Users;
 
 public abstract class User : BaseEntity 
 {
@@ -21,14 +23,14 @@ public abstract class User : BaseEntity
 
     public Address Address { get; protected set; }
 
-    public byte[]? Picture { get; protected set; }
-
     public Email Email { get; protected set; }
 
     public Email ConfirmEmail { get; protected set; }
 
     [MaxLength(50)]
     public string Password { get; protected set; }
+
+    public EnumRole Role { get; protected set; }
     
     protected User
     (
@@ -38,7 +40,6 @@ public abstract class User : BaseEntity
         Cpf cpf, 
         Phone phone, 
         Address address, 
-        byte[]? picture, 
         Email email, 
         Email confirmEmail, 
         string password
@@ -50,14 +51,12 @@ public abstract class User : BaseEntity
         Cpf = cpf;
         Phone = phone;
         Address = address;
-        Picture = picture;
         Email = email;
         ConfirmEmail = confirmEmail;
         Password = password;
     }
     
     protected User(){}
-        
     
     public void ThrowEvent(IDomainEvent domainEvent)
     {

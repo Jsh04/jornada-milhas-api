@@ -2,7 +2,7 @@
 using JornadaMilhas.Common.Entity;
 using JornadaMilhas.Common.PaginationResult;
 
-namespace JornadaMilhas.Common.Data.Repository;
+namespace JornadaMilhas.Common.Interfaces.Repository;
 
 //Exemplos de I do SOLID
 public interface IReadableRepository<TEntity> where TEntity : BaseEntity
