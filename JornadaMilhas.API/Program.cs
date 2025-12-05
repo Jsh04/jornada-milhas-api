@@ -1,12 +1,13 @@
-using JornadaMilhas.API;
+
 using JornadaMilhas.API.Extensions;
 using JornadaMilhas.API.Middleware;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.AddApiConfiguration();
-
+builder.Host.UseSerilog();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
@@ -24,7 +25,10 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Desactive Cors
+app.UseSerilogRequestLogging();
+
+Log.Information("Starting web application");
+
 app.UseCors("AllowFrontend");
 
 // Configure the HTTP request pipeline.
@@ -37,7 +41,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.UseAuthentication();
 app.UseMiddleware<GlobalExceptionHandler>();
-
 app.MapControllers();
 
 await app.RunAsync();

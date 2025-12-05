@@ -9,6 +9,7 @@ public static class ConfigurationApi
 {
     public static void AddApiConfiguration(this WebApplicationBuilder builder)
     {
+        builder.Services.AddLogging(builder.Environment.EnvironmentName, builder.Configuration);
         builder.Services.AddMemoryCache();
         builder.Services.GetServicesInjectionsOfInfrastructure(builder.Configuration, builder.Environment);
         builder.Services.GetServicesInjectiosOfApplication();
