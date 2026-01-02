@@ -20,7 +20,7 @@ services:
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_PID: ${SQL_EDITION:-Developer}
-      SA_PASSWORD: ${PASSWORD_SQL:-SenhaForte@123}
+      SA_PASSWORD: ${PASSWORD_SQL}
 
     volumes:
       - ./volumes/sqlserver/data:/var/opt/mssql/data
