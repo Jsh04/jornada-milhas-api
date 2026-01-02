@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>JornadaMilhas.API</RootNamespace>
+    <UserSecretsId>7ee90b83-38b9-41c9-abc3-fed1835313fc</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.28">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="JornadaMilhasTest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JornadaMilhas.Application\JornadaMilhas.Application.csproj" />
+    <ProjectReference Include="..\JornadaMilhas.Infrastruture\JornadaMilhas.Infrastruture.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\UsersController\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Controllers\UsersController\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Controllers\UsersController\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controllers\UsersController\**" />
+  </ItemGroup>
+
+</Project>

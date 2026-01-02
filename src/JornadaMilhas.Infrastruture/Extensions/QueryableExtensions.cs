@@ -1,0 +1,29 @@
+﻿using JornadaMilhas.Common.PaginationResult;
+using Microsoft.EntityFrameworkCore;
+
+namespace JornadaMilhas.Infrastruture.Extensions;
+
+public static class QueryableExtensions
+{
+    public static async Task<PaginationResult<T>> ToPaginationResultAsync<T>(
+        this IQueryable<T> query, int page, int pageSize, CancellationToken cancellationToken = default)
+    {
+        var totalCount = await query.CountAsync(cancellationToken);
+
+        var paginatioResult = new PaginationResult<T>(page, pageSize, totalCount);
+
+        var pageCount = (double)totalCount / pageSize;
+
+        var totalPages = (int)Math.Ceiling(pageCount);
+
+        paginatioResult.SetTotalPages(totalPages);
+
+        var skip = (page - 1) * pageSize;
+
+        var data = await query.Skip(skip).Take(pageSize).ToListAsync(cancellationToken);
+
+        paginatioResult.SetData(data);
+
+        return paginatioResult;
+    }
+}

@@ -364,3 +364,12 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Docker Folders and Files
+volumes/
+
+#
+src/**/bin/
+src/**/obj/
+src/.vs/
+src/**/*.user

@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Querys\DestinysQuerys\DestinysGetAllByQuery\**" />
+    <Compile Remove="Validations\**" />
+    <EmbeddedResource Remove="Querys\DestinysQuerys\DestinysGetAllByQuery\**" />
+    <EmbeddedResource Remove="Validations\**" />
+    <None Remove="Querys\DestinysQuerys\DestinysGetAllByQuery\**" />
+    <None Remove="Validations\**" />
+    <Compile Remove="Commands\UserCommands\UserLimitedCommands\**" />
+    <EmbeddedResource Remove="Commands\UserCommands\UserLimitedCommands\**" />
+    <None Remove="Commands\UserCommands\UserLimitedCommands\**" />
+    <Compile Remove="Interfaces\Services\IUserLimitedService.cs" />
+    <Compile Remove="Services\UserService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="4.0.0-preview.4" />
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JornadaMilhas.Core\JornadaMilhas.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Authentication\Dtos\" />
+    <Folder Include="Authentication\Queries\" />
+  </ItemGroup>
+
+</Project>

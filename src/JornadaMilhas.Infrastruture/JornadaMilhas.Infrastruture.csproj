@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+      <UserSecretsId>50e723cb-e795-4718-b265-f94bf94b0457</UserSecretsId>
+  </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Persistence\Configurations\UserLimited\**" />
+        <EmbeddedResource Remove="Persistence\Configurations\UserLimited\**" />
+        <None Remove="Persistence\Configurations\UserLimited\**" />
+        <Compile Remove="Persistence\Repository\UserRepository\UserLimitedRepository.cs" />
+        <Compile Remove="Persistence\Repository\UserRepository\**" />
+        <EmbeddedResource Remove="Persistence\Repository\UserRepository\**" />
+        <None Remove="Persistence\Repository\UserRepository\**" />
+        <Compile Remove="Persistence\Configurations\UserAdminConfiguration.cs" />
+        <Compile Remove="Persistence\Configurations\UserLimitedConfiguration.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="12.0.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+        <PackageReference Include="AWSSDK.S3" Version="4.0.0-preview.4" />
+        <PackageReference Include="Elastic.Serilog.Sinks" Version="9.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.26" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.28" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.28">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Serilog" Version="4.3.1-dev-02395" />
+        <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\JornadaMilhas.Application\JornadaMilhas.Application.csproj" />
+    </ItemGroup>
+
+</Project>
