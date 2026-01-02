@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  app:
+    profiles: ["full"]
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    container_name: ${PROJECT_NAME:-meu-projeto}-app
+    ports:
+      - "${APP_PORT:-5000}:80"
+
+    restart: unless-stopped
+  
+  sqlServer:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: ${PROJECT_NAME:-meu-projeto}-sqlServer
+    ports:
+      - "${SQL_PORT:-1433}:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: ${SQL_EDITION:-Developer}
+      SA_PASSWORD: ${PASSWORD_SQL:-SenhaForte@123}
+
+    volumes:
+      - ./volumes/sqlserver/data:/var/opt/mssql/data
+      - ./volumes/sqlserver/log:/var/opt/mssql/log
+      - ./volumes/sqlserver/secrets:/var/opt/mssql/secrets
+      - ./docker/scripts/init-sqlserver.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    networks:
+      - app-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    labels:
+      co.elastic.logs/module: elasticsearch
+    volumes:
+      - ./volumes/certs:/usr/share/elasticsearch/config/certs
+      - ./volumes/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=${CLUSTER_NAME}
+      - cluster.initial_master_nodes=elasticsearch
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - network.host=0.0.0.0
+      - network.publish_host=elasticsearch
+    mem_limit: ${ES_MEM_LIMIT}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\\|yellow\"' || exit 1"
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+      start_period: 40s
+    networks:
+      - elastic
+
+  kibana:
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+    image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
+
+    container_name: ${PROJECT_NAME:-meu-projeto}-kibana
+
+    volumes:
+     - ./volumes/certs:/usr/share/kibana/config/certs
+     - ./volumes/kibanadata:/usr/share/kibana/data
+
+    ports:
+     - ${KIBANA_PORT}:5601
+
+    environment:
+      - SERVERNAME=kibana
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=kibana_system
+      - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
+      - ELASTICSEARCH_SSL_VERIFICATIONMODE=none
+    mem_limit: ${KB_MEM_LIMIT}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -I http://localhost:5601 | grep -q 'HTTP/1.1 302 Found'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+    networks:
+      - elastic
+
+networks:
+  app-network:
+    driver: bridge
+  elastic: 
+    driver: bridge
