@@ -3,8 +3,8 @@
 public sealed record AddressInputModel(
     string City,
     string State,
-    string ZipCode,
-    string Address,
-    string District)
+    string? ZipCode,
+    string? Address,
+    string? District)
 {
 }

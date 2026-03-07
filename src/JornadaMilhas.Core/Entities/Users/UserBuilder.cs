@@ -1,7 +1,7 @@
-﻿using JornadaMilhas.Common.Entity.Users.Enums;
-using JornadaMilhas.Common.Results.Errors;
+﻿using JornadaMilhas.Common.Results.Errors;
 using JornadaMilhas.Common.Security;
 using JornadaMilhas.Common.ValueObjects;
+using JornadaMilhas.Core.Entities.Users.Enums;
 
 namespace JornadaMilhas.Core.Entities.Users;
 

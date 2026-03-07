@@ -1,5 +1,5 @@
-﻿using JornadaMilhas.Common.Entity.Users.Enums;
-using JornadaMilhas.Common.ValueObjects;
+﻿using JornadaMilhas.Common.ValueObjects;
+using JornadaMilhas.Core.Entities.Users.Enums;
 
 namespace JornadaMilhas.Application.Querys.Dtos.UsersDto;
 

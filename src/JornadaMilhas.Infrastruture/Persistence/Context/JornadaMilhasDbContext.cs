@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using JornadaMilhas.Common.Entity;
-using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.ValueObjects;
 using JornadaMilhas.Core.Entities.Admins;
 using JornadaMilhas.Core.Entities.Companies;

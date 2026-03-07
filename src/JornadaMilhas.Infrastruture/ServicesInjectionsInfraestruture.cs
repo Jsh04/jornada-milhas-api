@@ -128,7 +128,7 @@ public static class ServicesInjectionsInfraestruture
         services.AddScoped<ICompanyRepository, CompanyRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<ICustomerRepository, CustomerRepositoryMongoDb>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IPlaneRepository, PlaneRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IDestinationRepository, DestinationRepository>();

@@ -7,7 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.AddApiConfiguration();
-builder.Host.UseSerilog();
+builder.Host.UseSerilog((ctx, _, loggerConfig) => 
+    loggerConfig.SetLoggingConfiguration(
+    ctx.HostingEnvironment.EnvironmentName,
+    ctx.Configuration));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
@@ -27,8 +31,6 @@ var app = builder.Build();
 
 app.UseSerilogRequestLogging();
 
-Log.Information("Starting web application");
-
 app.UseCors("AllowFrontend");
 
 // Configure the HTTP request pipeline.
@@ -37,10 +39,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.UseMiddleware<GlobalExceptionHandler>();
 app.MapControllers();
 
-await app.RunAsync();
+try
+{
+    Log.Information("Starting web application");
+    await app.RunAsync();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+}
+finally
+{
+    await Log.CloseAndFlushAsync();
+}

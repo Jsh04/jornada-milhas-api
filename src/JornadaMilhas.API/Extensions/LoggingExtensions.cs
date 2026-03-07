@@ -10,12 +10,9 @@ namespace JornadaMilhas.API.Extensions;
 
 public static class LoggingExtensions
 {
-    public static void AddLogging(this IServiceCollection services, string environment, IConfiguration configuration)
+    public static void SetLoggingConfiguration(this LoggerConfiguration loggerConfig, string environment, IConfiguration configuration)
     {
-        var elasticUri = configuration["Elasticsearch:Uri"] ?? "https://localhost:9200";
-        
-        var elasticPassword = configuration["Elasticsearch:Password"] ?? "";
-        var elasticUsername = configuration["Elasticsearch:Username"] ?? "";
+        var elasticUri = configuration["Elasticsearch:Uri"] ?? "http://localhost:9200";
         
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Information()
@@ -41,12 +38,6 @@ public static class LoggingExtensions
                             OutboundBufferMaxSize = 5000
                         };
                     };
-                }, 
-                configureTransport: transportConfig =>
-                {
-                    transportConfig.Authentication(new BasicAuthentication(elasticUsername, elasticPassword));
-                    transportConfig.RequestTimeout(TimeSpan.FromSeconds(30));
-                    transportConfig.ServerCertificateValidationCallback((_, _, _, _) => true);
                 })
             .CreateLogger();
         

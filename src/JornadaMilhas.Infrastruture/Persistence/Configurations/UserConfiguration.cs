@@ -1,5 +1,4 @@
 ﻿using JornadaMilhas.Common.Entity;
-using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Core.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

@@ -23,9 +23,10 @@ public class RegisterCustomerCommandHandler : IRequestHandler<RegisterCustomerCo
         CancellationToken cancellationToken)
     {
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
+            
             var request = command.InputModel;
         
-            var hasUser = await _customerRepository.IsUniqueAsync(request.Cpf, request.Mail, cancellationToken);
+            var hasUser = await _customerRepository.IsUniqueAsync(request.Mail, request.Cpf, cancellationToken);
         
             if (hasUser)
                 return Result.Fail<Customer>(UserErrors.UserIsNotUnique);

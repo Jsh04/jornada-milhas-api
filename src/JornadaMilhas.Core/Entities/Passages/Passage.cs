@@ -1,5 +1,4 @@
 ﻿using JornadaMilhas.Common.Entity;
-using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Core.Entities.Flights;
 using JornadaMilhas.Core.Entities.Orders;
 using JornadaMilhas.Core.Entities.Passages.Enums;

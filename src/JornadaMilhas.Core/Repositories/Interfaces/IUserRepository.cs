@@ -1,5 +1,4 @@
-﻿using JornadaMilhas.Common.Entity;
-using JornadaMilhas.Common.Entity.Users;
+﻿
 using JornadaMilhas.Common.Interfaces.Repository;
 using JornadaMilhas.Core.Entities.Users;
 

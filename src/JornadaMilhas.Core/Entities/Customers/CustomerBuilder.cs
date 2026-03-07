@@ -1,5 +1,4 @@
 ﻿using JornadaMilhas.Common.Builder;
-using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.Results;
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Events;

@@ -1,4 +1,4 @@
-﻿using JornadaMilhas.Common.Entity.Users.Enums;
+﻿using JornadaMilhas.Core.Entities.Users.Enums;
 
 namespace JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer.InputModels;
 

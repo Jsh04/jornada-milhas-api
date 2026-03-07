@@ -1,4 +1,4 @@
-﻿using JornadaMilhas.Common.Entity.Users;
+﻿
 using JornadaMilhas.Core.Entities.Admins;
 using JornadaMilhas.Core.Entities.Customers;
 using Microsoft.EntityFrameworkCore;

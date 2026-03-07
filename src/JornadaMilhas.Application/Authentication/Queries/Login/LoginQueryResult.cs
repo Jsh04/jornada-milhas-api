@@ -1,5 +1,4 @@
 ﻿using JornadaMilhas.Application.Authentication.Shared;
-using JornadaMilhas.Common.Entity.Users;
 
 namespace JornadaMilhas.Application.Authentication.Queries.Login;
 

@@ -22,6 +22,13 @@ public class RegisterCustomerValidation : AbstractValidator<CustomerCreateInputM
             .NotEmpty()
             .EmailAddress()
             .WithMessage("Email é obrigatório");
+        
+        RuleFor(x => x.ConfirmMail)
+            .NotNull()
+            .NotEmpty()
+            .WithMessage("O e-mail de confirmação não poderá ser nulo")
+            .Equal(x => x.Mail)
+            .WithMessage("O e-mail deve ser igual ao e-mail fornecido primeiramente");
 
         RuleFor(x => x.Password)
             .NotNull()

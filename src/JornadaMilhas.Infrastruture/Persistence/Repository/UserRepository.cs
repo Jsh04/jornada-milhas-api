@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Entities.Users;
 using JornadaMilhas.Core.Repositories.Interfaces;

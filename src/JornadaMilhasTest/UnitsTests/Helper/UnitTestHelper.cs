@@ -3,15 +3,7 @@ using System.Security.Cryptography;
 using AutoFixture;
 using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;
 using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer.InputModels;
-using JornadaMilhas.Common.Entity;
-using JornadaMilhas.Common.Entity.Users;
-using JornadaMilhas.Common.Entity.Users.Enums;
-using JornadaMilhas.Common.PaginationResult;
-using JornadaMilhas.Common.ValueObjects;
-using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhas.Core.Entities.Users;
-using Moq;
-
 namespace JornadaMilhasTest.UnitsTests.Helper;
 
 public static class UnitTestHelper

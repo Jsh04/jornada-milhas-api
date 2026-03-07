@@ -1,6 +1,6 @@
 ﻿using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;
 using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer.InputModels;
-using JornadaMilhas.Common.Entity.Users.Enums;
+using JornadaMilhas.Core.Entities.Users.Enums;
 using JornadaMilhasTest.InterfacesTest.Helper;
 using JornadaMilhasTest.InterfacesTest.PageObjects;
 using OpenQA.Selenium;

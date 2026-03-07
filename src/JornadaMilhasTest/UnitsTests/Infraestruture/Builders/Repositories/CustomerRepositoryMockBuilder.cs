@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Core.Entities.Customers;
 using JornadaMilhas.Core.Repositories.Interfaces;

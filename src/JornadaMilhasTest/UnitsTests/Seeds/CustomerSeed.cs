@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Common.PaginationResult;
 using JornadaMilhas.Common.Security;
 using JornadaMilhas.Common.Util;

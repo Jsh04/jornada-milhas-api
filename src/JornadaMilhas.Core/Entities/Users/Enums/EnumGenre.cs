@@ -1,4 +1,4 @@
-﻿namespace JornadaMilhas.Common.Entity.Users.Enums;
+﻿namespace JornadaMilhas.Core.Entities.Users.Enums;
 
 public enum EnumGenre
 {

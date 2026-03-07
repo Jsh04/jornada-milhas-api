@@ -2,7 +2,6 @@
 using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer;
 using JornadaMilhas.Application.Commands.CustomerCommands.RegisterCustomer.InputModels;
 using JornadaMilhas.Application.Querys.UserQuerys.GetCustomerById;
-using JornadaMilhas.Core.Entities.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +9,7 @@ namespace JornadaMilhas.API.Controllers;
 
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class CustomerController : ControllerBase
 {
 
@@ -20,8 +19,13 @@ public class CustomerController : ControllerBase
     {
         _mediator = mediator;
     }
-
+    
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    
     public async Task<IActionResult> CreateCustomer([FromBody] CustomerCreateInputModel customerCreateInputModel,
         CancellationToken cancellationToken = default)
     {

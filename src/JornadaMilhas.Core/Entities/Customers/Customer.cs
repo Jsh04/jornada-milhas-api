@@ -1,6 +1,5 @@
 ﻿using JornadaMilhas.Common.Builder;
 using JornadaMilhas.Common.Entity;
-using JornadaMilhas.Common.Entity.Users;
 using JornadaMilhas.Core.Entities.Depoiments;
 using JornadaMilhas.Core.Entities.Orders;
 using JornadaMilhas.Core.Entities.Users;
